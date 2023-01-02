@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+/*모든 곳에 적용*/
+*{
+	font-family: "굴림"
+	
+	}
+
+
+h2{
+	text-align:center;
+ 
+}
+
+.center{
+	text-align: center;
+	
+}
+
+.table{
+	align-self: center;
+	
+}
+
+
+table{ margin : 0 auto; }
+
+
+
