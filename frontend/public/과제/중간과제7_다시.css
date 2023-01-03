@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+
+
+.book_img{
+	width: 300px; /*가로사이즈*/
+	
+	}
+	
+.title_no{
+	color: orange;
+	font-size: 40px;
+	
+}
+
+.contents{
+	background-color: #0f6878;
+	width: 500px;
+	padding: 20px;	/*안쪽여백*/
+	color: white;	/*글꼴색상*/
+	line-height: 150%;
+}
+
+.cont_ef{
+	color: orange;	
+	font-weight: bold;	/*진하게*/
+}

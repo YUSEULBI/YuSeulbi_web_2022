@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link href="중간과제9.css" rel="stylesheet">
+</head>
+<body>
+	<h3 class="title"> 회원 가입 폼 </h3>
+	
+	<table class="sign_t">
+		<tr>
+			<td>아이디</td><td><input type="text" class="textbox"></td>
+		</tr>
+		
+		<tr>
+			<td>비밀번호</td><td><input type="text" class="textbox"></td>
+		</tr>
+		
+		<tr>
+			<td>비밀번호 확인</td><td><input type="text" class="textbox"></td>
+		</tr>
+		
+		<tr>
+			<td>이름</td><td><input type="text" class="textbox"></td>
+		</tr>
+		
+		<tr>
+			<td>이메일</td>
+			<td>
+				<input type="text" class="textbox">@
+				<select class="listbox"> <option >직접입력</option> </select>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>이메일 수신</td><td><input type="radio" name="email">비수신 <input type="radio" name="email">수신</td>
+		</tr>
+		<tr>
+			<td>가입 경로</td> <td><input type="checkbox" name="signup">친구추천 <input type="checkbox" name="signup">인터넷검색 <input type="checkbox" name="signup" checked="checked">기타</td>
+		</tr>
+		<tr>
+			<td class="hello">인사말 </td> <td><textarea class="freetext" rows="10" cols="100"></textarea> </td>
+		</tr>
+	
+	
+	</table>
+	<div class="btn_box">
+		<input type="button" value="저장하기" class="button">
+		<input type="button" value="취소하기" class="button">
+	</div>
+	
+</body>
+</html>

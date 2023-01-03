@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+/*
+	class , id 정의 [만들기]
+		1. 영문
+		2. 띄어쓰기 대신_ 사용
+		3. 한글, 숫자, 특수문자 X
+		4. 이해할 수 있는 단어 [이름
+*/
+
+
+.signup_title
+{text-align: center;}
+
+.signup_form{ /*form 구역 설정하기*/
+	width: 600px;
+	margin: 0 auto;
+	border-top: solid 2px red;
+	border-bottom: solid 2px red;
+	padding: 30px;
+}
+
+
+	
+/* 글머리 제거 */
+.signup_box li{
+	list-style-type: none; 
+	
+}
+
+
+/*li[block->inline-block;]*/
+.colums li{
+	display: inline-block;
+	}
+	
+/*ul의 기본여백 수정*/	
+.colums{ padding: 5px; }
+
+.colums .col1{
+	width: 150px;
+}
+/*입력 input*/
+.colums .col2 input{
+	width: 250px; height: 25px;
+}
+
+/*입력 select*/
+.colums .col2 select {
+	width:100px; height: 30px;
+	}
+	
+	
+/*게시판 사이즈 고정*/
+textarea {resize: none;}
+
+/*버튼들의 box*/
+.btn_box{
+	
+	text-align: right;
+	
+}
+/*버튼 사이즈 변경*/
+.btn_box input{
+		padding:10px 20px;
+		margin: 10px 3px 0px 0px;
+		
+}
+
+/*인사말 세로정렬*/
+.hello{vertical-align: top;}

@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+/*
+	class , id 정의 [만들기]
+		1. 영문
+		2. 띄어쓰기 대신_ 사용
+		3. 한글, 숫자, 특수문자 X
+		4. 이해할 수 있는 단어 [이름
+*/
+
+*{ font-family: "굴림"}
+.title{ text-align: center; }
+
+.sign_t{
+	margin: 0 auto;
+	border-top: solid 2px red;
+	border-bottom: solid 2px red;
+	padding: 40px;
+	margin-bottom: 20px;
+	
+	
+}
+
+.sign_t td{
+	padding: 6px;
+	
+}
+
+.textbox{
+	width: 300px;
+	padding: 7px 0px;
+	
+}
+.listbox{
+	padding: 8px 20px 8px 0px ;
+	font-size:15px;
+	
+}
+
+.freetext{
+	width: 430px;
+	
+}
+
+.button{
+	padding: 10px 15px;
+	
+}
+
+.btn_box{
+	text-align: right;
+	margin: 0 130px 0 0;
+	 
+}
+
+.btn_box input{
+	font-size: 15px;
+	padding: 10px 20px 10px 20px; 
+}
+
+
+.hello{vertical-align: top;}
