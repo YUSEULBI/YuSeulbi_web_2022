@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.t1{
+	border-top: solid 4px black;
+	width:800px;
+	margin: 0 auto;
+	
+}
+
+.col1{
+	border-bottom: solid 1px #eeeeee;
+	padding: 10px 0px; 
+	font-size: 18px;
+}
+
+.input_1{
+	width: 600px;
+	padding: 20px 0;
+	}
+	
+.input_2{
+	width: 600px;
+	padding: 70px 0;
+	}
+	
+.space{
+	padding: 0 20px 0 0;
+	
+}
+
+.btn_box{
+	text-align: right;
+		}
+	
+.btn_box input{
+	font-size: 15px;
+	padding: 8px 27px 7px 27px;
+	font-size:15px;
+	margin: 25px 10px 0 0; 
+}
