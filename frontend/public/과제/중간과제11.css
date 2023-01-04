@@ -1,0 +1,187 @@
+@charset "UTF-8";
+
+
+
+
+/* --------공통------*/
+
+*{/*1. 모든곳 여백제거 	2. 기본폰트 맑은 고딕 */ 
+	padding: 0px; margin:0px;
+	font-family: "맑은 고딕"
+	}
+
+a{/*a태그 기본색상과 밑줄 제거*/
+	color: black;
+	text-decoration: none;
+}
+
+/*모든곳 li 글머리제거*/
+li{ list-style-type: none; /*글머리제거*/	}
+
+/* 웹폰트 */
+@font-face { /*눈누에서 가져온 외부폰트*/
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;}
+    
+/* *{border: 1px solid red;} */
+
+/* --------공통------*/
+
+
+	
+/*  헤더  */
+#header{
+	width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 40px;
+}
+
+
+
+
+/*li가로배치*/
+.main_menu li{
+	display:inline;
+	margin-left: 80px;
+	padding: 30px 0;
+	
+	
+}
+
+/*상단메뉴*/
+
+.main_menu li a{
+	font-family: 'LINESeedKR-Bd';
+	font-size:23px;
+	
+}
+
+
+.top_menu{
+	text-align:right;
+	margin-top: 20px;
+	margin-bottom: 40px;
+	
+}
+
+/*대표이미지*/
+#main_img{
+	width:100%; height: 350px;
+	background-image: url("중간과제11/main_img.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-bottom: 30px;
+	margin-top: 40px;
+	}
+
+/*본문*/
+#content{
+	width: 1200px; margin: 0 auto;
+	height: 600px;
+	display:flex;
+	justify-content: space-between;	
+}
+
+/* 사이드바 */
+.side_bar{
+	width: 250px;
+	height: 500px;
+}
+
+.side_bar h3{
+	font-size: 20px;
+	background-color: #0ca9a3;
+	color: white;
+	padding: 10px 50px 10px 20px;
+}
+
+.side_bar p{
+	padding: 20px;
+}
+.side_input{
+	text-align: center;
+}
+.text_box{
+	padding: 7px 0; 
+}
+
+.search_box{
+	padding: 7px 12px;
+	margin: 0 0 0 4px;
+}
+
+.side_bar h4{
+	border-top: 1px solid black;
+	border-bottom: 1px solid #eeeeee;
+	padding: 10px 50px 10px 20px;
+	margin: 20px 0 10px 0;
+}
+
+.side_bar li{
+	margin-left: 20px;
+	line-height: 200%;
+}
+
+/* 가운데 본문 */
+.content_1{
+	width: 410px;
+}
+
+.content_1 h4{
+	border-bottom: 1px solid black;
+	padding: 0 0 10px 0;
+	margin-bottom: 10px;
+
+}
+.content_1 ul{
+	display: flex;
+	justify-content:space-between;
+	line-height: 200%;
+}
+
+.notice{
+	margin: 0 0 50px 0;
+}
+
+/* 오른쪽 본문 */
+.content_2{
+	width: 410px;
+}
+.content_2 ul{
+	display: inline-block;
+	margin: 5px 5px 20px 5px;
+}	
+.content_2 h4{
+	border-bottom: 1px solid black;
+	padding: 0 0 10px 0;
+	margin-bottom: 10px;}
+
+/* 푸터 */
+#footer{
+background-color: #05354e;
+	
+	}
+	
+.ft_content{
+	color: white;
+	width: 1200px;
+	margin: 0 auto;
+	padding: 30px;
+	}
+.ft_top li{
+	display: inline-block;
+	margin-right: 20px;
+	font-weight: bold;
+	}
+.ft_sub{
+	display:flex; 
+	justify-content: space-between;
+	margin: 50px 50px;
+}
+.ft_item ul{
+	padding: 10px 3px;
+}
