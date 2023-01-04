@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+
+*{
+	border: 1px solid gray;
+}
+
+#header{
+	width: 1200px;
+	height: 100px;
+	margin: 0 auto;	/*가운데정렬*/
+	display: flex; /*하위요소들 가로배치*/
+	justify-content: space-between;
+}
+
+/* li 가로 배치 */
+.main_menu{ display: inline-block;}
