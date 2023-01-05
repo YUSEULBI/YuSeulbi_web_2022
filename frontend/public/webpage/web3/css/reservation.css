@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+
+/*------기본 css 제거------*/
+*{ 
+	padding: 0px; margin: 0px;
+	font-family: "맑은 고딕";
+}
+
+a{
+	color: black;
+	text-decoration: none;
+		}
+		
+li{ list-style-type: none;	}
+
+
+ /* *{ border: 1px solid blue;} */
+ 
+ 
+ /*----서브이미지-----*/
+
+#sub_img2{
+	background-image: url("../img/sub_reservation.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+
+ 
+/*----노란색 박스-----*/ 
+  
+.yello_box{
+	background-color:#fcf9ea;
+	
+	margin: 40px   0;
+	height: 395px;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.yello_box h5 , .yello_box h3 {
+	position: absolute;
+	
+}
+
+.yello_box h5{
+	top:35px;
+	left: 34.5%;
+}
+.yello_box h3{
+	top:65px;
+	left: 38.5%;
+}
+
+.yello_box table{
+ 	border-collapse: collapse;
+ 	border: 1px solid black;
+ 	width: 500px;
+ 	align-items: flex-start;
+ 	height: 400px;
+ 	margin: 20px auto 0  auto;
+ 	position: absolute;
+ 	top: 90px;
+ 	background-color: white;
+ 	
+ 	}
+	
+ 	
+.week{ height: 20px; 
+		text-align: center;
+		 }
+
+.yello_box table td{
+	width: 50px;
+}
+
+.num td{
+padding: 0 0 0 3px; 
+vertical-align:top; }
+
+.yello_box table .red{
+	color: red;
+}
+
+/* 오른쪽 안내사항 */
+.reservation_info{
+	margin: 0 0 0 10px;
+	}
+
+.reservation_info h3{
+	border-left: 4px solid black ;
+	padding: 0 0 0 10px;
+	margin: 0 0 10px 0 ;
+	
+}
+
+.reservation_info p{
+	color: green;
+	font-weight: bold;
+	margin: 20px 0 0 0; 
+ } 
+
+.reservation_info .info_1{
+	margin: 0 0 30px 0; 
+}

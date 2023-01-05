@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+/*------기본 css 제거------*/
+*{ 
+	padding: 0px; margin: 0px;
+	font-family: "맑은 고딕";
+}
+
+a{
+	color: black;
+	text-decoration: none;
+		}
+		
+li{ list-style-type: none;	}
+
+ /* *{ border: 1px solid blue;} */   
+
+/*------ 헤더 --------*/
+#header{
+	width: 1200px;
+	height: 100px; /*포지션 쓰려면 사이징 필요*/
+	margin: 0 auto;
+	position:relative; /*상위요소에 relative*/ 
+	}
+	
+.h_logo{
+	position: absolute; /*하위요소에 absolute */
+	left: 0px; top: 20px;
+}
+.h_logo span{
+	color: #2a62bf;
+	font-weight: bold;
+}
+	
+.h_menu{
+	position: absolute;  /*하위요소에 absolute */
+	right: 0px;
+	top: 30px;
+}
+.h_menu li{
+	display: inline-block;
+	margin-left: 30px;
+}
+
+/*------ 대표이미지 --------*/
+#main_img{
+	text-align: center;
+	}
+
+
+
+/*------ 본문1 --------*/
+#content1{
+	width: 1200px;
+	margin: 0 auto;
+
+	padding: 80px 120px;
+	display: flex;
+}
+
+
+
+.info{
+	width: 400px;
+	padding: 0 30px 0 15px;
+}
+
+.info h4{
+	margin-bottom: 10px;
+	font-size: 22px;
+	}
+
+.icon{
+	padding: 0 40px;
+}	
+/*------ 본문2 --------*/
+.content2{
+	width: 100%; 
+	background-color: #eeeeee;
+	height: 432px;
+	
+}
+.pic_board{
+	width: 1200px;
+	margin: 0 auto 70px auto; 
+	display: flex;
+	padding-bottom: 100px;
+}
+
+.picture{
+	width: 280px;
+	margin-top: 70px;
+}
+
+.pic_board h4{
+	font-size: 20px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	
+}
+
+.pic_board ul{
+	margin: 0 10px;
+}
+
+.board_text{
+	margin-left: 10px;
+}
+
+/*------ 푸터 --------*/
+#footer{
+	background-color: #292c32;
+
+}
+
+.ft_content{
+	width: 1200px; margin: 0 auto;
+	display: flex; justify-content: space-between;
+	padding: 50px 0px;
+	color: white;
+}
+.introduce li{
+	display: inline-block;
+}
+
+.ft_item{
+	width: 500px;
+}
+
+.ft_sns{
+	width: 200px;
+}
+
+
+
+
+
