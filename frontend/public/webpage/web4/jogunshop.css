@@ -30,7 +30,7 @@ a{/*a태그 기본색상과 밑줄 제거*/
 	padding: 13px 0;
 	display: flex;
 	justify-content: flex-end;
-	
+	margin-right: 30px;
 }
 
 .top_menu{
