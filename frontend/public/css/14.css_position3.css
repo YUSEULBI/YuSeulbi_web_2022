@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+
+
+#header{
+		display: flex;
+		justify-content: space-between;
+		/* position: fixed;
+		top: 0px; */
+		
+		position: sticky;	/* 해당 요소가 화면에서 나갔을 때 위치 고정 */
+		top:0px;			/* 가장 위에 위치 고정 */
+		
+		
+		background-color: red;
+		border-bottom: 1px solid #eeeeee;
+		
+		z-index: -1;	/* 다른 요소와 겹쳤을 때의 대한 배치 순서*/
+}
+
+#header li{
+	display: inline-block;
+}
+
+.popup{
+	width: 20%;
+	border: 2px solid #eeeeee;
+	position: fixed;	/* 화면 위치 고정 */ 
+	right: 0px; top: 40%;	/* 가장 오른쪽 화면기준 위에서부터 40% 내려옴*/
+	
+	opacity : 80%;	/* 투명도 [ %, 소수점 ] */
+	
+	background-color: white; /* 기본값: transparent; 색상없음*/
+}
+
+body{ background-color: yellow;}
