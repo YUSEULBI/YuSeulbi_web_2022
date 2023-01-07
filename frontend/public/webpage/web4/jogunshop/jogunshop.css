@@ -18,7 +18,7 @@ a{/*a태그 기본색상과 밑줄 제거*/
 /*-------------헤더-------------- */
 #header{
 	width: 100%;
-	position: fixed;
+	position: sticky;
 	top:0px;
 }
 
@@ -39,7 +39,7 @@ a{/*a태그 기본색상과 밑줄 제거*/
 
 .top_menu{
 	border-bottom: 1px solid #dbdcdd;
-	
+	background-color: white;
 }
 
 .topmenu_bar{
@@ -58,8 +58,8 @@ a{/*a태그 기본색상과 밑줄 제거*/
 	display: flex;
 	justify-content: space-between;
 	align-items: center;	/*[로고+메인메뉴] [검색창] 세로정렬*/
-	
-	
+	background-color: white;
+	opacity: 90%;
 }
 
 .logo_and_mainspan{
