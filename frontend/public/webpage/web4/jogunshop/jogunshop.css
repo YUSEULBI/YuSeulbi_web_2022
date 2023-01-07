@@ -143,6 +143,7 @@ a{/*a태그 기본색상과 밑줄 제거*/
 	border: none;
 	width: 126px;	/* input박스 가로길이*/
 	margin-left: 10px;
+	background-color: transparent;
 	
 }
 *:focus{ outline: none; }	/* input 입력창의 마우스커서[포커스] 생겼을때 이벤트*/
