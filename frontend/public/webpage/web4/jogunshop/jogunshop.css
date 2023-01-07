@@ -18,6 +18,7 @@ a{/*a태그 기본색상과 밑줄 제거*/
 /*-------------헤더-------------- */
 #header{
 	width: 100%;
+	position: fixed;
 }
 
 /*---------최상단 메뉴----------- */
@@ -48,13 +49,16 @@ a{/*a태그 기본색상과 밑줄 제거*/
 	height: 15px;
 }
 
-/*---------로고 and 메인 메뉴----------- */
+/*---------메인헤더----------- */
+
+/*-----메인헤더의 로고 and 메인 메뉴----------- */
 .main_header{	/* [로고+메인메뉴] [검색창] flex로 옆으로정렬*/
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;	/*[로고+메인메뉴] [검색창] 세로정렬*/
-	position: fixed;
+	
+	
 }
 
 .logo_and_mainspan{
