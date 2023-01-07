@@ -16,7 +16,9 @@ a{/*a태그 기본색상과 밑줄 제거*/
 }
 
 /*-------------헤더-------------- */
-
+#header{
+	width: 100%;
+}
 
 /*---------최상단 메뉴----------- */
 .top_li{
@@ -30,7 +32,7 @@ a{/*a태그 기본색상과 밑줄 제거*/
 	padding: 13px 0;
 	display: flex;
 	justify-content: flex-end;
-	margin-right: 30px;
+	margin-right: 60px;
 }
 
 .top_menu{
@@ -48,6 +50,7 @@ a{/*a태그 기본색상과 밑줄 제거*/
 
 /*---------로고 and 메인 메뉴----------- */
 .main_header{	/* [로고+메인메뉴] [검색창] flex로 옆으로정렬*/
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;	/*[로고+메인메뉴] [검색창] 세로정렬*/
@@ -120,16 +123,21 @@ a{/*a태그 기본색상과 밑줄 제거*/
 
 /*---------검색창----------- */
 
+.sherch_div{
+	margin-right: 70px;  
+}
+
 .search_input{
 	border-bottom: 1px solid black;
 	display: flex;
 	align-items: center;
-	padding-bottom: 4px; 
+	padding-bottom: 4px;
+	width: 160px; 
 }
 
 .s_input_box{
 	border: none;
-	width: 120px;	/* input박스 가로길이*/
+	width: 126px;	/* input박스 가로길이*/
 	margin-left: 10px;
 	
 }
