@@ -79,7 +79,7 @@ console.log( ' 부정 : ' + !(10>3) ) // T->F / F->T 결과를바꿈 참->거짓
 
 
 /*
-	문제2 : prompt 함수 로 반지름 입력받아서 원넓이[반지름*3.14] 출력  
+	문제2 : prompt 함수 로 반지름 입력받아서 원넓이[반지름*반지름*3.14] 출력  
 	문제3 : prompt 함수 로 두 실수를 입력받아서 앞 실수의 값이 뒷 실수의 값의 몇% 인지 출력
 	 	- 54.4  84.3  64%
 	-문제4 : prompt 함수 로 정수를 입력받아 홀수[true] / 짝수[false] 여부 출력
@@ -220,9 +220,8 @@ console.log('78점의 등급:' + 등급)
 
 
 //문제9
-let value1 = Number(prompt('정수'))
-let 홀짝구분 = value1%2==1 ? '홀수' : '짝수'
-console.log( value1 + '의 홀짝 판단: ' + 홀짝구분 )
+let value7 = Number(prompt('정수'))
+console.log( value7 + '의 홀짝판단 : ' + (value7%2==0 ? '짝수' : '홀수'))
 
 //문제10
 let value2 = Number(prompt('정수2'))
