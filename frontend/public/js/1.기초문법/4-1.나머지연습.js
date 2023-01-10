@@ -68,3 +68,11 @@ console.log ('결과1 : ' + result1)
 let result3 = prompt('데이터 입력')
 console.log('결과2: ' + result3)*/
 
+
+/*let value13 = Number(prompt('정수') )
+let value14 = Number(prompt('정수') )
+let value15 = Number(prompt('정수') )
+max = value13
+max = max < value14 ? value14 : max
+max = max < value15 ? value15 : max
+console.log('가장큰수는:' +  max )*/
