@@ -67,7 +67,7 @@ function onAdd() { // 함수 onAdd 시작점
 	// 5. input 마크업에 입력된 데이터 호출
 	let sno2Value = sno2.value;
 	// * 5번 확인
-		console.log ('5번체크' + sno2Value) 
+		console.log ('입력값 확인' + sno2Value) 
 	//6. 찾기
 	let sIndex2 = studentArray.indexOf(sno2Value)
 	//* 6번 확인
@@ -75,7 +75,7 @@ function onAdd() { // 함수 onAdd 시작점
 		
 	//7. 논리 , 출력
 	
-	if ( sIndex2 == 0 ) { 
+	if ( sIndex2 != -1 ) { 
 	document.querySelector('.resultBox2') .innerHTML = '실패! 이미 존재하는 학번입니다!' 
 		 }
 	
