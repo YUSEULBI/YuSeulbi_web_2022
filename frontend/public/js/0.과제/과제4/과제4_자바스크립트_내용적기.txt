@@ -1,0 +1,41 @@
+도서목록 선언
+대여목록 선언
+
+관리자테이블 함수 실행
+	bookTable 선언
+		번호 도서명 도서대여여부 비고
+		
+	i가 0부터 도서목록개수 전까지 1씩 증가할때마다
+	bookTable에 추가
+		1열: i+1
+		2열: 도서목록의 인덱스 i의 데이터
+		3열: <div>
+		4열: <button>삭제 (클릭이벤트)
+	
+	bookTable의 내용을 html .bookTable<table>에 덮어씌우기
+
+
+고객테이블 함수 실행
+	bookTable2 선언
+		번호 도서명 도서대여여부 비고
+	i가 0부터 도서목록개수 전까지 1씩 증가할때마다
+	bookTable에 추가
+		1열: i+1
+		2열: 도서목록 인덱스 i의 데이터
+		3열: <div>
+		4열: <button>대여  <button>반납
+	
+	bookTable2의 내용을 .bookList<table>에 덮어씌우기
+	.대여버튼<button>을 숨기기
+	.반납버튼<button>을 숨기기
+
+등록버튼을 누르면 newClick함수 실행
+
+	<도서등록>
+	newBook 선언, input의 값
+	newBook 글자길이가 4자 초과이고 11자 미만이면 도서목록에 push
+	글자길이가 4자이하면 alert , 11자이상이면 alert
+
+	관리자테이블 함수 ( bookTable초기값+추가값을 테이블에 덮어씌우기)
+
+	고객테이블 함수 ( bookTable2초기값+추가값을 테이블에 덮어씌우기,대여버튼,반납버튼 숨기기)
