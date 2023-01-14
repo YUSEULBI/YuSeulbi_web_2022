@@ -84,7 +84,7 @@ function 고객테이블(){
 	let bookTable2 = ` <tr> <th>번호</th> <th>도서명</th> <th>도서대여여부</th> <th>비고</th> </tr> `
 	
 	for(let i = 0 ; i < 도서목록.length ; i++  ){
-		for ( let j = 0 ; j < 대여목록 ; j++ ){
+		for ( let j = 0 ; j < 대여목록.length ; j++ ){
 			if ( 도서목록[i] == 대여목록[j]){
 				bookTable2 += `<tr> 
 								<th> ${i+1} </th> 
