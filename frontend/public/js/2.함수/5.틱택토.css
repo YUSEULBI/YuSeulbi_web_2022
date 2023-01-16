@@ -24,4 +24,6 @@
 	width: 30%;	height: 150px; /* 가로사이즈 세로사이즈  */
 	border: 5px solid white; /*테두리*/
 	background-color: #eeeeee;
+	font-size: 110px; color: white;
+	text-align: center; /* 폰트정렬  */
 }
