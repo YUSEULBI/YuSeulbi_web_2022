@@ -5,9 +5,23 @@ let 대여목록 = [ '혼자공부하는자바' ]
 
 console.log ( ' 도서목록 : ' + 도서목록)
 console.log ( ' 대여목록 : ' + 대여목록)
+console.log( '도서목록[-1]의 값 : ' + 도서목록[-1] )
 
-let 대여목록콘솔용 = 대여목록.indexOf ('혼자공부하는자바')
-console.log ( 대여목록콘솔용 )
+도서목록.splice( -1 , 1 )
+console.log ( ' 도서목록 : ' + 도서목록)
 
 
-// let sindex = 배열명.indexOf('신동엽'); console.log('신동엽 인덱스 : ' + sindex) 
+//function bookDelete(dno) {
+//	if( 대여목록.length < 1 ){
+// 도서목록.splice( dno , 1 ) 
+//if ( 도서목록[dno] == 대여목록[dno] ){
+			//alert('대여중인 도서는 삭제할 수 없습니다.')
+	//}else { 도서목록.splice( dno , 1 ) }
+	
+	
+	//관리자테이블()
+	//고객테이블()
+	
+//onsole.log( '도서목록 : ' + 도서목록 )
+//onsole.log( '대여목록 : ' + 대여목록 )
+// }

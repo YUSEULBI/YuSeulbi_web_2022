@@ -131,7 +131,7 @@ function 고객테이블(){
 }
 
 function returnBook(dno) {
-	대여목록.splice( 대여목록.indexOf(dno) , 1 )
+	대여목록.splice( 대여목록.indexOf(도서목록[dno]) , 1 )
 	관리자테이블()
 	고객테이블()
 	
