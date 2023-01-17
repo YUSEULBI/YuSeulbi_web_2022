@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.wrap{ 
+	display: flex; /* 레이아웃 배치 사용 */
+	justify-content: center; /* 레이아웃 가운데정렬 */
+}
+.addbox , .listbox{
+	border: 1px solid red;
+	width: 40%;	/* 가로길이 배율 */
+	text-align: center; /*내용물들의 가운데정렬*/
+}
+
+.addTable{
+	margin: 0 auto;
+}
