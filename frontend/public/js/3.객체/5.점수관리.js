@@ -79,12 +79,10 @@ function printTable() {
 	
 	// 2. 배열내 객체 
 			studentArray.forEach( ( o , i ) => {
-				
 				let total = o.kor+o.eng+o.mat;
 		
 				let rank = 1;
 				studentArray.forEach( (o2) => {
-				
 					let total2 = o2.kor + o2.eng + o2.mat ;
 					
 					// 2. 총점이 비교할 총점보다 작으면 순위 하락
