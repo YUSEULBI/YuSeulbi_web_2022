@@ -5,6 +5,18 @@
 	1. 하나의 html에서 2가지 요구사항 구현
 	2. 기본 카테고리
 		let categoryList = [ 프리미엄 , 스페셜 , 와퍼 , 올데이킹 , 치킨버거 ]
+	3. 버거 객체 [ 서로 다른 유형들의 데이터 ]
+		let burger = {
+			
+			name : 버거이름 
+			price : 가격
+			img : 버거이미지
+			category : 버거카테고리
+		}
+		
+		let burgerList = [ {burger} , {burger} , {burger} , {burger} , {burger} ]
+		
+	4. let cartList = [ ] 
 
 1. 고객 요구사항
 	1. 프론트엔드 : 카카오톡 사진 기준

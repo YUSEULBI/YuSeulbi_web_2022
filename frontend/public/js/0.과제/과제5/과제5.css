@@ -1,8 +1,16 @@
 @charset "UTF-8";
 
+/*웹폰트 가져오기*/
+@font-face {
+    font-family: 'GangwonEduPowerExtraBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 *{ /* 기본값 제거 */
 	padding:0px; margin: 0px;
-	
+	font-family: 'GangwonEduPowerExtraBoldA'; /*기본폰트 적용*/
 }
 
 .wrap{
@@ -19,30 +27,44 @@
 
 /*키오스크 박스권*/
 .kioskbox{
-	width: 100%; height: 800px;
+	width: 100%; height: 900px;
 	border: 1px solid red;
 	
 }
 
 /*키오스크 헤더구역사이즈*/
-.header{
-	height: 250px;
-	border: 1px solid blue;
-}
+.header{	height: 250px; }
 
 /*키오스크 헤더구역 메뉴*/
 .categorybox li{
 	display: inline-block; /* 가로배치  */
 	margin: 10px 35px;
+	color: #8e8e8e;
 }
 
-/*키오스크내 본문*/
-.content{
-	height: 500px;
-	border: 1px solid orange;
+/*선택된 li 꾸미기*/
+.categoryselect{
+	color : red !important; /*충돌시 최우선 */
+	border-bottom: 5px solid red;
+	padding-bottom: 5px;
 }
 
-/*키오스크 푸터구역*/
+
+
+/*-----------------본문------------------------  */
+
+.content{	height: 600px; }
+.productbox{ height: 450px; display:flex; flex-wrap:wrap; } /*자동줄바꿈  */
+.cartbox{ height: 150px; border: 1px solid blue;}
+
+/* 제품  */
+.product{
+	width: 28%; margin:2%;
+}
+.productinfo{ text-align: center; }
+.pprice{ color: red; }
+
+/*----------------키오스크 푸터구역-----------------------------*/
 .footer{
 	height: 50px;
 	border: 1px solid blue;
