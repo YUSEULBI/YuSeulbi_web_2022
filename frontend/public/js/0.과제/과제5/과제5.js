@@ -1,14 +1,15 @@
 
 
-let categoryList = [ '프리미엄' , '스페셜' , '와퍼' , '올데이킹' , '치킨버거' ]
-let burgerList = [ 
+let categoryList = [ '프리미엄' , '스페셜' , '와퍼' , '올데이킹' , '치킨버거' ] //카테고리목록
+let burgerList = [ //메뉴전체 버거목록
 	
-	{name : '콰트로치즈와퍼' , price: 9500 , img : 'img/cheese.png' , category : '프리미엄' } , 
-	{name : '몬스터X' , price: 8000 , img : 'img/monster_x.png' , category : '프리미엄' } ,
-	{name : '스페셜' , price: 13000 , img : 'img/special.png' , category : '스페셜' }
+	{name : '콰트로치즈와퍼' , price: 9500 , img : 'cheese.png' , category : '프리미엄' } , 
+	{name : '몬스터X' , price: 8000 , img : 'monster_x.png' , category : '프리미엄' } ,
+	{name : '스페셜' , price: 13000 , img : 'special.png' , category : '스페셜' }
 ]
 
-let cartList = [ ]
+let cartList = [ ] // 카트목록
+let orderList = [ ] // 주문목록
 
 category_print();
 category_select(0) //기본값 프리미엄
@@ -60,7 +61,7 @@ function product_print( index ) {
 	 if ( burgerList[i].category == categoryList[index] )
 	 //i번째 버거객체의 카테고리와 선택된 카테고리와 같으면
 	// 1. html 구성
-	 html += `<div class="product">
+	 html += `<div onclick="cartadd(${i})" class="product">
 					<img src="img/${ burgerList[i].img }" width="100%" />
 					<div class="productinfo">
 						<div class="ptitle"> ${ burgerList[i].name }	</div>
@@ -71,3 +72,110 @@ function product_print( index ) {
 	 // 2. 구성된 htlml을 마크업 대입
 	 document.querySelector('.productbox').innerHTML = html;
 }
+
+//4. 제품선택함수 ( 선택한 제품을 카트에 담기 )
+
+function cartadd( i ){
+	//1. 선택한 i번째 버거의 객체를 cardlist에 추가
+	cartList.push( burgerList[i] )
+	cartprint();
+	
+} // f e
+
+
+
+
+
+//5. 주문 취소 버튼
+function cancel(){
+	alert('주문취소함니다')
+	cartList.splice(0); // 개수 생략시 모두 삭제
+	cartprint(); // 카트내 제품 화면 렌더링 [새로고침]
+}
+
+
+//6. 주문 요청 버튼
+ function order(){
+	 alert('주문합니다.');
+	 console.log('주문하기전 카트리스트-----------')
+	 console.log(cartList)
+	
+	// 1. 주문번호 만들기
+	let no = 0;
+	//마지막인덱스 : 배열명.length -1
+	if ( orderList.length == 0 ){no = 1;}
+		// 2. 아니면 마지막인덱스의 주문번호+1 를 다음 주문번호로 사용
+	else{ no = orderList [ orderList.length-1 ].no+1 }
+	
+	
+	
+	// forEach 와 map 의 차이 
+	let for배열 = cartList.forEach( (o) => {console.log(o); return o;}) //반환이 안됨
+	console.log( for배열 )
+	console.log('구분선--------------')
+	let map배열 = cartList.map ( (o) => {console.log(o); return o;}) // 반환됨 , 카트배열은 지워지는 상황이라 새로운 배열(메모리가 다름)에 저장
+	console.log( map배열 )
+	
+	// 2. 총 가격 만들기
+	let total = 0;
+	for ( let i = 0 ; i< map배열.length ; i++ ){ total += map배열[i].price }
+	
+	
+	//1. 주문객체 만들기
+	
+		//1. order 객체 만들기
+		let order = { 
+			no : no ,
+			items : map배열 , //.map( ()=>{} ) 새로운 배열에 메모리 저장해서 삭제가 안됨
+			time : new Date() , // new Date() : 현재 날짜/시간 호출
+			state : true , 		// true : 일단 주문 	// false : 주문완료
+			complete : 0,		// 아직 주문 완료되기 전
+			price : total		// cartlist 배열내 버거객체들의 총금액 합계
+			
+		}
+		
+		//2.order 객체 배열에 저장
+		orderList.push( order )
+		console.log('주문후 카트리스트-----------')
+	 console.log(cartList)
+		console.log( orderList )
+	// 2. 주문완료후
+	 cartList.splice(0)
+	 cartprint();
+	 
+ }
+
+//7. 카트 내 버거 출력 [ 1. 제품 클릭할때마다 2. 취소/주문]
+function cartprint(){
+	//2. 버거개수 카운트
+	document.querySelector('.pcount').innerHTML = cartList.length
+	//3. 버거 총 개수
+	let total = 0;
+	for( let j = 0 ; j<cartList.length ; j++ ){
+		total += cartList[j].price
+	}
+	document.querySelector('.ptotal').innerHTML = total.toLocaleString(); //천단위쉼표
+	
+	//4. 카트내 버거 출력
+	let html = ''
+	
+	for( let j = 0 ; j < cartList.length ; j++ ){
+		html += `<div class="item">
+						<div class="ititle"> ${cartList[j].name} </div>
+						<div class="iprice"> ${cartList[j].price.toLocaleString() }원 </div>
+				</div>`
+		
+	}
+		//2. 구성된 html 
+		document.querySelector('.cartbottom').innerHTML = html;
+}
+
+
+
+
+
+
+
+
+
+

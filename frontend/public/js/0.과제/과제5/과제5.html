@@ -9,7 +9,7 @@
 
 	<div class="wrap"> <!-- 전체구역 -->
 		<div class="container"><!-- 키오스크 구현 -->
-			<div class="kioskbox"> 
+			<div class="kioskbox"> <!-- 키오스크 s -->
 				<!-- 구현 -->
 				<div class="header"> <!-- 헤더+메뉴 -->
 					<!-- <div class="h_img"></div>  -->
@@ -20,20 +20,50 @@
 					</div> 
 				</div> <!-- 키오스크 헤더 e -->
 				
-				<div class="content"> <!-- 본문+카트 -->
+				<div class="content"> <!-- 본문 -->
 					<div class="productbox"> <!-- 제품출력 --> 
 						
 						<!-- 제품1개  -->
 						
 					
 						
-					</div> 
-					<div class="cartbox"> 카트목록 </div>
-				</div>
+					</div> <!-- 제품출력 end --> 
+					
+					
+					<div class="cartbox"> <!-- 카트 출력 구역 -->
+					
+					
+					
+							<div class="cartcontent"> <!-- 제품정보 s -->
+									<div class="carttop"> <!-- 제품개수 , 제품가격 -->
+										<div> 카트 <span class="pcount"> 0 </span>	</div>
+										<div> 총 주문금액 <span class="ptotal">31,000</span>	</div>
+									</div>
+								
+									<div class="cartbottom"><!-- 제품정보구역 -->
+									
+																				
+									</div> <!-- 제품정보구역 end -->
+								
+							</div> <!-- 제품정보 end -->
+							 
+							 
+							 
+							<div class="cartbtn"> <!-- 버튼구역 -->
+							
+									<button onclick="cancel()" class="cancelbtn" type="button">취소</button>
+									<button onclick="order()" class="orderbtn" type="button">주문하기</button>
+								
+							</div>  <!-- 버튼구역end -->
+						
+						
+						
+					</div> <!-- 카트 출력 구역 end -->
+					 
+				</div> <!-- 본문 end -->
 				
-				<div class="footer"> 푸터 
-				</div>
-			</div>
+				
+			</div> <!-- 키오스크 end -->
 		</div>
 		
 		<div class="container"> <!-- 포스기 -->

@@ -2,15 +2,15 @@
 
 /*웹폰트 가져오기*/
 @font-face {
-    font-family: 'GangwonEduPowerExtraBoldA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
-    font-weight: normal;
+    font-family: 'TTTtangsbudaejjigaeB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/TTTtangsbudaejjigaeB.woff2') format('woff2');
+    font-weight: 700;
     font-style: normal;
 }
 
 *{ /* 기본값 제거 */
 	padding:0px; margin: 0px;
-	font-family: 'GangwonEduPowerExtraBoldA'; /*기본폰트 적용*/
+	font-family: 'TTTtangsbudaejjigaeB'; /*기본폰트 적용*/
 }
 
 .wrap{
@@ -27,8 +27,8 @@
 
 /*키오스크 박스권*/
 .kioskbox{
-	width: 100%; height: 900px;
-	border: 1px solid red;
+	width: 100%; height: 1000px;
+	/* border: 1px solid red; */
 	
 }
 
@@ -53,9 +53,9 @@
 
 /*-----------------본문------------------------  */
 
-.content{	height: 600px; }
+.content{	height: 700px; }
 .productbox{ height: 450px; display:flex; flex-wrap:wrap; } /*자동줄바꿈  */
-.cartbox{ height: 150px; border: 1px solid blue;}
+.cartbox{ height: 250px; background-color:  #eeeeee;}
 
 /* 제품  */
 .product{
@@ -64,11 +64,78 @@
 .productinfo{ text-align: center; }
 .pprice{ color: red; }
 
-/*----------------키오스크 푸터구역-----------------------------*/
-.footer{
-	height: 50px;
-	border: 1px solid blue;
+/* 카트  */
+.cartcontent{
+	padding: 20px;
 }
+
+/* 총 개수  div , 총 주문금액 div  */
+.carttop{ 
+	display: flex;
+	justify-content: space-between;
+}
+/*총개수원형*/
+.pcount{
+	background-color: red;
+	width: 30px; /*span의 기본값은 inline : 사이즈 변경 불가*/
+	display: inline-block; /*그래서 inline-block으로 변경*/
+	border-radius: 10px;	/*둥근모서리*/
+	text-align: center;		/* 내용 가로 가운데 정렬 */
+	color: white;
+	font-size: 12px;
+	padding: 3px;			/*안쪽여백*/
+}
+/*총금액표시*/
+.ptotal {
+	color: red;
+}
+
+.cartbottom{
+	display: flex;
+	margin-top: 20px;
+}
+
+.item{
+	width:20%;
+	background-color: white;
+	padding: 15px;	 	
+	margin-right: 10px;
+}
+
+
+.ititle{
+	width: 100%;
+	height: 50px;
+}
+
+
+.iprice{
+	margin: 10px 0px;
+	color: red;
+}
+
+
+/*버튼  */
+.cartbtn{
+	display: flex;
+}
+
+.cartbtn button{
+	width: 50%;
+	font-size: 20px;
+	color: white;
+	padding : 20px;
+	border: none;
+}
+
+.cancelbtn{
+	background-color: black;
+}
+.orderbtn{
+	background-color: red;
+}
+
+
 
 /* .h_img{
 	background-image: url("img/h.jpg"); 비율이 맞는이미지 사용해야함
