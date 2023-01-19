@@ -1,19 +1,26 @@
+/*공통-DB -- 공통데이터 ------------전역변수*/
 
+let categoryList = [ '프리미엄' , '스페셜' , '와퍼' , '올데이킹' , '치킨버거' ] //카테고리목록 문자열 배열
 
-let categoryList = [ '프리미엄' , '스페셜' , '와퍼' , '올데이킹' , '치킨버거' ] //카테고리목록
-let burgerList = [ //메뉴전체 버거목록
-	
+let burgerList = [ //메뉴전체 버거목록객체
 	{name : '콰트로치즈와퍼' , price: 9500 , img : 'cheese.png' , category : '프리미엄' } , 
 	{name : '몬스터X' , price: 8000 , img : 'monster_x.png' , category : '프리미엄' } ,
 	{name : '스페셜' , price: 13000 , img : 'special.png' , category : '스페셜' }
 ]
 
+// '버거객체' 배열
 let cartList = [ ] // 카트목록
+// '주문객체'배열
 let orderList = [ ] // 주문목록
 
-category_print();
-category_select(0) //기본값 프리미엄
-product_print( 0 ) //기본값 프리미엄
+/*공통-DB--------------------------전역변수 end*/
+
+/*스크립트가 열렸을때 실행되는 함수-------------*/
+category_print(); //카테고리출력함수 1회 호출
+category_select(0) //기본값 프리미엄 (css변경/카테고리별 제품출력)
+product_print( 0 ) //기본값 프리미엄 // 결과적으론 없어도됨 product_print함수가 category_select함수에 들어가있음
+
+/*-------------------------*/
 
 // 1. 카테고리 출력하는 함수
 function category_print(){
@@ -113,7 +120,7 @@ function cancel(){
 	let for배열 = cartList.forEach( (o) => {console.log(o); return o;}) //반환이 안됨
 	console.log( for배열 )
 	console.log('구분선--------------')
-	let map배열 = cartList.map ( (o) => {console.log(o); return o;}) // 반환됨 , 카트배열은 지워지는 상황이라 새로운 배열(메모리가 다름)에 저장
+	let map배열 = cartList.map ( (o) => { return o;}) // 반환됨 , 카트배열은 지워지는 상황이라 새로운 배열(메모리가 다름)에 저장
 	console.log( map배열 )
 	
 	// 2. 총 가격 만들기
@@ -125,8 +132,9 @@ function cancel(){
 	
 		//1. order 객체 만들기
 		let order = { 
-			no : no ,
-			items : map배열 , //.map( ()=>{} ) 새로운 배열에 메모리 저장해서 삭제가 안됨
+			no : no , // 고유한 변경없는 번호 만들기
+			items : map배열 , //.map( ()=>{} ) 새로운 배열에 메모리 저장해서 삭제가 안됨 / 전역변수로 저장하면 안되어서 새로운 배열에 저장 
+			// map배열은 지역변수 ,함수가 실행될때마다 새로운 메모리를 만들고 orderlist에 map배열데이터를 저장시키고 선언된map배열은 삭제됨.
 			time : new Date() , // new Date() : 현재 날짜/시간 호출
 			state : true , 		// true : 일단 주문 	// false : 주문완료
 			complete : 0,		// 아직 주문 완료되기 전
@@ -169,6 +177,11 @@ function cartprint(){
 		//2. 구성된 html 
 		document.querySelector('.cartbottom').innerHTML = html;
 }
+
+
+
+
+
 
 
 
