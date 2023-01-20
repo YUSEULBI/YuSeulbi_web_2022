@@ -7,7 +7,7 @@ let burgerList = [ //메뉴전체 버거목록객체
 	{name : '몬스터X' , price: 8000 , img : '몬스터X.png' , category : '프리미엄' } ,
 	{name : '블랙어니언팩' , price: 13000 , img : '블랙어니언팩.png' , category : '스페셜' }
 ]
-
+																																																												
 // '버거객체' 배열
 let cartList = [ ] // 카트목록
 // '주문객체'배열
@@ -38,7 +38,7 @@ function category_print(){
 	
 	// 2.해당 마크업에 HTML 출력
 	document.querySelector('.categorybox').innerHTML = html
-}
+} 
 
 
 //2.카테고리선택함수
@@ -240,6 +240,13 @@ function newBurgerApply() {
 		//console.log(burgerList)
 			
 		burgerTable();
+		category_print(); //카테고리출력함수 1회 호출
+		category_select(0) //기본값 프리미엄 (css변경/카테고리별 제품출력)
+		product_print( 0 )
+		document.querySelector('.newName').value = ''
+		document.querySelector('.newCategory').value = ''
+		document.querySelector('.newPrice').value = ''
+		document.querySelector('.newImg').value = ''
 		
 }
 
@@ -257,7 +264,7 @@ function burgerTable(){
 					<td>${burgerList[i].name}</td> 
 					<td>${burgerList[i].category}</td> 
 					<td>${burgerList[i].price}</td> 
-					<td> <button onclick="bListDelete(${i})" type="button">삭제</button> <button onclick="pChangeBox(${i})" type="button">가격수정</button> </td>
+					<td> <button class="bugerListBtn" onclick="bListDelete(${i})" type="button">[삭제]</button> <button class="bugerListBtn" onclick="pChangeBox(${i})" type="button">[가격수정]</button> </td>
 				</tr>`
 	}
 	document.querySelector('.burgerTable').innerHTML = html2
@@ -291,53 +298,12 @@ function orderTable(){
 	let html = `<tr>
 					<th>주문번호</th> <th>버거이름</th> <th>상태</th> <th>요청/완료시간</th> <th>비고</th>
 				</tr>`
-	 
-	for( let i = 0 ; i < orderList.length ; i++ ){
-		// 0부터 orderList 인덱스번호까지 1씩 증가할때마다
-		for( let j = 0 ; j < orderList[i].items.length ; j++ ){
-			// 0부터 items객체 인덱스번호까지 1씩 증가하면서
-			let state = (i) => { if ( orderList[i].state == true){ return '주문요청' }else{ return'주문완료'} }
-			html += `<tr>
-						<td>${ orderList[i].no }</td> 
-						<td>${ orderList[i].items[j].name }</td> 
-						<td> ${state(i)}  </td> 
-						<td class="time">${ orderList[i].time }</td> 
-						<td> <button onclick="oComplete(${i})" type="button" >주문완료</button> </td>
-					</tr>`
-			//console.log('orderList[i].items')
-			//console.log(orderList[i].items)
-			
-		}
-	}
-	
-	document.querySelector('.orderTable').innerHTML = html
-	
-	/*if ( orderList[i].state == true){
-				document.querySelectorAll('.state').innerHTML = '주문요청'
-	}else{
-				document.querySelectorAll('.state').innerHTML = '주문완료'
-	}*/
-	
-}
-
-
-function oComplete(index){
-	orderList[index].state = false;
-	//console.log ( orderList[index].state )
-	
-	//console.log( 'state 삼항연상자 결과' )
-	
-	
-	orderList[index].time = new Date();
-	let html = `<tr>
-					<th>주문번호</th> <th>버거이름</th> <th>상태</th> <th>요청/완료시간</th> <th>비고</th>
-				</tr>`
 	for( let i = 0 ; i < orderList.length ; i++ ){			
 		for( let j = 0 ; j < orderList[i].items.length ; j++ ){
 			let state = (i) => { if ( orderList[i].state == true){ return '주문요청' }else{ return'주문완료'} }
 			let complete = (i) => { if ( orderList[i].state == true){ 
-				return `<button onclick="oComplete(${i})" type="button" >주문완료</button>` 
-			}else{ return'완료'} }
+				return `<button class="oComplete" onclick="oComplete(${i})" type="button" >주문완료</button>` 
+			}else{ return'<span class="completed">주문완료</span>'} }
 				html += `<tr>
 							<td>${ orderList[i].no }</td> 
 							<td>${ orderList[i].items[j].name }</td> 
@@ -345,11 +311,26 @@ function oComplete(index){
 							<td class="time">${ orderList[i].time }</td> 
 							<td>  ${complete(i)}   </td>
 						</tr>`
+			//console.log('orderList[i].items')
+			//console.log(orderList[i].items)
 		}
 	}
 	
 	document.querySelector('.orderTable').innerHTML = html
+	
+	
+	
+}
 
+// 주문현황에 주문완료 버튼 눌렀을 때
+function oComplete(index){
+	orderList[index].state = false;
+	//console.log ( orderList[index].state )
+	
+	
+	orderList[index].time = new Date();
+	orderTable()
+	
 }
 
 
@@ -363,28 +344,38 @@ function salesTable(){
 		let count = 0;
 		for ( let j = 0 ; j < orderList.length ; j++ ){
 				// 0부터 orderList의 인덱스까지
-				for ( let g = 0 ; g < orderList[j].items.length ; g++ ){
+				for ( let b = 0 ; b < orderList[j].items.length ; b++ ){
 					// 0부터 버거객체의 인덱스까지
 					
 						
-					if( orderList[j].items[g].name == burgerList[index].name ){count++}
+					if( orderList[j].items[b].name == burgerList[index].name ){count++}
 			
 				}
 		}
 		return count;
 	}		
 	
+	function total(i){ 
+		let total = counthamsu(i)*burgerList[i].price
+		return total; 
+	}
+	
+	
 	
 	for ( let i = 0 ; i < burgerList.length ; i++ ){
-		let total = counthamsu(i)*burgerList[i].price
-		
+				
+			
 		html += `<tr>
-					<th> ${i+1}</th> 
-					<th> ${burgerList[i].name}</th> 
-					<th> ${ counthamsu(i) } </th> 
-					<th> ${ total }</th> 
-					<th>순위</th>
+					<td> ${i+1}</th> 
+					<td> ${burgerList[i].name}</td> 
+					<td> ${ counthamsu(i) } </td> 
+					<td> ${ total(i) } </td>
+					<td> </td>
 				</tr>`
+			
+			
+
 	}
 	document.querySelector('.salesTable').innerHTML = html
+	
 }

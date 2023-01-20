@@ -69,45 +69,50 @@
 		<div class="container"> <!-- 포스기 -->
 			<div class="adminPage">
 			
-				<div class="newBurger"> <!-- 버거등록 -->
-					<h3>버거등록</h3>
-					<table class="newTable">
-						<tr> 
-							<td class="newListName"> 버거이름 : </td> 
-							<td> <input class="newName Ninput" type="text"> </td>
-						</tr>
-						<tr>
-							<td class="newListName"> 카테고리명 : </td> 
-							<td> <input class="newCategory Ninput" type="text" placeholder="프리미엄/스페셜/와퍼/올데이킹/치킨버거" > </td>
-						</tr>
-						<tr>
-							<td class="newListName"> 가격 : </td> 
-							<td> <input class="newPrice Ninput" type="text" placeholder="숫자만 입력하세요."> </td>
-						</tr>
-						<tr>
-							<td class="newListName"> 이미지 : </td> 
-							<td> <input class="newImg Ninput" type="text" placeholder="버거이름.png"> </td>
-						</tr>
-						<tr>
-							<td colspan="2"> <button onclick="newBurgerApply()" type="button">버거등록</button> </td>
-						</tr>
-					</table>
+				<div class="newBurgerDiv"> <!-- 버거등록 -->
+					<h3 class="h3Title">버거등록</h3>
+					<div class="newTableDiv">
+						<table class="newTable">
+							<tr> 
+								<td class="newListName"> 버거이름 </td> 
+								<td class="inputTd"> <input class="newName" type="text"> </td>
+							</tr>
+							<tr>
+								<td class="newListName"> 카테고리명 </td> 
+								<td class="inputTd"> <input class="newCategory" type="text" placeholder="프리미엄/스페셜/와퍼/올데이킹/치킨버거" > </td>
+							</tr>
+							<tr>
+								<td class="newListName"> 가격 </td> 
+								<td class="inputTd"> <input class="newPrice" type="text" placeholder="숫자만 입력하세요."> </td>
+							</tr>
+							<tr>
+								<td class="newListName"> 이미지 </td> 
+								<td class="inputTd"> <input class="newImg" type="text" placeholder="버거이름.png"> </td>
+							</tr>
+							<tr>
+								<td class="applyBtnTr" colspan="2"> <button class="applyBtn"  onclick="newBurgerApply()" type="button">버거등록</button> </td>
+							</tr>
+							<tr>
+								<td colspan="2" class="imglist"> 이미지목록: 롱치킨버거.png , 불고기와퍼.png , 오믈렛킹모닝.png </td>
+							<tr>
+						</table>
+					</div>
 				</div>
 				
-				<div class="burgerListdiv"> <!-- 등록된 버거 목록 -->
-					<h3>등록된 버거목록</h3>
+				<div class="burgerListDiv"> <!-- 등록된 버거 목록 -->
+					<h3 class="h3Title">등록된 버거목록</h3>
 					<table class="burgerTable" border="1">
 					</table>
 				</div>
 				
-				<div> <!-- 주문 현황 -->
-					<h3>주문현황</h3>
+				<div class="orderDiv"> <!-- 주문 현황 -->
+					<h3 class="h3Title">주문현황</h3>
 					<table class="orderTable"  border="1">
 					</table>
 				</div>
 				
-				<div> <!-- 매출현황 -->
-					<h3>매출현황</h3>
+				<div class="salseDiv"> <!-- 매출현황 -->
+					<h3 class="h3Title">매출현황</h3>
 					<table class="salesTable" border="1">
 					</table>
 				</div>
