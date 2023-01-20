@@ -3,9 +3,9 @@
 let categoryList = [ '프리미엄' , '스페셜' , '와퍼' , '올데이킹' , '치킨버거' ] //카테고리목록 문자열 배열
 
 let burgerList = [ //메뉴전체 버거목록객체
-	{name : '콰트로치즈와퍼' , price: 9500 , img : 'cheese.png' , category : '프리미엄' } , 
-	{name : '몬스터X' , price: 8000 , img : 'monster_x.png' , category : '프리미엄' } ,
-	{name : '스페셜' , price: 13000 , img : 'special.png' , category : '스페셜' }
+	{name : '콰트로치즈와퍼' , price: 9500 , img : '콰트로치즈와퍼.png' , category : '프리미엄' } , 
+	{name : '몬스터X' , price: 8000 , img : '몬스터X.png' , category : '프리미엄' } ,
+	{name : '블랙어니언팩' , price: 13000 , img : '블랙어니언팩.png' , category : '스페셜' }
 ]
 
 // '버거객체' 배열
@@ -104,8 +104,8 @@ function cancel(){
 //6. 주문 요청 버튼
  function order(){
 	 alert('주문합니다.');
-	 console.log('주문하기전 카트리스트-----------')
-	 console.log(cartList)
+	 //console.log('주문하기전 카트리스트-----------')
+	 //console.log(cartList)
 	
 	// 1. 주문번호 만들기
 	let no = 0;
@@ -117,11 +117,11 @@ function cancel(){
 	
 	
 	// forEach 와 map 의 차이 
-	let for배열 = cartList.forEach( (o) => {console.log(o); return o;}) //반환이 안됨
-	console.log( for배열 )
-	console.log('구분선--------------')
+	let for배열 = cartList.forEach( (o) => { return o;}) //반환이 안됨
+	//console.log( for배열 )
+	//console.log('구분선--------------')
 	let map배열 = cartList.map ( (o) => { return o;}) // 반환됨 , 카트배열은 지워지는 상황이라 새로운 배열(메모리가 다름)에 저장
-	console.log( map배열 )
+	//console.log( map배열 )
 	
 	// 2. 총 가격 만들기
 	let total = 0;
@@ -144,13 +144,14 @@ function cancel(){
 		
 		//2.order 객체 배열에 저장
 		orderList.push( order )
-		console.log('주문후 카트리스트-----------')
-	 console.log(cartList)
-		console.log( orderList )
+		//console.log('주문후 카트리스트-----------')
+	 //console.log(cartList)
+		//console.log( orderList )
 	// 2. 주문완료후
 	 cartList.splice(0)
 	 cartprint();
-	 
+	 orderTable();
+	 salesTable();
  }
 
 //7. 카트 내 버거 출력 [ 1. 제품 클릭할때마다 2. 취소/주문]
@@ -180,15 +181,210 @@ function cartprint(){
 
 
 
+/*-------------------------포스기------------------------------*/
+burgerTable();
+orderTable();
+salesTable();
+
+function newBurgerApply() {
+	// 버거등록 버튼을 눌렀을 때 실행되는 함수
+	
+	// 1. 버거등록 input 입력값을 js로 가져오기
+	let newName = document.querySelector('.newName').value
+	let newCategory = document.querySelector('.newCategory').value
+	let newPrice = document.querySelector('.newPrice').value
+	let newImg = document.querySelector('.newImg').value
+	
+	// 2. 입력값 유효성검사
+	
+		// 2-1. 중복이름 검사
+		for( let i = 0 ; i < burgerList.length ; i++ ){
+			//burgurList의 인덱스
+			
+			if( burgerList[i].name == newName ){
+				//burgerList 모든 객체 name중에 버거등록입력네임값이랑 같은 name이 있다면 
+				alert('동일한 버거이름이 있습니다.') ; return false;
+				//경고창 띄우고 false를 return하고 함수종료
+			}
+		}
+		
+		// 2-2. 카테고리 입력값 검사
+		if( categoryList.indexOf(newCategory) < 0  ){
+			//입력값이 catogoryList에 없으면 
+			
+				alert('존재하지 않는 카테고리입니다.') ; return false;
+		}
+		
+		//2-3. 가격입력값이 숫자인지 문자인지 검사
+		if ( isNaN( newPrice ) ){
+			//금액 입력값이 문자이면
+			alert('숫자를 입력하세요.') ; return false;
+		}  
+		
+		
+		// 3. 입력값을 newBurgerInfo객체에 저장 , 객체를 burgerList에 push
+		let newBurgerInfo = {
+			name : newName , 
+			price: parseInt(newPrice) , 
+			img : newImg , 
+			category : newCategory
+		}
+			
+		burgerList.push( newBurgerInfo )
+		alert('버거 등록 성공')
+			
+			
+		//console.log('newBurgersInfo--------')
+		//console.log( newBurgerInfo )
+		//console.log('burgerList--------')
+		//console.log(burgerList)
+			
+		burgerTable();
+		
+}
 
 
+function burgerTable(){
+	//현재 버거 목록을 테이블에 출력하는 함수
+	
+	let html2 = `<tr>
+					<th>번호</th> <th>이미지</th> <th>버거이름</th> <th>카테고리</th> <th>가격</th> <th>비고</th>
+				</tr>`
+	for ( let i = 0 ; i < burgerList.length ; i++ ){					
+		html2 += `<tr>
+					<td>${ i+1 }</td> 
+					<td class="burgerTableImg"><img src="img/${burgerList[i].img}" /></td> 
+					<td>${burgerList[i].name}</td> 
+					<td>${burgerList[i].category}</td> 
+					<td>${burgerList[i].price}</td> 
+					<td> <button onclick="bListDelete(${i})" type="button">삭제</button> <button onclick="pChangeBox(${i})" type="button">가격수정</button> </td>
+				</tr>`
+	}
+	document.querySelector('.burgerTable').innerHTML = html2
+}
+
+function bListDelete(i){
+	//삭제버튼을 클릭하면 함수실행
+	
+	burgerList.splice( i , 1 );
+	//버거리스트의 i번 인덱스를 1개 삭제
+	burgerTable();
+}
 
 
+function pChangeBox(i){
+	//가격수정 버튼을 클릭하면 함수실행
+	let html = `<tr> <td colspan="6" class="changeTr" > 수정금액: <input class="changePrice" type="text"> <button onclick="changeBtn(${i})" type="button"> 수정 </button> </td> </tr>`
+	document.querySelector('.burgerTable').innerHTML += html
+	
+}
+
+function changeBtn(i){
+	//버거리스트의 인덱스번호가 인수로 들어옴
+	let changePrice = document.querySelector('.changePrice').value
+	burgerList[i].price = changePrice
+	burgerTable();
+}
+
+function orderTable(){
+	
+	let html = `<tr>
+					<th>주문번호</th> <th>버거이름</th> <th>상태</th> <th>요청/완료시간</th> <th>비고</th>
+				</tr>`
+	 
+	for( let i = 0 ; i < orderList.length ; i++ ){
+		// 0부터 orderList 인덱스번호까지 1씩 증가할때마다
+		for( let j = 0 ; j < orderList[i].items.length ; j++ ){
+			// 0부터 items객체 인덱스번호까지 1씩 증가하면서
+			let state = (i) => { if ( orderList[i].state == true){ return '주문요청' }else{ return'주문완료'} }
+			html += `<tr>
+						<td>${ orderList[i].no }</td> 
+						<td>${ orderList[i].items[j].name }</td> 
+						<td> ${state(i)}  </td> 
+						<td class="time">${ orderList[i].time }</td> 
+						<td> <button onclick="oComplete(${i})" type="button" >주문완료</button> </td>
+					</tr>`
+			//console.log('orderList[i].items')
+			//console.log(orderList[i].items)
+			
+		}
+	}
+	
+	document.querySelector('.orderTable').innerHTML = html
+	
+	/*if ( orderList[i].state == true){
+				document.querySelectorAll('.state').innerHTML = '주문요청'
+	}else{
+				document.querySelectorAll('.state').innerHTML = '주문완료'
+	}*/
+	
+}
 
 
+function oComplete(index){
+	orderList[index].state = false;
+	//console.log ( orderList[index].state )
+	
+	//console.log( 'state 삼항연상자 결과' )
+	
+	
+	orderList[index].time = new Date();
+	let html = `<tr>
+					<th>주문번호</th> <th>버거이름</th> <th>상태</th> <th>요청/완료시간</th> <th>비고</th>
+				</tr>`
+	for( let i = 0 ; i < orderList.length ; i++ ){			
+		for( let j = 0 ; j < orderList[i].items.length ; j++ ){
+			let state = (i) => { if ( orderList[i].state == true){ return '주문요청' }else{ return'주문완료'} }
+			let complete = (i) => { if ( orderList[i].state == true){ 
+				return `<button onclick="oComplete(${i})" type="button" >주문완료</button>` 
+			}else{ return'완료'} }
+				html += `<tr>
+							<td>${ orderList[i].no }</td> 
+							<td>${ orderList[i].items[j].name }</td> 
+							<td>  ${state(i)}   </td> 
+							<td class="time">${ orderList[i].time }</td> 
+							<td>  ${complete(i)}   </td>
+						</tr>`
+		}
+	}
+	
+	document.querySelector('.orderTable').innerHTML = html
+
+}
 
 
+// 매출현황출력
 
-
-
-
+function salesTable(){
+	let html = `<tr>
+					<th>제품번호</th> <th>버거이름</th> <th>판매수량</th> <th>매출액</th> <th>순위</th>
+				</tr>`
+	function counthamsu (index){
+		let count = 0;
+		for ( let j = 0 ; j < orderList.length ; j++ ){
+				// 0부터 orderList의 인덱스까지
+				for ( let g = 0 ; g < orderList[j].items.length ; g++ ){
+					// 0부터 버거객체의 인덱스까지
+					
+						
+					if( orderList[j].items[g].name == burgerList[index].name ){count++}
+			
+				}
+		}
+		return count;
+	}		
+	
+	
+	for ( let i = 0 ; i < burgerList.length ; i++ ){
+		let total = counthamsu(i)*burgerList[i].price
+		
+		html += `<tr>
+					<th> ${i+1}</th> 
+					<th> ${burgerList[i].name}</th> 
+					<th> ${ counthamsu(i) } </th> 
+					<th> ${ total }</th> 
+					<th>순위</th>
+				</tr>`
+	}
+	document.querySelector('.salesTable').innerHTML = html
+}
