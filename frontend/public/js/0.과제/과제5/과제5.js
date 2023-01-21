@@ -277,6 +277,9 @@ function bListDelete(i){
 	burgerList.splice( i , 1 );
 	//버거리스트의 i번 인덱스를 1개 삭제
 	burgerTable();
+	category_print(); //카테고리출력함수 1회 호출
+	category_select(0); //기본값 프리미엄 (css변경/카테고리별 제품출력)
+	product_print( 0 );
 	salesTable()
 }
 
