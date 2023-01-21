@@ -263,7 +263,7 @@ function burgerTable(){
 					<td class="burgerTableImg"><img src="img/${burgerList[i].img}" /></td> 
 					<td>${burgerList[i].name}</td> 
 					<td>${burgerList[i].category}</td> 
-					<td>${burgerList[i].price}</td> 
+					<td>${burgerList[i].price.toLocaleString()}원</td> 
 					<td> <button class="bugerListBtn" onclick="bListDelete(${i})" type="button">[삭제]</button> <button class="bugerListBtn" onclick="pChangeBox(${i})" type="button">[가격수정]</button> </td>
 				</tr>`
 	}
@@ -276,6 +276,7 @@ function bListDelete(i){
 	burgerList.splice( i , 1 );
 	//버거리스트의 i번 인덱스를 1개 삭제
 	burgerTable();
+	salesTable()
 }
 
 
@@ -338,7 +339,7 @@ function oComplete(index){
 
 function salesTable(){
 	let html = `<tr>
-					<th>제품번호</th> <th>버거이름</th> <th>판매수량</th> <th>매출액</th> <th>순위</th>
+					<th>제품번호</th> <th>버거이름</th> <th>판매수량</th> <th>매출액</th> <th>순위 [매출액]</th>
 				</tr>`
 	function counthamsu (index){
 		let count = 0;
@@ -376,7 +377,7 @@ function salesTable(){
 							<td> ${i+1}</th> 
 							<td> ${burgerList[i].name}</td> 
 							<td> ${ counthamsu(i) } </td> 
-							<td> ${ total(i) } </td>
+							<td> ${ total(i).toLocaleString() }원 </td>
 							<td> ${rank} </td>
 						</tr>`
 	
