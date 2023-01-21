@@ -19,6 +19,7 @@ let orderList = [ ] // 주문목록
 category_print(); //카테고리출력함수 1회 호출
 category_select(0) //기본값 프리미엄 (css변경/카테고리별 제품출력)
 product_print( 0 ) //기본값 프리미엄 // 결과적으론 없어도됨 product_print함수가 category_select함수에 들어가있음
+cartprint()
 
 /*-------------------------*/
 
