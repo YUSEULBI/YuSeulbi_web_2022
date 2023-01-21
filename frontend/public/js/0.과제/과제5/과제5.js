@@ -359,22 +359,27 @@ function salesTable(){
 		let total = counthamsu(i)*burgerList[i].price
 		return total; 
 	}
-	
+	let rank1 = [ ]
+
 	
 	
 	for ( let i = 0 ; i < burgerList.length ; i++ ){
+			let rank = 1;
+		 for ( let a = 0 ; a < burgerList.length ; a++ ){
+					 
+			if ( total(i) < total(a)){ rank++ }
+			rank1.push(rank)
+			console.log(rank1)
 				
-			
-		html += `<tr>
-					<td> ${i+1}</th> 
-					<td> ${burgerList[i].name}</td> 
-					<td> ${ counthamsu(i) } </td> 
-					<td> ${ total(i) } </td>
-					<td> </td>
-				</tr>`
-			
-			
-
+		}
+				html += `<tr>
+							<td> ${i+1}</th> 
+							<td> ${burgerList[i].name}</td> 
+							<td> ${ counthamsu(i) } </td> 
+							<td> ${ total(i) } </td>
+							<td> ${rank} </td>
+						</tr>`
+	
 	}
 	document.querySelector('.salesTable').innerHTML = html
 	
