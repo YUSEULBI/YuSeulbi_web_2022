@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+
+
+.gameboard {
+	margin: 0 auto;
+	display: flex;
+	width: 350px;
+	flex-wrap: wrap;
+}
+
+.btnClass{
+	width: 100px; height: 100px;
+}
