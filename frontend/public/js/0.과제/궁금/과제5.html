@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 버거킹 </title>
+	<link href="과제5.css" rel="stylesheet" >
+</head>
+<body>
+
+	<div class="wrap"> <!-- 전체구역 -->
+		<div class="container"><!-- 키오스크 구현 -->
+			<div class="kioskbox"> <!-- 키오스크 s -->
+				<!-- 구현 -->
+				<div class="header"> <!-- 헤더+메뉴 -->
+					<!-- <div class="h_img"></div>  -->
+					<img alt="" src="img/himg.png" width="100%" height="80%">
+					
+					<div class="categorybox"> <!-- 헤더의 카테고리 [js에서 html 구성] -->
+						<!-- 스크립트 데이터가 들어가는 자리 -->						
+					</div> 
+				</div> <!-- 키오스크 헤더 e -->
+				
+				<div class="content"> <!-- 본문 -->
+					<div class="productbox"> <!-- 제품출력 --> 
+						
+						<!-- 제품1개  -->
+						
+					
+						
+					</div> <!-- 제품출력 end --> 
+					
+					
+					<div class="cartbox"> <!-- 카트 출력 구역 -->
+					
+					
+					
+							<div class="cartcontent"> <!-- 제품정보 s -->
+									<div class="carttop"> <!-- 제품개수 , 제품가격 -->
+										<div> 카트 <span class="pcount"> 0 </span>	</div>
+										<div> 총 주문금액 <span class="ptotal">31,000</span>	</div>
+									</div>
+								
+									<div class="cartbottom"><!-- 제품정보구역 -->
+									
+																				
+									</div> <!-- 제품정보구역 end -->
+								
+							</div> <!-- 제품정보 end -->
+							 
+							 
+							 
+							<div class="cartbtn"> <!-- 버튼구역 -->
+							
+									<button onclick="cancel()" class="cancelbtn" type="button">취소</button>
+									<button onclick="order()" class="orderbtn" type="button">주문하기</button>
+								
+							</div>  <!-- 버튼구역end -->
+						
+						
+						
+					</div> <!-- 카트 출력 구역 end -->
+					 
+				</div> <!-- 본문 end -->
+				
+				
+			</div> <!-- 키오스크 end -->
+		</div>
+		
+		<div class="container"> <!-- 포스기 -->
+			<div class="adminPage">
+			
+				<div class="newBurgerDiv"> <!-- 버거등록 -->
+					<h3 class="h3Title">버거등록</h3>
+					<div class="newTableDiv">
+						<table class="newTable">
+							<tr> 
+								<td class="newListName"> 버거이름 </td> 
+								<td class="inputTd"> <input class="newName" type="text"> </td>
+							</tr>
+							<tr>
+								<td class="newListName"> 카테고리명 </td> 
+								<td class="inputTd"> <input class="newCategory" type="text" placeholder="프리미엄/스페셜/와퍼/올데이킹/치킨버거" > </td>
+							</tr>
+							<tr>
+								<td class="newListName"> 가격 </td> 
+								<td class="inputTd"> <input class="newPrice" type="text" placeholder="숫자만 입력하세요."> </td>
+							</tr>
+							<tr>
+								<td class="newListName"> 이미지 </td> 
+								<td class="inputTd"> <input class="newImg" type="text" placeholder="버거이름.png"> </td>
+							</tr>
+							<tr>
+								<td class="applyBtnTr" colspan="2"> <button class="applyBtn"  onclick="newBurgerApply()" type="button">버거등록</button> </td>
+							</tr>
+							<tr>
+								<td colspan="2" class="imglist"> 이미지목록: 롱치킨버거.png , 불고기와퍼.png , 오믈렛킹모닝.png	</td>
+							<tr>
+						</table>
+					</div>
+				</div>
+				
+				<div class="burgerListDiv"> <!-- 등록된 버거 목록 -->
+					<h3 class="h3Title">등록된 버거목록</h3>
+					<table class="burgerTable" border="1">
+					</table>
+				</div>
+				
+				<div class="orderDiv"> <!-- 주문 현황 -->
+					<h3 class="h3Title">주문현황</h3>
+					<table class="orderTable"  border="1">
+					</table>
+				</div>
+				
+				<div class="salseDiv"> <!-- 매출현황 -->
+					<h3 class="h3Title">매출현황</h3>
+					<table class="salesTable" border="1">
+					</table>
+				</div>
+				
+			</div>
+		</div>
+	
+	</div> <!--  wrap  end -->
+
+
+	<script src="과제5.js" type="text/javascript"></script>
+</body>
+</html>

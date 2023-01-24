@@ -1,0 +1,366 @@
+@charset "UTF-8";
+
+/*웹폰트 가져오기*/
+@font-face {
+    font-family: 'TTTtangsbudaejjigaeB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/TTTtangsbudaejjigaeB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+*{ /* 기본값 제거 */
+	padding:0px; margin: 0px;
+	font-family: 'TTTtangsbudaejjigaeB'; /*기본폰트 적용*/
+}
+*:focus{ outline: none; }
+
+.wrap{
+	display: flex; /*레이아웃배치 기본값을 가로배치로 변경*/
+	justify-content: center; /* 레이아웃 가운데 배치 */
+	background-color: black;
+	
+}
+
+.container{
+	width: 45%;  /* 디바이스[크롬] 배율*/
+	margin : 1%; /*바깥여백*/
+	background-color: white;
+}
+
+/*키오스크 박스권*/
+.kioskbox{
+	width: 100%; height: 1000px;
+	/* border: 1px solid red; */
+	
+}
+
+/*키오스크 헤더구역사이즈*/
+.header{	height: 250px; }
+
+/*키오스크 헤더구역 메뉴*/
+.categorybox li{
+	display: inline-block; /* 가로배치  */
+	margin: 10px 35px;
+	color: #8e8e8e;
+}
+
+/*선택된 li 꾸미기*/
+.categoryselect{
+	color : red !important; /*충돌시 최우선 */
+	border-bottom: 5px solid red;
+	padding-bottom: 5px;
+}
+
+
+
+/*-----------------본문------------------------  */
+
+.content{	height: 700px; }
+.productbox{ height: 450px; display:flex; flex-wrap:wrap; } /*자동줄바꿈  */
+.cartbox{ height: 250px; background-color:  #eeeeee;}
+
+/* 제품  */
+.product{
+	width: 28%; margin:2%;
+}
+.productinfo{ text-align: center; }
+.pprice{ color: red; }
+
+/* 카트  */
+.cartcontent{
+	padding: 20px;
+}
+
+/* 총 개수  div , 총 주문금액 div  */
+.carttop{ 
+	display: flex;
+	justify-content: space-between;
+}
+/*총개수원형*/
+.pcount{
+	background-color: red;
+	width: 30px; /*span의 기본값은 inline : 사이즈 변경 불가*/
+	display: inline-block; /*그래서 inline-block으로 변경*/
+	border-radius: 10px;	/*둥근모서리*/
+	text-align: center;		/* 내용 가로 가운데 정렬 */
+	color: white;
+	font-size: 12px;
+	padding: 3px;			/*안쪽여백*/
+}
+/*총금액표시*/
+.ptotal {
+	color: red;
+}
+
+.cartbottom{
+	display: flex;
+	margin-top: 20px;
+}
+
+.item{
+	width:20%;
+	background-color: white;
+	padding: 15px;	 	
+	margin-right: 10px;
+}
+
+
+.ititle{
+	width: 100%;
+	height: 50px;
+}
+
+
+.iprice{
+	margin: 10px 0px;
+	color: red;
+}
+
+
+/*버튼  */
+.cartbtn{
+	display: flex;
+}
+
+.cartbtn button{
+	width: 50%;
+	font-size: 20px;
+	color: white;
+	padding : 20px;
+	border: none;
+}
+
+.cancelbtn{
+	background-color: black;
+}
+.orderbtn{
+	background-color: red;
+}
+
+
+
+/* .h_img{
+	background-image: url("img/h.jpg"); 비율이 맞는이미지 사용해야함
+	width:100%; height: 100px; 
+} */
+
+
+
+/*-------------포스기---------------*/
+
+.adminPage{
+	padding: 40px;
+	font-size: 13px;
+	
+}
+
+.h3Title{
+	margin-left: 1px;
+	margin-bottom: 7px;
+	color: red;
+	font-size: 16px;
+	
+}
+
+.adminPage button{
+	font-family: 'LINESeedKR-Bd';
+}
+
+.adminPage th{
+	font-family: 'LINESeedKR-Bd';
+}
+
+.adminPage td{
+	font-family: 'LINESeedKR-Bd';
+}
+.adminPage input{
+	font-family: 'LINESeedKR-Bd';
+	
+}
+
+/*-------------버거등록--------------*/
+
+.newBurgerDiv{
+	margin-bottom: 55px;
+	background-color: white;
+	
+	
+}
+.newTableDiv{
+	background-color: #eeeeee;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.newTable{
+	padding: 35px 0 30px 0;
+}
+
+.inputTd{
+	width: 270px;
+}
+.newTable input{
+	width: 270px; height: 20px;
+	border: none;
+	padding: 3px 0 3px 5px;
+	
+}
+.newListName{
+	text-align: center;
+	width: 80px;
+	padding : 6px 0 ;
+	background-color: #A9A9A9;
+	color: white;
+	}
+
+.applyBtnTr{
+	text-align: center;
+	
+}
+.applyBtn{
+	margin: 5px 0 13px 0;
+	width: 357px;
+	padding: 5px 20px;
+	background-color: red;
+	color: white;
+	border: none;
+}
+
+.imglist{
+	font-size: 12px;
+	color: gray;
+	text-align: center;
+}
+
+/*-------------버거목록--------------*/
+
+.burgerListDiv{
+	margin-bottom: 60px;
+	margin-top: 20px;
+	background-color: white;
+	
+}
+
+
+.burgerTable{
+	border-collapse: collapse;
+	text-align: center;
+	width: 100%;
+	border: white;
+}
+
+.burgerTable th{
+	padding: 5px 0px;
+	border-right-color: white;
+	border-left-color: white;
+	border-top: 2px solid red;
+	border-bottom: 2px solid red;
+	color: black;
+}
+
+.burgerTable td{
+	padding: 3px 10px;
+	border-bottom-color: #C0C0C0;
+}
+
+.burgerTableImg img{
+	width:50px;
+}
+
+.bugerListBtn{
+	border: none;
+	background-color: white;
+	color: gray;
+	padding: 5px;
+	
+}
+
+
+/* 수정금액박스 */
+.changeTr{
+	padding: 10px 0px;
+}
+
+/*-------------주문현황목록--------------*/
+
+.orderDiv{
+	margin-bottom: 60px;
+	background-color: white;
+}
+
+.orderTable{
+	border-collapse: collapse;
+	width: 100%;
+	border: white;
+}
+.orderTable th{
+	padding: 5px 0px;
+	border-right-color: white;
+	border-left-color: white;
+	border-top: 2px solid red;
+	border-bottom: 2px solid red;
+	color: black;
+}
+
+.orderTable td{
+	padding: 10px;
+	text-align: center;
+	border-bottom-color: #C0C0C0;
+}
+.time{
+	font-size: 10px;	
+}
+
+.oComplete{
+	color: white;
+	background-color: red;
+	border: none;
+	border-radius: 0px;
+	padding: 4px 5px;
+}
+.completed{
+	color: red;
+	border: 1px solid red;
+	padding: 4px 5px;
+	font-family: 'LINESeedKR-Bd';
+}
+
+/*------------매출현황------  */
+.salseDiv{
+	background-color: white;
+}
+
+.salesTable{
+	border-collapse: collapse;
+	width: 100%;
+	border: white;
+}
+
+.salesTable th{
+	padding: 5px 0px;
+	border-right-color: white;
+	border-left-color: white;
+	border-top: 2px solid red;
+	border-bottom: 2px solid red;
+	color: black;
+}
+.salesTable td{
+	padding: 10px;
+	text-align: center;
+	border-bottom-color: #C0C0C0;
+	}
