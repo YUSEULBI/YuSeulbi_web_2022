@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.gameboard{
+	margin: 0 auto;
+	width: 300px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.gamebtn{
+	width: 100px; height: 100px;
+}
