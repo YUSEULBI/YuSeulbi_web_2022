@@ -8,6 +8,28 @@
     font-style: normal;
 }
 
+
+@font-face {
+    font-family: 'HS-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HS-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KOTRAHOPE';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HSGooltokki';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/HSGooltokki.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /*기본값*/
 *{
 	font-family: '맑은 고딕';
@@ -50,5 +72,116 @@
 	font-size: 12px;
 	color: #F08080;
 }
+
+
+/*-------------------------------------*/
+.itembox{
+	display: flex;
+	flex-wrap: wrap;
+	margin: 3%;
+}
+.box_title{
+	text-align: center; /*텍스트 가운데정렬*/
+	font-family: 'HSGooltokki';
+	border-bottom: solid 2px #D3D3D3;
+	width: 22%;	/*구역가로길이*/
+	margin: 0 auto; /*박스권 가운데정렬*/
+	padding-top: 10%; /*안쪽여백*/
+	padding-bottom: 2%;
+	font-size: 40px;
+	color: #696969;
+	
+}
+
+/* 서로 다른 px사이즈[디바이스]마다 css를 다르게 설정 -> 미디어쿼리 */
+/* @media( 조건 ){ 참일경우 css } */
+
+
+
+/* 컴퓨터 기준 1200px 이상일 때 */
+.item{	width: 20%; margin: 2%; }
+/* 1200px 이하일 때 */
+@media( max-width : 1000px){ /* 최대 가로사이즈 1000px 아래이면*/
+	.item{
+		width: 45% !important; 
+		margin: 2% !important;
+	}
+}
+/* 500px 이하일 때 */
+@media( max-width : 500px ){
+	.item{
+		width: 90% !important; 
+		margin: 2% !important;
+	}
+}
+
+.item img{
+	width: 100%; /*상위 요소의 크기 백분율*/
+	border-radius: 20px; /*둥근모서리*/
+}
+
+.item :hover{ /*해당요소에 마우스를 올렸을때*/
+	opacity: 0.8; /*투명도*/
+}
+
+.item_title{
+	font-size: 14px;
+	margin: 5% 0%;	/*상하여백 좌우여백*/
+	height: 35px;
+}
+
+.item_size{
+	font-size: 13px;
+	color: #999999;
+	border-bottom: 1px solid #999999;
+	padding-bottom: 4%;
+}
+
+.item_price{
+	text-decoration: line-through; /* 취소선 */
+	font-size: 14px;
+	color: #999999;
+	margin-top: 3%;
+}
+
+.item_sale{
+	font-family: 'KOTRAHOPE';
+	font-size: 17px;
+}
+
+
+.item_discount{
+	font-family: 'KOTRAHOPE';
+	color: #ff9995;
+	font-size: 17px;
+	
+}
+
+.item_bottom{
+	display: flex;
+	justify-content: space-between; /*하위요소의 가로정렬*/
+	align-items: center; /*하위요소의 세로정렬*/
+	margin-top: 3%;
+}
+
+.item_review{
+	font-size: 12px;
+	color: #999999;
+	text-align: right;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

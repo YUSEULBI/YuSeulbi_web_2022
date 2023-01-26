@@ -366,14 +366,21 @@ function salesTable(){
 		return total; 
 	}
 	
-	
+	let rank1 = [ ]
 	function rankhamsu(i){
 		let rank = 1;
-		for ( let a = 0 ; a < burgerList.length ; a++ ){
-				 
-			if ( total(i) < total(a)){ rank++ }
 		
+		for ( let a = 0 ; a < burgerList.length ; a++ ){
+		
+			if ( total(i) < total(a) ){ rank++;  }
+			console.log(i)
+			console.log(rank)
+			rank1.push(rank)
+			console.log(rank1)
+			
 			return rank;
+			
+		}
 	}
 	
 	
@@ -384,17 +391,17 @@ function salesTable(){
 			if ( total(i) < total(a)){ rank++ }
 			rank1.push(rank)
 			console.log(rank1)*/
-			rankhamsu(i)	
-		}
+				
+		
 				html += `<tr>
 							<td> ${i+1}</th> 
 							<td> ${burgerList[i].name}</td> 
 							<td> ${ counthamsu(i) } </td> 
 							<td> ${ total(i).toLocaleString() }원 </td>
-							<td> ${ rank } </td>
+							<td> ${ rankhamsu(i) } </td>
 						</tr>`
 	
-	}
-	document.querySelector('.salesTable').innerHTML = html
 	
+	document.querySelector('.salesTable').innerHTML = html
+	}
 }
