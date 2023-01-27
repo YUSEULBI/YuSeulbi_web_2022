@@ -9,12 +9,70 @@
 	background-size: 110%;
 }
 
-.hpbox{ /* hp박스 */
-	width: 250px;
+.result{ /*결과*/
+	text-align: center;
+	padding-top: 20px;
+}
+
+/*-----------------------------------------  */
+
+.chaBox{
+	border: 1px solid white;
+	width: 150px;
+	height: 40px;
+	position: absolute;
+	bottom: 0px;
+	color:white;
+	padding: 10px;
+}
+
+.chainfo1{
+	display: flex;
+	justify-content: space-between;
+}
+
+.powerNum{
+	margin-left: 5px;
+}
+
+.expDiv{
+	display: flex;
+	align-items: center;
+}
+
+.expBox{
+	border: 1px white solid;
+	width: 104px;
+	height: 10px;
+	margin-left: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+.expBoxGauge{
+	background-color: white;
+	width: 100px;
+	margin-left: 2px;
+	height: 6px;
+}
+
+/*-----------------------------------------  */
+.mhpbox{ /* 몬스터hp박스 */
+	
 	height: 20px;
 	background-color: red;
+	border: 1px white solid;
 	position: absolute;
-	top: 60px; right: 100px;
+	top: 70px; right: 100px;
+}
+
+.userhpbox{ /* 유저 hp박스 */
+	width: 250px;
+	height: 20px;
+	background-color: blue;
+	border: 1px white solid;
+	position: absolute;
+	top: 70px; left: 100px;
 }
 
 .userbox{ /*캐릭터*/
@@ -22,8 +80,9 @@
 	height: 100px;
 	/*position: static; 포지션 기본값 */
 	position: absolute; /* 절대위치: relative 설정한 상위요소 / relative안하면 body기준 */
-	left: 10px;	top: 430px;
-	background-image: url("img/캐릭터1.png");
+	/* left: 10px; */	
+	top: 430px;
+	/* background-image: url("img/캐릭터1.png"); */
 	background-repeat: no-repeat;
 	background-size: 90%;
 }
@@ -38,4 +97,11 @@
 	background-repeat: no-repeat;
 	
 	transition : all 1s; /*애니메이션 부드러운 이동 효과*/
+}
+
+/*-------------------------------------------------*/
+
+.win{
+	font-size: 100px;
+	text-align: center;
 }
