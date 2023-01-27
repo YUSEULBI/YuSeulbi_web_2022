@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+.wrap{ /* 게임화면 설정 */
+	width: 1000px;	height: 600px;
+	margin: 0 auto;
+	position: relative; /*하위요소들의 위치 기준점*/
+	background-image: url("img/게임배경.jfif"); /*배경이미지*/
+	background-repeat: no-repeat; /*배경 반복제거*/
+	background-size: 110%;
+}
+
+.hpbox{ /* hp박스 */
+	width: 250px;
+	height: 20px;
+	background-color: red;
+	position: absolute;
+	top: 60px; right: 100px;
+}
+
+.userbox{ /*캐릭터*/
+	width: 100px;
+	height: 100px;
+	/*position: static; 포지션 기본값 */
+	position: absolute; /* 절대위치: relative 설정한 상위요소 / relative안하면 body기준 */
+	left: 10px;	top: 430px;
+	background-image: url("img/캐릭터1.png");
+	background-repeat: no-repeat;
+	background-size: 90%;
+}
+
+
+.monbox{ /*몬스터구역*/
+	width: 100px;	height: 100px;
+	position: absolute;
+	left : 910px; top: 430px;
+	background-image: url("img/몬스터1.gif");
+	background-size:70%; 
+	background-repeat: no-repeat;
+	
+	transition : all 1s; /*애니메이션 부드러운 이동 효과*/
+}
