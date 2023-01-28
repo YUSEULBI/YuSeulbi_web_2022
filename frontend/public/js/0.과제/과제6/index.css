@@ -57,13 +57,25 @@
 }
 
 /*-----------------------------------------  */
+.moninfo{
+	position : absolute;
+	border: 1px solid white;
+	height: 50px;
+	right: 100px;
+	top: 40px;
+	text-align: right;
+	padding: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
 .mhpbox{ /* 몬스터hp박스 */
 	
 	height: 20px;
 	background-color: red;
 	border: 1px white solid;
-	position: absolute;
-	top: 70px; right: 100px;
+	
 }
 
 .userhpbox{ /* 유저 hp박스 */

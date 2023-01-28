@@ -2,48 +2,55 @@
 
 
 // 1. userbox , logbox , monbox -  Dom 객체 가져오기
-let wrap = document.querySelector('.wrap')
-let userbox = document.querySelector('.userbox')
-let logbox = document.querySelector('.logbox')
-let monbox = document.querySelector('.monbox')
-let logbox2 = document.querySelector('.logbox2')
-let mhpbox = document.querySelector('.mhpbox')
-let userhpbox = document.querySelector('.userhpbox')
-let result = document.querySelector('.result')
-let expBoxGauge = document.querySelector('.expBoxGauge')
-let levelNum = document.querySelector('.levelNum')
-let powerNum = document.querySelector('.powerNum')
-
+let wrap = document.querySelector('.wrap') //전체div
+let userbox = document.querySelector('.userbox') //유저구역
+let logbox = document.querySelector('.logbox') //유저좌표
+let monbox = document.querySelector('.monbox') // 몹구역
+let logbox2 = document.querySelector('.logbox2') // 몹좌표
+let mhpbox = document.querySelector('.mhpbox') // 몹hp출력
+let userhpbox = document.querySelector('.userhpbox') // 유저hp출력
+let result = document.querySelector('.result') // 승부결과
+let expBoxGauge = document.querySelector('.expBoxGauge') //경험치게이지 출력
+let levelNum = document.querySelector('.levelNum') // 레벨 숫자 출력
+let powerNum = document.querySelector('.powerNum') // 파워 숫자 출력
+let moninfo = document.querySelector('.moninfo') // 몬스터 인포 출력
+let monname = document.querySelector('.monname')
 // 몬스터객체 배열
-let monsterG = [ 
+let monsterG = [ // 몬스터 배열
 	{ m_img : '몬스터1.gif' , hp : 200 , left : 910 , power : 10 , top : 430 } ,
 	{ m_img : '몬스터2.gif' , hp : 250 , left : 910 , power : 40 , top : 460 } ,
 	{ m_img : '몬스터3.gif' , hp : 300 , left : 910 , power : 60 , top : 460 }
 ]
 
 // 캐릭터 객체
-let character = {
+let character = { // 캐릭터 객체
 				img   :	`캐릭터1.png`	,
 				left  :	10	,
 				exp   :	0	,
 				lev   :	1	,
-				power : 20
+				power : 20 ,
+				hp : 250
 			}
 
 
 //*userbox 기본처음 위치
-let u_left = 10;	//유저
-let m_left = 910;	//몬스터
-let nowMon = 0 //객체인덱스
-let mhp = monsterG[nowMon].hp
-let userhp = 250;
+let u_left = character.left; // 유저 위치 변수 선언
 
-userbox.style.backgroundImage = `url("img/${character.img}")`
-userbox.style.left = `${character.left}px`
-expBoxGauge.style.width = `${character.exp}px`
-levelNum.innerHTML = character.lev
-mhpbox.style.width = `${monsterG[nowMon].hp}px`
-powerNum.innerHTML = character.power
+let nowMon = 0; //객체인덱스
+let m_left = monsterG[nowMon].left;	//몬스터 위치 변수 선언
+let mhp = monsterG[nowMon].hp; //몬스터 hp 변수 선언
+let userhp = character.hp //유저 hp 변수 선언
+let skey = 1;
+
+userbox.style.backgroundImage = `url("img/${character.img}")` //캐릭터 객체에서 이미지
+userbox.style.left = `${character.left}px` // 실행시 유저 처음위치
+expBoxGauge.style.width = `${character.exp}px` // 실행시 유저 처음 exp
+levelNum.innerHTML = character.lev // 실행시 유저 처음 레벨
+powerNum.innerHTML = character.power // 실행시 유저 처음 파워
+
+mhpbox.style.width = `${monsterG[nowMon].hp}px` // 실행시 몬스터 처음 hp
+moninfo.style.width = monsterG[nowMon].hp + `px` // 실행시 몬스터 처음 hp 정보칸 
+monname.style.width = monsterG[nowMon].hp + `px` // 실행시 몬스터 처음 hp 네임칸
 
 // 2. 문서안에서 키입력 이벤트
 //-----------------------------------캐릭터이동-----------------------------
@@ -70,16 +77,15 @@ document.addEventListener( 'keydown' , (e) => {
 		userbox.style.backgroundImage = `url("img/이동.png")` // 공격모션이미지
 		attack(); // 공격함수~~~~
 		// *
-		
-		
+	}else if( key == 83 && userhp != 0 ){ // s키 방어
+		userbox.style.backgroundImage = `url("img/이동.png")` // 방어모션이미지
+		skey = 0;
+		console.log ('skey: '+ skey)
 	} 
 	
 	userbox.style.left = `${u_left}px` // 키입력후 css left 변경
 	
 	logbox.innerHTML = `<div> 캐릭터좌표 : ${ u_left }</div>`
-	
-	
-	
 	
 	
 } ) 
@@ -89,22 +95,12 @@ document.addEventListener( 'keydown' , (e) => {
 document.addEventListener('keyup' , (e) => {
 	
 	userbox.style.backgroundImage = `url("img/캐릭터1.png")`
+	skey = 1;
+	console.log ('skey: '+ skey)
 	
 })
 
-// 3. 방어
 
-document.addEventListener( 'keydown' , (e) => { 
-		
-		let key = e.keyCode
-		if ( key == 83 ){
-			//console.log('s키누름')
-			userbox.style.backgroundImage = `url("img/이동.png")` // 방어모션이미지
-			
-		}
-		
-		
-	})
 
 
 //-----------------------------------캐릭터이동 end -----------------------------
@@ -132,7 +128,7 @@ function expUp(){
 		console.log('character.power')
 		console.log(character.power)
 		powerNum.innerHTML = character.power
-	}
+	} 
 	character.exp += 10
 	expBoxGauge.style.width = `${character.exp}px`
 	console.log('character.exp')
@@ -163,7 +159,10 @@ function damage(){ // 몬스터  [ 공격 범위 ]
 
 function userhpDown(){ // 몬스터 -> User [ 몬스터 공격력 , 유저 hp깎임 ]
 	
+	
 	let mpower = parseInt(Math.random()*monsterG[nowMon].power+1) // 1~10
+	console.log('monsterG[nowMon].power')
+	console.log(monsterG[nowMon].power)
 	if ( userhp < 10 ){ userhp = mpower }
 	
 	userhp = userhp -  mpower
@@ -183,11 +182,13 @@ function winner(){ // 유저hp , 몬스터hp 검사
 		userhpbox.style.display = 'none'
 		result.innerHTML = '패배'
 		
-	}else if ( mhp == 0 ){
+	}else if ( mhp == 0 ){ // 몬스터가 죽으면
 		if ( nowMon == 3 ){ win();  return;}
 		nowMon += 1
 		//console.log('nowMon : '+nowMon)
 		mhpbox.style.width = `${ monsterG[nowMon].hp }px`
+		moninfo.style.width = monsterG[nowMon].hp + `px` 
+		monname.style.width = monsterG[nowMon].hp + `px`
 		monbox.style.backgroundImage = `url("img/${monsterG[nowMon].m_img}")`
 		monbox.style.left = `${monsterG[nowMon].left}px`
 		m_left = monsterG[nowMon].left
@@ -231,7 +232,12 @@ function mon_moving(){
 	
 	logbox2.innerHTML = `<div> 몹좌표 : ${ m_left }</div>`
 	
+	if ( skey == 0 ){ console.log ('skey 0일때 노데미지: '+ skey); return; }
+	
 	damage();
+	
+	
+	
 	//console.log( mhp )
 }
 //-----------------------------------몬스터이동-----------------------------
