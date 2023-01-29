@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
-@font-face {
-font-family: 'UhBeeSe_hyun';
-src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeSe_hyun.woff') format('woff');
-font-weight: normal;
-font-style: normal;
-}
-
 .wrap{ /* 게임화면 설정 */
 	width: 1000px;	height: 600px;
 	margin: 0 auto;
@@ -18,12 +11,10 @@ font-style: normal;
 
 .result{ /*결과*/
 	text-align: center;
-	padding-top: 30px;
-	font-family: 'UhBeeSe_hyun';
-	color:pink;
+	padding-top: 20px;
 }
 
-/*----------------하단인포--------------------  */
+/*-----------------------------------------  */
 
 .chaBox{
 	border: 1px solid white;
@@ -65,79 +56,56 @@ font-style: normal;
 	height: 6px;
 }
 
-/*-------------상단인포---------------------  */
+/*-----------------------------------------  */
 .moninfo{
 	position : absolute;
-	
-	opacity:80%;
+	border: 1px solid white;
 	height: 50px;
-	right: 0px;
-	top: 120px;
+	right: 100px;
+	top: 40px;
 	text-align: right;
-	padding: 10px 15px;
+	padding: 10px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-end;
 }
 
-.monname{
-	font-family: 'UhBeeSe_hyun';
-	color: white;
-	
-}
-
 .mhpbox{ /* 몬스터hp박스 */
 	
 	height: 20px;
-	background-color: white;
+	background-color: red;
+	border: 1px white solid;
 	
-	border-radius: 15px;
 }
 
-.userinfo{
-	position : absolute;
-	
-	opacity:80%;
-	height: 50px;
-	left: 0px;
-	top: 120px;
-	text-align: left;
-	padding: 10px 15px;
-	
-}
-.username{
-	font-family: 'UhBeeSe_hyun';
-	color: white;
-}
 .userhpbox{ /* 유저 hp박스 */
-	width: 200px;
+	width: 250px;
 	height: 20px;
-	background-color: white;
-	
-	border-radius: 15px;
-	margin-top: 5px;
+	background-color: blue;
+	border: 1px white solid;
+	position: absolute;
+	top: 70px; left: 100px;
 }
-/*-----------------캐릭터,몬스터 구역-------------------  */
 
 .userbox{ /*캐릭터*/
-	width: 150px;
-	height: 239px;
+	width: 300px;
+	height: 300px;
 	/*position: static; 포지션 기본값 */
 	position: absolute; /* 절대위치: relative 설정한 상위요소 / relative안하면 body기준 */
 	/* left: 10px; */	
-	top: 350px;
-	/* background-image: url("img/stop.gif");  */
+	top: 430px;
+	/* background-image: url("img/캐릭터1.png"); */
 	background-repeat: no-repeat;
-	background-size: 100%;
+	background-size: 300%;
 }
 
 
 .monbox{ /*몬스터구역*/
-	width: 220px;	height: 250px;
+	width: 300px;	height: 300px;
 	position: absolute;
-	left : 766px; top: 320px;
-	/* background-image: url("img/몬스터1.gif"); */
-	background-size:100%; 
+	left : 910px; top: 430px;
+	background-image: url("img/몬스터1.gif");
+	background-size:300%; 
 	background-repeat: no-repeat;
 	
 	transition : all 1s; /*애니메이션 부드러운 이동 효과*/
@@ -146,8 +114,6 @@ font-style: normal;
 /*-------------------------------------------------*/
 
 .win{
-	font-size: 80px;
+	font-size: 100px;
 	text-align: center;
-	font-family: 'UhBeeSe_hyun';
-	color: white;
 }

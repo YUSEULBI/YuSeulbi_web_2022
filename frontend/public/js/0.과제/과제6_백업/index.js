@@ -15,23 +15,21 @@ let levelNum = document.querySelector('.levelNum') // 레벨 숫자 출력
 let powerNum = document.querySelector('.powerNum') // 파워 숫자 출력
 let moninfo = document.querySelector('.moninfo') // 몬스터 인포 출력
 let monname = document.querySelector('.monname')
-let username = document.querySelector('.username')
-
 // 몬스터객체 배열
 let monsterG = [ // 몬스터 배열
-	{ m_name: `미끄럼틀 타고싶어!` , m_img : 'slide.gif' , hp : 200 , left : 766 , power : 10 , top : 320 } ,
-	{ m_name: `그네 타고싶어!` , m_img : 'swing.gif' , hp : 250 , left : 766 , power : 40 , top : 320 } ,
-	{ m_name: `뱅뱅이 타고싶어!` , m_img : 'bangbang.gif' , hp : 300 , left : 766 , power : 60 , top : 310 }
+	{ m_img : '몬스터1.gif' , hp : 200 , left : 910 , power : 10 , top : 430 } ,
+	{ m_img : '몬스터2.gif' , hp : 250 , left : 910 , power : 40 , top : 460 } ,
+	{ m_img : '몬스터3.gif' , hp : 300 , left : 910 , power : 60 , top : 460 }
 ]
 
 // 캐릭터 객체
 let character = { // 캐릭터 객체
-				img   :	`stop.gif`	,
+				img   :	`캐릭터1.png`	,
 				left  :	10	,
 				exp   :	0	,
 				lev   :	1	,
 				power : 20 ,
-				hp : 200
+				hp : 250
 			}
 
 
@@ -49,13 +47,10 @@ userbox.style.left = `${character.left}px` // 실행시 유저 처음위치
 expBoxGauge.style.width = `${character.exp}px` // 실행시 유저 처음 exp
 levelNum.innerHTML = character.lev // 실행시 유저 처음 레벨
 powerNum.innerHTML = character.power // 실행시 유저 처음 파워
-username.style.width = `${userhp}px`
 
-monbox.style.backgroundImage = `url("img/${monsterG[nowMon].m_img}")` //캐릭터 객체에서 이미지
 mhpbox.style.width = `${monsterG[nowMon].hp}px` // 실행시 몬스터 처음 hp
 moninfo.style.width = monsterG[nowMon].hp + `px` // 실행시 몬스터 처음 hp 정보칸 
 monname.style.width = monsterG[nowMon].hp + `px` // 실행시 몬스터 처음 hp 네임칸
-monname.innerHTML = monsterG[nowMon].m_name
 
 // 2. 문서안에서 키입력 이벤트
 //-----------------------------------캐릭터이동-----------------------------
@@ -69,21 +64,21 @@ document.addEventListener( 'keydown' , (e) => {
 		 
 		u_left -= 10
 		u_left = u_left < 0 ? 0 : u_left // 만약에 차감된 왼쪽좌표가 0보다 작으면 u_left값을 0으로 아니면 그대로
-		userbox.style.backgroundImage = `url("img/moving2.gif")` // 이동모션이미지 
+		userbox.style.backgroundImage = `url("img/이동2.png")` // 이동모션이미지 
 		
 	}else if( key == 39 && userhp != 0 ){ //오른쪽키
 		
 		u_left += 10
-		u_left = u_left > 766 ? 766 : u_left // 766 넘어가면 u_left값을 766으로
-		userbox.style.backgroundImage = `url("img/moving.gif")` // 이동모션이미지
+		u_left = u_left > 910 ? 910 : u_left // 910 넘어가면 u_left값을 910으로
+		userbox.style.backgroundImage = `url("img/이동.png")` // 이동모션이미지
 		userbox.style.backgroundSize = `150%;`
 		//console.log(  u_left )
 	}else if( key == 65 && userhp != 0 ){ // a키 공격
-		userbox.style.backgroundImage = `url("img/attck.gif")` // 공격모션이미지
+		userbox.style.backgroundImage = `url("img/이동.png")` // 공격모션이미지
 		attack(); // 공격함수~~~~
 		// *
 	}else if( key == 83 && userhp != 0 ){ // s키 방어
-		userbox.style.backgroundImage = `url("img/defence.gif")` // 방어모션이미지
+		userbox.style.backgroundImage = `url("img/이동.png")` // 방어모션이미지
 		skey = 0;
 		console.log ('skey: '+ skey)
 	} 
@@ -99,7 +94,7 @@ document.addEventListener( 'keydown' , (e) => {
 
 document.addEventListener('keyup' , (e) => {
 	
-	userbox.style.backgroundImage = `url("img/stop.gif")`
+	userbox.style.backgroundImage = `url("img/캐릭터1.png")`
 	skey = 1;
 	console.log ('skey: '+ skey)
 	
@@ -185,7 +180,7 @@ function winner(){ // 유저hp , 몬스터hp 검사
 		//userbox.style.display ='none'
 		//mhpbox.style.display = 'none'
 		userhpbox.style.display = 'none'
-		result.innerHTML = '식사시간에 늦어서 엄마한테 혼났다.'
+		result.innerHTML = '패배'
 		
 	}else if ( mhp == 0 ){ // 몬스터가 죽으면
 		if ( nowMon == 3 ){ win();  return;}
@@ -199,12 +194,11 @@ function winner(){ // 유저hp , 몬스터hp 검사
 		m_left = monsterG[nowMon].left
 		monbox.style.top = `${monsterG[nowMon].top}px`
 		mhp = monsterG[nowMon].hp
-		monname.innerHTML = monsterG[nowMon].m_name
 	}
 }
 
 function win(){
-		wrap.innerHTML = '<div class="win"> 집에 가자! </div>'
+		wrap.innerHTML = '<div class="win"> 승리! </div>'
 		console.log('mhp'+ mhp); console.log('nowMon'+ nowMon);
 }
 
@@ -231,7 +225,7 @@ function mon_moving(){
 	
 	// 2. 게임 화면 고정
 	if ( m_left < 0 ) m_left = 0;
-	if ( m_left > 766 ) m_left = 766;
+	if ( m_left > 910 ) m_left = 910;
 	
 	// 3. 
 	monbox.style.left = `${m_left}px`
