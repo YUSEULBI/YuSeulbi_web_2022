@@ -24,7 +24,7 @@
 }
 
 @font-face {
-    font-family: 'HSGooltokki';
+    font-family: 'HSGooltokki'; /* 제목 */
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/HSGooltokki.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
@@ -33,8 +33,23 @@
 /*기본값*/
 *{
 	font-family: '맑은 고딕';
-	color:black;
+	color:black ;
 	margin: 0 ; padding: 0;
+}
+
+a{
+	color: black !important;
+	text-decoration: none !important;
+}
+
+/* 커뮤니티, 문의사항 게시글 h3 */
+.listTitle{
+	text-align: center;
+	font-family: 'HSGooltokki';
+	margin-top: 5% !important;
+	font-size: 30px !important;
+	color : #696969;
+	
 }
 
 /*로고 구역*/

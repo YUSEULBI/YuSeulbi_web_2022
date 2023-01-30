@@ -44,7 +44,7 @@ function tbodyTable( keyword , key ){
 	for ( let i = 0 ; i < boardlist.length ; i++ ){
 		html += `<tr> 
 					<td>${ boardlist[i].no }</td> 
-					<td>${ boardlist[i].title }</td> 
+					<td> <a href="/jsp/board/view.html"> ${ boardlist[i].title } </a> </td> 
 					<td>${ boardlist[i].writer }</td> 
 					<td>${ boardlist[i].date }</td> 
 					<td>${ boardlist[i].view }</td> 
