@@ -85,11 +85,12 @@
 	font-family: 'HSGooltokki';
 	border-bottom: solid 2px #D3D3D3;
 	width: 22%;	/*구역가로길이*/
-	margin: 0 auto; /*박스권 가운데정렬*/
+	margin: 3% auto; /*박스권 가운데정렬*/
 	padding-top: 10%; /*안쪽여백*/
 	padding-bottom: 2%;
 	font-size: 40px;
 	color: #696969;
+	
 	
 }
 
