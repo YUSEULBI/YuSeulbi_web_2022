@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+
+/* 캘린더 */
+.calender{
+	border: 1px solid #eeeeee;
+	padding: 5%;
+	border-radius: 3%;
+	box-shadow: 0px 0px 3px red;	/* x축 y축 흐림도 색상 */
+}
+
+/* 캘린더 상단 메뉴 */
+.cal_top{
+	display: flex;
+	justify-content: center;
+	margin: 5% 0%;
+	align-items: center;
+}
+
+/*캘린더 상단 이전달 다음달 버튼*/
+
+.previousbtn , .nextbtn{
+	background-color: white;
+	border: 1px solid #eeeeee;
+	padding:  5px 20px;
+	color: #ffc0cb; /* 연분홍  */
+	font-size: 20px;
+}
+
+/*캘린더 상단 연도/월 */
+.top_date{
+	font-family: 'HS-Regular';
+	margin: 0% 3%;
+	color: #ffc0cb; /* 연분홍  */
+}
+
+
+/* 데이구역  */
+.cal_day{
+	display: flex; /* 하위요소의 동일한 여백을 위해 사용  */
+	justify-content: flex-start;
+	flex-wrap: wrap; /* 하위요소 가로사이즈가 넘치면 자동 줄바꿈  */
+}
+
+/* 캘린더 데이 */
+.day{
+	display: inline-block; /* width,height 사이즈 조절을 위해 block  */
+	border: 1px solid #eeeeee;
+	width: 14%; /* 100% / 7등분  */
+	height: 100px;
+}
+
+/* 일정박스 */
+.content{
+	background-color: #ffc0cb; /* 연분홍  */
+	color: white;
+	margin: 1%; padding: 1%;
+	
+	/* 내용이 구역 사이즈보다 커졌을 때 */
+	white-space: nowrap; /* 자동줄바꿈처리 해제 */
+	overflow: hidden;  /* 넘친 부분 숨김  */
+	text-overflow: ellipsis; /* 넘친부분 ...표시  */
+	max-width: 150px;
+}
+
+/* 요일구역 */
+.weekday{
+	height: 30px;
+	text-align: center;
+	background-color:  #ffc0cb;
+	font-size: 18px;
+}
+
+/* 일요일  */
+.sunday{
+	color: red;
+}
+
