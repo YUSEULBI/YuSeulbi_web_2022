@@ -6,7 +6,7 @@
 	border: 1px solid #eeeeee;
 	padding: 5%;
 	border-radius: 3%;
-	box-shadow: 0px 0px 3px red;	/* x축 y축 흐림도 색상 */
+	box-shadow: 0px 0px 3px #ffc0cb;	/* x축 y축 흐림도 색상 */
 }
 
 /* 캘린더 상단 메뉴 */
@@ -31,7 +31,7 @@
 .top_date{
 	font-family: 'HS-Regular';
 	margin: 0% 3%;
-	color: #ffc0cb; /* 연분홍  */
+	color: #FFB6C1; /* 연분홍  */
 }
 
 
@@ -74,5 +74,6 @@
 /* 일요일  */
 .sunday{
 	color: red;
+	
 }
 
