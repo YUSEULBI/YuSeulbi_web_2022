@@ -3,9 +3,9 @@ console.log('js실행')
 /* DB라고 가정 */
 let contents = [
 	
-	{ date : '20230101' , content : '새해맞이 여행'} ,
+	/*{ date : '20230101' , content : '새해맞이 여행'} ,
 	{ date : '20230103' , content : '친구 만나기'} ,
-	{ date : '20230101' , content : '새해맞이쇼핑 새해맞이쇼핑 새해맞이쇼핑 새해맞이쇼핑 새해맞이쇼핑'}  
+	{ date : '20230101' , content : '새해맞이쇼핑 새해맞이쇼핑 새해맞이쇼핑 새해맞이쇼핑 새해맞이쇼핑'}  */
 ]
 
 /*--------------전역변수 : 모든 함수 공용으로 사용되는 메모리 -------------------*/
@@ -81,7 +81,7 @@ document.querySelector('.previousbtn').addEventListener('click' , (e) => {
 	
 	cal_print();
 })
-
+/*---------------------------------------------------------------------*/
 document.querySelector('.nextbtn').addEventListener('click' , (e) => {
 	//console.log('다음달 버튼 클릭')
 	month++;
@@ -92,7 +92,7 @@ document.querySelector('.nextbtn').addEventListener('click' , (e) => {
 	cal_print();
 })
 
-
+/*---------------------------------------------------------------------*/
 // 4. 날짜 포맷 함수 [ 인수 : 날짜 ----로직[반환]-----> 반환 : 변경된 날짜형식 ]
 function date_format( date ){
 	let d_year =  date.getFullYear();
@@ -104,7 +104,7 @@ function date_format( date ){
 	return `${d_year}${d_month}${d_day}`
 }
 
-
+/*---------------------------------------------------------------------*/
 //5. 일정 출력 함수
 function contents_print( date ){ console.log(date)
 	// 1. 인수로 전달된 날짜와 동일한 일정 날짜 찾기
@@ -114,17 +114,85 @@ function contents_print( date ){ console.log(date)
 		contents.forEach( (o) => { // 반복문
 			console.log( o.date )
 			if ( date == o.date ){ // 일정목록이랑 날짜랑 같으면
-				html += `<div class="content"> ${o.content} </div>`
+				html += `<div class="content" style="background-color:${o.bg_color}"> ${o.content} </div>`
 			}
 		})
 		console.log(html)
 		return html;
 	
 }
-
-//6.
+/*---------------------------------------------------------------------*/
+//6. 모달 열기 함수
 function openModal( date){
-	console.log( date +'modal열기' )
+	//console.log( date +'modal열기' )
+	
+	// 모달이 보이게 css수정
+	document.querySelector('.modal_wrap').style.display = 'flex';
+	
+	// 모달에 선택된 날짜 표시하기
+	document.querySelector('.modal_date').innerHTML = date;
+	
+	//해당하는 날짜에 모든 일정 출력
+	schedule_print(); 
+	
+}
+
+/*---------------------------------------------------------------------*/
+
+//7. 모달 닫기 함수
+document.querySelector('.modal_close').addEventListener('click' , (e)=> {
+	/*모달숨기기*/
+	document.querySelector('.modal_wrap').style.display = 'none';
+})
+
+/*---------------------------------------------------------------------*/
+
+//8. 등록 버튼 눌렀을 때
+document.querySelector('.modal_write').addEventListener('click', (e)=> {
+	// 1. 입력받은 내용과 선택된 날짜를 가져와서 객체화
+	let content = {
+		date : document.querySelector('.modal_date').innerHTML ,
+		content : document.querySelector('.modal_input').value ,
+		bg_color : document.querySelector('.modal_color').value
+	}; console.log(content)
+	// 2. 유효성검사 생략
+	//3.
+	contents.push(content);
+	//4.화면업데이트
+		// 1. 입력된 데이터 초기화
+			document.querySelector('.modal_input').value = ''
+		// 2. 모달닫기
+			document.querySelector('.modal_wrap').style.display = 'none';
+			
+		//3.캘린더 출력 함수
+		cal_print();
+})
+/*---------------------------------------------------------------------*/
+function schedule_print(){ 
+	let html = `<tr> <th width="5%">#</th> <th>일정내용</th> <th width="15%">비고</th> </tr>`
+	let date = document.querySelector('.modal_date').innerHTML;
+	let j = 0 ;  // [출력용도] j : 동일한 일정의 객체들의 개수
+	contents.forEach( (o , i) => { // 반복문  // [삭제용도] i : content 객체 인덱스 순서
+			if ( date == o.date ){ // 일정목록이랑 날짜랑 클릭한 날짜랑 같으면
+				j++; // 찾은 개수 증가
+				html += `<tr> 
+							<td>${ j }</td> 
+							<td>${o.content}</td> 
+							<td><button type="button" onclick="onDelete(${i})">삭제</button></td> 
+						</tr>`
+			}
+		})
+	document.querySelector('.table').innerHTML = html
+}
+/*---------------------------------------------------------------------*/
+//9. 삭제함수
+function onDelete(i){
+	// 1. 배열내 해당 인덱스 삭제 
+	contents.splice( i , 1 );
+	// 2. 화면업데이트
+	document.querySelector('.modal_wrap').style.display = 'none';
+	//3.캘린더 출력 함수
+		cal_print();
 }
 
 

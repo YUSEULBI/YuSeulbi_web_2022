@@ -48,6 +48,7 @@
 	border: 1px solid #eeeeee;
 	width: 14%; /* 100% / 7등분  */
 	height: 100px;
+	overflow: hidden; /*내용이 구역보다 넘쳤을때 숨기기 */
 }
 
 /* 일정박스 */
@@ -76,4 +77,64 @@
 	color: red;
 	
 }
+
+
+/* 모달 백구역 */
+.modal_wrap{ /* 모달배경구역  */
+	position: fixed;	/*위치고정*/
+	top: 0; 	left: 0; /*시작점을 맨처음부터*/
+	
+	/*모든 영역 배경*/
+	width: 100%; height: 100%; /* 모든화면 감싸기 */
+	
+	background-color: rgba( 0 , 0 , 0 , 0.5 );
+	/* rgb( 0, 0 , 0 ) : 검정색 */
+	/* rgba( 0, 0 , 0 , 0.5 ) : 검정색+투명도50% (1은 100%) */
+	
+	/*자식요소를 중앙배치*/
+	display: flex;
+	justify-content: center;
+	align-items: center; 
+	
+	z-index: 9999; /*겹쳤을때 우선순위 가장높은건9999*/ 
+	/*부트스트랩 .sticky-top { z-index : 1020 }*/
+	
+	/* 버튼에 따른 표시 여부 flex:모달열기 , none:모달닫기 */
+	display: none; /* 처음에는 모달 안보이게  */
+	
+}
+
+/* 모달 상자  */
+.modal_box{
+	background-color: white;
+	width: 40%;
+	padding: 3%; border-radius: 5%;
+} 
+
+/* 클릭된 모달의 날짜 표시  */
+.modal_date{
+	font-size: 14px;
+	font-weight: normal;
+}
+
+/*모달버튼목록*/
+.modal_btns{
+	display: flex;
+	justify-content: flex-end;
+	margin: 5% 0%;
+}
+
+/* 모달의 모든 버튼  */
+.modal_box button{
+	background-color: #ffc0cb;
+	padding: 5px 20px;
+	margin-left: 3%;
+	border: 1px solid #eeeeee;
+	border-radius: 10%;
+}
+
+
+
+
+
 
