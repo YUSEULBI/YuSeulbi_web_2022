@@ -1,10 +1,14 @@
 @charset "UTF-8";
 
+/*-------기본값--------*/
 *{
 	margin: 0px;
 	padding: 0px;
 }
-
+li{
+	list-style: none;
+}
+/*--------------------*/
 
 .imageDiv{
 	display: flex;
