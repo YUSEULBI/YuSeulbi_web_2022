@@ -124,10 +124,17 @@ public class 과제1_연산자문제 {
 		int 총점 = (int)(국어+영어+수학);
 		double 평균 = (국어+영어+수학)/3;
 		
-		System.out.printf("19번. 총점 : %d , 평균 : %3.2f" , 총점 , 평균);
+		System.out.printf("19번. 총점 : %d , 평균 : %3.2f \n" , 총점 , 평균);
 		
 		// 20번 문제
-		String 아이디 = scanner.nextLine();
+		String 아이디 = scanner.next();
+		int 비밀번호 = scanner.nextInt();
+		boolean 아이디확인 = "admin".equals(아이디);
+		String 로그인결과 = (아이디확인 = true && 비밀번호 == 1234) ? "로그인성공" : "로그인실패";
+		System.out.println( "20번. 로그인결과 : " + 로그인결과 );
+		
+		// 21번 문제
+		
 	}
 		
 	
