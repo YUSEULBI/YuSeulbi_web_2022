@@ -367,9 +367,10 @@ function salesTable(){
 	}
 	
 	let rank1 = [ ]
+	let rank = 1;
+	
 	function rankhamsu(i){
-		let rank = 1;
-		
+				
 		for ( let a = 0 ; a < burgerList.length ; a++ ){
 		
 			if ( total(i) < total(a) ){ rank++;  }
