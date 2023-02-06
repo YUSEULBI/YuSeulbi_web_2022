@@ -23,14 +23,13 @@ public class 과제2_키오스크 { // 클래스(파일)명
 			
 			//메뉴 안내 , 번호입력 안내
 			System.out.println("-------------------------------------");
-			System.out.print("[메뉴 번호를 입력하세요 ] \n 1. 콜라 2. 사이다 3. 환타 4. 결제 \n");
-			System.out.println("-------------------------------------");
-			
 			System.out.println("[장바구니] ");
 			System.out.println("콜라 : " + 콜라장바구니);
 			System.out.println("사이다 : " + 사이다장바구니);
 			System.out.println("환타 : " + 환타장바구니);
 			System.out.println("남은재고 : 콜라 "+콜라 + " / 사이다 "+사이다+" / 환타 "+환타 );
+			System.out.println("-------------------------------------");
+			System.out.print("[메뉴 번호를 입력하세요 ] \n 1. 콜라 2. 사이다 3. 환타 4. 결제 \n");
 			System.out.println("-------------------------------------");
 			System.out.print("메뉴선택 : ");
 			
