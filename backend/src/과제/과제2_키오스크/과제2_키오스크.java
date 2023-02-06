@@ -22,8 +22,18 @@ public class 과제2_키오스크 { // 클래스(파일)명
 		while ( true ) { // while 시작
 			
 			//메뉴 안내 , 번호입력 안내
-			System.out.print("1. 콜라 2. 사이다 3. 환타 4. 결제 \n");
-			System.out.print("번호입력 : ");
+			System.out.println("-------------------------------------");
+			System.out.print("[메뉴 번호를 입력하세요 ] \n 1. 콜라 2. 사이다 3. 환타 4. 결제 \n");
+			System.out.println("-------------------------------------");
+			System.out.println("남은재고 : 콜라 "+콜라 + " / 사이다 "+사이다+" / 환타 "+환타 );
+			System.out.println("-------------------------------------");
+			System.out.println("[장바구니] ");
+			System.out.println("콜라 : " + 콜라장바구니);
+			System.out.println("사이다 : " + 사이다장바구니);
+			System.out.println("환타 : " + 환타장바구니);
+			System.out.println("-------------------------------------");
+			System.out.print("메뉴선택 : ");
+			
 			
 			// 메뉴선택 값 num 저장
 			byte num = scanner.nextByte();
@@ -37,8 +47,15 @@ public class 과제2_키오스크 { // 클래스(파일)명
 								//콜라재고 1차감
 								콜라--;
 								콜라장바구니++;
-								System.out.println(">>>콜라 재고 : " + 콜라);
-								System.out.println(">>>장바구니에 담긴 콜라개수 : " + 콜라장바구니);
+								System.out.println("-------------------------------------");
+								System.out.println("[장바구니] ");
+								System.out.println("콜라 : " + 콜라장바구니);
+								System.out.println("사이다 : " + 사이다장바구니);
+								System.out.println("환타 : " + 환타장바구니);
+								System.out.println("-------------------------------------");
+								System.out.println("남은재고 : 콜라 "+콜라 + " / 사이다 "+사이다+" / 환타 "+환타 );
+								System.out.println("-------------------------------------");
+								
 							// 콜라 재고가 없을 때  
 							} else  {
 								System.out.println(">>>콜라 재고가 없습니다.");
@@ -53,8 +70,15 @@ public class 과제2_키오스크 { // 클래스(파일)명
 								//사이다재고 1차감
 								사이다--;
 								사이다장바구니++;
-								System.out.println(">>>사이다 재고 : " + 사이다);
-								System.out.println(">>>장바구니에 담긴 사이다개수 : " + 사이다장바구니);
+								System.out.println("-------------------------------------");
+								System.out.println("[장바구니] ");
+								System.out.println("콜라 : " + 콜라장바구니);
+								System.out.println("사이다 : " + 사이다장바구니);
+								System.out.println("환타 : " + 환타장바구니);
+								System.out.println("-------------------------------------");
+								System.out.println("남은재고 : 콜라 "+콜라 + " / 사이다 "+사이다+" / 환타 "+환타 );
+								System.out.println("-------------------------------------");
+								
 							// 사이다 재고가 없을 때  
 							} else  {
 								System.out.println(">>>사이다 재고가 없습니다.");
@@ -69,8 +93,15 @@ public class 과제2_키오스크 { // 클래스(파일)명
 								//환타재고 1차감
 								환타--;
 								환타장바구니++;
-								System.out.println(">>>환타 재고 : " + 환타);
-								System.out.println(">>>장바구니에 담긴 환타개수 : " + 환타장바구니);
+								System.out.println("-------------------------------------");
+								System.out.println("[장바구니] ");
+								System.out.println("콜라 : " + 콜라장바구니);
+								System.out.println("사이다 : " + 사이다장바구니);
+								System.out.println("환타 : " + 환타장바구니);
+								System.out.println("-------------------------------------");
+								System.out.println("남은재고 : 콜라 "+콜라 + " / 사이다 "+사이다+" / 환타 "+환타 );
+								System.out.println("-------------------------------------");
+								
 							// 환타 재고가 없을 때  
 							} else  {
 								System.out.println(">>>환타 재고가 없습니다.");
@@ -85,15 +116,56 @@ public class 과제2_키오스크 { // 클래스(파일)명
 							if ( 콜라장바구니>0 || 사이다장바구니>0 || 환타장바구니>0  ) {
 							//현재 장바구니 현황 표시 목록
 							System.out.println("-------------------------------------");
+							System.out.println("[금액 안내]");
 							System.out.println("제품명		수량		가격");
 							System.out.println("콜라		"	+	콜라장바구니+"		"+ 콜라장바구니*300+"원");
 							System.out.println("사이다		"	+	사이다장바구니+"		"+ 사이다장바구니*400+"원" 		);
 							System.out.println("환타		"	+	환타장바구니+"		"+ 환타장바구니*500+"원" 		);
+							int 총금액 = (int)(콜라장바구니*300+사이다장바구니*400+환타장바구니*500);
 							System.out.println("-------------------------------------");
-							System.out.println("총 금액"+ (int)(콜라장바구니*300+사이다장바구니*400+환타장바구니*500)+"원");
+							System.out.println("총 금액 : "+ 총금액 +"원");
 							System.out.println("-------------------------------------");
 							System.out.println("1. 결제 2. 취소");
 							System.out.println("메뉴 선택 : ");
+							
+							//메뉴 선택값 num2 에 저장
+							byte num2 = scanner.nextByte();
+							
+								// 1번 결제 선택
+								if ( num2 == 1 ) {
+									// 고객에게 받은 돈 입력
+									System.out.println("지불할 금액입력 : ");
+									int money = scanner.nextInt();
+									
+									// 결제 전 잔액부족확인 ( 총금액 > money -> 잔액부족,결제취소 )
+									if ( 총금액 > money ) { 
+										System.out.println("결제금액 부족, 결제취소");
+										System.out.println("-------------------------------------");
+										
+									
+									// [money==총금액] -> 결제완료
+									} else if ( money == 총금액 ) {
+										System.out.println(">>>결제완료");
+										System.out.println("-------------------------------------");
+										콜라장바구니 = 0; 사이다장바구니 = 0; 환타장바구니 = 0; 
+										콜라 = 10; 사이다 = 8; 환타 = 15;
+										
+									// [money < 총금액] -> 결제완료+거스름돈
+									} else if ( 총금액 < money ) {
+										
+										System.out.println(">>>결제완료");
+										//거스름돈 ( money - 총금액 = 거스름돈 )
+										System.out.println(">>>거스름돈 : " + (money-총금액) );
+										System.out.println("-------------------------------------");
+										콜라장바구니 = 0; 사이다장바구니 = 0; 환타장바구니 = 0; 
+										콜라 = 10; 사이다 = 8; 환타 = 15;
+									}
+								// 2번 취소 선택
+								}else if ( num2 == 2 ) {
+									System.out.println("결제취소 , 장바구니 초기화 , 재고 초기화");
+									콜라장바구니 = 0; 사이다장바구니 = 0; 환타장바구니 = 0; 
+									콜라 = 10; 사이다 = 8; 환타 = 15;
+								}
 							
 							} else { System.err.println("장바구니에 담긴 제품이 없습니다."); }
 						}else { 
