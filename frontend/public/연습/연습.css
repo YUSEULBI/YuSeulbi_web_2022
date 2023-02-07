@@ -1,3 +1,5 @@
 @charset "UTF-8";
 
 .seatNum{ width: 40px; height: 40px; }
+
+.selectbox{ background-color: red; color:white; }
