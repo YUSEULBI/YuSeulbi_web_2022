@@ -11,7 +11,7 @@ public class Ex6_비회원게시판_변수와배열버전 { // class start
 		// 입력객체
 		Scanner scanner = new Scanner(System.in);
 		
-		// 배열
+		////// C드라이브에 java폴더 생성후 board.txt 빈메모장 만들고 실행해야 정상실행됨 ///////////////
 		
 		
 		while ( true ) {
