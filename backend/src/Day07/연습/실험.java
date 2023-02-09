@@ -1,4 +1,4 @@
-package Day07;
+package Day07.연습;
 
 public class 실험 {
 	
