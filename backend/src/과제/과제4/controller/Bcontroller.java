@@ -65,4 +65,12 @@ public class Bcontroller { // 처리제어담당
 				boardList.get(linum).content = reContent;
 				
 			}
+		
+			
+		// 조회수 올리기 함수 ////////////////////
+		 public void viewUp( int linum ) {
+			 boardList.get(linum).view += 1;
+			
+		}
+			
 }

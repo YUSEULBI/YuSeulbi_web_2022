@@ -8,7 +8,7 @@ import 과제.과제4.controller.Bcontroller;
 import 과제.과제4.controller.Mcontroller;
 import 과제.과제4.model.Board;
 
-public class Front {
+public class Front { // Front class s
 	
 	// 스캐너클래스 객체생성
 	Scanner scanner = new Scanner(System.in);
@@ -111,96 +111,56 @@ public class Front {
 		}
 	}
 	
-	// 6. 로그인 성공 화면 - 커뮤니티
+	// 6. 로그인 성공 화면 - 커뮤니티/////////////////////////////////////////
 	void community( int i ){
-		System.out.println("---------- 커뮤니티 ----------");
-		System.out.println("번호\t조회수\t작성자\t제목");
-		// 글목록출력
-			
-			for ( int j = 0 ; j < result.size(); j++) {
-				if ( result.size() >= 0 ) {
-				System.out.println(j+"\t"+result.get(j).view+"\t"+result.get(j).writer+"\t"+result.get(j).title);
+		
+		while ( true ) {
+			System.out.println("---------- 커뮤니티 ----------");
+			System.out.println("번호\t조회수\t작성자\t제목");
+			// 글목록출력
+				
+				for ( int j = 0 ; j < result.size(); j++) {
+					if ( result.size() >= 0 ) {
+					System.out.println(j+"\t"+result.get(j).view+"\t"+result.get(j).writer+"\t"+result.get(j).title);
+					}
 				}
+			
+			
+			//메뉴 선택화면 출력
+			System.out.println("메뉴> 1.글쓰기 2.글보기 3.로그아웃");
+			int no = scanner.nextInt();
+			
+			// 1.글쓰기
+			if ( no == 1 ) {
+				write(i);
+				
+				
+				
+			// 2.글보기
+			}else if ( no == 2 ) {
+				if ( result.size() < 1 ) { System.out.println("게시물이 없습니다"); community(i); }
+				
+				System.out.println("글번호를 입력하시면 상세글페이지로 넘어갑니다.");
+				
+				// 상세보기,삭제,수정할 글 인덱스 //////////////////
+				int linum = scanner.nextInt();
+				bc.viewUp( linum );
+				postView(linum , i);
+				
+				
+				
+				
+				
+				
+			// 3.로그아웃
+			}else if ( no == 3 ) {
+				// 인덱스 페이지로 돌아가기
+				System.out.println("초기화면으로 이동합니다.");
+				index();
+				
 			}
-		
-		
-		//메뉴 선택화면 출력
-		System.out.println("메뉴> 1.글쓰기 2.글보기 3.로그아웃");
-		int no = scanner.nextInt();
-		
-		// 1.글쓰기
-		if ( no == 1 ) {
-			write(i);
-			
-			
-			
-		// 2.글보기
-		}else if ( no == 2 ) {
-			
-			System.out.println("글번호를 입력하시면 상세글페이지로 넘어갑니다.");
-			
-			// 상세보기,삭제,수정할 글 인덱스 //////////////////
-			int linum = scanner.nextInt();
-			
-			postView(linum);
-			
-			int cnum = scanner.nextInt(); 
-			if ( cnum == 1 ) { // 글삭제
-				if ( result.size() < 0 ) {
-					System.out.println("작성된 글이 없습니다.");
-					community(i);
-				}				
-				//삭제함수 ( 인수 : 삭제할글인덱스 , 현재로그인id ) 
-				int result = bc.deleteBoard( linum, mc.id(i) );
-				
-				if ( result == 0 ) {
-				System.out.println("삭제되었습니다.");
-				community(i);
-				
-				} else if ( result == 1 ) {
-					System.out.println("작성자만 삭제할 수 있습니다.권한없음");
-					postView(linum);
-				}
-				postView(linum);
-				
-			}else if ( cnum == 2 ) { // 글수정
-				if ( result.size() < 0 ) {
-					System.out.println("작성된 글이 없습니다.");
-					community(i);
-				}
-				//수정함수 ( 인수 : 수정할글인덱스 , 현재로그인id ) 
-				int result = bc.checkId( linum, mc.id(i) );
-				
-				if ( result == 0 ) { // 작성자 아이디와 같음
-				System.out.println("글 수정내용: ");
-				String reContent = scanner.next();
-				//글 수정함수 (인수 : 선택한 글 인덱스 , 수정내용 )
-				bc.reWrite( linum , reContent );
-				
-				System.out.println("글을 수정했습니다.");
-				community(i);
-								
-				} else if ( result == 1 ) { // 작성자 아이디와 다름
-					System.out.println("작성자만 수정할 수 있습니다.권한없음");
-					postView(linum);
-				}
-				postView(linum);
-						
-			
-			}else if ( cnum == 3 ) { postView(linum);	} // 뒤로가기
-			else { postView(linum);	}
-			
-			
-			
-		// 3.로그아웃
-		}else if ( no == 3 ) {
-			// 인덱스 페이지로 돌아가기
-			System.out.println("로그인페이지로 이동합니다.");
-			index();
-			
 		}
-		
-	}; // community 함수 end
+	}; // community 함수 end///////////////////////////////////////////////////////
 	
 	
 	//글쓰기함수
@@ -225,17 +185,61 @@ public class Front {
 		community(i);
 	}
 	
-	
-	void postView(int linum) {
 	// 글상세 함수
 	// 인덱스 번호를 입력하면 제목,작성자,조회수,내용 보여줌
+	void postView(int linum , int i) {
+			
+			while (true ) {
 				System.out.println("---------- 글상세 ----------");
 				System.out.println("제목 : " + result.get(linum).title );
 				System.out.println("작성자 : " + result.get(linum).writer +"\t"+"조회수 : "+result.get(linum).view);
 				System.out.println("내용 : " + result.get(linum).content);
 				System.out.println("메뉴> 1.글삭제 2.글수정 3.뒤로가기");
-	}
-}
+	
+				int cnum = scanner.nextInt(); 
+				if ( cnum == 1 ) { // 글삭제////////////////////////////////////
+									
+					//삭제함수 ( 인수 : 삭제할글인덱스 , 현재로그인id ) 
+					int result = bc.deleteBoard( linum, mc.id(i) );
+					
+					if ( result == 0 ) { // 삭제 결과 안내
+					System.out.println(">>> 삭제되었습니다."); community(i);
+					
+					
+					} else if ( result == 1 ) { // 삭제 실패 안내
+						System.out.println(">>> 작성자만 삭제할 수 있습니다.권한없음");
+						
+					}
+					
+					 
+				}else if ( cnum == 2 ) { // 글수정 ////////////////////////////////////
+					
+					
+					//수정함수 ( 인수 : 수정할글인덱스 , 현재로그인id ) 
+					int result = bc.checkId( linum, mc.id(i) );
+					
+					if ( result == 0 ) { // 작성자 아이디와 같음
+					System.out.println("글 수정내용: ");
+					String reContent = scanner.next();
+					//글 수정함수 (인수 : 선택한 글 인덱스 , 수정내용 )
+					bc.reWrite( linum , reContent );
+					
+					System.out.println(">>> 글을 수정했습니다."); 
+					community(i);
+									
+					} else if ( result == 1 ) { // 작성자 아이디와 다름
+						System.out.println(">>> 작성자만 수정할 수 있습니다.권한없음");
+						
+					}
+					
+							
+				
+				}else if ( cnum == 3 ) { community(i);} // 뒤로가기 ////////////////////////////////////
+				
+			} // while end
+	} // postView end
+	
+} // Front class end
 
 
 
