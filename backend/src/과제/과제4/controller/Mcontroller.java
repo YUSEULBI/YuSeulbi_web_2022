@@ -27,16 +27,22 @@ public class Mcontroller {
 	// 2. 로그인 로직
 	public int login( String loginId , String loginPwd ){
 		
-		int count = 0;
+		int idcount = 0;
+		int pwcount = 0;
 		// id와 pwd가 DB데이터의 id,pwd와 같으면
 		for ( int i = 0 ; i < memberDb.size() ; i++ ) {
 			if ( loginId.equals(memberDb.get(i).id)) {
+				idcount++;
 				if ( loginPwd.equals(memberDb.get(i).pwd) ) {
-					return i; //회원인덱스
+					pwcount++;
 				}
-			}else {
-				return -1; // 비밀번호 틀림
-			}// if end
+			}
+			
+			if ( idcount == 1 && pwcount == 1 ) return i;  //회원인덱스
+			if ( idcount == 1 && pwcount == 0 ) return -1; // 비밀번호가 다릅니다.
+			if ( idcount == 0 && pwcount == 1 ) return -2; // 없는회원입니다.
+			
+			
 		} // for end
 		return -2; // for문 다돌렸는데 맞는게 없어~ 아이디가 없음
 	}
@@ -72,6 +78,16 @@ public class Mcontroller {
 			}
 		}
 		return "0"; // 맞는 아이디가 없음
+	}
+	
+	// 5. 아이디 반환해주는 로직
+	public String id ( int i ) {
+		return memberDb.get(i).id;
+	};
+	
+	// 6.멤버리스트 반환함수 // 아직 안씀 //////////
+	public ArrayList<Member> memberList(){
+		return memberDb;
 	}
 	
 }
