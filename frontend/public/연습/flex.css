@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+*{
+	margin: 0px;
+	padding: 0px;
+}
+.wrap{
+	width: 100%;
+	
+	display: flex;
+	justify-content: space-between;
+	
+	
+}
+
+.content{
+	background-color: red;
+	width: 33%;
+	
+	height: 300px;
+}
+
+
