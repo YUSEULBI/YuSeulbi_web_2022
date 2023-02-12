@@ -33,7 +33,7 @@ public class Front { // 클래스 시작 ///////////////////////////////////////
 			else if ( ch == 2 ) { logIn();	}
 			
 			// 3. 아이디찾기 ---------------------------------------
-			else if ( ch == 3 )	{	}
+			else if ( ch == 3 )	{ findId();	}
 			
 			// 4. 비밀번호찾기 --------------------------------------
 			else if ( ch == 4 ) {	}
@@ -68,12 +68,16 @@ public class Front { // 클래스 시작 ///////////////////////////////////////
 		// 유효성 검사후
 		// Member 객체 생성(초기값) 후 DB저장
 		// result 리턴값 0이면 회원가입성공 , -1이면 비번이 서로 다릅니다.
-		if ( result == 0 ) { System.out.println(">>> 회원가입 성공");	}
+		if ( result == 0 ) { System.out.println(">>> 회원가입 성공");	
+			System.out.println( mc.memberList().get(0).id ); 
+			System.out.println( mc.memberList().get(0).pw );
+		}
 		else if ( result == -1 ) { System.out.println("비밀번호가 다릅니다.");	} 
 		
 	}
 	
-	int logIn() {	
+	// 로그인 함수  ///////////////////////////////////////////////////////
+	void logIn() { 	
 		
 		// 아이디 ,비번 입력받은 값을 문자열객체에 저장
 		System.out.println("아이디 : ");
@@ -82,12 +86,46 @@ public class Front { // 클래스 시작 ///////////////////////////////////////
 		String pw = scanner.next();
 		
 		// 입력값을 Mcontroller의 함수로 보내서
-		mc.login( id , pw );
+		int i = mc.login( id , pw );
+		System.out.println("i : " + i);
 		// 유효성 검사 후
-		// 로그인성공 안내 , 커뮤니티 페이지로 이동
+		if ( i >= 0 ) {
+			System.out.println("로그인 성공 ,커뮤니티 페이지로 이동");
+			community(i);
 		
-		return 0 ;
+		}else if ( i == -1 ) { System.out.println("비밀번호가 틀렸습니다.");	}
+		else if ( i == -2 ) { System.out.println("존재하지 않는 아이디 입니다.");	}
+				
+		
 	}
 	
+	
+	// 아이디 찾기 함수  ///////////////////////////////////////////////////////
+	void findId(  ) {
+		
+		System.out.println("이름 : ");
+		String name = scanner.next();
+		System.out.println("전화번호 : ");
+		String phone = scanner.next();
+		
+		String id = mc.findId(name, phone);
+		if ( id == null ) {
+			System.out.println("일치하는 회원 정보가 없습니다.");
+		} else { // 아이디를 반환
+			System.out.println("찾은 아이디 : " + id);
+		}
+		
+	}
+	
+	// 커뮤니티 출력 함수  ///////////////////////////////////////////////////////
+	void community ( int i ) {
+		while ( true ) {
+			
+			System.out.println("------------ 커뮤니티 ------------");
+			
+			System.out.println("메뉴> 1.글쓰기 2.글보기 3.로그아웃");
+			int ch = scanner.nextInt();
+		}
+	}
 	
 }// 클래스 끝 /////////////////////////////////////////////////////////
