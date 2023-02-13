@@ -86,8 +86,10 @@ public class Front {
 	// 5. 상세페이지 함수
 	private void  view_page() {
 		System.out.println("게시물번호 : ");
-		// 2. 입력받은 게시물번호의 게시물정보를 컨트롤에게 요청 [ bno 넘겨주고 ]
 		int bno = scanner.nextInt();
+		
+		// 2. 입력받은 게시물번호의 게시물정보를 컨트롤에게 요청 [ bno 넘겨주고 ]
+		// view함수 실행 , 조회수를 올리고 , 게시물List중 bno인덱스 게시물 반환
 		Board result = Bcontroller.getInstance().view(bno);
 		System.out.println("------------ 게시물상세 "+bno+" ------------");
 		System.out.println( " 제목 : " + result.getTitle()  );

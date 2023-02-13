@@ -20,6 +20,13 @@ public class Test {
 		
 		// 라이브러리 클래스에서 만든 객체에 접근할 수 있음
 		
+		//-------------------------------------
+		// Member 클래스에서 생성자 막음 / 객체생성 불가
+		//Member member = new Member();
+		
+		// 함수를 통해서 Member의 test메소드 호출
+		Member.getInstance().test();
+		
 		
 	}
 	
