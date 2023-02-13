@@ -49,6 +49,8 @@ public class Bcontroller { // 처리제어담당
 			return 1; // 삭제실패
 		}
 		
+		
+		
 		// 선택한 글 작성자와 로그인아이디 같은지 판단해주는 함수   ///////////////
 			// 인수 : 선택한글인덱스 , 현재로그인id
 			public int checkId( int dNum , String id ) {
@@ -58,11 +60,14 @@ public class Bcontroller { // 처리제어담당
 				}
 				return 1; // 아이디가 다름
 			}
+			
+			
 	
 		// 글 수정함수 (인수 : 선택한 글 인덱스 , 수정내용 )
-			public void reWrite( int linum , String reContent) {
+			public void reWrite( int linum , String 수정내용) {
 				
-				boardList.get(linum).content = reContent;
+				boardList.get(linum).content = 수정내용;
+				//
 				
 			}
 		

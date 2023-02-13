@@ -144,6 +144,7 @@ public class Front { // Front class s
 				
 				// 상세보기,삭제,수정할 글 인덱스 //////////////////
 				int linum = scanner.nextInt();
+				
 				bc.viewUp( linum );
 				postView(linum , i);
 				
@@ -202,8 +203,10 @@ public class Front { // Front class s
 					//삭제함수 ( 인수 : 삭제할글인덱스 , 현재로그인id ) 
 					int result = bc.deleteBoard( linum, mc.id(i) );
 					
+					
 					if ( result == 0 ) { // 삭제 결과 안내
 					System.out.println(">>> 삭제되었습니다."); community(i);
+					
 					
 					
 					} else if ( result == 1 ) { // 삭제 실패 안내
@@ -214,15 +217,16 @@ public class Front { // Front class s
 					 
 				}else if ( cnum == 2 ) { // 글수정 ////////////////////////////////////
 					
-					
+										
 					//수정함수 ( 인수 : 수정할글인덱스 , 현재로그인id ) 
 					int result = bc.checkId( linum, mc.id(i) );
 					
 					if ( result == 0 ) { // 작성자 아이디와 같음
 					System.out.println("글 수정내용: ");
-					String reContent = scanner.next();
+					String 수정내용 = scanner.next();
 					//글 수정함수 (인수 : 선택한 글 인덱스 , 수정내용 )
-					bc.reWrite( linum , reContent );
+					bc.reWrite( linum , 수정내용 );
+					
 					
 					System.out.println(">>> 글을 수정했습니다."); 
 					community(i);

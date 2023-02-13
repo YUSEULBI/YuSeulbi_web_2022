@@ -63,6 +63,7 @@ public class Front {
 			System.out.println("[알림]글쓰기 성공");
 		}else {
 			System.out.println("[알림]글쓰기 실패");
+			
 		} // if end
 		
 	} // write end ////////////////////////////////////////
