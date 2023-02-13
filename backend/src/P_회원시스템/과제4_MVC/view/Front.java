@@ -2,7 +2,9 @@ package P_회원시스템.과제4_MVC.view;
 
 import java.util.Scanner;
 
+import P_회원시스템.과제4_MVC.controller.Bcontroller;
 import P_회원시스템.과제4_MVC.controller.Mcontroller;
+
 
 
 public class Front { // 클래스 시작 /////////////////////////////////////////////
@@ -11,6 +13,9 @@ public class Front { // 클래스 시작 ///////////////////////////////////////
 	Scanner scanner = new Scanner(System.in);
 	// Mcontroller 객체 생성
 	Mcontroller mc = new Mcontroller();
+	// Bcontroller 객체 생성
+	Bcontroller bc = new Bcontroller();
+	
 	
 	// 1. 필드
 	// 2. 생성자
@@ -125,7 +130,28 @@ public class Front { // 클래스 시작 ///////////////////////////////////////
 			
 			System.out.println("메뉴> 1.글쓰기 2.글보기 3.로그아웃");
 			int ch = scanner.nextInt();
+			if ( ch == 1 ) { write(i);	} // 1. 글쓰기
+			else if ( ch == 2 ) {	} // 2. 글보기
+			else if ( ch == 3 ) {	} // 3. 로그아웃
+			
 		}
+	}
+	
+	// 글쓰기 함수  ///////////////////////////////////////////////////////
+	void write ( int  i ) {
+		System.out.println("------------ 글쓰기 ------------");
+		System.out.println("제목작성: ");
+		String title = scanner.next();
+		String writer = mc.memberList().get(i).id;
+		System.out.println("내용작성: ");
+		String content = scanner.next();
+		
+		// 보드 인수3개생성자로 Board 객체 생성 --> Bcontroller로 옮겨야할듯
+		int result = bc.addBoardList(title, writer, content);
+		if ( result == 0 ) {
+			System.out.println("게시글이 업로드 되었습니다.");
+		}else { System.out.println("게시물업로드실패");}
+		
 	}
 	
 }// 클래스 끝 /////////////////////////////////////////////////////////
