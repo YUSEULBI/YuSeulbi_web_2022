@@ -46,64 +46,51 @@ public class Board { // Board 여러개 만들어서 리스트에 담기 때문�
 		this.view = view;
 	}
 
-	
-	
+
 	
 	
 	// 3. 메소드 ////////////////////////////////////////////////////////
 	
-	// 주소값 대신 필드값 알려줌.
+	// 주소값 대신 필드값 알려줌. -> 수정함. 주소값 대신 내가 정의한 형식 반환 , 내가 원하는대로 출력
 	@Override
 	public String toString() {
-		return "Board [title=" + title + ", content=" + content + ", writer=" + writer + ", password=" + password
-				+ ", date=" + date + ", view=" + view + "]";
+		return title +"\t"+writer+"\t"+view+"\t"+date;
 	}
 	
-	//getter setter 
+	// getter setter
 	public String getTitle() {
 		return title;
 	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 	public String getContent() {
 		return content;
 	}
-
 	public void setContent(String content) {
 		this.content = content;
 	}
-
 	public String getWriter() {
 		return writer;
 	}
-
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	public Date getDate() {
 		return date;
 	}
-
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
 	public int getView() {
 		return view;
 	}
-
 	public void setView(int view) {
 		this.view = view;
 	}
