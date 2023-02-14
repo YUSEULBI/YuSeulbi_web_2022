@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import 과제.과제4_싱글톤.model.Board;
 
 public class Bcontroller {
-
+	
+	// Board클래스타입 ArrayList 객체 새로 생성 // private 동일클래스 외에 접근 막음.
 	private ArrayList<Board> boardDB = new ArrayList<>();
 	
-	// 1. 글쓰기 처리
+	// 1. 글쓰기 처리 // 인수 : 제목,내용 / 반환 : true,false
 	public boolean write( String title , String content ) {
 		// 1. 유효성검사 [ 로그인했는지 검사 / 로그인 안되어있으면 false ]
 		if ( Mcontroller.getInstance().getLogSession() == null ) {

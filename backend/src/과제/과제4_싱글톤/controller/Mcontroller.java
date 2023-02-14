@@ -9,6 +9,7 @@ import 과제.과제4_싱글톤.model.Member;
 
 public class Mcontroller { // 멀티다대다,멀티채팅 아니라면 1개만 있으면 됨
 	
+	//// 싱글톤 /////////////////////////////////////////////////////////////////
 	// * 싱글톤 : 다른곳에서 해당 객체를 공유 메모리 [ 멤버(필드,메소드) 동일한 1개로 사용 ]
 	// 1. 본인 객체 미리 만들기
 	private static Mcontroller mc = new Mcontroller();
@@ -22,17 +23,24 @@ public class Mcontroller { // 멀티다대다,멀티채팅 아니라면 1개만 
 	//외부에서 getInstance 함수를 사용하려면 객체가 필요한데 객체 못만들게 막아둠
 	// 정적멤버로 사용해서 객체없이 사용하게함.
 	
-	//DB 대신 ArrayList
+	
+	// DB 대신 ArrayList /////////////////////////////////////////////////////////
 	private ArrayList<Member> memberDB = new ArrayList<>();
 	
-	// 세션...!! 전역변수!!!!!!!!!!!!
+	
+	// 세션...!! ////////////////////////////////////////////////
 	//로그인 한 회원의 객체를 저장 [ *동시접속 문제점 발생 DB가 아니라서 ]
-		// 사용목적 : 페이지가 바뀌더라도 정보 저장 [ * 메소드가 종료되더라도 정보는 저장 ] 전역변수같은
+		// 사용목적 : 페이지가 바뀌더라도 정보 저장 [ * 메소드가 종료되더라도 정보는 저장 ] 
+	
+	// 필드생성 // 현재 값이 없음 / 힙영역에 없음
 	private Member logSession = null;
+	
+	// 필드 반환 함수 getter
 	public Member getLogSession() {
 		return logSession;
 	}
 	
+	//////////////////////////////////////////////////////////////////////////////
 	
 	// 1. 회원가입 처리 /////////////////////////////////////////////////////////////
 	public int signup( String id , String pw , String confirmpw , String name , String phone ) {
