@@ -5,7 +5,7 @@ public class Member {
 	// 아직 생성전이었던 객체를 메소드에 저장 : static
 	// 공유메모리 , 외부클래스에서 객체생성없이 바로 호출가능.
 	// 객체에 바로 접근하지 못하도록 private
-	private static Member member = new Member();
+	static Member member = new Member();
 	
 	private Member() { 	}
 	
