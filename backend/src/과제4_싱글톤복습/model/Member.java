@@ -2,7 +2,7 @@ package 과제4_싱글톤복습.model;
 
 import java.util.ArrayList;
 
-public class Member {
+public class Member { // Member객체가 여러개 필요함 싱글톤X
 	
 	// 1. 필드
 	private String id;
