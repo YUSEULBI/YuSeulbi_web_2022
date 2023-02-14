@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import 과제.과제4_싱글톤.model.Board;
 
 public class Bcontroller {
+	private static Bcontroller bc = new Bcontroller();
+	private Bcontroller() {};
+	public static Bcontroller getInstance() { return bc; }
+	
 	
 	// Board클래스타입 ArrayList 객체 새로 생성 // private 동일클래스 외에 접근 막음.
 	private ArrayList<Board> boardDB = new ArrayList<>();
@@ -34,12 +38,14 @@ public class Bcontroller {
 	
 	// 3. 글상세
 	public Board getBoard(int bno) {
+		boardDB.get(bno).setView( boardDB.get(bno).getView()+1 ) ;
 		return boardDB.get(bno);  // 인수로 전달받은 인덱스[게시물번호]의 게시물을 반환
 	}
 	
 	// 4. 글삭제
 	public boolean delete( int bno ) {
-		boardDB.remove(bno);
+		boardDB.remove(bno); //boardDB 게시물 삭제
+		//Mcontroller.getInstance().getLogSession().setBoardlist(boardDB); //로그인한 사람의 보드DB변경
 		return true;
 	}
 	

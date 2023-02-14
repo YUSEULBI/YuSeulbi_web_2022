@@ -2,7 +2,9 @@ package 과제.과제4_싱글톤.view;
 
 import java.util.Scanner;
 
+import 과제.과제4_싱글톤.controller.Bcontroller;
 import 과제.과제4_싱글톤.controller.Mcontroller;
+import 과제.과제4_싱글톤.model.Board;
 
 public class Front {
 
@@ -87,25 +89,97 @@ public class Front {
 		else { System.out.println("회원님 비번은 "+ result + "입니다.");	}
 	}
 	
-	// 6. 로그인 성공시 게시물 출력
+	// 6. 로그인 성공시 게시물 출력 페이지
 	public void board_page() {
+		
+		// 로그인정보
+		// System.out.println(Mcontroller.getInstance().getLogSession().toString());
+		
+		while ( true ) { // 3입력시 braek;
+			//// model 양방향설정 [ * toString 쓰면 무한루프빠짐 ]
+			//System.out.println("로그인정보 : "+ Mcontroller.getInstance().getLogSession().toString());
+			
+			System.out.println("-----------------커뮤니티----------------");
+			System.out.println("번호\t조회수\t작성자\t제목");
+			
+			// 내가 쓴 글
+			// Mcontroller.getInstance().getLogSession().getBoardlist();
+			
+			//////////////////////////////
+			
+			// 전체 글 출력
+			int i = 0 ;
+			for ( Board b : Bcontroller.getInstance().getList()) {
+				System.out.println(i+"\t"+b.getView()+"\t"
+									+b.getMember().getId()+"\t"+b.getTitle());
+				
+				i++;
+			}
+			// 메뉴
+			System.out.println("1.쓰기 2.글보기 3.로그아웃");
+			int ch2 = scanner.nextInt();
+			if ( ch2 == 1 ) { write_page();}
+			else if ( ch2 == 2 ) { view_page();}
+			else if ( ch2 == 3 ) { Mcontroller.getInstance().logOut(); break; } // while문 끝내기 return 또는 break 
+		}
+		
+		// 로그인후
+		// System.out.println(Mcontroller.getInstance().getLogSession().toString());
 		
 	}
 	
 	// 7. 게시물 쓰기 페이지
 	public void write_page() {
-		
+		System.out.println("----------------글쓰기페이지-----------------");
+		System.out.println("제목 : "); String title = scanner.next();
+		System.out.println("내용 : "); String content = scanner.next();
+		boolean result = Bcontroller.getInstance().write(title, content);
+		if ( result ) { System.out.println("[알림] 글 작성 성공 "); }
+		else { System.out.println("[알림] 글작성 실패");}
 	}
 	// 8. 게시물 상세 페이지
 	public void view_page() {
+		System.out.println("* 이동할 게시물 번호[인덱스] : ");
+		int bno = scanner.nextInt();
+		Board result = Bcontroller.getInstance().getBoard(bno);
+		System.out.println("제목 : " + result.getTitle());
+		System.out.println("작성자 : " + result.getMember().getId() + "\t 조회수 : " + result.getView());
+		System.out.println("내용 : " + result.getContent());
 		
+		System.out.println("1.삭제 2.수정 3.뒤로가기");
+		int ch3 = scanner.nextInt();
+		if ( ch3 == 1 ) { delete_page(bno);}
+		else if ( ch3 == 2 ) { update_page(bno); }
+		else if ( ch3 == 3 ) { return; } // return 안넣어도됨
 	}
 	
-	// 8. 게시물 수정 페이지
-	public void update_page() {
-		
+	
+	
+	// 9. 게시물 삭제 페이지
+	public void delete_page( int bno ) {
+		// 1. 유효성검사 [ 해당 글의 작성자와 현재 로그인된 회원과 같으면 ]
+		if ( Bcontroller.getInstance().getBoard(bno).getMember().equals( //.equls 힙의 주소를 비교 
+				Mcontroller.getInstance().getLogSession()) ){
+			
+			Bcontroller.getInstance().delete(bno);
+			System.out.println("[알림] 삭제가 되었습니다. ");
+			return;
+		}
+		System.out.println("[알림] 삭제 권한이 없습니다. ");
 	}
 	
+	// 10. 게시물 수정 페이지
+	public void update_page( int bno ) {
+		if ( Bcontroller.getInstance().getBoard(bno).getMember().equals(
+				Mcontroller.getInstance().getLogSession())) {
+			System.out.println(" 새로운 제목 : "); String title = scanner.next();
+			System.out.println(" 새로운 내용 : "); String content = scanner.next();
+			Bcontroller.getInstance().update(bno, title, content);
+			System.out.println("[알림] 수정이 되었습니다.");
+			return;
+		}
+		System.out.println("[알림] 수정할 권한이 없습니다.");
+	}
 	
 	
 }

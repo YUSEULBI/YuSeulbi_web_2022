@@ -10,6 +10,11 @@ public class Board {
 	// DTO 이동객체..!!!
 	// Board 주인은 1명...?
 	
+	
+	
+	// model 양방향설정 [ * toString 쓰면 무한루프빠짐 ]
+	
+	
 	// 1.필드 // 제목 , 내용 , 조회수
 	private String title;
 	private String content;
