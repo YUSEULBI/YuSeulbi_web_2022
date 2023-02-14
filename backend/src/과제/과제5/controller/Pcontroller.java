@@ -15,9 +15,7 @@ public class Pcontroller { // 객체 1개만 써도 됨 싱글톤
 	}
 	
 	private ArrayList<Product> productDB = new ArrayList<>();
-	public ArrayList<Product> getProductDB (){
-		return productDB;
-	}
+	
 	
 	private ArrayList<Integer> pnoList = new ArrayList<>();
 	
@@ -26,7 +24,7 @@ public class Pcontroller { // 객체 1개만 써도 됨 싱글톤
 	// 인수: 제품이름,내용		반환 :  true판매중 false판매완료
 	public boolean regist( String title , String content , String price ){
 		int mno = Mcontroller.getInstance().getLogSession();
-		int pno = 0;
+		int pno = 1;
 		for ( int i : pnoList ) {
 			if ( i == pno ) {
 				pno++;
@@ -34,6 +32,7 @@ public class Pcontroller { // 객체 1개만 써도 됨 싱글톤
 		}
 		Product product = new Product(mno, pno, title, content, price, true);
 		productDB.add(product);
+		pnoList.add(pno);
 		return true;
 	}
 	

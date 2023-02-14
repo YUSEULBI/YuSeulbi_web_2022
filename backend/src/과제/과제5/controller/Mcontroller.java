@@ -18,7 +18,10 @@ public class Mcontroller {// 객체 1개만 써도 됨 싱글톤
 	}
 	
 	// Member DB 역할
-	private ArrayList<Member> memberDB = new ArrayList<>(); 
+	private ArrayList<Member> memberDB = new ArrayList<>();
+	public ArrayList<Member> getMemberDB (){
+		return memberDB;
+	}
 	
 	// Memo DB역할
 	private ArrayList<Memo> memoDB = new ArrayList<>();
@@ -78,7 +81,7 @@ public class Mcontroller {// 객체 1개만 써도 됨 싱글톤
 	// 4. 내가등록한 제품반환 // 인수X 	반환 내가등록한제품 productList 또는 null 
 	public ArrayList<Product> myProduct(){
 		ArrayList<Product> myPList = new ArrayList<>();
-		for ( Product p : Pcontroller.getInstance().getProductDB() ) {
+		for ( Product p : Pcontroller.getInstance().pPrint() ) {
 			if ( p.getMno() == logSession ) {
 				myProduct().add(p);
 				return myProduct();
@@ -86,31 +89,26 @@ public class Mcontroller {// 객체 1개만 써도 됨 싱글톤
 		}
 		return null;
 	}
-	// ProductDB에서 for문
+	
+	
 	
 	// 5. 내가보낸쪽지 반환 // 인수X	반환 쪽지리스트의 보낸사람.equls( 로그인한사람 )인 쪽지객체만 반환 
-		public ArrayList<Memo> mySendM(){
-			ArrayList<Memo> sendMemo = new ArrayList<>();
-			for ( Memo m : memoDB ) {
-				if ( m.getFrommno() == logSession ) {
-					sendMemo.add(m);
-				}
-				
-			}
-			return sendMemo;
-			
-		}
+	/*
+	 * public ArrayList<Memo> mySendM(){ ArrayList<Memo> sendMemo = new
+	 * ArrayList<>(); for ( Memo m : memoDB ) { if ( m.getFrommno() == logSession )
+	 * { sendMemo.add(m); }
+	 * 
+	 * } return sendMemo;
+	 * 
+	 * }
+	 */
 	
 	//6. 받은쪽지 반환 // 인수X	반환 쪽지리스트의 받은사람.equls( 로그인한사람 )인 쪽지객체만 반환 	
-		public ArrayList<Memo> myReceiM(){
-			ArrayList<Memo> receiMemo = new ArrayList<>();
-			for ( Memo m : memoDB ) {
-				if ( m.getPno() == logSession ) {
-					receiMemo.add(m);
-				}
-			}
-			return receiMemo; 
-		}
+	/*
+	 * public ArrayList<Memo> myReceiM(){ ArrayList<Memo> receiMemo = new
+	 * ArrayList<>(); for ( Memo m : memoDB ) { if ( m.getPno() == logSession ) {
+	 * receiMemo.add(m); } } return receiMemo; }
+	 */
 
 	
  
