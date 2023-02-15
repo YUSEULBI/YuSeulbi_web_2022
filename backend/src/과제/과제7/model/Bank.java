@@ -28,19 +28,23 @@ public class Bank {
 			this.holder = holder;
 			this.leftMoney = leftMoney;
 		}
+		
+		//매개변수4개
+		public Bank( String accountNum, String password, String holder, int leftMoney) {
+				super();
+				this.accountNum = accountNum;
+				this.password = password;
+				this.holder = holder;
+				this.leftMoney = leftMoney;
+		}
 
 		
 		
 		
 			
 	// 3. 메소드
-		public boolean newAccount ( int bNum , String password , String holder ) {
+		public boolean newAccount ( String password , String holder ) {
 			
-			//bNum
-			String bankNo = " ";
-			if ( bNum == 1 ) {	bankNo = "03";	}
-			else if ( bNum == 2 ) {	bankNo = "04";	}
-			else if ( bNum == 3 ) {	bankNo = "05";	}
 			
 			// accountNum
 			Random random = new Random();
@@ -51,10 +55,11 @@ public class Bank {
 			if ( result < 10 ) { resultString = "0" + resultString;	}
 			if ( result2 < 10 ) { resultString2 = "0" + resultString2;	}
 			String accountNo = bankNum +"-"+ resultString +"-"+ resultString2;
-			//
+			
+			// leftMoney
 			int leftMoney = 0;
 			
-			Bank bank = new Bank(bankNo, accountNo, password, holder, leftMoney);
+			Bank bank = new Bank(accountNo, password, holder, leftMoney);
 			accountDB.add(bank);
 			return true;
 		}
@@ -67,49 +72,17 @@ public class Bank {
 			return "Bank [bankNum=" + bankNum + ", accountNum=" + accountNum + ", password=" + password + ", holder="
 					+ holder + ", leftMoney=" + leftMoney + "]";
 		}
+
+		public ArrayList<Bank> getAccountDB() {
+			return accountDB;
+		}
+
+		public void setAccountDB(ArrayList<Bank> accountDB) {
+			this.accountDB = accountDB;
+		}
 		
-		public String getBankNum() {
-			return bankNum;
-		}
-
 		
-
-		public void setBankNum(String bankNum) {
-			this.bankNum = bankNum;
-		}
-
-		public String getAccountNum() {
-			return accountNum;
-		}
-
-		public void setAccountNum(String accountNum) {
-			this.accountNum = accountNum;
-		}
-
-		public String getPassword() {
-			return password;
-		}
-
-		public void setPassword(String password) {
-			this.password = password;
-		}
-
-		public String getHolder() {
-			return holder;
-		}
-
-		public void setHolder(String holder) {
-			this.holder = holder;
-		}
-
-		public int getLeftMoney() {
-			return leftMoney;
-		}
-
-		public void setLeftMoney(int leftMoney) {
-			this.leftMoney = leftMoney;
-		}
-	
+		
 		
 		
 }

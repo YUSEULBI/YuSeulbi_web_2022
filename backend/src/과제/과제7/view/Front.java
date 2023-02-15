@@ -3,6 +3,9 @@ package 과제.과제7.view;
 
 import java.util.Scanner;
 
+import 과제.과제7.model.Bank;
+import 과제.과제7.model.Sinhan;
+
 
 
 
@@ -16,6 +19,10 @@ public class Front {
 		}
 		
 		Scanner scanner = new Scanner(System.in);
+		
+		Sinhan sinhan = new Sinhan();
+		
+		Bank bank = new Bank();
 		
 		public void index() {
 			while ( true ) {
@@ -42,6 +49,7 @@ public class Front {
 			String holder = scanner.next();
 			System.out.println("계좌비밀번호 : ");
 			String password = scanner.next();
+			
 			
 		}
 		
