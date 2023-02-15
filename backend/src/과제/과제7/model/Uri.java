@@ -5,7 +5,8 @@ import java.util.Random;
 public class Uri extends Bank {
 		
 	// 1.필드
-	private final String kookmin = "03";
+	private final String bankNum = "05";
+	
 	// 2. 생성자
 	public Uri( String password, String holder ) {
 		super();
@@ -15,9 +16,9 @@ public class Uri extends Bank {
 		String resultString = Integer.toString(result);
 		String resultString2 = Integer.toString(result2);
 		if ( result < 10 ) { resultString = "0" + resultString;	}
-		if ( result < 10 ) { resultString2 = "0" + resultString2;	}
+		if ( result2 < 10 ) { resultString2 = "0" + resultString2;	}
 				
-		this.accountNum = kookmin +"-"+ resultString +"-"+ resultString2;
+		this.accountNum = bankNum +"-"+ resultString +"-"+ resultString2;
 		this.password = password;
 		this.holder = holder;
 		this.leftMoney = 0;

@@ -1,9 +1,11 @@
 package 과제.과제7.view;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import 과제.과제7.controller.Bcontroller;
+import 과제.과제7.model.Bank;
 import 과제.과제7.model.Kookmin;
 import 과제.과제7.model.Sinhan;
 import 과제.과제7.model.Uri;
@@ -20,16 +22,26 @@ public class Front {
 		Scanner scanner = new Scanner(System.in);
 		
 		public void index() {
-			
-			System.out.println("------------- 계좌 관리 ---------------");
-			System.out.println("은행명\t계좌번호\t예금액");
-			
-			
-			System.out.println("메뉴 > 1.계좌생성 2.예금");
-			int ch = scanner.nextInt();
-			if ( ch == 1 ) { newAccount_page();	}
-			else if ( ch == 2 ) { deposit_page();	}
-			
+			while ( true ) {
+				System.out.println("------------- 계좌 관리 ---------------");
+				System.out.println("은행명\t계좌번호\t예금액");
+				
+				ArrayList<Bank> bankDB = Bcontroller.getInstance().accountPrint();
+				String bankName = " ";
+				for ( Bank b : bankDB ) {
+					String bankname = " ";
+					System.out.println(b.toString());
+					//b.getBankNum().equals("03") ? bankname = "신한" : 
+					//	b.getBankNum().equals("04") ? bankname = "국민" : bankname = "우리";
+							
+				}
+				System.out.println("");
+				
+				System.out.println("메뉴 > 1.계좌생성 2.예금");
+				int ch = scanner.nextInt();
+				if ( ch == 1 ) { newAccount_page();	}
+				else if ( ch == 2 ) { deposit_page();	}
+			}
 		}
 		
 		// 1. 계좌생성 페이지

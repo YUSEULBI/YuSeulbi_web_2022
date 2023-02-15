@@ -26,4 +26,8 @@ public class Bcontroller {
 		return true;
 	}
 	
+	// 2. 계좌DB 반환 함수
+	public ArrayList<Bank> accountPrint(){
+		return accountDB;
+	}
 }
