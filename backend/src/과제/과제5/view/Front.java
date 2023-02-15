@@ -167,28 +167,21 @@ public class Front {
 	// 7. 마이페이지 ( 내가 등록한제품 , 내가보낸쪽지 , 내가받은쪽지 )
 	public void myPage() {
 		System.out.println("------------마이페이지------------");
-		// 로그인한사람이 등록한 제품 리스트
-		//ArrayList<Product> myP =  Mcontroller.getInstance().myProduct();
+		//로그인한사람이 등록한 제품 리스트
+		ArrayList<Product> myP =  Mcontroller.getInstance().myProduct();
 		// 내가보낸쪽지 리스트
 		//ArrayList<Memo> sendM = Mcontroller.getInstance().mySendM();
 		// 내가 받은 쪽지 리스트
 		//ArrayList<Memo> receiM = Mcontroller.getInstance().myReceiM();
 		
-		
-		
-		// 로그인한사람이 등록한 제품 리스트
-		System.out.println(">>>내가 등록한 제품");
-		for ( Product p : Mcontroller.getInstance().myProduct() ) {
-			System.out.println("제품번호 : " + p.getPno() + "제목 : "+p.getTitle() + "금액 : " + p.getPrice());
+		System.out.println(">>내가 등록한 제품");
+		for( Product p : myP ) {
+			System.out.println("제품번호\t제목\t금액");
+			System.out.println(p.getPno()+"\t"+p.getTitle()+"\t"+p.getPrice()  );
 		}
+		System.out.println(">>내가 보낸 쪽지");
 		
-		//
-//		for ( Memo m : Mcontroller.getInstance().getMemoDB() ) {
-//			if ( m.getFrommno() == Mcontroller.getInstance().getLogSession()) {
-//				System.out.println("내가보낸메세지");
-//			}
-//				
-//		}
+	
 		
 	/*	
 		
