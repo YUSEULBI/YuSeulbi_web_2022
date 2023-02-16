@@ -13,8 +13,8 @@ public class 화장품서비스 {
 	
 	void 상세보기() {
 		화장품 제품 = (화장품)this;
-		System.out.println( 제품.제품명 );
-		System.out.println( 제품.가격 );
+		System.out.println( "제품명 : "+제품.제품명 );
+		System.out.println( "가격 : "+제품.가격 );
 	}
 	
 }

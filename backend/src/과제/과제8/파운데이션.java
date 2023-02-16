@@ -37,8 +37,8 @@ public class 파운데이션 extends 화장품 {
 		@Override
 		void 상세보기() {
 			super.상세보기();
-			System.out.println(제형);
-			System.out.println(호수);
+			System.out.println("제형 : "+제형);
+			System.out.println("호수 : "+호수);
 		}
 
 

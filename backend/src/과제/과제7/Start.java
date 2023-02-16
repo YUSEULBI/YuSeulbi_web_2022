@@ -1,6 +1,5 @@
 package 과제.과제7;
 
-import java.util.Random;
 
 import 과제.과제7.view.Front;
 
