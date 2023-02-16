@@ -14,9 +14,9 @@ public class D extends A {
 	}
 	
 	public void method2 () {
-		A a = new A();
-		a.field = "value";
-		a.method();
+//		A a = new A();
+//		a.field = "value";
+//		a.method();
 	}
 	
 		

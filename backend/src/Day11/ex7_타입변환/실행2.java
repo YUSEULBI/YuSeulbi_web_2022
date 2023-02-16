@@ -36,8 +36,8 @@ public class 실행2 {
 		// 4. 배열
 		ArrayList<KumHoTire> kumHoList = new ArrayList<>();
 		kumHoList.add(kumHoTire);	// O
-		kumHoList.add(hanKookTire); // X
-		kumHoList.add(tire);		// X
+//		kumHoList.add(hanKookTire); // X
+//		kumHoList.add(tire);		// X
 		
 		// ----> 리스트 자료형을 슈퍼클래스로 설정하면 자식참조형을 담을 수 있다.
 		ArrayList<Tire> TireList = new ArrayList<>();
