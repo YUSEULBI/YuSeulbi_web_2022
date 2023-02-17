@@ -1,4 +1,4 @@
-package 과제.과제9;
+package 과제.과제9.인터페이스1;
 
 import java.util.Scanner;
 
@@ -16,12 +16,21 @@ public class Front {
 	
 	public void index() {
 		while (true) {
-			System.out.println("--------------------");
-			System.out.println(">>>이동방법을 선택하세요");
-			System.out.println("1.걷기 2.이동수단");
-			int ch = scanner.nextInt();
-			if ( ch == 1 ) {  동쪽서쪽이동();	}
-			else if ( ch == 2 ) { 이동수단선택();	};
+			while (true) {
+				System.out.println("-------------------------");
+				System.out.println(">>>이동방법을 선택하세요");
+				System.out.println("1. 비행기");
+				System.out.println("2. 자동차");
+				System.out.println("3. 자전거");
+				System.out.println("4. 걷기");
+				System.out.println("선택 : ");
+				
+				int ch = scanner.nextInt();
+				if ( ch == 1 ) { 비행기이동();	}
+				else if ( ch == 2 ) { 자동차이동();	}
+				else if ( ch == 3 ) { 자전거이동();	}
+				else if ( ch == 4 ) { 걷기이동(); }
+			}
 		}
 	}
 	
@@ -37,22 +46,11 @@ public class Front {
 		if ( ch == 1 ) { move.동쪽이동(); 	}
 		else if ( ch == 2 ) { move.서쪽이동();	}
 	}
+			
 	
-		
-	void 이동수단선택() {
-		while (true) {
-			System.out.println("---- 이동수단을 골라보자 ----");
-			System.out.println("1. 비행기");
-			System.out.println("2. 자동차");
-			System.out.println("3. 자전거");
-			System.out.println("선택 : ");
-			
-			int ch = scanner.nextInt();
-			if ( ch == 1 ) { 비행기이동();	}
-			else if ( ch == 2 ) { 자동차이동();	}
-			else if ( ch == 3 ) { 자전거이동();	}
-			
-		}
+	void 걷기이동() {
+		move = new 사람();
+		동쪽서쪽이동();
 	}
 	
 	void 비행기이동() {

@@ -1,6 +1,6 @@
-package 과제.과제9;
+package 과제.과제9.인터페이스1;
 
-import java.util.Scanner;
+
 
 public class 실행 {
 	

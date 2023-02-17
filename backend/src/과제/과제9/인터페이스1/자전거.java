@@ -1,4 +1,4 @@
-package 과제.과제9;
+package 과제.과제9.인터페이스1;
 
 public class 자전거 extends 사람 {
 	@Override
