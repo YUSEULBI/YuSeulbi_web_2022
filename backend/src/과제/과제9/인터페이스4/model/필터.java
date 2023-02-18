@@ -1,4 +1,4 @@
-package 과제.과제9.인터페이스4;
+package 과제.과제9.인터페이스4.model;
 
 public class 필터 extends 샤워기 { //필터 공통 모델링
 	//1.필드

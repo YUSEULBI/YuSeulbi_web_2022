@@ -17,17 +17,17 @@ public class 실행 {
 			
 			int no = scanner.nextInt();
 			if ( no == 1 ) {
-				System.out.println("-거품날을 장착합니다.");
+				System.out.println("[장착] 거품날을 장착합니다.");
 				반죽기 = new 거품날();
 				반죽기.작동();
 			}
 			else if ( no == 2 ) {
-				System.out.println("-혼합날을 장착합니다.");
+				System.out.println("[장착] 혼합날을 장착합니다.");
 				반죽기 = new 혼합날();	
 				반죽기.작동();
 			}
 			else if ( no == 3 ) { 
-				System.out.println("-반죽날을 장착합니다.");
+				System.out.println("[장착] 반죽날을 장착합니다.");
 				반죽기 = new 반죽날();
 				반죽기.작동();
 			}

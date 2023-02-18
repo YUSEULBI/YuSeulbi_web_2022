@@ -1,4 +1,4 @@
-package 과제.과제9.인터페이스4;
+package 과제.과제9.인터페이스4.model;
 
 public class 항균세디먼트필터 extends 필터 {
 	

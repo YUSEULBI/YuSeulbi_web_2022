@@ -2,12 +2,12 @@ package 과제.과제9.인터페이스4.view;
 
 import java.util.Scanner;
 
-import 과제.과제9.인터페이스4.비타민필터;
-import 과제.과제9.인터페이스4.샤워기;
-import 과제.과제9.인터페이스4.수전;
-import 과제.과제9.인터페이스4.카본필터;
-import 과제.과제9.인터페이스4.필터;
-import 과제.과제9.인터페이스4.항균세디먼트필터;
+import 과제.과제9.인터페이스4.model.비타민필터;
+import 과제.과제9.인터페이스4.model.샤워기;
+import 과제.과제9.인터페이스4.model.수전;
+import 과제.과제9.인터페이스4.model.카본필터;
+import 과제.과제9.인터페이스4.model.필터;
+import 과제.과제9.인터페이스4.model.항균세디먼트필터;
 
 public class Front {
 	
@@ -19,7 +19,7 @@ public class Front {
 	public void index() {
 		
 		System.out.println("-----------------------------");
-		System.out.println("          욕실           ");
+		System.out.println("             욕실            ");
 		System.out.println("-----------------------------");
 		while( true ) {
 			

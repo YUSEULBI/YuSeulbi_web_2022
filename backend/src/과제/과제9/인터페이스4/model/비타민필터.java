@@ -1,4 +1,4 @@
-package 과제.과제9.인터페이스4;
+package 과제.과제9.인터페이스4.model;
 
 public class 비타민필터 extends 필터 {
 	
