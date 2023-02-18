@@ -13,7 +13,7 @@ public class 항균세디먼트필터 extends 필터 {
 		
 		}
 
-		// 3. 메소드
+	// 3. 메소드
 		@Override
 		public void 수도꼭지를튼다() {
 			System.out.println("샤워기에서 '향균처리된' 물이 나옵니다.");

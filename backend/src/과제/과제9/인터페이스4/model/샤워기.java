@@ -15,11 +15,13 @@ public class 샤워기 implements 수전 {
 		return 필터;
 	}
 	
+	//필터소진확인용
 	public boolean 필터확인함수() {
 		필터 필터 =(필터)this;
 		if ( 필터.get필터누적사용횟수() >= 필터.get필터교체주기() ) {return true;}
 		return false;
 	}
+	//소진시 횟수 초기화
 	public void 누적횟수초기화() {
 		필터 필터 =(필터)this;
 		필터.set필터누적사용횟수(0);
