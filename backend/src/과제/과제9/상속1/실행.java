@@ -25,7 +25,7 @@ public class 실행 {
 		while(true) { //할일목록에 없으면 while문 종료
 					
 					if ( 할일목록.size() == 0 ) { //할일목록에 없으면 while문 종료
-						System.out.println("----------------------------");
+						System.out.println("---------------------------------");
 						System.out.println("[ 할일을 다했습니다! ]"); break;	}
 					// 할 일을 하기전이면
 					if ( 할일목록.size() == 3 ) {	 System.out.println("----------- 아침에 할 일 -----------"); }
@@ -47,7 +47,7 @@ public class 실행 {
 					if ( no > 할일목록.size() ) { //번호 잘못입력햇을 때
 						System.out.println("- 번호를 다시 입력해주세요.");
 					}else { //맞게 입력했을 때
-						System.out.println("----------------------------");
+						System.out.println("---------------------------------");
 						할일목록.get(no-1).전원키기();
 						할일목록.get(no-1).전원끄기();
 						할일목록.remove(no-1);
