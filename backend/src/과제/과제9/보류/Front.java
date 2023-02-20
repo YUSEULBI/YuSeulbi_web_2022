@@ -1,6 +1,7 @@
 package 과제.과제9.보류;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Front {
@@ -18,27 +19,35 @@ public class Front {
 	
 	Scanner scanner = new Scanner(System.in);
 	public void index() {
-		//오류나서 보류
-//		if ( 악기검색기록.size()>0) {
-//			System.out.println("-------검색기록-------");
-//			System.out.println("악기이름\t대분류\t중분류");
-//			
-//		}
 		
-		System.out.println("-------악기분류찾기-------");
-		System.out.println("-악기 하나를 생각해주세요.");
-		System.out.println("-생각하신 악기의 연주방법은?");
-		System.out.println("1.줄을사용 2.입으로불어서 3.두들겨서");
-		int ch = scanner.nextInt();
-		
-		if ( ch == 1 ) { 
-			악기 악기 = new 악기("현악기"); 현악기(악기);
-		}
-		else if ( ch == 2 ) { 	
-			악기 악기 = new 악기("관악기"); 관악기(악기);
-		}
-		else if ( ch == 3 ) { 	
-			악기 악기 = new 악기("타악기"); 타악기(악기);
+		while(true){
+			try {
+					if ( 악기검색기록.size()>0) {
+						System.out.println("-------검색기록-------");
+						System.out.println("악기이름\t대분류\t중분류");
+						for ( 악기 i : 악기검색기록 ) {
+							System.out.println(i.get악기이름()+"\t"+i.get대분류()+"\t"+i.get중분류());
+						}
+					}
+					
+					System.out.println("-------악기분류찾기-------");
+					System.out.println("-악기 하나를 생각해주세요.");
+					System.out.println("-생각하신 악기의 연주방법은?");
+					System.out.println("1.줄을사용 2.입으로불어서 3.두들겨서");
+					int ch = scanner.nextInt();
+					
+					if ( ch == 1 ) { 
+						악기 악기 = new 악기("현악기"); 현악기(악기);
+					}
+					else if ( ch == 2 ) { 	
+						악기 악기 = new 악기("관악기"); 관악기(악기);
+					}
+					else if ( ch == 3 ) { 	
+						악기 악기 = new 악기("타악기"); 타악기(악기);
+					}
+			}catch (InputMismatchException e) {
+				System.out.println("잘못된입력입니다.");
+			}
 		}
 	}
 	
@@ -58,21 +67,30 @@ public class Front {
 	}
 	
 	void 찰현악기( 악기 생각한악기 ) {
-//		현악기 생각한현악기 = (현악기)생각한악기; // 형변환 콘솔오류나서 보류
-//		생각한현악기.set중분류("찰현악기");
+		생각한악기.set중분류("찰현악기");
 		System.out.println(">>생각하신 악기는 찰현악기입니다~!");
-//		System.out.println("생각하신 악기이름을 알려주세요");
-//		String name = scanner.next();
-//		생각한현악기.set악기이름(name);
-//		악기검색기록.add(생각한현악기);
+		System.out.println("생각하신 악기이름을 알려주세요");
+		String name = scanner.next();
+		생각한악기.set악기이름(name);
+		악기검색기록.add(생각한악기);
 	}
 	
 	void 발현악기 ( 악기 생각한악기 ) {
 		System.out.println(">>생각하신 악기는 발현악기입니다~!");
+		생각한악기.set중분류("발현악기");
+		System.out.println("생각하신 악기이름을 알려주세요");
+		String name = scanner.next();
+		생각한악기.set악기이름(name);
+		악기검색기록.add(생각한악기);
 	}
 	
 	void 타현악기 ( 악기 생각한악기 ) {
 		System.out.println(">>생각하신 악기는 타현악기입니다~!");
+		생각한악기.set중분류("타현악기");
+		System.out.println("생각하신 악기이름을 알려주세요");
+		String name = scanner.next();
+		생각한악기.set악기이름(name);
+		악기검색기록.add(생각한악기);
 	}
 	
 	/////관악기////////////////
@@ -92,10 +110,20 @@ public class Front {
 	
 	void 목관악기 ( 악기 생각한악기 ) {
 		System.out.println(">>생각하신 악기는 목관악기입니다~!");
+		생각한악기.set중분류("목관악기");
+		System.out.println("생각하신 악기이름을 알려주세요");
+		String name = scanner.next();
+		생각한악기.set악기이름(name);
+		악기검색기록.add(생각한악기);
 	}
 	
 	void 금관악기 ( 악기 생각한악기 ) {
 		System.out.println(">>생각하신 악기는 금관악기입니다~!");
+		생각한악기.set중분류("금관악기");
+		System.out.println("생각하신 악기이름을 알려주세요");
+		String name = scanner.next();
+		생각한악기.set악기이름(name);
+		악기검색기록.add(생각한악기);
 	}
 	
 	////타악기////////////////
@@ -110,15 +138,25 @@ public class Front {
 		int ch = scanner.nextInt();
 		
 		if ( ch == 1 ) { 막명악기( 생각한악기 );	}
-		else if ( ch == 2 ) { 목관악기( 생각한악기 );	}
+		else if ( ch == 2 ) { 체명악기( 생각한악기 );	}
 		
 	}
 	
 	void 막명악기 ( 악기 생각한악기 ) {
 		System.out.println(">>생각하신 악기는 막명악기입니다~!");
+		생각한악기.set중분류("막명악기");
+		System.out.println("생각하신 악기이름을 알려주세요");
+		String name = scanner.next();
+		생각한악기.set악기이름(name);
+		악기검색기록.add(생각한악기);
 	}
 	
 	void 체명악기 ( 악기 생각한악기 ) {
 		System.out.println(">>생각하신 악기는 체명악기입니다~!");
+		생각한악기.set중분류("체명악기");
+		System.out.println("생각하신 악기이름을 알려주세요");
+		String name = scanner.next();
+		생각한악기.set악기이름(name);
+		악기검색기록.add(생각한악기);
 	}
 }
