@@ -66,31 +66,29 @@ public class Front {
 		else if ( ch == 3 ) { 타현악기( 생각한악기 );	}
 	}
 	
-	void 찰현악기( 악기 생각한악기 ) {
-		생각한악기.set중분류("찰현악기");
-		System.out.println(">>생각하신 악기는 찰현악기입니다~!");
+	void 악기DB추가 ( 악기 생각한악기 ) {
 		System.out.println("생각하신 악기이름을 알려주세요");
 		String name = scanner.next();
 		생각한악기.set악기이름(name);
 		악기검색기록.add(생각한악기);
+	}
+	
+	void 찰현악기( 악기 생각한악기 ) {
+		생각한악기.set중분류("찰현악기");
+		System.out.println(">>생각하신 악기는 찰현악기입니다~!");
+		악기DB추가(생각한악기);
 	}
 	
 	void 발현악기 ( 악기 생각한악기 ) {
 		System.out.println(">>생각하신 악기는 발현악기입니다~!");
 		생각한악기.set중분류("발현악기");
-		System.out.println("생각하신 악기이름을 알려주세요");
-		String name = scanner.next();
-		생각한악기.set악기이름(name);
-		악기검색기록.add(생각한악기);
+		악기DB추가(생각한악기);
 	}
 	
 	void 타현악기 ( 악기 생각한악기 ) {
 		System.out.println(">>생각하신 악기는 타현악기입니다~!");
 		생각한악기.set중분류("타현악기");
-		System.out.println("생각하신 악기이름을 알려주세요");
-		String name = scanner.next();
-		생각한악기.set악기이름(name);
-		악기검색기록.add(생각한악기);
+		악기DB추가(생각한악기);
 	}
 	
 	/////관악기////////////////
@@ -111,19 +109,13 @@ public class Front {
 	void 목관악기 ( 악기 생각한악기 ) {
 		System.out.println(">>생각하신 악기는 목관악기입니다~!");
 		생각한악기.set중분류("목관악기");
-		System.out.println("생각하신 악기이름을 알려주세요");
-		String name = scanner.next();
-		생각한악기.set악기이름(name);
-		악기검색기록.add(생각한악기);
+		악기DB추가(생각한악기);
 	}
 	
 	void 금관악기 ( 악기 생각한악기 ) {
 		System.out.println(">>생각하신 악기는 금관악기입니다~!");
 		생각한악기.set중분류("금관악기");
-		System.out.println("생각하신 악기이름을 알려주세요");
-		String name = scanner.next();
-		생각한악기.set악기이름(name);
-		악기검색기록.add(생각한악기);
+		악기DB추가(생각한악기);
 	}
 	
 	////타악기////////////////
@@ -145,18 +137,12 @@ public class Front {
 	void 막명악기 ( 악기 생각한악기 ) {
 		System.out.println(">>생각하신 악기는 막명악기입니다~!");
 		생각한악기.set중분류("막명악기");
-		System.out.println("생각하신 악기이름을 알려주세요");
-		String name = scanner.next();
-		생각한악기.set악기이름(name);
-		악기검색기록.add(생각한악기);
+		악기DB추가(생각한악기);
 	}
 	
 	void 체명악기 ( 악기 생각한악기 ) {
 		System.out.println(">>생각하신 악기는 체명악기입니다~!");
 		생각한악기.set중분류("체명악기");
-		System.out.println("생각하신 악기이름을 알려주세요");
-		String name = scanner.next();
-		생각한악기.set악기이름(name);
-		악기검색기록.add(생각한악기);
+		악기DB추가(생각한악기);
 	}
 }
