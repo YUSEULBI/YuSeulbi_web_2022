@@ -1,4 +1,4 @@
-package 과제.과제9.보류;
+package 과제.과제9.상속3_List출력;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -47,6 +47,7 @@ public class Front {
 					}
 			}catch (InputMismatchException e) {
 				System.out.println("잘못된입력입니다.");
+				scanner = new Scanner(System.in);
 			}
 		}
 	}
@@ -74,8 +75,8 @@ public class Front {
 	}
 	
 	void 찰현악기( 악기 생각한악기 ) {
-		생각한악기.set중분류("찰현악기");
 		System.out.println(">>생각하신 악기는 찰현악기입니다~!");
+		생각한악기.set중분류("찰현악기");
 		악기DB추가(생각한악기);
 	}
 	

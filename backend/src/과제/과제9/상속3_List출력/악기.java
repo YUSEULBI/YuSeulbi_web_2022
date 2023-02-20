@@ -1,4 +1,4 @@
-package 과제.과제9.보류;
+package 과제.과제9.상속3_List출력;
 
 public class 악기 {
 	private String 대분류;
