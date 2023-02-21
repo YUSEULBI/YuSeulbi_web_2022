@@ -21,12 +21,12 @@ public class MemberDAO { // M?
 	
 	
 	// 1. 필드
-	private Connection conn; 		// 1. 연결된 DB구현객체 가지고 있는 인터페이스
-	private PreparedStatement ps;	// 2. 연결된 SQL 조작 [ + 매개변수 가능 ] 인터페이스
-	private Resultset rs;			// 3. 실행된 SQL 결과 확인 인터페이스
+	private Connection conn; 		// 1. 연결만 블루투스역할만 연결된 DB구현객체 가지고 있는 인터페이스
+	private PreparedStatement ps;	// 2. 연결된 SQL 내용수정 실행 [ + 매개변수 가능 ] 인터페이스
+	private Resultset rs;			// 3. 실행된 SQL 결과조작 확인 인터페이스
 	
 	// 2. 생성자 [ 연동코드 -> 객체 생성시 바로 연동될 수 있게 하려고 ]
-	private MemberDAO() {
+	private MemberDAO( ) {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/day15","root","1234");
 		}
@@ -34,6 +34,7 @@ public class MemberDAO { // M?
 			System.out.println(e.getMessage());
 		}
 	}
+	
 	
 	// 3. SQL 처리 메소드
 	// 1. 회원가입 메소드 // 인수:DTO 반환:true false

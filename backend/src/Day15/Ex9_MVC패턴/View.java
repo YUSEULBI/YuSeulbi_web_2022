@@ -2,6 +2,8 @@ package Day15.Ex9_MVC패턴;
 
 import java.util.Scanner;
 
+import Day15.Ex1_p498.Member;
+
 public class View {
 	Scanner scanner = new Scanner(System.in);
 	
@@ -39,6 +41,6 @@ public class View {
 	} // signup end
 	
 	public void list() {
-		
+	
 	}
 }
