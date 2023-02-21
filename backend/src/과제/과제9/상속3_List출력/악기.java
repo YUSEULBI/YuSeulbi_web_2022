@@ -15,7 +15,11 @@ public class 악기 {
 		this.대분류 = 대분류;
 	}
 	
-
+	public void 세부분류안내() {
+		System.out.println(">>생각하신 악기는 현악기 입니다!");
+		System.out.println();
+		System.out.println("-세부분류로 들어가볼까요?");
+	}
 
 
 	public String get대분류() {

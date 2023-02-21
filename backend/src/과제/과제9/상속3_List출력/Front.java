@@ -55,9 +55,7 @@ public class Front {
 	///현악기////////////////
 	
 	void 현악기( 악기 생각한악기 ) {
-		System.out.println(">>생각하신 악기는 현악기 입니다!");
-		System.out.println();
-		System.out.println("-세부분류로 들어가볼까요?");
+		생각한악기.세부분류안내();
 		System.out.println("줄 사용방식을 묻습니다.");
 		System.out.println("1.활을 씁니까? 2.줄을뜯습니까? 3.줄을때립니까?");
 		int ch = scanner.nextInt();
@@ -95,9 +93,7 @@ public class Front {
 	/////관악기////////////////
 	
 	void 관악기( 악기 생각한악기 ) {
-		System.out.println(">>생각하신 악기는 관악기 입니다!");
-		System.out.println();
-		System.out.println("-세부분류로 들어가볼까요?");
+		생각한악기.세부분류안내();
 		System.out.println("마우스피스 유무를 묻습니다.");
 		System.out.println("1.있다. 2.없다.");
 		int ch = scanner.nextInt();
@@ -122,9 +118,7 @@ public class Front {
 	////타악기////////////////
 	
 	void 타악기( 악기 생각한악기 ) {
-		System.out.println(">>생각하신 악기는 타악기 입니다!");
-		System.out.println();
-		System.out.println("-세부분류로 들어가볼까요?");
+		생각한악기.세부분류안내();
 		System.out.println("자세한 연주방식을 묻습니다.");
 		System.out.println("1.악기에 씌워진 막을 때린다.");
 		System.out.println("2.악기의 소리나는 부분을 직접때린다.");
