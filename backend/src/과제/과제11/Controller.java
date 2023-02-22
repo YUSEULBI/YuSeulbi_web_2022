@@ -76,16 +76,10 @@ public class Controller {
 	// 장바구니에 담으면 임시재고 개수를 차감 , 결제시 임시재고 수량으로 DB 변경
 	// 8. 장바구니 담기 [ 인수 : 제품번호 / 반환 : 성공[1] 재고부족[2] 없는제품[3]]
 	int addCartList( int pno ){
-		// 임시재고 차감
-				for ( ProductDto p : 임시재고 ) {
-					if ( p.getPno() == pno ) {
-						if ( p.getPstock() > 0 ) {
-							p.setPstock(p.getPstock()-1);;
-						}
-					}
-				}
+		
 		// 장바구니에 담기
-		for ( ProductDto p : 임시재고 ) { 
+		for ( ProductDto p : 임시재고 ) {
+			
 			//임시재고의 제품번호가 선택한 제품번호와 같으면
 			if ( p.getPno() == pno ) {	
 					//선택한 제품의 재고가 0보다 크면
@@ -93,6 +87,8 @@ public class Controller {
 						cartList.add(pno);
 						//System.out.println("장바구니ArrayList : ");
 						System.out.println("장바구니ArrayList : "+cartList);
+						//임시재고차감
+						p.setPstock(p.getPstock()-1);;
 						return 1; //장바구니성공
 					//선택한 제품의 재고가 0보다 크지 않으면
 					}else { return 2;} //재고없음
@@ -102,6 +98,7 @@ public class Controller {
 		
 		return 3; // 없는제품
 	}
+	
 	
 	// 9. 장바구니 개수 출력
 	int cartCount() {
