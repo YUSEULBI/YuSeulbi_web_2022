@@ -110,7 +110,7 @@ public class Controller {
 	void cancel() {
 		
 		임시재고 = list();
-		System.out.println(임시재고.toString());
+		//System.out.println(임시재고.toString());
 		cartList = new ArrayList<>();
 	}
 	

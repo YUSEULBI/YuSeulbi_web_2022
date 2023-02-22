@@ -18,16 +18,19 @@ public class View {
 	
 	// index
 	public void index() {
-		System.out.println("1.관리자 2.사용자");
-		try {
-			int ch = scanner.nextInt();
-			if ( ch == 1 ) { admin();	}
-			else if ( ch == 2 ) { customer_page();	}
-		}
-		catch (InputMismatchException e) {
-			System.out.println("다시입력하세요 [예외사유] : "+ e);
+		while ( true ) {
+			System.out.println("1.관리자 2.사용자");
+			try {
+				int ch = scanner.nextInt();
+				if ( ch == 1 ) { admin();	}
+				else if ( ch == 2 ) { customer_page();	}
+			}
+			catch (InputMismatchException e) {
+				System.out.println("다시입력하세요 [예외사유] : "+ e);
+			}
 		}
 	}
+	
 	// 사용자페이지 --------------------------------------------------------------//
 	
 	void customer_page() {
@@ -46,33 +49,41 @@ public class View {
 						p.getPno(),p.getPname(),p.getPprice(),state);
 				}
 			System.out.println("-----------------------------------------------------");
-			System.out.println("0:결제 / -1:결제취소 / 장바구니추가[제품번호입력]: ");
+			System.out.println("0:결제 / -1:결제취소 / -2:뒤로가기 / 장바구니추가[제품번호입력]: ");
 			System.out.println("장바구니 담긴 제품수 : " + Controller.getInstance().cartCount());
 			
 			int ch = scanner.nextInt();
 			if ( ch == 0 ) { pay(); }//장바구니에 있는 모든 제품을 결제..
 			else if ( ch == -1 ) { cancel();	} // 장바구니 결제전 취소
-			else { addCartList( ch ); }//장바구니 담기
+			else if ( ch == -2 ) { cancel(); break;	} // 뒤로가기
+			else if ( ch > 0 ) { addCartList( ch ); }//장바구니 담기
+			else { System.out.println("번호를 다시 입력해주세요");	}
 
 		}
 		
 	}
 	
 	void pay() {
-		System.out.println("-----------------------------------------------------");
+		System.out.println("-------------------- 장바구니 ------------------------");
 		//결제 예정 리스트
 		cartPrint();
 		System.out.println("-----------------------------------------------------");
-		System.out.println("0 : 결제");
-		int ch = scanner.nextInt();
-		if ( ch == 0 ){ 
-		int total = Controller.getInstance().pay();
-			System.out.println("-----------------------------------------------------");
-			System.out.println("★총 결제금액 : " + total +"원");
-			System.out.println("-----------------------------------------------------");
-			System.out.println("[알림] 장바구니를 비웠습니다.");
+		System.out.println("0: 결제 / 1: 이전화면[장바구니 초기화]");
+		try {
+			int ch = scanner.nextInt();
+			if ( ch == 0 ){ 
+				int total = Controller.getInstance().pay();
+					System.out.println("-----------------------------------------------------");
+					System.out.println("[결제완료] ★총 결제금액 : " + total +"원");
+					System.out.println("-----------------------------------------------------");
+					System.out.println("[알림] 장바구니를 비웠습니다.");
+			}
+			else if ( ch == 1 ) { cancel(); return;	} // 뒤로가기 장바구니 비우기
+		}catch (Exception e) {
+			System.out.println( e );
 		}
-	}
+		
+	}// pay end
 	
 	void cartPrint() {
 		ArrayList<ProductDto> result =  Controller.getInstance().list();
@@ -84,14 +95,15 @@ public class View {
 				int sum = 0;
 				int count = 0;
 				for ( int i = 0 ; i < cartList.size(); i++ ) {
-				 if ( cartList.get(i) == p.getPno() ) {
-					 sum += p.getPprice();
-					 count++;
+					 if ( cartList.get(i) == p.getPno() ) {
+						 sum += p.getPprice();
+						 count++;
+					 	}
 				}
 				System.out.print(count+"\t");
 				System.out.println(sum+"원");
+			
 			}
-		}
 	}
 	
 	void cancel() {
@@ -111,7 +123,7 @@ public class View {
 	// 관리자페이지 --------------------------------------------------------------//
 	void admin() {
 		while(true) {
-			System.out.println("1.제품등록 2.제품출력 3.제품수정 4.제품재고변경 5.제품삭제");
+			System.out.println("1.제품등록 2.제품출력 3.제품수정 4.제품재고변경 5.제품삭제 6.뒤로가기");
 			try {
 				int ch = scanner.nextInt();
 				if ( ch == 1 ) { pRegist(); }
@@ -119,6 +131,7 @@ public class View {
 				else if ( ch == 3 ) { upDate_page(  );	}
 				else if ( ch == 4 ) { upDate_pstock();	}
 				else if ( ch == 5 ) { delete();	}
+				else if ( ch == 6 ) { break;	}
 			}
 			catch (InputMismatchException e) {
 				System.out.println("다시입력하세요 [예외사유] : "+ e);
@@ -165,12 +178,11 @@ public class View {
 		}catch (InputMismatchException e) {
 			System.out.println("다시입력하세요 [예외사유] : "+ e);
 		}
-		
 	}
 	
 	void upDate_pname() {
 		System.out.println("제품번호 : "); int pno = scanner.nextInt();
-		System.out.println("제품이름 : "); String pname = scanner.next();
+		System.out.println("수정할 제품이름 : "); String pname = scanner.next();
 		boolean result = Controller.getInstance().upDate_pname(pno, pname);
 		if ( result ) { System.out.println("[알림] 제품이름 수정성공");	}
 		else { System.out.println("[알림] 제품이름 수정실패");	}
@@ -179,7 +191,7 @@ public class View {
 	void upDate_pprice() {
 		
 		System.out.println("제품이름 : "); String pname = scanner.next();
-		System.out.println("제품가격 : "); int pprice = scanner.nextInt();
+		System.out.println("수정할 제품가격 : "); int pprice = scanner.nextInt();
 		boolean result = Controller.getInstance().upDate_pprice(pname, pprice);
 		if ( result ) { System.out.println("[알림] 제품가격 수정성공");	}
 		else { System.out.println("[알림] 제품가격 수정실패");	}
