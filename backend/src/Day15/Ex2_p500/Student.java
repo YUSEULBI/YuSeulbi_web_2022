@@ -28,19 +28,6 @@ public class Student {
 		return hashCode;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if ( obj instanceof Student ) {
-			Student target = (Student) obj;
-
-			if ( no == target.getNo() && name.equals(target.getName())) {
-				return true;
-			}
-		}
-		return false;
-			
-	}
-	
 	
 	
 
