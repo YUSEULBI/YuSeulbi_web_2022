@@ -76,14 +76,16 @@ public class Front {
 	}
 	
 	public void member_Page() {
-		try {
-			System.out.println("1.수업예약 2.예약내역");
-			int ch = scanner.nextInt();
-			if (  ch == 1 ) {  수업예약();	}
-			else if ( ch == 2 ) {	}
-		}catch (Exception e) {
-			System.out.println("다시 입력하세요.");
-			
+		while ( true ) {
+			try {
+				System.out.println("1.수업예약 2.예약내역");
+				int ch = scanner.nextInt();
+				if (  ch == 1 ) {  수업예약();	}
+				else if ( ch == 2 ) {	}
+			}catch (Exception e) {
+				System.out.println("다시 입력하세요.");
+				
+			}
 		}
 		
 	}
