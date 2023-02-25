@@ -1,4 +1,4 @@
-package 팀플예습;
+package 팀플2;
 
 import 팀플2.View.Front;
 import 팀플2.model.DbDAO;

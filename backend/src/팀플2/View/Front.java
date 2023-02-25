@@ -1,9 +1,12 @@
 package 팀플2.View;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import 팀플2.Controller.수업Controller;
 import 팀플2.Controller.회원Controller;
 import 팀플2.model.DbDAO;
+import 팀플2.model.스케줄Dto;
 
 public class Front {
 	
@@ -69,7 +72,7 @@ public class Front {
 		try {
 			System.out.println("1.수업예약 2.예약내역");
 			int ch = scanner.nextInt();
-			if (  ch == 1 ) { 	}
+			if (  ch == 1 ) {  수업예약();	}
 			else if ( ch == 2 ) {	}
 		}catch (Exception e) {
 			System.out.println("다시 입력하세요.");
@@ -78,11 +81,17 @@ public class Front {
 	}
 	
 	public void 수업예약() {
-		
+		전체수업목록();
 	}
 	
 	public void 전체수업목록() {
 		
+		ArrayList<스케줄Dto> 전체스케줄 = 수업Controller.getInstance().전체수업목록();
+		System.out.println("스케줄번호\t수업일시\t금액\t강사");
+		if ( 전체스케줄 == null ) { System.out.println("[스케줄목록 불러오기 실패]");	}
+		for ( 스케줄Dto 스케줄1개 : 전체스케줄 ) {
+			System.out.println(스케줄1개.get스케줄번호_pk()+"\t"+스케줄1개.get수강일시()+"\t"+스케줄1개.get금액()+"\t"+스케줄1개.get회원번호_fk());
+		}
 	}
 	
 	//관리자페이지////////////////////////////////////////////////
