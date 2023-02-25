@@ -2,6 +2,7 @@ package 팀플2.Controller;
 
 import java.util.ArrayList;
 
+import 팀플2.model.수강내역Dao;
 import 팀플2.model.스케줄Dao;
 
 import 팀플2.model.스케줄출력Dto;
@@ -17,8 +18,13 @@ public class 수업Controller {
 	
 	//전체스케줄목록
 	public ArrayList<스케줄출력Dto> 전체수업목록() {
-		boolean result = 스케줄Dao.getInstance().전체스케줄목록();
-		if ( result ) { return 스케줄Dao.getInstance().get전체스케줄리스트();	}
-		else { return null;	}
+		return 스케줄Dao.getInstance().전체스케줄목록();
+		
+	}
+	
+	//예약처리
+	public boolean 예약처리( int sc ) {
+		int logsession = 회원Controller.getInstance().getlogsession();
+		return 수강내역Dao.getInstance().예약처리(sc, logsession );
 	}
 }

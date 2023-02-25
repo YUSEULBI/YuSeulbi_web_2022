@@ -12,6 +12,9 @@ public class 회원Controller {
 	}
 	
 	private int logsession;
+	public int getlogsession() {
+		return logsession;
+	}
 	
 	public boolean 회원가입( String 아이디 , String 비밀번호 , String 전화번호 , String 이름 , int 등급 ) {
 		

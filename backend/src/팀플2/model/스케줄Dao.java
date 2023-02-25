@@ -16,9 +16,7 @@ public class 스케줄Dao {
 	
 	// 전체스케줄테이블의 레코드 여러개 -> 스케줄출력DTO 여러개 -> ArrayList로 담기
 	private ArrayList<스케줄출력Dto> 전체스케줄리스트 = new ArrayList<>();
-	public ArrayList<스케줄출력Dto> get전체스케줄리스트(){
-		return 전체스케줄리스트;
-	}
+	
 	
 	public boolean 스케줄테이블() {
 		//sql문 작성
@@ -49,7 +47,7 @@ public class 스케줄Dao {
 		}
 	}
 	
-	public boolean 전체스케줄목록() {
+	public ArrayList<스케줄출력Dto> 전체스케줄목록() {
 		//sql문 작성
 		String sql = "select 스케줄번호_pk,수강일시,금액,이름 from 회원,스케줄 where 스케줄.회원번호_fk = 회원.회원번호_pk;";
 		try {
@@ -72,10 +70,10 @@ public class 스케줄Dao {
 				전체스케줄리스트.add(dto);
 			}	 
 			System.out.println("[전체스케줄 list에 저장함.]");
-			return true;
+			return 전체스케줄리스트;
 		}catch (Exception e) {
 			System.out.println("[전체스케줄목록 함수 예외발생]" + e);
-			return false;
+			return null;
 		}
 	}
 	

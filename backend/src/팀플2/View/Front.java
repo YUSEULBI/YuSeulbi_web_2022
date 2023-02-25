@@ -136,7 +136,9 @@ public class Front {
 	}
 	
 	public void 예약처리( int sc ) {
-		
+		boolean result = 수업Controller.getInstance().예약처리(sc);
+		if ( result ) { System.out.println("[수강신청이 완료되었습니다.]");	}
+		else { System.out.println("[수강신청 실패 - 관리자문의]");	}
 	}
 	
 	
