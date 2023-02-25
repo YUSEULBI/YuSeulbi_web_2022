@@ -1,5 +1,6 @@
 package 팀플2.View;
 
+import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -91,13 +92,14 @@ public class Front {
 		전체수업목록();
 	}
 	
+	
 	public void 전체수업목록() {
 		
 		ArrayList<스케줄출력Dto> 전체스케줄 = 수업Controller.getInstance().전체수업목록();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy.MM.dd aHH:mm");
 		System.out.println("=============== 예약페이지 ===============");
 		System.out.printf("%s\t|%-10s \t  |%s \t |%s\n","스케줄번호","수업일시","금액","강사");
 		if ( 전체스케줄 == null ) { System.out.println("[스케줄목록 불러오기 실패]");	}
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy.MM.dd aHH:mm");
 		for ( 스케줄출력Dto 스케줄1개 : 전체스케줄 ) {
 			String time = 스케줄1개.get수강일시().format(dtf);
 			System.out.printf("%d\t|%s |%d  |%s\n",
@@ -105,7 +107,38 @@ public class Front {
 			//System.out.println(스케줄1개.get스케줄번호_pk()+"\t"+스케줄1개.get수강일시().format(dtf)+"\t"+스케줄1개.get금액()+"\t"+스케줄1개.get이름());
 
 		}
+		
+		System.out.println("스케줄번호를 선택하시면 예약이 됩니다.");
+		int sc = scanner.nextInt();
+		예약( sc );
+		
 	}
+	
+	public void 예약( int sc ) {
+		
+		ArrayList<스케줄출력Dto> 전체스케줄 = 수업Controller.getInstance().전체수업목록();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy.MM.dd aHH:mm");
+		
+		System.out.println("=============== 선택한 스케줄 ===============");
+		System.out.println("["+sc + "번 수업을 선택하셨습니다.]");
+		String time = 전체스케줄.get(sc).get수강일시().format(dtf);
+		System.out.println("일시 : " + time);
+		int num = 전체스케줄.get(sc).get금액();
+		DecimalFormat df = new DecimalFormat("#,##0원");
+		System.out.println("강사 : " + 전체스케줄.get(sc).get이름()+" 강사");
+		System.out.println("금액 : " + df.format(num) );
+
+		System.out.println("========================================");
+		System.out.println("수강하시겠습니까? [ 1.예 / 2.아니오 ]");
+		int ch = scanner.nextInt();
+		if ( ch == 1 ) { 예약처리( sc );	}
+		else if ( ch == 2 ) { return; }
+	}
+	
+	public void 예약처리( int sc ) {
+		
+	}
+	
 	
 	//관리자페이지////////////////////////////////////////////////
 	public void admin_page() { /////////미완성
