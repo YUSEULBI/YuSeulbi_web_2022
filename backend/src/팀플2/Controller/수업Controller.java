@@ -3,7 +3,8 @@ package 팀플2.Controller;
 import java.util.ArrayList;
 
 import 팀플2.model.스케줄Dao;
-import 팀플2.model.스케줄Dto;
+
+import 팀플2.model.스케줄출력Dto;
 
 public class 수업Controller {
 	
@@ -15,9 +16,9 @@ public class 수업Controller {
 	}
 	
 	//전체스케줄목록
-	public ArrayList<스케줄Dto> 전체수업목록() {
+	public ArrayList<스케줄출력Dto> 전체수업목록() {
 		boolean result = 스케줄Dao.getInstance().전체스케줄목록();
-		if ( result ) { return 스케줄Dao.getInstance().get스케줄리스트();	}
+		if ( result ) { return 스케줄Dao.getInstance().get전체스케줄리스트();	}
 		else { return null;	}
 	}
 }

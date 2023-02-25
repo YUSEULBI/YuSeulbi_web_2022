@@ -1,5 +1,6 @@
 package 팀플2.View;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,6 +8,7 @@ import 팀플2.Controller.수업Controller;
 import 팀플2.Controller.회원Controller;
 import 팀플2.model.DbDAO;
 import 팀플2.model.스케줄Dto;
+import 팀플2.model.스케줄출력Dto;
 
 public class Front {
 	
@@ -20,23 +22,27 @@ public class Front {
 	}
 	
 	public void index() {
-		System.out.println("1.관리자페이지 2.회원페이지");
-		try {
-			int ch = scanner.nextInt();
-			if ( ch == 1 ) {	}
-			else if ( ch == 2 ) { 회원_page();	}
-			else { System.out.println("다시 입력해주세요");	}
-		}catch (Exception e) {
-			System.out.println("[예외]다시 입력해주세요");
+		while ( true ) {
+			System.out.println("1.관리자페이지 2.회원페이지");
+			try {
+				int ch = scanner.nextInt();
+				if ( ch == 1 ) {	}
+				else if ( ch == 2 ) { 회원_page();	}
+				else { System.out.println("다시 입력해주세요");	}
+			}catch (Exception e) {
+				System.out.println("[예외]다시 입력해주세요");
+				scanner = new Scanner(System.in);
+			}
 		}
 	}
 	
 	public void 회원_page() {
-		System.out.println("1.로그인 2.회원가입");
-		int ch = scanner.nextInt();
-		if ( ch == 1 ) { 로그인_page();	}
-		else if  ( ch == 2 ) {  회원가입_page();	}
-		
+		while (true) {
+			System.out.println("1.로그인 2.회원가입");
+			int ch = scanner.nextInt();
+			if ( ch == 1 ) { 로그인_page();	}
+			else if  ( ch == 2 ) {  회원가입_page();	}
+		}
 	}
 	public void 회원가입_page() {
 		
@@ -76,6 +82,7 @@ public class Front {
 			else if ( ch == 2 ) {	}
 		}catch (Exception e) {
 			System.out.println("다시 입력하세요.");
+			
 		}
 		
 	}
@@ -86,11 +93,17 @@ public class Front {
 	
 	public void 전체수업목록() {
 		
-		ArrayList<스케줄Dto> 전체스케줄 = 수업Controller.getInstance().전체수업목록();
-		System.out.println("스케줄번호\t수업일시\t금액\t강사");
+		ArrayList<스케줄출력Dto> 전체스케줄 = 수업Controller.getInstance().전체수업목록();
+		System.out.println("=============== 예약페이지 ===============");
+		System.out.printf("%s\t|%-10s \t  |%s \t |%s\n","스케줄번호","수업일시","금액","강사");
 		if ( 전체스케줄 == null ) { System.out.println("[스케줄목록 불러오기 실패]");	}
-		for ( 스케줄Dto 스케줄1개 : 전체스케줄 ) {
-			System.out.println(스케줄1개.get스케줄번호_pk()+"\t"+스케줄1개.get수강일시()+"\t"+스케줄1개.get금액()+"\t"+스케줄1개.get회원번호_fk());
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy.MM.dd aHH:mm");
+		for ( 스케줄출력Dto 스케줄1개 : 전체스케줄 ) {
+			String time = 스케줄1개.get수강일시().format(dtf);
+			System.out.printf("%d\t|%s |%d  |%s\n",
+					스케줄1개.get스케줄번호_pk(),time,스케줄1개.get금액(),스케줄1개.get이름());
+			//System.out.println(스케줄1개.get스케줄번호_pk()+"\t"+스케줄1개.get수강일시().format(dtf)+"\t"+스케줄1개.get금액()+"\t"+스케줄1개.get이름());
+
 		}
 	}
 	
