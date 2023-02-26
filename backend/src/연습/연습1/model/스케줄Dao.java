@@ -17,6 +17,7 @@ public class 스케줄Dao {
 	// 전체스케줄테이블의 레코드 여러개 -> 스케줄출력DTO 여러개 -> ArrayList로 담기
 	private ArrayList<스케줄출력Dto> 전체스케줄리스트 = new ArrayList<>();
 	
+	private ArrayList<강사스케줄출력dto> 강사스케줄리스트 = new ArrayList<>();
 	
 	public boolean 스케줄테이블() {
 		//sql문 작성
@@ -76,6 +77,27 @@ public class 스케줄Dao {
 			System.out.println("[전체스케줄목록 함수 예외발생]" + e);
 			return null;
 		}
+	}
+	
+	public ArrayList<강사스케줄출력dto> 강사스케줄출력( int logsession ){
+		String sql = "select 이름,스케줄번호_pk,수강일시 from 회원 , 스케줄 where 회원.회원번호_pk = 스케줄.회원번호_fk and 스케줄.회원번호_fk = ?;";
+		try {
+			DbDAO.getInstance().setPs(DbDAO.getInstance().getConn().prepareStatement(sql));
+			PreparedStatement ps = DbDAO.getInstance().getPs();
+			ps.setInt(1, logsession);
+			DbDAO.getInstance().setRs(ps.executeQuery());
+			ResultSet rs = DbDAO.getInstance().getRs();
+			while ( rs.next()) {
+				LocalDateTime time = (LocalDateTime) rs.getObject(3);
+				강사스케줄출력dto dto = new 강사스케줄출력dto(rs.getString(1), rs.getInt(2), time);
+				강사스케줄리스트.add(dto);
+			}return 강사스케줄리스트;
+			
+		}catch (Exception e) {
+			System.out.println("[강사스케줄출력 예외발생] :" + e);
+			return null;
+		}
+		
 	}
 	
 }

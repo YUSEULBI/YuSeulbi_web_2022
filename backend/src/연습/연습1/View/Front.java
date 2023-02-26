@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import 연습.연습1.Controller.수업Controller;
 import 연습.연습1.Controller.회원Controller;
+import 연습.연습1.model.강사스케줄출력dto;
 import 연습.연습1.model.스케줄출력Dto;
 import 연습.연습1.model.예약내역Dto;
 
@@ -29,7 +30,7 @@ public class Front {
 			System.out.println("1.관리자페이지 2.회원페이지");
 			try {
 				int ch = scanner.nextInt();
-				if ( ch == 1 ) {	}
+				if ( ch == 1 ) { 관리자로그인_page();	}
 				else if ( ch == 2 ) { 회원_page();	}
 				else { System.out.println("다시 입력해주세요");	}
 			}catch (Exception e) {
@@ -70,13 +71,27 @@ public class Front {
 		try {
 			System.out.println("아이디 : "); String 아이디 = scanner.next();
 			System.out.println("비밀번호 : "); String 비밀번호 = scanner.next();
-			boolean result = 회원Controller.getInstance().로그인(아이디, 비밀번호);
-			if ( result ) { System.out.println("[로그인 성공]"); member_Page();	}
+			int result = 회원Controller.getInstance().로그인(아이디, 비밀번호);
+			if ( result == 1 ) { System.out.println("[회원 로그인 성공]"); member_Page();	}
+			else if (result == 2 ) { System.out.println("[강사 로그인 성공]"); teacher_page();	}
 			else { System.out.println("[로그인 실패] 다시 입력하세요.");	}
 		}catch (Exception e) {
 			System.out.println("[로그인 실패] 다시 입력하세요.");
 			scanner = new Scanner(System.in);
 		}
+	}
+	
+	public void teacher_page() {
+		
+		ArrayList<강사스케줄출력dto> 강사스케줄리스트 = 수업Controller.getInstance().강사스케줄출력();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy.MM.dd aHH:mm");
+		System.out.println("=============== 강사 스케줄 ===============");
+		System.out.printf("%s\t%s\t%-10s\n","강사명","스케줄번호","수강일시");
+		for ( 강사스케줄출력dto dto : 강사스케줄리스트 ) {
+			String time = dto.get수강일시().format(dtf);
+			System.out.printf("%s\t%s\t%-10s\n",dto.get강사(),dto.get스케줄번호_pk(),time);
+		}
+		System.out.println("========================================");
 	}
 	
 	public void member_Page() {
@@ -174,22 +189,26 @@ public class Front {
 	
 	
 	//관리자페이지////////////////////////////////////////////////
-	public void admin_page() { /////////미완성
-		System.out.println("비밀번호 : ");
+	
+	
+	public void 관리자로그인_page() {
+		System.out.println("관리자 비밀번호 : ");
 		try {
-			String 비밀번호 = scanner.next();
+			String pw =  scanner.next();
+			boolean result = 회원Controller.getInstance().관리자로그인(pw);
+			if ( result ) { System.out.println("[ 관리자 로그인 성공 ]");	}
+			else { System.out.println("[ 관리자 로그인 실패 ]");	}
 		}catch (Exception e) {
-			System.out.println("[예외] 다시 입력해주세요");
+			System.out.println("[예외] 관리자 로그인 실패 ");
 			scanner = new Scanner(System.in);
 		}
-		
 	}
 	
 	
 	// 1. 관리자페이지 2. 회원페이지
 	
 	// 회원페이지
-	// 1. 로그인 2.획원가입
+	// 1. 로그인 2.회원가입(일반회원)
 	
 	// 회원가입페이지
 	
@@ -201,6 +220,8 @@ public class Front {
 	
 	// 2. 예약내역
 	// 내가 예약한 수업목록 보기
+	
+	// 2-1. 예약취소
 	   
 	// 로그인페이지 (강사)
 	// 강사의 수업목록 출력
@@ -211,6 +232,8 @@ public class Front {
 			// 수업수정(날짜,강사) , 수업삭제
 	// 2. 수업등록 
 	
-	// 3. 회원삭제
+	// 3. 강사등록
+	
+	// 회원수정삭제는 필요없을 것 같음. (수강권등록기능이 없어서)
 	
 }

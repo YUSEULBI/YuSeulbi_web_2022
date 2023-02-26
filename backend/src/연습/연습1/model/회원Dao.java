@@ -35,8 +35,8 @@ public class 회원Dao {
 		
 	}// signUp end //
 	
-	// 2. 로그인 [ 인수 : 아이디 , 비번 / 반환 : 성공실패 ]
-	public int 로그인( String 아이디 , String 비번 ) {
+	// 2. 로그인 [ 인수 : 아이디 , 비번 / 반환 : 회원Dto ]
+	public 회원Dto 로그인( String 아이디 , String 비번 ) {
 		//select * from 회원 where 아이디 = 'qwe' and 비밀번호 = 'qwe';
 		try {
 			String sql = "select * from 회원 where 아이디 = ? and 비밀번호 = ?";
@@ -50,14 +50,36 @@ public class 회원Dao {
 			ResultSet rs = DbDAO.getInstance().getRs();
 			if ( rs.next() ) {
 				회원Dto dto = new 회원Dto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
-				return dto.get회원번호_pk();
-			}else { return -1; }
+				return dto;
+			}else { return null; }
 			 
 		}catch (Exception e) {
 			System.out.println("[로그인 예외 ,맞는 정보가 없습니다.] :" + e);
-			return -1;
+			return null;
 		}
 		
 	}
+	
+	// 3. 관리자 로그인 [ 인수 비밀번호 / 반환 : 회원Dto ]
+	public 회원Dto 관리자로그인( String 비번 ) {
+		회원Dto dto = new 회원Dto();
+		String sql = "select * from 회원 where 등급 = 3 and 비밀번호 = ?;";
+		try {
+			DbDAO.getInstance().setPs(DbDAO.getInstance().getConn().prepareStatement(sql));
+			PreparedStatement ps = DbDAO.getInstance().getPs();
+			ps.setString(1, 비번);
+			DbDAO.getInstance().setRs(ps.executeQuery());
+			ResultSet rs = DbDAO.getInstance().getRs();
+			if ( rs.next() ) {
+				dto = new 회원Dto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
+				
+			}return dto;
+		}catch (Exception e) {
+			System.out.println("[관리자로그인 예외발생] :" + e);
+			return null;
+		}
+		
+	}
+	
 	
 }

@@ -25,13 +25,23 @@ public class 회원Controller {
 		} else { return false; }
 	}
 	
-	public boolean 로그인 ( String 아이디 , String 비번 ) {
-		int result = 회원Dao.getInstance().로그인(아이디, 비번);
-		if ( result == -1 ) {return false;}
-		else if ( result > 0 ) { logsession = result; System.out.println( "logsesion : " + logsession); return true;	}
-		return false;
+	public int 로그인 ( String 아이디 , String 비번 ) {
+		회원Dto dto = 회원Dao.getInstance().로그인(아이디, 비번);
+		if ( dto == null ) {return -1;} //로그인실패 
+		else if ( dto.get회원번호_pk() > 0 ) { 
+			logsession = dto.get회원번호_pk(); System.out.println( "logsesion : " + logsession);
+			if ( dto.get등급() == 2 ) { return 2;	} // 강사
+			return 1;	} // 일반회원
+		return -1; // 로그인실패 
 	}
 	
-	
+	// 3. 관리자 로그인 [ 인수 비밀번호 / 반환 : 성공실패 ]
+	public boolean 관리자로그인( String 비번 ) {
+		
+		회원Dto dto = 회원Dao.getInstance().관리자로그인(비번);
+		if ( dto == null ) { return false;	}
+		logsession = dto.get회원번호_pk();
+		return true;
+	}
 	
 }
