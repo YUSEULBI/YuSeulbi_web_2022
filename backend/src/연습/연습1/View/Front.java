@@ -48,10 +48,12 @@ public class Front {
 			System.out.println("1.로그인 2.회원가입");
 			int ch = scanner.nextInt();
 			if ( ch == 1 ) { 로그인_page();	}
-			else if  ( ch == 2 ) {  회원가입_page();	}
+			else if  ( ch == 2 ) {  회원가입_page(1);	}
 		}
 	}
-	public void 회원가입_page() {
+	
+	// 회원,강사 회원가입 ( 회원-회원페이지 / 강사-관리자페이지 에서등록 )
+	public void 회원가입_page( int 등급 ) {
 		
 		try {
 			System.out.print("아이디: "); 		String 아이디 = scanner.next(); 
@@ -59,7 +61,7 @@ public class Front {
 			System.out.print("전화번호: "); 	String 전화번호 = scanner.next();
 			System.out.print("이름: "); 	String 이름 = scanner.next();
 				
-		int 등급 = 1;
+		
 		boolean result = 회원Controller.getInstance().회원가입(아이디, 비밀번호, 전화번호, 이름, 등급);
 		if ( result ) { System.out.println("[회원가입 성공]");	}
 		else { System.out.println("[회원가입 실패]");	}
@@ -224,7 +226,7 @@ public class Front {
 				else if ( ch == 2 ) { 회원조회(2);	}
 				else if ( ch == 3 ) { 회원조회(1);	}
 				else if ( ch == 4 ) { 수업등록();	}
-				else if ( ch == 5 ) {	}
+				else if ( ch == 5 ) { 회원가입_page(2);	}
 			}catch (Exception e) {
 				System.out.println("[예외] 잘못된 입력형식 입니다.");
 				scanner = new Scanner(System.in);
