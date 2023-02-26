@@ -12,6 +12,8 @@ import 연습.연습1.Controller.회원Controller;
 import 연습.연습1.model.강사스케줄출력dto;
 import 연습.연습1.model.스케줄출력Dto;
 import 연습.연습1.model.예약내역Dto;
+import 연습.연습1.model.회원Dao;
+import 연습.연습1.model.회원Dto;
 
 
 
@@ -211,7 +213,7 @@ public class Front {
 	public void 관리자_page() {
 		while(true) {
 			System.out.println("=============== 관리자 페이지 ===============");
-			System.out.print("[ 1.전체수업목록 2.강사조회 3.수업등록 4.강사등록 ] 번호입력 : ");
+			System.out.print("[ 1.전체수업목록 2.강사조회 3.회원조회 4.수업등록 5.강사등록 ] 번호입력 : ");
 			try {
 				int ch = scanner.nextInt();
 				if ( ch == 1 ) { 
@@ -219,9 +221,10 @@ public class Front {
 					전체수업목록();
 					System.out.println();}
 				
-				else if ( ch == 2 ) {	}
-				else if ( ch == 3 ) { 수업등록();	}
-				else if ( ch == 4 ) {	}
+				else if ( ch == 2 ) { 회원조회(2);	}
+				else if ( ch == 3 ) { 회원조회(1);	}
+				else if ( ch == 4 ) { 수업등록();	}
+				else if ( ch == 5 ) {	}
 			}catch (Exception e) {
 				System.out.println("[예외] 잘못된 입력형식 입니다.");
 				scanner = new Scanner(System.in);
@@ -230,8 +233,19 @@ public class Front {
 		
 	}
 	
+	public void 회원조회( int 등급 ) {
+		System.out.println("=============== 강사조회 ===============");
+		System.out.printf("%s\t%s\t%s\t%-10s\t%s\n","회원번호","아이디","비밀번호","전화번호","이름");
+		ArrayList<회원Dto> 강사리스트 = 회원Dao.getInstance().회원조회(등급);
+		for ( 회원Dto d : 강사리스트 ) {
+			System.out.printf("%s\t%s\t%s\t%s\t%s\n",d.get회원번호_pk(),d.get아이디(),d.get비밀번호(),d.get전화번호(),d.get이름());
+		}
+	}
+	
+	
+	
 	public void 수업등록() {
-
+		System.out.println("=============== 수업등록 ===============");
 		try {
 			//강사여야 등록가능하도록 유효성검사 필요
 			System.out.print("금액 : "); int 금액 = scanner.nextInt();

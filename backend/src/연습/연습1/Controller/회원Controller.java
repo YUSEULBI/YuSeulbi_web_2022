@@ -1,5 +1,7 @@
 package 연습.연습1.Controller;
 
+import java.util.ArrayList;
+
 import 연습.연습1.model.회원Dao;
 import 연습.연습1.model.회원Dto;
 
@@ -42,6 +44,11 @@ public class 회원Controller {
 		if ( dto == null ) { return false;	}
 		logsession = dto.get회원번호_pk();
 		return true;
+	}
+	
+	// 4. 강사,회원조회
+	public ArrayList<회원Dto> 회원조회( int 등급  ){
+		return 회원Dao.getInstance().회원조회(등급);
 	}
 	
 }

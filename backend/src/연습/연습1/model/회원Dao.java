@@ -2,6 +2,9 @@ package 연습.연습1.model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 public class 회원Dao {
 	
@@ -12,6 +15,9 @@ public class 회원Dao {
 	public static 회원Dao getInstance() {
 		return dao;
 	}
+	
+	// 강사 , 회원 조회용 ArrayList
+	ArrayList<회원Dto> 회원조회리스트 = new ArrayList<>();
 	
 	// 1. 회원가입 [ 인수 : 아이디,비번 / 반환 : 성공실패 ]
 	public boolean 회원가입( 회원Dto dto ) {
@@ -80,6 +86,28 @@ public class 회원Dao {
 		}
 		
 	}
+	
+	// 4. 강사,회원 조회
+	public ArrayList<회원Dto> 회원조회( int 등급  ){
+		회원조회리스트 = new ArrayList<>();
+		String sql = "select * from 회원 where 등급 = ?;";
+		try {
+			DbDAO.getInstance().setPs(DbDAO.getInstance().getConn().prepareStatement(sql));
+			PreparedStatement ps = DbDAO.getInstance().getPs();
+			ps.setInt(1, 등급);
+			ResultSet rs = ps.executeQuery();
+			while ( rs.next() ) {
+				회원Dto dto = new 회원Dto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
+				회원조회리스트.add(dto);
+			}
+			return 회원조회리스트;
+			
+		}catch (Exception e) {
+			System.out.println("[회원조회 예외발생] :" +e);
+			return null;
+		}
+	}
+	
 	
 	
 }
