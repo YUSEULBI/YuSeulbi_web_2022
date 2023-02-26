@@ -185,11 +185,11 @@ public class Front {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy.MM.dd aHH:mm");
 		DecimalFormat df = new DecimalFormat("#,##0원");
 		System.out.println("========================================");
-		System.out.printf("%s\t%-20s\t%s\t%s\n","스케줄번호","수강일시","강사","금액");
+		System.out.printf("%s\t%-20s\t%s\t%s\n","수강내역번호","수강일시","강사","금액");
 		for ( 예약내역Dto dto : 예약내역리스트 ) {
 			String time = dto.get수강일시().format(dtf);
 			int num = dto.get금액();
-			System.out.printf("%s\t%s\t%s\t%s\n",dto.get스케줄번호_fk(),time,dto.get강사(),df.format(num));
+			System.out.printf("%s\t%s\t%s\t%s\n",dto.get수강내역번호(),time,dto.get강사(),df.format(num));
 			
 		}
 		System.out.println("========================================");

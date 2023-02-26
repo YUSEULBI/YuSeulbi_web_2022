@@ -38,8 +38,8 @@ public class 수강내역Dao {
 		예약내역리스트 = new ArrayList<>();
 		
 		//스케줄번호/ 수강일시 / 강사 / 금액
-		String sql ="select 스케줄번호_pk , 수강일시 , 이름 , 금액 from 회원,스케줄,수강내역 \r\n"
-				+ "			where 스케줄.회원번호_fk = 회원.회원번호_pk and 회원.회원번호_pk = ? and 회원.회원번호_pk = 수강내역.회원번호_fk   and 스케줄.스케줄번호_pk = 수강내역.스케줄번호_fk order by 수강일시;";
+		String sql ="select distinct 수강내역번호 , 수강일시 , 이름 , 금액 from 회원,스케줄,수강내역 \r\n"
+				+ "				where 수강내역.회원번호_fk = ? and 수강내역.스케줄번호_fk = 스케줄.스케줄번호_pk and 스케줄.회원번호_fk = 회원.회원번호_pk;";
 		try {
 			DbDAO.getInstance().setPs(DbDAO.getInstance().getConn().prepareStatement(sql));
 			PreparedStatement ps = DbDAO.getInstance().getPs();
@@ -58,5 +58,13 @@ public class 수강내역Dao {
 		}
 		
 	}
+	
+	// 수강취소
+	public boolean 수강취소( int logsession , int 수업번호 ) {
+		String sql = "delete from 수강내역 where 수강내역번호 = ? and 회원번호_fk = ?;";
+		
+		return false;
+	}
+	
 	
 }
