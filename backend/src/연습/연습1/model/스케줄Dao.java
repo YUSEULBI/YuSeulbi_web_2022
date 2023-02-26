@@ -3,6 +3,7 @@ package 연습.연습1.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class 스케줄Dao {
@@ -98,6 +99,29 @@ public class 스케줄Dao {
 			return null;
 		}
 		
+	}
+	
+	// 수업등록
+	public boolean 수업등록( 스케줄Dto dto ) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String time = dto.수강일시.format(dtf);
+		
+		String sql ="insert into 스케줄( 수강일시 , 금액 , 회원번호_fk ) "
+				+ "values( ? , ? , ? );";
+		try {
+			DbDAO.getInstance().setPs(DbDAO.getInstance().getConn().prepareStatement(sql));
+			PreparedStatement ps = DbDAO.getInstance().getPs();
+			
+			ps.setString(1, time);
+			ps.setInt(2, dto.금액);
+			ps.setInt(3, dto.회원번호_fk);
+			ps.executeUpdate();
+			return true;
+			
+		}catch (Exception e) {
+			System.out.println("[수업등록 예외] : " + e);
+			return false;
+		}
 	}
 	
 }

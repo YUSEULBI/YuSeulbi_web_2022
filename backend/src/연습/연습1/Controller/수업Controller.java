@@ -1,10 +1,12 @@
 package 연습.연습1.Controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import 연습.연습1.model.강사스케줄출력dto;
 import 연습.연습1.model.수강내역Dao;
 import 연습.연습1.model.스케줄Dao;
+import 연습.연습1.model.스케줄Dto;
 import 연습.연습1.model.스케줄출력Dto;
 import 연습.연습1.model.예약내역Dto;
 
@@ -39,5 +41,13 @@ public class 수업Controller {
 	public ArrayList<강사스케줄출력dto> 강사스케줄출력(){
 		int logsession = 회원Controller.getInstance().getlogsession();
 		return 스케줄Dao.getInstance().강사스케줄출력(logsession);
+	}
+	
+	//수업등록
+	public boolean 수업등록 (  LocalDateTime time , int 금액 , int 회원번호 ) {
+	
+		스케줄Dto dto = new 스케줄Dto(0, time, 금액, 회원번호);
+		return 스케줄Dao.getInstance().수업등록(dto);
+		
 	}
 }

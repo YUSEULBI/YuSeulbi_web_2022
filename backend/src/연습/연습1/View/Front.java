@@ -2,6 +2,7 @@ package 연습.연습1.View;
 
 
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -34,7 +35,7 @@ public class Front {
 				else if ( ch == 2 ) { 회원_page();	}
 				else { System.out.println("다시 입력해주세요");	}
 			}catch (Exception e) {
-				System.out.println("[예외]다시 입력해주세요");
+				System.out.println("[예외] 잘못된 입력형식 입니다.");
 				scanner = new Scanner(System.in);
 			}
 		}
@@ -61,7 +62,7 @@ public class Front {
 		if ( result ) { System.out.println("[회원가입 성공]");	}
 		else { System.out.println("[회원가입 실패]");	}
 		}catch (Exception e) {
-			System.out.println("다시 입력해주세요");
+			System.out.println("[예외] 잘못된 입력형식 입니다.");
 			scanner = new Scanner(System.in);
 		}
 		
@@ -76,7 +77,7 @@ public class Front {
 			else if (result == 2 ) { System.out.println("[강사 로그인 성공]"); teacher_page();	}
 			else { System.out.println("[로그인 실패] 다시 입력하세요.");	}
 		}catch (Exception e) {
-			System.out.println("[로그인 실패] 다시 입력하세요.");
+			System.out.println("[로그인 실패] [예외] 잘못된 입력형식 입니다.");
 			scanner = new Scanner(System.in);
 		}
 	}
@@ -95,14 +96,16 @@ public class Front {
 	}
 	
 	public void member_Page() {
+		
 		while ( true ) {
+			System.out.println("=============== 회원 페이지 ===============");
 			try {
 				System.out.println("1.수업예약(유효성검사추후에) 2.예약내역");
 				int ch = scanner.nextInt();
 				if (  ch == 1 ) {  수업예약();	}
 				else if ( ch == 2 ) { 예약내역 ();	}
 			}catch (Exception e) {
-				System.out.println("다시 입력하세요.");
+				System.out.println("[예외] 잘못된 입력형식 입니다.");
 				scanner = new Scanner(System.in);
 				
 			}
@@ -111,13 +114,14 @@ public class Front {
 	}
 	
 	public void 수업예약() {
+		System.out.println("=============== 예약페이지 ===============");
 		전체수업목록();
 		System.out.println("스케줄번호를 선택하시면 예약이 됩니다.");
 		try {
 			int sc = scanner.nextInt();
 			예약( sc );
 		}catch (Exception e) {
-			System.out.println("잘못 입력하셨습니다.");
+			System.out.println("[예외] 잘못된 입력형식 입니다.");
 			scanner = new Scanner(System.in);
 		}
 	}
@@ -127,7 +131,7 @@ public class Front {
 		
 		ArrayList<스케줄출력Dto> 전체스케줄 = 수업Controller.getInstance().전체수업목록();
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy.MM.dd aHH:mm");
-		System.out.println("=============== 예약페이지 ===============");
+		
 		System.out.printf("%s\t|%-10s \t  |%s \t |%s\n","스케줄번호","수업일시","금액","강사");
 		if ( 전체스케줄 == null ) { System.out.println("[스케줄목록 불러오기 실패]");	}
 		for ( 스케줄출력Dto 스케줄1개 : 전체스케줄 ) {
@@ -160,7 +164,7 @@ public class Front {
 			if ( ch == 1 ) { 예약처리( sc );	}
 			else if ( ch == 2 ) { return; }
 		}catch (Exception e) {
-			System.out.println("잘못 입력하셨습니다.");
+			System.out.println("[예외] 잘못된 입력형식 입니다.");
 			scanner = new Scanner(System.in);
 		}
 	}
@@ -196,7 +200,7 @@ public class Front {
 		try {
 			String pw =  scanner.next();
 			boolean result = 회원Controller.getInstance().관리자로그인(pw);
-			if ( result ) { System.out.println("[ 관리자 로그인 성공 ]");	}
+			if ( result ) { System.out.println("[ 관리자 로그인 성공 ]"); 관리자_page();	}
 			else { System.out.println("[ 관리자 로그인 실패 ]");	}
 		}catch (Exception e) {
 			System.out.println("[예외] 관리자 로그인 실패 ");
@@ -204,7 +208,55 @@ public class Front {
 		}
 	}
 	
+	public void 관리자_page() {
+		while(true) {
+			System.out.println("=============== 관리자 페이지 ===============");
+			System.out.print("[ 1.전체수업목록 2.강사조회 3.수업등록 4.강사등록 ] 번호입력 : ");
+			try {
+				int ch = scanner.nextInt();
+				if ( ch == 1 ) { 
+					System.out.println("=============== 전체수업목록 ==============="); 
+					전체수업목록();
+					System.out.println();}
+				
+				else if ( ch == 2 ) {	}
+				else if ( ch == 3 ) { 수업등록();	}
+				else if ( ch == 4 ) {	}
+			}catch (Exception e) {
+				System.out.println("[예외] 잘못된 입력형식 입니다.");
+				scanner = new Scanner(System.in);
+			}
+		}
+		
+	}
 	
+	public void 수업등록() {
+
+		try {
+			//강사여야 등록가능하도록 유효성검사 필요
+			System.out.print("금액 : "); int 금액 = scanner.nextInt();
+			System.out.print("강사번호 : "); int 강사번호 = scanner.nextInt();
+			
+			//연도,월,일,시,분
+			System.out.print("연도 : "); int year = scanner.nextInt();
+			System.out.print("월 : "); int month = scanner.nextInt();
+			System.out.print("일 : "); int day = scanner.nextInt();
+			System.out.print("시 : "); int hour = scanner.nextInt();
+			System.out.print("분 : "); int minute = scanner.nextInt();
+			
+			LocalDateTime time = LocalDateTime.of(year, month, day, hour, minute);
+			System.out.println( time );
+			boolean result = 수업Controller.getInstance().수업등록(time, 금액, 강사번호);
+			if ( result ) { System.out.println("[수업등록 성공]");	}
+			else { System.out.println("[수업등록 실패]");	}
+			
+		}catch (Exception e) {
+			System.out.println("[예외] 잘못된 입력형식 입니다.");
+			scanner = new Scanner(System.in);
+		}
+		
+		
+	}
 	// 1. 관리자페이지 2. 회원페이지
 	
 	// 회원페이지
