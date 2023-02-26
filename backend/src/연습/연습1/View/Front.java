@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.mysql.cj.jdbc.SuspendableXAConnection;
+
 import 연습.연습1.Controller.수업Controller;
 import 연습.연습1.Controller.회원Controller;
 import 연습.연습1.model.강사스케줄출력dto;
@@ -104,15 +106,32 @@ public class Front {
 		while ( true ) {
 			System.out.println("=============== 회원 페이지 ===============");
 			try {
-				System.out.println("1.수업예약(유효성검사추후에) 2.예약내역");
+				System.out.println("1.수업예약(유효성검사추후에) 2.예약내역 3.수강취소");
 				int ch = scanner.nextInt();
 				if (  ch == 1 ) {  수업예약();	}
 				else if ( ch == 2 ) { 예약내역 ();	}
+				else if ( ch == 3 ) { 수강취소();	}
 			}catch (Exception e) {
 				System.out.println("[예외] 잘못된 입력형식 입니다.");
 				scanner = new Scanner(System.in);
 				
 			}
+		}
+		
+	}
+	
+	public void 수강취소() {
+		System.out.println("=============== 예약 취소 ===============");
+		예약내역();
+		System.out.println("취소하실 수업의 수강내역번호를 입력하세요.");
+		try {
+			int no = scanner.nextInt();
+			boolean result = 수업Controller.getInstance().수강취소(no);
+			if ( result ) {	System.out.println("[예약이 취소되었습니다.]");}
+			else { System.out.println("[예약취소실패 - 관리자문의 ]");}
+		}catch (Exception e) {
+			System.out.println("[예외] 잘못된 입력형식 입니다.");
+			scanner = new Scanner(System.in);
 		}
 		
 	}
@@ -154,16 +173,17 @@ public class Front {
 		
 		System.out.println("=============== 선택한 스케줄 ===============");
 		System.out.println("["+sc + "번 수업을 선택하셨습니다.]");
-		String time = 전체스케줄.get(sc).get수강일시().format(dtf);
+		String time = 전체스케줄.get(sc-1).get수강일시().format(dtf);
 		System.out.println("일시 : " + time);
-		int num = 전체스케줄.get(sc).get금액();
+		int num = 전체스케줄.get(sc-1).get금액();
 		DecimalFormat df = new DecimalFormat("#,##0원");
-		System.out.println("강사 : " + 전체스케줄.get(sc).get이름()+" 강사");
+		System.out.println("강사 : " + 전체스케줄.get(sc-1).get이름()+" 강사");
 		System.out.println("금액 : " + df.format(num) );
-
+		
 		System.out.println("========================================");
 		System.out.println("수강하시겠습니까? [ 1.예 / 2.아니오 ]");
 		try {
+			
 			int ch = scanner.nextInt();
 			if ( ch == 1 ) { 예약처리( sc );	}
 			else if ( ch == 2 ) { return; }

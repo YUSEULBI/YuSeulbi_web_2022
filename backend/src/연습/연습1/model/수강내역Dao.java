@@ -60,10 +60,19 @@ public class 수강내역Dao {
 	}
 	
 	// 수강취소
-	public boolean 수강취소( int logsession , int 수업번호 ) {
+	public boolean 수강취소( int 수강내역번호 , int logsession ) {
 		String sql = "delete from 수강내역 where 수강내역번호 = ? and 회원번호_fk = ?;";
-		
-		return false;
+		try {
+			DbDAO.getInstance().setPs(DbDAO.getInstance().getConn().prepareStatement(sql));
+			PreparedStatement ps = DbDAO.getInstance().getPs();
+			ps.setInt(1, 수강내역번호);
+			ps.setInt(2, logsession);
+			ps.executeUpdate();
+			return true;
+		}catch (Exception e) {
+			System.out.println("[수강취소 예외발생] :" + e);
+			return false;
+		}
 	}
 	
 	
