@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import 연습.연습1.model.수강내역Dao;
 import 연습.연습1.model.스케줄Dao;
 import 연습.연습1.model.스케줄출력Dto;
+import 연습.연습1.model.예약내역Dto;
 
 public class 수업Controller {
 	
@@ -24,6 +25,12 @@ public class 수업Controller {
 	//예약처리
 	public boolean 예약처리( int sc ) {
 		int logsession = 회원Controller.getInstance().getlogsession();
-		return 수강내역Dao.getInstance().예약처리(sc, logsession );
+		return 수강내역Dao.getInstance().예약처리(logsession, sc );
+	}
+	
+	//예약내역
+	public ArrayList<예약내역Dto> 예약내역( ) {
+		int logsession = 회원Controller.getInstance().getlogsession();
+		return 수강내역Dao.getInstance().예약내역(logsession);
 	}
 }

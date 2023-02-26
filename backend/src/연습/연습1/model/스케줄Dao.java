@@ -48,6 +48,7 @@ public class 스케줄Dao {
 	}
 	
 	public ArrayList<스케줄출력Dto> 전체스케줄목록() {
+		전체스케줄리스트 = new ArrayList<>();
 		//sql문 작성
 		String sql = "select 스케줄번호_pk,수강일시,금액,이름 from 회원,스케줄 where 스케줄.회원번호_fk = 회원.회원번호_pk;";
 		try {

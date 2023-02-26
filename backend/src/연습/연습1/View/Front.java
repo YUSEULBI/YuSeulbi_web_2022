@@ -9,6 +9,7 @@ import java.util.Scanner;
 import 연습.연습1.Controller.수업Controller;
 import 연습.연습1.Controller.회원Controller;
 import 연습.연습1.model.스케줄출력Dto;
+import 연습.연습1.model.예약내역Dto;
 
 
 
@@ -60,6 +61,7 @@ public class Front {
 		else { System.out.println("[회원가입 실패]");	}
 		}catch (Exception e) {
 			System.out.println("다시 입력해주세요");
+			scanner = new Scanner(System.in);
 		}
 		
 	}
@@ -73,6 +75,7 @@ public class Front {
 			else { System.out.println("[로그인 실패] 다시 입력하세요.");	}
 		}catch (Exception e) {
 			System.out.println("[로그인 실패] 다시 입력하세요.");
+			scanner = new Scanner(System.in);
 		}
 	}
 	
@@ -82,9 +85,10 @@ public class Front {
 				System.out.println("1.수업예약(유효성검사추후에) 2.예약내역");
 				int ch = scanner.nextInt();
 				if (  ch == 1 ) {  수업예약();	}
-				else if ( ch == 2 ) {	}
+				else if ( ch == 2 ) { 예약내역 ();	}
 			}catch (Exception e) {
 				System.out.println("다시 입력하세요.");
+				scanner = new Scanner(System.in);
 				
 			}
 		}
@@ -93,6 +97,14 @@ public class Front {
 	
 	public void 수업예약() {
 		전체수업목록();
+		System.out.println("스케줄번호를 선택하시면 예약이 됩니다.");
+		try {
+			int sc = scanner.nextInt();
+			예약( sc );
+		}catch (Exception e) {
+			System.out.println("잘못 입력하셨습니다.");
+			scanner = new Scanner(System.in);
+		}
 	}
 	
 	
@@ -110,11 +122,6 @@ public class Front {
 			//System.out.println(스케줄1개.get스케줄번호_pk()+"\t"+스케줄1개.get수강일시().format(dtf)+"\t"+스케줄1개.get금액()+"\t"+스케줄1개.get이름());
 
 		}
-		
-		System.out.println("스케줄번호를 선택하시면 예약이 됩니다.");
-		int sc = scanner.nextInt();
-		예약( sc );
-		
 	}
 	
 	public void 예약( int sc ) {
@@ -133,15 +140,36 @@ public class Front {
 
 		System.out.println("========================================");
 		System.out.println("수강하시겠습니까? [ 1.예 / 2.아니오 ]");
-		int ch = scanner.nextInt();
-		if ( ch == 1 ) { 예약처리( sc );	}
-		else if ( ch == 2 ) { return; }
+		try {
+			int ch = scanner.nextInt();
+			if ( ch == 1 ) { 예약처리( sc );	}
+			else if ( ch == 2 ) { return; }
+		}catch (Exception e) {
+			System.out.println("잘못 입력하셨습니다.");
+			scanner = new Scanner(System.in);
+		}
 	}
 	
 	public void 예약처리( int sc ) {
 		boolean result = 수업Controller.getInstance().예약처리(sc);
 		if ( result ) { System.out.println("[수강신청이 완료되었습니다.]");	}
 		else { System.out.println("[수강신청 실패 - 관리자문의]");	}
+	}
+	
+	// 예약내역조회
+	public void 예약내역 () {
+		ArrayList<예약내역Dto> 예약내역리스트 = 수업Controller.getInstance().예약내역();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy.MM.dd aHH:mm");
+		DecimalFormat df = new DecimalFormat("#,##0원");
+		System.out.println("========================================");
+		System.out.printf("%s\t%-20s\t%s\t%s\n","스케줄번호","수강일시","강사","금액");
+		for ( 예약내역Dto dto : 예약내역리스트 ) {
+			String time = dto.get수강일시().format(dtf);
+			int num = dto.get금액();
+			System.out.printf("%s\t%s\t%s\t%s\n",dto.get스케줄번호_fk(),time,dto.get강사(),df.format(num));
+			
+		}
+		System.out.println("========================================");
 	}
 	
 	
@@ -152,6 +180,7 @@ public class Front {
 			String 비밀번호 = scanner.next();
 		}catch (Exception e) {
 			System.out.println("[예외] 다시 입력해주세요");
+			scanner = new Scanner(System.in);
 		}
 		
 	}
