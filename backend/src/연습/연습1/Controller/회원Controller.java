@@ -33,6 +33,7 @@ public class 회원Controller {
 		else if ( dto.get회원번호_pk() > 0 ) { 
 			logsession = dto.get회원번호_pk(); System.out.println( "logsesion : " + logsession);
 			if ( dto.get등급() == 2 ) { return 2;	} // 강사
+			if ( dto.get등급() == 3 ) { return 3;	} //관리자 --> 회원페이지에서 로그인 시도했기 때문에 안됨.
 			return 1;	} // 일반회원
 		return -1; // 로그인실패 
 	}

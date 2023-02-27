@@ -124,4 +124,28 @@ public class 스케줄Dao {
 		}
 	}
 	
+	// 수업수정
+	public boolean 수업수정( 스케줄Dto dto ) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String time = dto.수강일시.format(dtf);
+		System.out.println(time);
+		
+		//update 스케줄 set 수강일시 = '2023-02-25' , 금액 = '40000' , 회원번호_fk = '2' where 스케줄번호_pk=1;
+		String sql = "update 스케줄 set 수강일시 = ? , 금액 = ? , 회원번호_fk = ? where 스케줄번호_pk= ?;";
+		try {
+			DbDAO.getInstance().setPs(DbDAO.getInstance().getConn().prepareStatement(sql));
+			PreparedStatement ps = DbDAO.getInstance().getPs();
+			ps.setString(1 , time );
+			ps.setInt(2, dto.금액);
+			ps.setInt( 3 , dto.회원번호_fk);
+			ps.setInt(4, dto.스케줄번호_pk);
+			ps.executeUpdate();
+			return true;
+		}catch (Exception e) {
+			System.out.println("[수업수정 예외] : "+e);
+			return false;
+		}
+		
+	}
+	
 }

@@ -241,7 +241,10 @@ public class Front {
 				if ( ch == 1 ) { 
 					System.out.println("=============== 전체수업목록 ==============="); 
 					전체수업목록();
-					System.out.println();}
+					System.out.println("======================================");
+					수업조회수정삭제();
+					System.out.println();
+					}
 				
 				else if ( ch == 2 ) { 회원조회(2);	}
 				else if ( ch == 3 ) { 회원조회(1);	}
@@ -252,6 +255,40 @@ public class Front {
 				scanner = new Scanner(System.in);
 			}
 		}
+		
+	}
+	
+	public void 수업조회수정삭제() {
+		System.out.println("1.수업수정 2.수업삭제");
+		try {
+			int sc = scanner.nextInt();
+			if ( sc == 1 ) {	수업수정();	}
+			else if ( sc == 2 ) {		}
+		}catch (Exception e) {
+			System.out.println("[예외]" +e);
+		}
+	}
+	
+	public void 수업수정() {
+		System.out.println("수정할 스케줄번호 : "); int 스케줄번호 = scanner.nextInt();
+
+		//강사여야 등록가능하도록 유효성검사 필요
+		System.out.print("금액 : "); int 금액 = scanner.nextInt();
+		System.out.print("강사번호 : "); int 강사번호 = scanner.nextInt();
+		
+		//연도,월,일,시,분
+		System.out.print("연도 : "); int year = scanner.nextInt();
+		System.out.print("월 : "); int month = scanner.nextInt();
+		System.out.print("일 : "); int day = scanner.nextInt();
+		System.out.print("시 : "); int hour = scanner.nextInt();
+		System.out.print("분 : "); int minute = scanner.nextInt();
+		
+		LocalDateTime time = LocalDateTime.of(year, month, day, hour, minute);
+		System.out.println( time );
+		boolean result =  수업Controller.getInstance().수업수정(스케줄번호, time, 금액, 강사번호);
+		if ( result ) { System.out.println("[수업수정 완료]");	}
+		else { System.out.println("[수업수정 실패]");	}
+		
 		
 	}
 	

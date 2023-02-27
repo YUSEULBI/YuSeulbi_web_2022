@@ -56,4 +56,11 @@ public class 수업Controller {
 		int logsession = 회원Controller.getInstance().getlogsession();
 		return 수강내역Dao.getInstance().수강취소(수강내역번호, logsession);
 	}
+	
+	// 수업수정
+	public boolean 수업수정( int 스케줄번호 , LocalDateTime time , int 금액 , int 강사번호 ) {
+		스케줄Dto dto = new 스케줄Dto(스케줄번호, time, 금액, 강사번호);
+		return 스케줄Dao.getInstance().수업수정(dto);
+		
+	}
 }
