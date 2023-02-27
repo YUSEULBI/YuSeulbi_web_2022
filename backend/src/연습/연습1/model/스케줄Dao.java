@@ -148,4 +148,9 @@ public class 스케줄Dao {
 		
 	}
 	
+	// 수업삭제
+	public boolean 수업수정 ( int 스케줄번호 ) {
+		return false;
+	}
+	
 }

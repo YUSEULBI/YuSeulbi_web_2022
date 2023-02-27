@@ -263,10 +263,14 @@ public class Front {
 		try {
 			int sc = scanner.nextInt();
 			if ( sc == 1 ) {	수업수정();	}
-			else if ( sc == 2 ) {		}
+			else if ( sc == 2 ) {	수업삭제();	}
 		}catch (Exception e) {
 			System.out.println("[예외]" +e);
 		}
+	}
+	
+	public void 수업삭제() {
+		
 	}
 	
 	public void 수업수정() {
