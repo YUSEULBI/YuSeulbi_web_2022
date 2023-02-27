@@ -63,4 +63,9 @@ public class 수업Controller {
 		return 스케줄Dao.getInstance().수업수정(dto);
 		
 	}
+	
+	// 수업삭제
+	public boolean 수업삭제 ( int 스케줄번호 ) {
+		return 스케줄Dao.getInstance().수업삭제(스케줄번호);
+	}
 }

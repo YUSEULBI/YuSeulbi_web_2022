@@ -148,9 +148,42 @@ public class 스케줄Dao {
 		
 	}
 	
-	// 수업삭제
-	public boolean 수업수정 ( int 스케줄번호 ) {
+	// 삭제전에 확인
+	public boolean 수업유무( int 스케줄번호 ) {
+		String sql = "select * from 스케줄 where 스케줄번호_pk = ?;";
+		try {
+			DbDAO.getInstance().setPs(DbDAO.getInstance().getConn().prepareStatement(sql));
+			PreparedStatement ps = DbDAO.getInstance().getPs();
+			ps.setInt(1, 스케줄번호);
+			ResultSet rs = ps.executeQuery();
+			if ( rs.next() ) {
+				LocalDateTime time =  (LocalDateTime)rs.getObject(2);
+				스케줄Dto dto = new 스케줄Dto(rs.getInt(1), time , 0, 0);
+				if ( dto.수강일시 == null ) { return false;	 }
+				else { return true;	}
+			}
+		}catch (Exception e) {
+			System.out.println("[수업유무 예외] : "+ e);
+			
+		}
 		return false;
+	}
+	
+	// 수업삭제
+	public boolean 수업삭제 ( int 스케줄번호 ) {
+		if ( 수업유무(스케줄번호) == false ) { return false;}
+		String sql ="delete from 스케줄 where 스케줄번호_pk = ?;";
+		try {
+			DbDAO.getInstance().setPs(DbDAO.getInstance().getConn().prepareStatement(sql));
+			PreparedStatement ps = DbDAO.getInstance().getPs();
+			ps.setInt(1, 스케줄번호);
+			ps.executeUpdate();
+			return true;
+		}catch (Exception e) {
+			System.out.println("[수업수정 예외] : " + e);
+			return false;
+		}
+		
 	}
 	
 }

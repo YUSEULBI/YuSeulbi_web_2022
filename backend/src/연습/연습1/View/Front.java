@@ -270,7 +270,11 @@ public class Front {
 	}
 	
 	public void 수업삭제() {
-		
+		System.out.println("삭제할 스케줄번호 : ");
+		int no = scanner.nextInt();
+		boolean result = 수업Controller.getInstance().수업삭제(no);
+		if ( result ) {	System.out.println("[수업 삭제 성공]");}
+		else { System.out.println("[수업 삭제 실패]");	}
 	}
 	
 	public void 수업수정() {
@@ -350,7 +354,7 @@ public class Front {
 	//////////////////////////////////////////////////////
 	// 관리자페이지
 	// 1. 수업목록보기
-			// 수업수정(날짜,강사) , 수업삭제 -->아직못함
+			// 수업수정(날짜,강사) , 수업삭제
 	// 2.강사조회 3.회원조회 4.수업등록 5.강사등록
 	
 	// 회원수정삭제는 필요없을 것 같음. (수강권등록기능이 없어서)
