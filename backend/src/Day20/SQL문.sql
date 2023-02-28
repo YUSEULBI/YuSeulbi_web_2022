@@ -90,7 +90,7 @@ select * from board order by bdate desc limit 3; -- 게시물 위에서 3개
         select b.bno , b.btitle , b.bcontent , b.bdate , b.bview , m.mid , c.cname 
         from board b , member m , category c 
         where b.mno_fk = m.mno and b.cno_fk = c.cno 
-        order by b.bate desc limit 3;
+        order by b.bdate desc limit 3;
         
         select b.bno , b.btitle , b.bcontent , b.bdate , b.bview , m.mid , c.cname 
         from board b , member m , category c 
