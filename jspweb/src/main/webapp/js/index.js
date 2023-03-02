@@ -6,11 +6,52 @@ function Ex1(){
 	console.log( data );
 	
 	$.ajax({
-		url : "http://localhost:8080/jspweb/Ex1" ,		// 통신할 서블릿 주소 
+		url : "/jspweb/Ex1" ,		// 통신할 서블릿 주소 
 		method : "post" , 				// HTTP 메소드 
 		data : { "data" : data } , 		// 데이터 보내기 
 		success : function(result){   	// 데이터 받기 
 			console.log( result );
+			Ex2(); // 쓰기 성공할 때마다
+		}
+	});
+}
+
+//
+Ex2(); // 페이지 열리면 데이터 호출
+function Ex2(){
+	
+	 $.ajax({ 
+         url : "/jspweb/Ex1" , 
+         method : "get" , 
+         //data : {  } , 
+         success : function( result ){
+            console.log( result );
+            document.querySelector('.ex2box').innerHTML = result;
+         }
+      });
+}
+
+function Q1(){
+	let data = document.querySelector('.inputdata2').value;
+	console.log(data);
+	$.ajax({ 
+         url : "/jspweb/Q1" , 
+         method : "post" , 
+         data : { data : data } , 
+         success : function( result2 ){
+            console.log ( result2 )
+            Q1print();
+         }
+     });
+}
+Q1print();
+function Q1print(){
+	$.ajax({
+		url: "/jspweb/Q1" ,
+		method : "get" ,
+		success : function ( result ){
+			console.log( result )
+			document.querySelector('.q1box').innerHTML = result;
 		}
 	});
 }

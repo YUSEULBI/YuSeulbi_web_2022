@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class Dao {
 	
@@ -27,7 +28,7 @@ public class Dao {
 		}catch (Exception e) { 	System.out.println("연동실패"+e); 	}
 	}
 	
-	// 2. SQL 메소드
+	// 2. SQL 메소드 // 데이터 1개
 	public boolean setData( String data ) {
 		// 1. SQL 작성
 		String sql = "insert into ex1 values(?)";
@@ -41,5 +42,51 @@ public class Dao {
 			System.err.println(e);
 		}return false;
 		
+	}
+	
+	// 데이터들 호출 [ 1개 : String / 여러개 : ArrayList<String> ]
+	public ArrayList<String> getData(){
+		ArrayList<String> list = new ArrayList();
+		String sql = "select * from ex1";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery(); 
+			// 레코드1개 if 여러개 while
+			while( rs.next() ) {
+				list.add(rs.getString(1)); // 레코드 첫번째 필드
+			}
+			
+			
+		}catch (Exception e) { 	System.out.println(e); 	}
+		return list;
+	}
+	
+	public boolean setData2( String data ) {
+		String sql = "insert q1( e_data2 ) values( ? );" ;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, data);
+			ps.executeUpdate();
+			return true;
+		}catch (Exception e) {
+			System.err.println(e);
+		}return false;
+	}
+	
+	public ArrayList<String> getData2 (){
+		ArrayList<String> list2 = new ArrayList();
+		String sql = "select * from q1;";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while ( rs.next() ) {
+				 
+				 list2.add(rs.getString(1));
+				 
+			}
+		}catch (Exception e) {
+			System.out.println(e);
+		}
+		return list2;
 	}
 }
