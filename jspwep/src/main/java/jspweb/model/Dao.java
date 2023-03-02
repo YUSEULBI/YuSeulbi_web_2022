@@ -1,4 +1,4 @@
-package jspwep.model;
+package jspweb.model;
 
 public class Dao {
 

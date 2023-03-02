@@ -16,6 +16,6 @@
 	<button type="button" onclick="예제1()">예제1 실행</button>
 
 	<!-- 사용자정의 JS 가져오기 [/프로젝트명/[webapp,main폴더생략,webapp하위부터 작성]폴더/파일명] -->
-	<script src="js/index.js" type="text/javascript"></script>
+	<script src="/jspweb/js/index.js" type="text/javascript"></script>
 </body>
 </html>

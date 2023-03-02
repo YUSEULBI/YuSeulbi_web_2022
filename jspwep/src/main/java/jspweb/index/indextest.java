@@ -1,4 +1,4 @@
-package jspwep.index;
+package jspweb.index;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
