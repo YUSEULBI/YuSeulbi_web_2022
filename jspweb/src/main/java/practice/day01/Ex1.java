@@ -1,4 +1,4 @@
-package jspweb.index;
+package practice.day01;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
-
-import jspweb.model.Dao;
 
 /**
  * Servlet implementation class Indextest

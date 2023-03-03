@@ -44,6 +44,6 @@
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	
 	<!-- 사용자정의 js -->
-	<script src="/jspweb/js/index.js" type="text/javascript"></script>
+	<script src="index.js" type="text/javascript"></script>
 </body>
 </html>
