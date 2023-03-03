@@ -22,13 +22,33 @@
 							<option>안산</option>
 							<option>수원</option>
 							<option>성남</option>
-						</select>
+						</select> <br>
 	data10[긴글]		: 	<textarea class="data10" rows="" cols=""></textarea>
  	
  	<button type="button" onclick="ex1()"> 전송 </button> 	
  	 	
 	<h3> 예1) [R] 'dao' --[메소드]---> 'servlet' --[AJAX]--> 'JS' --[document.querySelector]--> 'HTML' </h3>
 	<div class="ex1_box"></div>
+	
+	<h3>과제 [C]	</h3>
+	이름[문자열]	: 	<input type="text" class="q1"> <br>
+	전화번호[문자열]	:	<input type="text" class="q2"> <br>	
+	키[실수]		: 	<input type="text" class="q3"> <br>
+	나이[정수]		: 	<input type="number" class="q4"> <br>
+	등록일[날짜]	:	<input type="date" class="q5">  <br>
+	성별[체크박스]	:	<input type="radio" name="q6" value="남"> 남
+					<input type="radio" name="q6" value="여"> 여 <br>
+	개인정보 동의	: 	<input type="checkbox" class="q7"> 동의 <br>
+	사는지역		: 	<select class="q8"> <br>
+						<option>안산</option>
+						<option>안양</option>
+						<option>수원</option>
+					</select> <br>
+	자기소개 		:	<textarea class="q9" rows="" cols=""></textarea> <br>
+	<button type="button" onclick="q1()">전송</button>
+	
+	<h3>과제 [R]	</h3>
+	<div class="q2_box"></div>
 	
 	
 	<!-- 1. JQUERY -->

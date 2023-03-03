@@ -99,7 +99,7 @@ public class Dao {
 			ps.executeUpdate();
 			return true;
 		}catch (Exception e) {
-			System.out.println(e);
+			System.out.println("dao setdata2 : "+e);
 		}return false;
 	}
 	
@@ -127,7 +127,7 @@ public class Dao {
 						
 			}
 		}catch (Exception e) {
-			System.out.println(e);
+			System.out.println("dao getdata2 : "+e);
 		}return list;
 	}
 }
