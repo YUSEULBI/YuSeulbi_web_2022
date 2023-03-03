@@ -19,10 +19,19 @@ function ex1(){ // 함수 정의
 	}
 	console.log(info); // data7 외에 모두 문자열 -> 추후 형변환
 	
-	$.ajax({
-		url : "" ,
-		method : "" ,
-		data : {},
-		success : function(result){}
-	});
+	// 비동기 통신
+	$.ajax({ 
+         url : "/jspweb/Ex2" , 		// 주소 [ /프로젝트명/서블릿주소 --> 서블릿파일에 @WebServlet("/Ex2")] 
+         method : "post" , 		// 메소드방식 [ doGet doPost]
+         data : info  , 	// 보낼 데이터 [객체 vs {}]
+         success : function( result ){ // 받을데이터
+            alert('통신');
+            console.log(result);
+            if ( result == 'true'){
+				alert('등록성공');
+			}else{
+				alert('등록실패');
+			}
+         }
+    });
 }
