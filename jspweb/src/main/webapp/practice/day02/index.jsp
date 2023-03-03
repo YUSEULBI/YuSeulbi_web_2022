@@ -27,8 +27,8 @@
  	
  	<button type="button" onclick="ex1()"> 전송 </button> 	
  	 	
-	<h3> 예2) [R] 'dao' --[메소드]---> 'servlet' --[AJAX]--> 'JS' --[document.querySelector]--> 'HTML' </h3>
-	
+	<h3> 예1) [R] 'dao' --[메소드]---> 'servlet' --[AJAX]--> 'JS' --[document.querySelector]--> 'HTML' </h3>
+	<div class="ex1_box"></div>
 	
 	
 	<!-- 1. JQUERY -->

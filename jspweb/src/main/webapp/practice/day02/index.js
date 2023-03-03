@@ -27,11 +27,30 @@ function ex1(){ // 함수 정의
          success : function( result ){ // 받을데이터
             alert('통신');
             console.log(result);
-            if ( result == 'true'){
+            if ( result == 'true'){ //문자열 true를 받음
 				alert('등록성공');
+				getData();
+				
 			}else{
 				alert('등록실패');
 			}
          }
     });
+}// function end
+
+getData();
+function getData(){
+	
+	$.ajax({
+		url : "/jspweb/Ex2" ,
+		method : "get" ,
+		success : function(result){
+			console.log(result);
+			document.querySelector('.ex1_box').innerHTML = result;
+		}
+	});	
+		
 }
+
+
+
