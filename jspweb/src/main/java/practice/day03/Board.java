@@ -23,13 +23,23 @@ public class Board extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 요청시 한글 인코딩
 		request.setCharacterEncoding("UTF-8");
 		// 매개변수 요청 [ AJAX data 속성에서 보내준 매개변수 이름 ]
 		String content = request.getParameter("content");
 			System.out.println("content : " + content);
 		String writer =  request.getParameter("writer");
 			System.out.println("writer : " + writer);
-		
+			
+		// 객체화 [ int 필드기본값 0 , 객체필드 기본값 null ]
+		BoardDto boardDto = new BoardDto(0, content, writer, null);
+			System.out.println("dto : "+boardDto);
+		// 4.Dao 호출해서 결과 저장
+		boolean result = BoardDao.getInstace().onwrite(boardDto);
+			System.out.println("onwrite result : " + result); 
+		// 5. dao결과 true / false response
+		// 한글없어서 인코딩안하고 truefalse는 잭슨 쓸 필요는 없어서 그대로 response ( 'true' vs '{true}' )
+		response.getWriter().print(result);
 	}
 	
 	
