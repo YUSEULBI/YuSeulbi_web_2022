@@ -68,10 +68,10 @@ public class Board extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		// 1.수정할 게시물번호 요청
 		int bno = Integer.parseInt( request.getParameter("bno") );
-		System.out.println("수정할번호요청 : "+bno);
+		//System.out.println("수정할번호요청 : "+bno);
 		// 2. 수정할 게시물
 		String newContent = request.getParameter("newContent");
-		System.out.println("수정할내용요청 : " + newContent);
+		//System.out.println("수정할내용요청 : " + newContent);
 		//dao호출 결과얻기
 		boolean result = BoardDao.getInstace().onupdate(newContent, bno);
 		// 결과응답하기
