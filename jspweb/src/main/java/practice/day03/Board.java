@@ -65,12 +65,45 @@ public class Board extends HttpServlet {
 
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		// 1.수정할 게시물번호 요청
+		int bno = Integer.parseInt( request.getParameter("bno") );
+		System.out.println("수정할번호요청 : "+bno);
+		// 2. 수정할 게시물
+		String newContent = request.getParameter("newContent");
+		System.out.println("수정할내용요청 : " + newContent);
+		//dao호출 결과얻기
+		boolean result = BoardDao.getInstace().onupdate(newContent, bno);
+		// 결과응답하기
+		response.getWriter().print(result);
+		
 	}
 
 	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 삭제할 게시물 번호
+		int bno = Integer.parseInt(request.getParameter("bno")); 
+		System.out.println("삭제할 번호 : "+bno);
+		
+		boolean result = BoardDao.getInstace().ondelete(bno);
+		response.getWriter().print(result);
 	}
 
 }
+
+
+
+
+/*
+
+
+	JSP 서블릿 에서 HTTP메소드 put , delete 사용시 필수 설정 ( get , post 는 안해도됨 ,스프링 안해도됨 )
+		* put,delete 기본값이 매개변수 요청 차단되어있음.
+	1. Servers 폴더 오른쪽 클릭
+	2. server.xml 더블클릭
+	3. 하단에 Design 말고 Source 탭 클릭
+	4. 65번째 쯤 줄에 수정
+	<Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443" parseBodyMethods="POST,PUT,DELETE" URIEncoding="UTF-8" />
+	
+
+*/

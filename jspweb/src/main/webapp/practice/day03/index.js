@@ -81,7 +81,12 @@ function onread(){
 			r.forEach( (o,i) => {
 				html += `
 						<tr>
-							<td>${o.bno}</td> <td>${o.bcontent}</td> <td>${o.bwriter}</td> <td>${o.bdate}</td> <td> 수정/삭제 </td> 
+							<td>${o.bno}</td> <td>${o.bcontent}</td> <td>${o.bwriter}</td> 
+							<td>${o.bdate}</td> 
+							<td> 
+								<button onclick="onupdate(${o.bno})" type="button"> 수정 </button>
+								<button onclick="ondelete(${o.bno})" type="button"> 삭제 </button>
+							</td> 
 						</tr>
 						`
 			})
@@ -91,5 +96,41 @@ function onread(){
 	});
 }
 
+function ondelete( bno ){
+	console.log('ondelete 실행')
+	console.log(bno);
+	$.ajax({
+		url : "/jspweb/Ex3/Board" ,
+		method : "delete" ,
+		data : { "bno" : bno } ,
+		success : ( r )=>{
+			console.log('ondelete응답성공')
+			console.log(r)
+			if ( r == 'true' ){ alert('삭제성공');
+				onread();
+			}else{alert('삭제실패');}
+		}
+	});
+}
 
+
+function onupdate( bno ){
+	console.log('onupdate 실행');
+	console.log(bno);
+	let newContent = prompt('수정할 내용');
+	console.log ( newContent);
+	$.ajax({
+		url : "/jspweb/Ex3/Board" ,
+		method : "put" ,
+		data : {"bno":bno , "newContent":newContent} ,
+		success : ( r ) => {
+			console.log('put응답성공')
+			console.log(r)
+			console.log(r)
+			if ( r == 'true' ){ alert('수정성공');
+				onread();
+			}else{alert('수정실패');}
+		}
+	});
+}
 
