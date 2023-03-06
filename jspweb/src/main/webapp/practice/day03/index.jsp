@@ -19,6 +19,7 @@
 	작성자 : <input type="text" class="writer">	<br>
 	<button onclick="onwrite()" type="button"> 방문록 등록 </button>
 	
+	<div class="result_box">비고</div>
 	
 	<!-- 1. JQUERY -->
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>

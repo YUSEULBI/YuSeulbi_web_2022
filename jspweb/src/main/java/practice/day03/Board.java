@@ -1,11 +1,15 @@
 package practice.day03;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Servlet implementation class Board
@@ -44,6 +48,18 @@ public class Board extends HttpServlet {
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<BoardDto> list = BoardDao.getInstace().onRead();
+		System.out.println( "dao List : " + list); // dao 반환값 확인
+		
+		// json 문자형식으로 변환
+		ObjectMapper objectMapper = new ObjectMapper(); // 1. Jackson 라이브러리에서 제공하는 클래스
+		
+		String jsonList = objectMapper.writeValueAsString(list); // 2. dao로 부터 받은 list객체를 변환
+		System.out.println(jsonList); // 형변환 확인
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		response.getWriter().print(jsonList);
 		
 	}
 
