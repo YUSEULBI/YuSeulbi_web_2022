@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import model.dao.MemberDao;
 import model.dto.MemberDto;
@@ -26,6 +28,74 @@ public class Info extends HttpServlet {
      */
     public Info() {       super();    }
 
+    
+    
+ // 회원가입
+ 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+ 		// 첨부파일 있을 때
+ 		// - request는 첨부파일에 대한 요청이 불가능 ---> 외부 라이브러리
+ 		// 프로젝트 build path 에 cos.jar 추가
+ 		// 프로젝트 WEB-INF  -> lib -> cos.jar 추가
+ 		
+ 		// MultipartRequest 클래스 제공
+ 			// 1. 요청방식 = HTTP request
+ 			// 2. 저장폴더 : 1. 프로젝트[git폴더] 2. 서버[워크스페이스 경로] // 수업은 서버에 올림
+ 					// 서버폴더 경로 찾기 :request.getSession().getServletContext().getRealPath("(webapp생략)/폴더명");
+ 			// 3. 첨부파일 허용 범위 용량 [ 바이트단위 ]
+ 			// 4. 첨부파일 요청 한글 인코딩
+ 			// 5. 첨부파일 파일명 중복일경우 뒤에 자동 붙임
+ 			
+ 		
+ 		// 1bit : 0 , 1
+ 		// 1byte : 0101010101
+ 		// 8bit -> 1byte
+ 		// 1kbte 1024byte -> 1kb
+ 		// 1mbyte 1024byte -> 1mb
+ 		// 1gbyte 1024byte -> 1gb
+ 		//1024*1024  10 -: 10mb
+ 		
+ 		// 현재 작업중인 프로젝트 경로 [ git ]
+ 		// String path = "C:\\Users\\504\\git\\YuSeulbi_web_2022\\jspweb\\src\\main\\webapp\\member\\pimg";
+ 		
+ 		// 현재 서버의 배포된 프로젝트내 폴더 경로 찾기
+ 		String uploadpath = request.getSession().getServletContext().getRealPath("/member/pimg");
+ 		System.out.println(uploadpath);
+ 		
+ 		MultipartRequest multi = new MultipartRequest(
+ 					request, 		// 1. 요청방식
+ 					uploadpath,		// 2. 첨부파일 가져와서 저장할 서버내 폴더
+ 					1024*1024 *10 ,	// 3. 첨부파일 허용 범위 용량 [ 바이트단위 ]
+ 					"UTF-8" ,		// 4. 첨부파일 한글 인코딩
+ 					new DefaultFileRenamePolicy() // 5. 동일한 첨부파일명이 있으면 뒤에 숫자 붙여서 식별
+ 				);
+ 		
+ 		//
+ 		String mid = multi.getParameter("mid");
+ 		System.out.println(mid);
+ 		
+ 		
+ 		
+ 		// 첨부파일 없을 때 =----------------------------------//
+ 		/*
+ 		request.setCharacterEncoding("UTF-8");
+ 		String mid = request.getParameter("mid");
+ 		String mpwd = request.getParameter("mpwd");
+ 		String memail = request.getParameter("memail");
+ 		String mimg = request.getParameter("mimg");
+ 		
+ 		// 2. DTO만들기
+ 		MemberDto dto = new MemberDto(0, mid, mpwd, mimg, memail);
+ 			System.out.println("dto : "+dto);
+ 			
+ 		// 3. dao 호출 응답결과받기
+ 		boolean result = MemberDao.getInstance().signup(dto);
+ 		
+ 		// 4. 결과응답
+ 		response.getWriter().print(result);;
+ 		*/
+ 	}
+    
+    
 	// 로그인 / 회원정보 호출
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -42,24 +112,7 @@ public class Info extends HttpServlet {
 		
 	}
 
-	// 회원가입
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String mid = request.getParameter("mid");
-		String mpwd = request.getParameter("mpwd");
-		String memail = request.getParameter("memail");
-		String mimg = request.getParameter("mimg");
-		
-		// 2. DTO만들기
-		MemberDto dto = new MemberDto(0, mid, mpwd, mimg, memail);
-			System.out.println("dto : "+dto);
-			
-		// 3. dao 호출 응답결과받기
-		boolean result = MemberDao.getInstance().signup(dto);
-		
-		// 4. 결과응답
-		response.getWriter().print(result);;
-	}
+	
 
 	// 회원정보수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
