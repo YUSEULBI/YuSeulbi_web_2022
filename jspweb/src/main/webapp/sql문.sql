@@ -1,5 +1,5 @@
 drop database if exists jspweb;
-create database jspweb;
+create databasemembermembermembermember jspweb;
 use jspweb;
 
 -- 회원테이블
@@ -12,6 +12,9 @@ create table member(
     memail		varchar(100) -- 공백불가 , 중복불가
     
 );
+-- insert into member( mid , mpwd , mimg , memail ) values ( ? , ? , ? , ? );
+select * from member;
+select * from member where mid = '테스트';
 
 -- 친추 테이블
 drop table if exists friend;
@@ -33,3 +36,4 @@ create table mpoint(
     mno			int ,								-- 포인트 주인
     foreign key ( mno ) references member ( mno ) on delete set null  -- 탈퇴하면 포인트 null
 );
+

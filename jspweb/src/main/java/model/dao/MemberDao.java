@@ -42,4 +42,24 @@ public class MemberDao extends Dao {
 			System.out.println("모든회원호출 : " + e);
 		}return list;
 	}
+	
+	// 3. 아이디 중복체크
+	public boolean idCheck( String mid ) {	//문자열 ' ' vs 정수/실수 안혀
+		// String sql = "select * from member where mid = '"+mid+"'";
+		String sql = "select * from member where mid = ? ";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mid);
+			rs = ps.executeQuery();
+			// 만약에 검색 결과 레코드가 존재하면 중복 아이디
+			if ( rs.next() ) { return true;	}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}return false; // 없으면 중복 아이디 아님
+	}
 }
+
+
+
+

@@ -61,6 +61,7 @@ public class Info extends HttpServlet {
  		String uploadpath = request.getSession().getServletContext().getRealPath("/member/pimg");
  		System.out.println(uploadpath);
  		
+ 		// * 업로드 [ 파일이동 : 유저파일 -> 서버폴더내 이동 ]
  		MultipartRequest multi = new MultipartRequest(
  					request, 		// 1. 요청방식
  					uploadpath,		// 2. 첨부파일 가져와서 저장할 서버내 폴더
@@ -69,11 +70,17 @@ public class Info extends HttpServlet {
  					new DefaultFileRenamePolicy() // 5. 동일한 첨부파일명이 있으면 뒤에 숫자 붙여서 식별
  				);
  		
- 		//
- 		String mid = multi.getParameter("mid");
- 		System.out.println(mid);
+ 		// 그외 매개변수 요청 [ request --> multi / ****form 하위태그 내 input태그의 name 식별자를 써주기**** ]
+ 		String mid = multi.getParameter("mid"); // 호출할 input의 name
+ 		String mpwd = multi.getParameter("mpwd");
+ 		String memail = multi.getParameter("memail");
+ 		String mimg = multi.getFilesystemName("mimg");	// 첨부파일된 파일명 호출 [ .getFilesystemName ]
  		
+ 		MemberDto dto = new MemberDto(0, mid, mpwd, mimg, memail);
+ 			System.out.println("dto : " + dto);
  		
+ 		boolean result = MemberDao.getInstance().signup(dto);
+ 		response.getWriter().print(result);
  		
  		// 첨부파일 없을 때 =----------------------------------//
  		/*
