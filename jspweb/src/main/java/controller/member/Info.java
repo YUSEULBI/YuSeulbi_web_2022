@@ -1,11 +1,15 @@
 package controller.member;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.dao.MemberDao;
 import model.dto.MemberDto;
@@ -24,6 +28,17 @@ public class Info extends HttpServlet {
 
 	// 로그인 / 회원정보 호출
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 모든 회원 명단 호출
+		ArrayList<MemberDto> list = MemberDao.getInstance().getMemberList();
+		System.out.println(list);
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonList =  mapper.writeValueAsString(list);
+		System.out.println(jsonList);
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		response.getWriter().print(jsonList);
 		
 	}
 
