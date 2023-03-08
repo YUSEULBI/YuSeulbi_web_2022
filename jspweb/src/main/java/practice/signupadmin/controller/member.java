@@ -1,15 +1,19 @@
 package practice.signupadmin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import practice.signupadmin.dao.MemberDao;
 import practice.signupadmin.dto.MemberDto;
 
 /**
@@ -27,7 +31,14 @@ public class member extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<MemberDto> list = MemberDao.getInstance().getMemberList();
 		
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonList = mapper.writeValueAsString(list);
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		response.getWriter().print(jsonList);
 	}
 
 
@@ -47,9 +58,13 @@ public class member extends HttpServlet {
 		String mid = multi.getParameter("mid");
 		String mpwd = multi.getParameter("mpwd");
 		String memail = multi.getParameter("memail");
-		String mimg = multi.getParameter("mimg");
+		String mimg = multi.getFilesystemName("mimg");
 		
 		MemberDto dto = new MemberDto(0, mid, mpwd, mimg, memail);
+		System.out.println(dto);
+		
+		boolean result = MemberDao.getInstance().signup(dto);
+		response.getWriter().print(result);
 		
 	}
 

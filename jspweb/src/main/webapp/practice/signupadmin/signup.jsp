@@ -10,7 +10,9 @@
 	
 	<h3> 회원가입 연습 </h3>
 	<form class="pSignupForm">
-		아이디 : 		<input type="text" name="mid" class="mid">	<br>
+		아이디 : 		<input onkeyup="idCheck()" type="text" name="mid" class="mid">
+		<span class="idcheckconfirm"></span>	
+		<br>
 		비밀번호 : 		<input type="text" name="mpwd" class="mpwd">	<br>
 		비밀번호확인 : 	<input type="text" name="mpwdconfirm" class="mpwdconfirm">	<br>
 		이메일 : 		<input type="text" name="memail" class="memail">	<br>
