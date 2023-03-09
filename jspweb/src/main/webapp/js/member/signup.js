@@ -60,6 +60,7 @@ function premimg( object ){ // 매개변수 : 해당 함수를 실행시킨 주�
 	let file = new FileReader();	// 파일 읽기 클래스
 	// 2. 해당 첨부된 파일을 읽어오기 ( file.readAsDAta URL(첨부파일))
 	file.readAsDataURL( object.files[0] )	// 해당 파일 읽어오기
+	
 	// 3. 읽어온 파일 꺼내기 바이트
 	file.onload = (e)=>{
 		document.querySelector('.premimg').src = e.target.result;

@@ -103,7 +103,7 @@ public class Info extends HttpServlet {
  	}
     
     
-	// 로그인 / 회원정보 호출
+	// 회원정보 호출
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 모든 회원 명단 호출
