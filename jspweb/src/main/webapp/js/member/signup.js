@@ -1,4 +1,4 @@
-
+console.log('js열림')
 
 /*
 	
@@ -8,14 +8,26 @@
 			$/		: 정규표현식 끝
 			[a-z]	: 소문자 a-z 패턴
 			[A-Z]	: A-Z 패턴
-			[0-9]	: 숫자 0~9 패턴
+			[0-9]	: 숫자 0~9 패턴		<--------> \d
 			[가-힣]	: 한글패턴
 			{ 최소길이 , 최대길이 } : 문자열 길이 패턴
+			{ 최소길이 } : 문자열 길이 패턴
+			+ : 앞에 있는 패턴 1개 이상 반복
+			? : 앞에 있는 패턴 0개 혹은 1개 이상 반복
+			* : 앞에 있는 패턴 0개 반복
 			
+			----
 			[a-zA-Z] : 영문만 입력
 			[a-zA-Z0-9] :영문+숫자 입력
 			[a-zA-Z0-9가-힣] :영문+숫자+한글 입력
-			
+		-------
+			1개 이상 문자가 포함되어야 하는 경우
+				(?=.*[패턴문자]) : 해당 패턴문자 한개 이상 입력 
+			(?=.*[a-z]) : 소문자 한 개 이상
+			(?=.*[A-Z]) : 대문자 한 개 이상
+			(?=.*[0-9]) : 숫자 한개 이상
+			(?=.*[!@#%^&*]) : 해당하는 특수문자 1개 이상
+		
 		-- 패턴 검사 함수
 			정규표현식.test( 데이터 )	: 패턴이 적합하면 true / 아니면 false
 			
@@ -24,6 +36,13 @@
 			/^[a-z]$/.test( QWE ) --> false
 			 
  */
+// 컨펌박스 span 모두 가져오기 -->  여러개의 span 배열/리스트 객체에 대입 [ 인덱스 0 ~3 ]
+// checkconfirm[0]
+// checkconfirm[1]
+// checkconfirm[2]
+// checkconfirm[3]
+
+let checkconfirm = document.querySelectorAll('.checkconfirm')
 
 // 2. 아이디 유효성검사 [ 1.문자체크 2.중복검사 ]
 function idcheck(){ // onkeyup : 키 누르고 떼기
@@ -47,20 +66,58 @@ function idcheck(){ // onkeyup : 키 누르고 떼기
 				console.log('ajax통신');
 				console.log(r)	// 응답 true 없으면false
 				if ( r == 'true'){
-					document.querySelector('.idcheckconfirm').innerHTML ='사용중인 아이디';
+					checkconfirm[0].innerHTML ='사용중인 아이디';
 				}else{
-					document.querySelector('.idcheckconfirm').innerHTML ='사용가능한 아이디';
-				}
-				
-			}
-		})
-		
+					checkconfirm[0].innerHTML ='O';
+				}// if문 end
+			}// success end
+		})// ajax end
 		
 	}else{
-		document.querySelector('.idcheckconfirm').innerHTML ='영소문자+숫자 조합 5~30사이로 입력해주세요';
+		checkconfirm[0].innerHTML ='영소문자+숫자 조합 5~30사이로 입력해주세요';
+	}
+}//
+
+// 3. 비밀번호 유효성검사
+function pwdcheck(){
+	console.log('pwdcheck')
+	// 1. 입력받은 값 가져오기
+	let mpwd = document.querySelector('.mpwd').value;
+	console.log(mpwd);
+	// 2. 정규표현식
+	let mpwdj = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z\d]{5,20}$/		
+		console.log(mpwdj.test(mpwd))
+	// 3. 제어
+	if ( mpwdj.test(mpwd) ){
+		checkconfirm[1].innerHTML = 'O'; 
+		pwdconfirmcheck();
+	}else{
+		checkconfirm[1].innerHTML = '영대소문자+숫자 조합 5~20사이로 입력해주세요'
 	}
 }
 
+// 4. 비밀번호 확인 유효성검사
+function pwdconfirmcheck(){
+	console.log('pwdconfirmcheck')
+	let mpwd = document.querySelector('.mpwd').value;
+	let mpwdconfirm = document.querySelector('.mpwdconfirm').value;
+	console.log(mpwdconfirm);
+	let mpwdj = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z\d]{5,20}$/
+	
+	// 3. 제어
+	// 정규표현식 통과하면
+	if ( mpwdj.test(mpwdconfirm)){
+		// 두 비밀번호 동일한지 체크
+		if ( mpwd != mpwdconfirm ){ // 두비밀번호 다르면
+			checkconfirm[1].innerHTML = '두 비밀번호가 일치하지 않습니다.'
+		}else{ // 두비밀번호 같으면
+			checkconfirm[1].innerHTML = 'O'
+		}	
+	}else{ // 정규표현식 틀리면
+		checkconfirm[1].innerHTML = '영대소문자+숫자 조합 5~20사이로 입력해주세요'
+	}
+	
+}
 
 // 1.회원가입
 function signup(){
