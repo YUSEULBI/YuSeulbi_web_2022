@@ -16,9 +16,13 @@
 		비밀번호 :		<input onkeyup="pwdcheck()" maxlength="20" type="password" name="mpwd" class="mpwd"> <br>
 		비밀번호 확인 :	<input onkeyup="pwdconfirmcheck()" maxlength="20" type="password" name="mpwdconfirm" class="mpwdconfirm">
 		<span class="checkconfirm"></span> <br>		
-		이메일 :		<input type="text" name="memail" 		class="memail">	
+		이메일 :		<input onkeyup="emailCheck()" type="text" name="memail" 		class="memail">	
 		<span class="checkconfirm"></span> <br>
-		프로필 :		<input type="file" name="mimg" 			class="mimg">			<br>
+		프로필 :		<input onchange="premimg(this)" type="file" name="mimg" 			class="mimg">
+			미리보기 <!-- onchange 첨부파일 바뀌었을때 / this input 값이 들어감 -->
+			<img class="premimg" alt="" src="/jspweb/member/pimg/default.webp">			
+		<br>
+		
 		<button type="button" onclick="signup()"> 가입 </button>
 	</form>
 	

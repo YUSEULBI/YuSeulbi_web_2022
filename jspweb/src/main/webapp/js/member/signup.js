@@ -15,6 +15,8 @@ console.log('js열림')
 			+ : 앞에 있는 패턴 1개 이상 반복
 			? : 앞에 있는 패턴 0개 혹은 1개 이상 반복
 			* : 앞에 있는 패턴 0개 반복
+			\ : 이스케이프 문자
+			
 			
 			----
 			[a-zA-Z] : 영문만 입력
@@ -23,10 +25,15 @@ console.log('js열림')
 		-------
 			1개 이상 문자가 포함되어야 하는 경우
 				(?=.*[패턴문자]) : 해당 패턴문자 한개 이상 입력 
-			(?=.*[a-z]) : 소문자 한 개 이상
-			(?=.*[A-Z]) : 대문자 한 개 이상
-			(?=.*[0-9]) : 숫자 한개 이상
+			(?=.*[a-z]) : 소문자 한 개(이상) 필수
+			(?=.*[A-Z]) : 대문자 한 개(이상) 필수
+			(?=.*[0-9]) : 숫자 한개(이상) 필수
 			(?=.*[!@#%^&*]) : 해당하는 특수문자 1개 이상
+			
+			(?=.*[!@#%^&*])[!@#%^&*] : 특수문자
+			필수입력 설정해놓은것은 소괄호 바깥 []안에도 써야함.
+			
+			
 		
 		-- 패턴 검사 함수
 			정규표현식.test( 데이터 )	: 패턴이 적합하면 true / 아니면 false
@@ -42,19 +49,45 @@ console.log('js열림')
 // checkconfirm[2]
 // checkconfirm[3]
 
+// 첨부파일 이미지 미리보기
+// 정책상 사용자[클라이언트JS]에 운영체제 접근 불가.
+// document.addEventListener('change' , (e)=>{ });
+function premimg( object ){ // 매개변수 : 해당 함수를 실행시킨 주체 
+	//console.log('첨부파일 바뀜'+object);
+	//console.log(object.files[0]); // 현재 이벤트를 실행한 input의 등록한 파일명
+	//console.log(document.querySelector('.mimg').files[0]) // 해당클래스 input의 등록한 파일호출
+	// 1. JS 파일클래스 선언
+	let file = new FileReader();	// 파일 읽기 클래스
+	// 2. 해당 첨부된 파일을 읽어오기 ( file.readAsDAta URL(첨부파일))
+	file.readAsDataURL( object.files[0] )	// 해당 파일 읽어오기
+	// 3. 읽어온 파일 꺼내기 바이트
+	file.onload = (e)=>{
+		document.querySelector('.premimg').src = e.target.result;
+	}
+		//console.log( e.target.result )
+		// e.target -> file.onload : 읽어온 파일
+		// e.target.result 			: 읽어온 파일의 바이트 결과
+		// 4. 이미지 태그의 src이미지 바이트 대입
+		
+	
+	// 4.
+	
+}
+
+
 let checkconfirm = document.querySelectorAll('.checkconfirm')
 
 // 2. 아이디 유효성검사 [ 1.문자체크 2.중복검사 ]
 function idcheck(){ // onkeyup : 키 누르고 떼기
-	console.log('입력중');
+	// console.log('입력중');
 	// 1. 입력할 때 입력값 가져오기
 	let mid = document.querySelector('.mid').value;
-	console.log( mid );
+	// console.log( mid );
 	// 2. 정규표현식 
 	// [ 영문(소문자)+숫자 5~30 글자 ]
 	let midj = /^[a-z0-9]{5,30}$/
 	// 3. 정규표현식 검사
-	console.log ( midj.test( mid ) )
+	// console.log ( midj.test( mid ) )
 	if ( midj.test(mid) ){
 		
 		// 아이디 중복검사 [ js -> 서블릿 -> dao 에게 해당 아이디 검색 select ]
@@ -63,8 +96,8 @@ function idcheck(){ // onkeyup : 키 누르고 떼기
 			method : "get" ,
 			data : {"mid" : mid} , // 입력받은 아이디 보내기
 			success : (r)=>{
-				console.log('ajax통신');
-				console.log(r)	// 응답 true 없으면false
+				// console.log('ajax통신');
+				// console.log(r)	// 응답 true 없으면false
 				if ( r == 'true'){
 					checkconfirm[0].innerHTML ='사용중인 아이디';
 				}else{
@@ -117,10 +150,42 @@ function pwdconfirmcheck(){
 		checkconfirm[1].innerHTML = '영대소문자+숫자 조합 5~20사이로 입력해주세요'
 	}
 	
-}
+}//
+
+// 이메일 유효성검사
+function emailCheck(){
+	console.log('emailcheck()')
+	let memail = document.querySelector('.memail').value;
+	console.log('memail : ' + memail)
+	let memailj = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/
+	console.log ( memailj.test(memail));
+	if ( memailj.test(memail) ){
+		checkconfirm[2].innerHTML = 'O'
+	}else{
+		checkconfirm[2].innerHTML = '이메일 형식으로 입력해주세요'
+	}
+			// 아이디 구역
+			// [a-zA-Z0-9_-] 		: 영문+숫자+ _ + -
+			// +@ 					: 아이디와 도메인 사이의 @ 
+			// 도메인구역
+			// [a-zA-Z0-9-]			: 영문+숫자+ -			naver
+			// +\.					: 도메인 중간에 .		.
+			// [a-zA-Z0-9-]			: 영문+숫자+ -			com
+			// +					: . 한개이상 			naver.co.kr
+}// email check		
+
 
 // 1.회원가입
 function signup(){
+	// * 유효성검사
+	let count = 0;
+	for( let i = 0 ; i < checkconfirm.length ; i++ ){
+		if (checkconfirm[i].innerHTML == 'O'){
+			count++
+		}
+	}
+	if ( checkconfirm.length != count  ){ alert('정상적으로 입력되지 않은 데이터가 있습니다.'); return;	}
+	 
 	console.log('signup 함수 열림')
 	
 	// 1. 첨부파일 있을 때 html file input 직접적으로 조작 불가능
