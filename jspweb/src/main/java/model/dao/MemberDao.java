@@ -71,6 +71,23 @@ public class MemberDao extends Dao {
 			System.out.println(e);
 		}return false; // 없으면 false
 	}
+	
+	// 회원정보 반환
+	public MemberDto getMember( String mid ) {
+		String sql = "select * from member where mid = ?;";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mid);
+			rs = ps.executeQuery();
+			if ( rs.next() ) {
+				MemberDto dto = new MemberDto( // 비밀번호 빼고
+						rs.getInt(1), rs.getString(2), 
+						null, rs.getString(4), rs.getString(5));
+				return dto; // 레코드1개
+			}
+		} catch (Exception e) { 	System.out.println(e); 		}
+		return null; // 없다
+	}
 }
 
 

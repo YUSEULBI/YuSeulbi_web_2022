@@ -47,7 +47,7 @@ console.log('js열림')
 // checkconfirm[0]
 // checkconfirm[1]
 // checkconfirm[2]
-// checkconfirm[3]
+
 
 // 첨부파일 이미지 미리보기
 // 정책상 사용자[클라이언트JS]에 운영체제 접근 불가.
@@ -59,10 +59,18 @@ function premimg( object ){ // 매개변수 : 해당 함수를 실행시킨 주�
 	// 1. JS 파일클래스 선언
 	let file = new FileReader();	// 파일 읽기 클래스
 	// 2. 해당 첨부된 파일을 읽어오기 ( file.readAsDAta URL(첨부파일))
-	file.readAsDataURL( object.files[0] )	// 해당 파일 읽어오기
+	//console.log(object)
+	//console.log( object.files[0])
+	
+	//FileList객체의 0번째 객체 , 아마 여러개 파일 등록시를 대비해서 FileList객체 안에 파일객체를 담는듯. 그래서 인덱스를 선택해야함.
+	// let file1 = object.files[0];
+	// file.readAsDataURL(file1);
+	// FileList객체의 첫번째 파일을 가져와서 readAsDataURL함수를 실행해서 파일 읽기
+	file.readAsDataURL( object.files[0] )	// 해당 파일 읽어오기 // 읽기동작
 	
 	// 3. 읽어온 파일 꺼내기 바이트
-	file.onload = (e)=>{
+	file.onload = (e)=>{ // 읽기동작이 성공하면 발생하는 이벤트
+		console.log( e.target.result)
 		document.querySelector('.premimg').src = e.target.result;
 	}
 		//console.log( e.target.result )
