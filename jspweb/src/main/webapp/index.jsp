@@ -9,9 +9,6 @@
 <body>
 	<%@ include file="/header.jsp" %> <!-- (프로젝트명 생략,webapp이하생략)절대경로 -->
 	<h3> 대문 입니다. </h3>
-
-	
-	
 	<%@include file="/footer.jsp" %>
 	
 	

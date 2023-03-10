@@ -27,7 +27,7 @@ function getLogin(){
 				html += `${r.mid}님 안녕하세요.`
 				html += `<a href="/jspweb/member/logout.jsp">로그아웃</a>`
 			}
-			document.querySelector('.header').innerHTML = html;
+			document.querySelector('.submenu').innerHTML = html;
 		}
 	})
 	
