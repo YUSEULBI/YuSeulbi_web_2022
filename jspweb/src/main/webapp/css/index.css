@@ -1,13 +1,91 @@
 @charset "UTF-8";
 
+*{	/* 전체 기본 css */
+	margin : 0px;
+	padding : 0px;
+	list-style-type: none;
+}
+a{ color:black; text-decoration: none;}
+
+@font-face {
+    font-family: 'establishRetrosansOTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRetrosansOTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
 /*---------- 헤더 css ---------------*/
 
 /* 1.헤더 로그인 프로필 */
+.header{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px 0px;
+}
+
+.mainlogo{ 	width : 10%; 	}
+.mainlogo img{ width : 100%;} /*로고이미지*/
+.mainmenu{ /*메인메뉴*/	
+	width: 70%; 
+	display: flex;
+	justify-content: center;
+	margin: 0px !important; /* 부트스트랩 여백 제거 */
+	font-family: 'establishRetrosansOTF';
+	font-size: 20px;
+} 
+
+.mainmenu li{ 	margin : 0px 10px; }
+
+.submenu{ /*서브메뉴*/ 
+	width:20%; 
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	
+	}	
+.submenu a{ margin-left: 15px; font-size : 13px;}
+
+/* 헤더 프로필 드롭다운 버튼 */
+.hpimgbtn{
+	border: none !important;
+	background-color: transparent;
+}
+
 .hpimg{
 	width: 50px;
 	height: 50px;
 	border : solid 1px #e8e8e8;
 	border-radius: 50%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

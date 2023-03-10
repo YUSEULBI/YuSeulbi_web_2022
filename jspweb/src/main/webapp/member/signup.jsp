@@ -5,26 +5,56 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/jspweb/css/signup.css" rel="stylesheet">
 </head>
 <body>
 <%-- 	<%@ include file="../header.jsp" %>  --%>
 	<%@ include file="/header.jsp" %> <!-- (프로젝트명 생략,webapp이하생략)절대경로 -->
-	<h3> 회원가입 </h3>
-	<form class="signupForm"> <!-- 폼 전송시 자식 input 매개변수 식별 : name -->
-		아이디 : 		<input onkeyup="idcheck()" maxlength="30" type="text" name="mid" class="mid">
-		<span class="checkconfirm"></span> <br>
-		비밀번호 :		<input onkeyup="pwdcheck()" maxlength="20" type="password" name="mpwd" class="mpwd"> <br>
-		비밀번호 확인 :	<input onkeyup="pwdconfirmcheck()" maxlength="20" type="password" name="mpwdconfirm" class="mpwdconfirm">
-		<span class="checkconfirm"></span> <br>		
-		이메일 :		<input onkeyup="emailCheck()" type="text" name="memail" 		class="memail">	
-		<span class="checkconfirm"></span> <br>
-		프로필 :		<input onchange="premimg(this)" type="file" name="mimg" 			class="mimg">
-			미리보기 <!-- onchange 첨부파일 바뀌었을때 / this input 값이 들어감 -->
-			<img class="premimg" alt="" src="/jspweb/member/pimg/default.webp">			
-		<br>
+	
+	<div class="container">
 		
-		<button type="button" onclick="signup()"> 가입 </button>
-	</form>
+		<form class="signupForm"> <!-- 폼 전송시 자식 input 매개변수 식별 : name -->
+			<h3> Ezen Community </h3>
+			<p> 환영합니다. 다양한 커뮤니티 플랫폼 제공합니다. </p>
+			
+			<div class="title">아이디</div> 		
+			<input onkeyup="idcheck()" maxlength="30" type="text" name="mid" class="mid">
+			<div class="checkconfirm"></div>
+			
+			<div class="title">비밀번호</div>		
+			<input onkeyup="pwdcheck()" maxlength="20" type="password" name="mpwd" class="mpwd">
+			
+			<div class="title">비밀번호 확인</div>	
+			<input onkeyup="pwdconfirmcheck()" maxlength="20" type="password" name="mpwdconfirm" class="mpwdconfirm">
+			<div class="checkconfirm"></div>
+			
+					
+			<div class="title">이메일</div>
+			<div class="emailbox">
+				<input onkeyup="emailCheck()" type="text" name="memail" 		class="memail">
+				<button  type="button">인증</button>		
+			</div>
+			
+			<!-- 인증코드 입력 구역 -->
+			<div class="authbox">
+				<div class="timebox"> 03:00 </div>
+				<input type="text" class="authinput" placeholder="인증코드">
+				<button type="button">확인</button>
+			</div>	
+			
+			<div class="checkconfirm"></div>
+			
+			<div class="title">프로필</div>	
+			<div class="pimgbox">	
+				<input onchange="premimg(this)" type="file" name="mimg" 			class="mimg">
+				<img class="premimg" alt="" src="/jspweb/member/pimg/default.webp">
+			</div>			
+			
+			
+			<button class="signupbtn" type="button" onclick="signup()"> 가입 </button>
+		</form>
+	</div>
+	
 	
 	
 

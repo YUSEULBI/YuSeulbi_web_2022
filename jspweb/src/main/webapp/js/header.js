@@ -19,13 +19,26 @@ function getLogin(){
 				html += `<a href="/jspweb/member/login.jsp">로그인</a>`
 				
 			}else{ // 일반회원,관리자 로그인
-				
+				html +=`
+						<div class="dropdown"> <!-- class="btn btn-secondary dropdown-toggle" aria-expanded="false" -->
+						  <button class="hpimgbtn" type="button" data-bs-toggle="dropdown" >
+						    <img class="hpimg" src="/jspweb/member/pimg/${r.mimg == null ? 'default.webp' : r.mimg}">
+						  </button>
+						  <ul class="dropdown-menu"> <!-- 드롭다운시 표시되는 구역 -->
+						    <li><a class="dropdown-item" href="#"> 내프로필 </a></li>
+						    <li><a class="dropdown-item" href="#"> 친구목록 </a></li>
+						    <li><a class="dropdown-item" href="/jspweb/member/logout.jsp"> 로그아웃 </a></li>
+						  </ul>
+						</div> <!-- 드롭다운 끝 -->
+						
+						${r.mid}님
+						<a href="#">쪽지함</a>
+						<a href="#">포인트</a>
+						`
 				if ( r.mid == 'admin'){
-					html += `<a href="/jspweb/admin/info.jsp">관리자페이지</a>`
+					html += `<a href="/jspweb/admin/info.jsp">관리자</a>`
 				}
-				html +=	`<img class="hpimg" src="/jspweb/member/pimg/${r.mimg == null ? 'default.webp' : r.mimg}">`
-				html += `${r.mid}님 안녕하세요.`
-				html += `<a href="/jspweb/member/logout.jsp">로그아웃</a>`
+				
 			}
 			document.querySelector('.submenu').innerHTML = html;
 		}
