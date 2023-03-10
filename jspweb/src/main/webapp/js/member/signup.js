@@ -189,17 +189,34 @@ function emailCheck(){
 function getauth(){
 	console.log('getauth()함수 실행')
 	
-	// * ajax JAVA에게 이메일 전송 후 인증코드 받기;
-	$.ajax({
-		url : "/jspweb/email" ,
-		method : "post" ,
-		data : {"memail" : document.querySelector('.memail').value } ,
-		success : (r) =>{
-			console.log('ajax 응답');
-			console.log(r);
-		}
-	}) // ajax end
+	// 메일 전송 테스트 할 경우 -------
 	
+	// * ajax JAVA에게 이메일 전송 후 인증코드 받기;
+//	$.ajax({
+//		url : "/jspweb/email" ,
+//		method : "post" ,
+//		data : {"memail" : document.querySelector('.memail').value } ,
+//		success : (r) =>{
+//			console.log('ajax 응답');
+//			console.log(r);
+//			
+//			let html = `
+//				<div class="timebox">02 : 00</div>
+//				<input type="text" class="authinput" placeholder="인증코드">
+//				<button onclick="authconfirm()" type="button">확인</button>
+//				`
+//				// 2. html 대입
+//				document.querySelector('.authbox').innerHTML = html;
+//				// 3. 타이머 함수 실행
+//				auth = r; // 인증코드 [ 이메일에게 보낸 난수 대입 ]
+//				timer = 119; // 인증시간 대입 5초 120초
+//				settimer(); // 타이머 함수 실행
+//		}
+//	}) 
+	// ajax end
+	
+	
+	// 메일 전송 테스트 안하는 경우 -------
 	// 1. 인증구역 html구성
 	let html = `
 				<div class="timebox">02 : 00</div>
