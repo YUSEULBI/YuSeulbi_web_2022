@@ -11,6 +11,9 @@
 	<div class="box" >
 	</div>
 	
+	<div class="eventListner"></div>
+	<input type="text">
+	
 	<script src="/jspweb/practice/setInterval/setInterval.js" type="text/javascript"></script>
 </body>
 </html>

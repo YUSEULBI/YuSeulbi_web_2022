@@ -34,3 +34,9 @@ function settimer(){
 		}
 	} , 1000 );
 }
+
+window.onkeyup = (e)=>{
+		console.log('keyup실행')
+		console.log(e.key)
+		console.log(e.keyCode)
+	}
