@@ -19,6 +19,13 @@ a{ color:black; text-decoration: none;}
     font-weight: 700;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'HoengseongHanu';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/HoengseongHanu.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /*---------- 헤더 css ---------------*/
 
 /* 1.헤더 로그인 프로필 */
@@ -36,7 +43,7 @@ a{ color:black; text-decoration: none;}
 	display: flex;
 	justify-content: center;
 	margin: 0px !important; /* 부트스트랩 여백 제거 */
-	font-family: 'establishRetrosansOTF';
+	font-family: 'HoengseongHanu';
 	font-size: 20px;
 } 
 

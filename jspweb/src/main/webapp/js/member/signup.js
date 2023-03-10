@@ -161,7 +161,7 @@ function pwdconfirmcheck(){
 	
 }//
 
-// 이메일 유효성검사
+// 5. 이메일 유효성검사
 function emailCheck(){
 	console.log('emailcheck()')
 	let memail = document.querySelector('.memail').value;
@@ -169,9 +169,11 @@ function emailCheck(){
 	let memailj = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/
 	console.log ( memailj.test(memail));
 	if ( memailj.test(memail) ){
-		checkconfirm[2].innerHTML = 'O'
+		checkconfirm[2].innerHTML = '이메일 형식 확인, 인증해주세요.'
+		document.querySelector('.authbtn').disabled = false; // 인증 버튼 사용
 	}else{
 		checkconfirm[2].innerHTML = '이메일 형식으로 입력해주세요'
+		document.querySelector('.authbtn').disabled = true; // 인증 버튼 미사용
 	}
 			// 아이디 구역
 			// [a-zA-Z0-9_-] 		: 영문+숫자+ _ + -
@@ -181,8 +183,88 @@ function emailCheck(){
 			// +\.					: 도메인 중간에 .		.
 			// [a-zA-Z0-9-]			: 영문+숫자+ -			com
 			// +					: . 한개이상 			naver.co.kr
-}// email check		
+}// emailCheck	end	
 
+// 6. 이메일 인증 함수
+function getauth(){
+	console.log('getauth()함수 실행')
+	
+	// * ajax JAVA에게 이메일 전송 후 인증코드 받기;
+	$.ajax({
+		url : "/jspweb/email" ,
+		method : "post" ,
+		data : {"memail" : document.querySelector('.memail').value } ,
+		success : (r) =>{
+			console.log('ajax 응답');
+			console.log(r);
+		}
+	}) // ajax end
+	
+	// 1. 인증구역 html구성
+	let html = `
+				<div class="timebox">02 : 00</div>
+				<input type="text" class="authinput" placeholder="인증코드">
+				<button onclick="authconfirm()" type="button">확인</button>
+				`
+	// 2. html 대입
+	document.querySelector('.authbox').innerHTML = html;
+	// 3. 타이머 함수 실행
+	auth = 1234; // 인증코드 [ 이메일에게 보낸 난수 대입 ]
+	timer = 119; // 인증시간 대입 5초 120초
+	settimer(); // 타이머 함수 실행
+	
+}
+
+let auth = 0;
+let timer = 0; // 인증시간
+let timerInter; // Interval 함수 저장할 변수
+
+// 7. 타이머 함수
+function settimer(){
+	
+	// setInterval : 특정 시간마다 함수 실행
+	// setInterval( ()=>{} , 시간/밀리초 )
+		// clearInterval : interval 종료
+	timerInter = setInterval( ()=>{
+		
+		let minutes = parseInt(timer / 60); // 분계산
+		let seconds =  parseInt( timer % 60 )  ; // 분 계산후 나마지가 초
+		// 한자리수 이면 0추가
+		minutes = minutes < 10 ? "0"+minutes : minutes;
+		seconds = seconds < 10 ? "0"+seconds : seconds;
+		
+		let timeHTML = minutes + " : " + seconds;
+			console.log(timeHTML)
+		
+		document.querySelector('.timebox').innerHTML = timeHTML;
+		
+		timer--;
+		
+		if ( timer < 0 ){
+			clearInterval( timerInter );
+			checkconfirm[2].innerHTML = '인증실패';
+			document.querySelector('.authbox').innerHTML = "";
+		}
+	} , 1000 ); // 1초마다 {} 코드 실행
+	
+}
+
+// 8. 인증코드 확인
+function authconfirm(){
+	console.log('authconfirm 실행')
+	// 1. 입력받은 인증코드 호출
+	let authinput = document.querySelector('.authinput').value;
+	
+	if ( auth == authinput ){
+		clearInterval( timerInter );
+		document.querySelector('.authbox').innerHTML = "";
+		document.querySelector('.authbtn').innerHTML = "완료";
+		document.querySelector('.authbtn').disabled = true;
+		checkconfirm[2].innerHTML = 'O';
+	}else{
+		checkconfirm[2].innerHTML = '인증코드가 일치하지 않습니다.';
+	}
+}
 
 // 1.회원가입
 function signup(){
