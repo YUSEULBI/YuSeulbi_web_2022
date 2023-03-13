@@ -123,12 +123,74 @@ public class Info extends HttpServlet {
 
 	// 회원정보수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// 1. 로그인된 회원수정
+		String mid = (String)request.getSession().getAttribute("login"); System.out.println("mid : "+mid);
+		String mpwd = request.getParameter("mpwd"); System.out.println("mpwd : "+mpwd);
+		String memail = request.getParameter("memail"); System.out.println("memail : "+memail);
+		// 2.
+		boolean result = MemberDao.getInstance().update(mid, mpwd, memail);
+		// 3.
+		response.getWriter().print(result);
 	}
 
 	// 회원탈퇴
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// 1. 로그인된 회원탈퇴
+			// 1. 로그인된 회원 아이디 가져오기 [ 세션 ( Object ) ]
+		String mid = (String)request.getSession().getAttribute("login");
+		System.out.println( "mid : "+ mid );
+		
+		// 2. Dao에게 결과 요청후 결과받기
+		boolean result = MemberDao.getInstance().delete(mid);
+		System.out.println("result : " + result);
+		
+		// 3. 결과 ajax에게 보내기
+		response.getWriter().print(result);
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
