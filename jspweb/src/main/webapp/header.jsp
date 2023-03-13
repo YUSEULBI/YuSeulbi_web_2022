@@ -20,7 +20,7 @@
 			<!-- logo -->
 			<div class="mainlogo">
 				<a href="/jspweb/index.jsp">
-					<img src="/jspweb/img/logo.jpg">
+					<img src="/jspweb/img/logo.gif">
 				</a>
 			</div>
 						

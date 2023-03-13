@@ -18,7 +18,7 @@
 			<h3> Ezen Community </h3>
 			<p> 환영합니다. 다양한 커뮤니티 플랫폼 제공합니다. </p>
 			
-			<div class="title">아이디</div> 		
+			<div class="title">아이디 [ 중복아이디 : qwe1234 ]</div> 		
 			<input onkeyup="idcheck()" maxlength="30" type="text" name="mid" class="mid">
 			<div class="checkconfirm"></div>
 			

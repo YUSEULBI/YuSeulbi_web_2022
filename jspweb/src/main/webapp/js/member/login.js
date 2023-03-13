@@ -23,6 +23,14 @@ function login(){
 	})	
 }
 
+// 엔터 누르면 로그인됨
+document.addEventListener("keydown" , (e)=>{
+	console.log(e.keyCode)
+	if ( e.keyCode == 13 ){
+		console.log('enter를 누름')
+		login();
+	}
+})
 
 
 // 아이디 찾기
@@ -83,3 +91,5 @@ function findpwd(){
 		} // success end
 	}) // ajax end
 } // end
+
+

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.oreilly.servlet.MultipartRequest;
 
 import model.dao.MemberDao;
 import model.dto.MemberDto;
@@ -27,6 +28,9 @@ public class Login extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
 		
 		// 1. 세션[Object]에 담겨진 회원아이디 호출
 		String mid = (String)request.getSession().getAttribute("login");
