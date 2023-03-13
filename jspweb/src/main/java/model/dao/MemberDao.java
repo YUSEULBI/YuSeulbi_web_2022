@@ -72,17 +72,22 @@ public class MemberDao extends Dao {
 		}return false; // 없으면 false
 	}
 	
-	// 회원정보 반환
+	// 특정 회원 반환 + 보유포인트
 	public MemberDto getMember( String mid ) {
-		String sql = "select * from member where mid = ?;";
+		// 조인한 레코드
+		String sql = "select m.mno , m.mid , m.mimg , memail , sum( p.mpamount ) as mpoint"
+				+ " from member m , mpoint p"
+				+ " where m.mno = p.mno and m.mid = ?";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, mid);
 			rs = ps.executeQuery();
-			if ( rs.next() ) {
+			if ( rs.next() ) { // 조인한 결과는 찾는 값이 없어도 null값이 포함된 레코드1개 들어옴 --> JS로 null값이 포함된 object로 반환됨
+				// 결과필드 :  mno[1] , mid[2] , mimg[3] , memail[4] , mpoint[5]
 				MemberDto dto = new MemberDto( // 비밀번호 빼고
 						rs.getInt(1), rs.getString(2), 
-						null, rs.getString(4), rs.getString(5));
+						null, rs.getString(3), rs.getString(4));
+				dto.setMpoint(rs.getInt(5)); // 늦게 만들어서 생성자 없어서 이렇게 추가
 				return dto; // 레코드1개
 			}
 		} catch (Exception e) { 	System.out.println(e); 		}

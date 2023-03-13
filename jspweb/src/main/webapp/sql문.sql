@@ -1,5 +1,5 @@
 drop database if exists jspweb;
-create databasemembermembermembermember jspweb;
+create database jspweb;
 use jspweb;
 
 -- 회원테이블
@@ -14,7 +14,12 @@ create table member(
 );
 -- insert into member( mid , mpwd , mimg , memail ) values ( ? , ? , ? , ? );
 select * from member;
-select * from member where mid = '테스트';
+
+select * from member where mid = '테스트' and mpwd = '테스트';
+update member set mpwd = 'qwe1234' where mid = 'qwe1234';
+--
+
+
 
 -- 친추 테이블
 drop table if exists friend;
@@ -36,4 +41,16 @@ create table mpoint(
     mno			int ,								-- 포인트 주인
     foreign key ( mno ) references member ( mno ) on delete set null  -- 탈퇴하면 포인트 null
 );
-
+-- 아이디에 해당하는 회원정보 호출
+select * from member where mid = '테스트';
+-- 아이디에 해당하는 회원정보+보유포인트 호출
+select * from mpoint where mno = 1;
+-- 특정 회원 보유 포인트
+select sum(mpamount) from mpoint where mno = 1;
+-- 아이디 해당하는 회원의 보유 포인트
+select * from member m , mpoint p where m.mno = p.mno;
+-- 출력하고 싶은것만 ( 통계 두개 이상 필드 출력시 그룹필수 )
+select m.mno , m.mid , m.mimg , memail , sum( p.mpamount ) as mpoint
+from member m , mpoint p 
+where m.mno = p.mno
+group by mno;	-- 집계할 기준 [ ~~별 ] 

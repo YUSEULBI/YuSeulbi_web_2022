@@ -30,8 +30,9 @@ public class Login extends HttpServlet {
 		
 		// 1. 세션[Object]에 담겨진 회원아이디 호출
 		String mid = (String)request.getSession().getAttribute("login");
+		System.out.println("mid : " + mid);
 		
-		// 2. 
+		// 2. 로그인 되어있는 dto객체 반환
 		MemberDto result = MemberDao.getInstance().getMember( mid );
 			System.out.println("result : "+result);
 			// JAVA객체 --> JS객체 변환
