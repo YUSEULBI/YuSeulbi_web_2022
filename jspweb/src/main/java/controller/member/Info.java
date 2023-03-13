@@ -140,9 +140,11 @@ public class Info extends HttpServlet {
 			// 1. 로그인된 회원 아이디 가져오기 [ 세션 ( Object ) ]
 		String mid = (String)request.getSession().getAttribute("login");
 		System.out.println( "mid : "+ mid );
+		String mpwd = request.getParameter("mpwd");
+		
 		
 		// 2. Dao에게 결과 요청후 결과받기
-		boolean result = MemberDao.getInstance().delete(mid);
+		boolean result = MemberDao.getInstance().delete(mid , mpwd);
 		System.out.println("result : " + result);
 		
 		// 3. 결과 ajax에게 보내기

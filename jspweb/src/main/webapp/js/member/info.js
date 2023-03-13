@@ -18,9 +18,12 @@ if ( memberInfo.mid == null ){
 function setDelete(){
 	console.log('setDelete() 함수 열림')
 	
+	
+	
 	$.ajax({
 		url : "/jspweb/member" ,
 		method : "delete",
+		data : { "mpwd" : document.querySelector('.mpwd').value } ,
 		success : (r)=>{
 			console.log('ajax응답');
 			console.log(r)
@@ -28,7 +31,7 @@ function setDelete(){
 				alert('회원탈퇴성공');
 				location.href = "/jspweb/member/logout.jsp"; // 세션없애기 위해서 로그아웃jsp거치기
 			}else{
-				alert('회원탈퇴실패 - [관리자에게 문의]');
+				alert('회원탈퇴실패 - [탈퇴할 계정의 비밀번호가 다릅니다.]');
 			}
 		}
 	})	
@@ -36,17 +39,3 @@ function setDelete(){
 
 
 
-// 탈퇴버튼
-document.querySelector('.modal_check').addEventListener('click',(e)=>{
-	let mpwdcheck = document.querySelector('.modal_input').value
-	$.ajax({
-		url : "" ,
-		method : "" ,
-		data : { "mpwdcheck" : mpwdcheck },
-		success : (r) => {
-			console.log('ajax응답')
-			console.log(r)
-		}
-	})
-	
-})

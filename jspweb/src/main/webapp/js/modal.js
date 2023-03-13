@@ -4,6 +4,6 @@ function modal_open(){
 }
 
 // 모달취소버튼
-document.querySelector('.modal_close').addEventListener('click',(e)=>{
+function closeModal(){
 	document.querySelector('.modal_wrap').style.display = 'none';
-})
+}

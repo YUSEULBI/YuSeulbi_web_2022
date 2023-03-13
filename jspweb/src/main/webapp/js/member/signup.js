@@ -319,8 +319,8 @@ function signup(){
 			console.log('ajax 응답');
 			console.log(r);
 			if ( r == 'true'){
-				alert('회원가입성공')
-				location.href="/jspweb/index.jsp"
+				modal_open();
+				// location.href="/jspweb/index.jsp"
 			}else{
 				alert('회원가입실패')
 			}
@@ -330,7 +330,11 @@ function signup(){
 	
 }
 
-
+//
+function Modal_close(){
+	document.querySelector('.modal_wrap').style.display = 'none';
+	location.href="/jspweb/index.jsp"
+}
 /*
 	// 2. 첨부파일 없을 때
 	let info = {
