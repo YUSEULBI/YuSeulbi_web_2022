@@ -73,7 +73,7 @@ function deprint(){
 						</tr>
 						`
 			});
-			document.querySelector('.employee_table').innerHTML = html;s
+			document.querySelector('.employee_table').innerHTML = html;
 		}
 	})
 }
