@@ -33,7 +33,7 @@ function getLogin(){
 						  </ul>
 						</div> <!-- 드롭다운 끝 -->
 						
-						${r.mid}님
+						<span class="nickname">${r.mid}님</span>
 						<a href="#">쪽지함</a>
 						<a href="#">${r.mpoint} 포인트</a>
 						`
