@@ -156,8 +156,8 @@ public class EmployeeDao extends Dao {
 			return false;
 		}
 		
-	// 4. 근무자 출력
-		public ArrayList<EmployeeDto> getWEmployee() {
+	// 4. 퇴사자 출력
+		public ArrayList<EmployeeDto> getDelEmployee() {
 			ArrayList<EmployeeDto> list = new ArrayList<>();
 			String sql = "select"
 					+ "	e.eno , e.ename , e.erank , e.etype , d.dname , e.edate , e.epic , "
@@ -179,4 +179,69 @@ public class EmployeeDao extends Dao {
 				} catch (Exception e) { System.out.println(e); 	}
 			return null;
 		}
+		
+		// 4. 근무자 출력
+		public ArrayList<EmployeeDto> getWEmployee() {
+			ArrayList<EmployeeDto> list = new ArrayList<>();
+			String sql = "select"
+					+ "	e.eno , e.ename , e.erank , e.etype , d.dname , e.edate , e.epic , "
+					+ "    if( e.eno in( select e.eno from  employee e , department d  where e.eno = d.eno ) , d.dname , '' ) as rname ,"
+					+ "    e.dedate , e.dereason"
+					+ " from "
+					+ "	employee e ,department d"
+					+ " where "
+					+ "	e.deptno = d.deptno and e.dedate IS NULL;";
+			try {
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					EmployeeDto dto = new EmployeeDto(rs.getInt(1), rs.getString(2), rs.getString(3), 
+							rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), 
+							rs.getString(8), rs.getString(9), rs.getString(10));
+					list.add(dto);
+				}return list;
+				} catch (Exception e) { System.out.println(e); 	}
+			return null;
+		}	
+		
+		// 검색
+		public ArrayList<EmployeeDto> searchEm( String findEm ) {
+			ArrayList<EmployeeDto> list = new ArrayList<>();
+			String sql = " select "
+					+ "	e.eno , e.ename , e.erank , e.etype , d.dname , e.edate , e.epic ,"
+					+ "    if( e.eno in( select e.eno from  employee e , department d  where e.eno = d.eno ) , d.dname , '' ) as rname ,"
+					+ "    e.dedate , e.dereason"
+					+ " from "
+					+ "	employee e ,department d"
+					+ " where "
+					+ "	e.deptno = d.deptno and ename like ? ;";
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setString(1, "%"+findEm+"%");
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					EmployeeDto dto = new EmployeeDto(rs.getInt(1), rs.getString(2), rs.getString(3), 
+							rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), 
+							rs.getString(8), rs.getString(9), rs.getString(10));
+					list.add(dto);
+				}return list;
+				} catch (Exception e) { System.out.println(e); 	}
+			return null;
+		}	
+		
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

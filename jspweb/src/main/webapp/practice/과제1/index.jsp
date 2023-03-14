@@ -45,11 +45,21 @@
 	
 	
 	<h3> 인사출력 </h3>
+	사원검색 : <input class="findEm" type="text"> 
+	<button onclick="searchEm()" class="searchEm" type="button">검색</button> 
+	<span class="searchnull"></span><br>
+	
 	<button onclick="allprint()" class="allprint" type="button">전체출력</button>
 	<button onclick="workprint()" class="workprint" type="button">직무</button>
 	<button onclick="deprint()" class="deprint" type="button">퇴사</button>
 	
-	<table class="employee_table" border="1"></table>
+	<table class="employee_table" border="1"></table> <br/>
+	
+	<!-- 임시 -->
+<!-- 	<table class="employee_Wortable" border="1"></table> <br/> -->
+<!-- 	<table class="employee_deltable" border="1"></table> <br/> -->
+	
+	
 	
 	
 	<!-- 모달 HTML -->
