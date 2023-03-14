@@ -8,7 +8,7 @@
 <link href="/jspweb/practice/과제1/modal.css" rel="stylesheet">
 </head>
 <body>
-	<div><img width="30%" alt="" src="/jspweb/practice/과제1/img/logo.gif"></div>
+	<div><img width="15%" alt="" src="/jspweb/practice/과제1/img/logo.gif"></div>
 	
 	<h3> 인사등록 </h3>
 	<form class="form" action="">
