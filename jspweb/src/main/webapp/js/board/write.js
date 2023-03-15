@@ -32,7 +32,10 @@ function bwrite(){
 		success : (r)=>{
 			console.log('통신')
 			console.log(r)
-			if ( r == 'true'){ 	alert('글쓰기 성공') }
+			if ( r == 'true'){ 	
+				alert('글쓰기 성공')
+				location.href="/jspweb/board/list.jsp"; 
+			}
 			else{ alert('글쓰기 실패') }
 		}
 	})

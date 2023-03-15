@@ -32,13 +32,26 @@ public class Boardinfo extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList();
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonlist = mapper.writeValueAsString(result);
 		
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json");
-		response.getWriter().print(jsonlist);
+		int type = Integer.parseInt(request.getParameter("type"));
+		if ( type == 1 ) { // 전체출력
+			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList();
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonlist = mapper.writeValueAsString(result);
+			
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json");
+			response.getWriter().print(jsonlist);
+			
+			
+		}else if (type == 2) { // 개별출력
+			int bno =  Integer.parseInt(request.getParameter("bno"));
+			System.out.println("bno : " + bno);
+			// Dao
+			// 형변환
+			// 응답
+		}
+		
 		
 	}
 

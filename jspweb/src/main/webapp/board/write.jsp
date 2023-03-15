@@ -10,12 +10,12 @@
 	<%@include file="/header.jsp" %>
 	
 	<!-- js 로그인제어 : html이 실행되기전에 유효성검사를 먼저하는방법 해결방법 -->
-<!-- 	<script type="text/javascript"> -->
-// 		if ( memberInfo.mid == null ){
-// 			alert('로그인 하세요')
-// 			location.href="/jspweb/member/login.jsp";
-// 		}
-<!-- 	</script> -->
+<!-- 	<script type="text/javascript">
+		if ( memberInfo.mid == null ){
+			alert('로그인 하세요')
+			location.href="/jspweb/member/login.jsp";
+		}
+		</script> -->
 	
 	
 	<!-- jsp 로그인제어 : html이 실행되기전에 유효성검사를 먼저하는방법 해결방법 -->
