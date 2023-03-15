@@ -12,6 +12,60 @@ function getBoard(){
 		success : (r)=>{
 			console.log('통신')
 			console.log(r)
+			document.querySelector('.infobox').innerHTML = `${r.bdate} / ${r.bview} / ${r.bup} / ${r.bdown}`
+			document.querySelector('.pimgbox').innerHTML = r.mid
+			document.querySelector('.btitle').innerHTML = r.btitle
+			document.querySelector('.bcontent').innerHTML = r.bcontent
+			
+			if ( r.bfile == null ){
+				document.querySelector('.bfile').innerHTML = '첨부파일없음';	
+			}else{ //첨부파일 있을 때
+				html = `${r.bfile} <button onclick="bdownload('${r.bfile}')" type="button">다운로드</button>`
+				document.querySelector('.bfile').innerHTML = html;
+			}
+			
+			
 		}
 	})
-}
+} // getBoard function end
+
+// 2. 다운로드 [ 다운로드할 파일명 인수로 받기 ]
+function bdownload( bfile ){
+	console.log('선택한 파일명 : ' + bfile);
+	$.ajax({
+		url : "/jspweb/filedownload" ,
+		method : "get" ,
+		data : {"bfile" : bfile} ,
+		success : (r)=>{
+			console.log('통신');
+			console.log(r);
+			
+		}
+	}) // ajax and
+} // m end
+/*
+	.접근연산자 때문에 인수로 넣을 때 오류발생 
+		-> bdownload(짱구4.jpg) : .파일확장자 구분기호가 아닌 .접근연산자로 사용 
+			-> bdownload('짱구4.jpg') : 문자처리되어서 파일확장자 구분기호로 전달됨.
+			
+	`<button onclick="bdownload(${r.bfile})" type="button">다운로드</button>`
+		`<button onclick="bdownload(짱구4.jpg)" type="button">다운로드</button>`  
+		
+	`<button onclick="bdownload('${r.bfile}')" type="button">다운로드</button>`
+		`<button onclick="bdownload('짱구4.jpg')" type="button">다운로드</button>`
+
+
+bcontent
+bdate
+bdown
+bfile
+bno
+btitle
+bup
+bview
+cno
+
+mid
+
+mno
+*/

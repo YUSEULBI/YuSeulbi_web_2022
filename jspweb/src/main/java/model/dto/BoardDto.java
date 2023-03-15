@@ -13,6 +13,7 @@ public class BoardDto {
     private int cno;
     // 추가 작성자 아이디
     private String mid;
+    // private String mimg;
     
     public BoardDto() {	}
     
@@ -60,10 +61,6 @@ public class BoardDto {
 		this.mid = mid;
 	}
 
-	
-
-	
-	//
 	@Override
 	public String toString() {
 		return "BoardDto [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bfile=" + bfile
@@ -158,6 +155,12 @@ public class BoardDto {
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
+
+	
+	
+
+
+	
 	
 	
 	

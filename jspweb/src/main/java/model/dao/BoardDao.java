@@ -43,18 +43,20 @@ public class BoardDao extends Dao {
 		return list;
 	}
 	
+	// 개별 게시물 조회
 	public BoardDto getBoard( int bno ) {
+		BoardDto boardDto = new BoardDto();
 		String sql = "select board.* , member.mid , member.mimg  from member natural join board where board.bno = ?;";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, bno);
 			rs = ps.executeQuery();
 			if ( rs.next() ) {  
-				BoardDto boardDto = new BoardDto(
+				boardDto = new BoardDto(
 						rs.getInt(1), rs.getString(2), rs.getString(3), 
 						rs.getString(4), rs.getString(5), rs.getInt(6), 
 						rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), 
-						rs.getString(11));
+						rs.getString(11) );
 				
 			}
 		} catch (Exception e) {System.out.println(e);		}
