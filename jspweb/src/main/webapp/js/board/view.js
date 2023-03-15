@@ -44,6 +44,7 @@ function bdownload( bfile ){
 //		}
 //	}) // ajax and
 
+	// location.href 에 get메소드 기능 들어있음 <a> , <form> 등등	
 	location.href="/jspweb/filedownload?bfile="+bfile;
 
 } // m end
