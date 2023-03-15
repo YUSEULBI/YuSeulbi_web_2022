@@ -26,7 +26,7 @@
 						
 			<!-- 본메뉴 -->
 			<ul class="mainmenu">
-				<li> <a href="#"> 기능메뉴1 </a> </li>
+				<li> <a href="/jspweb/board/list.jsp"> 커뮤니티 </a> </li>
 				<li> <a href="#"> 기능메뉴2 </a> </li>
 				<li> <a href="#"> 기능메뉴3 </a> </li>
 				<li> <a href="#"> 기능메뉴4 </a> </li>
@@ -38,8 +38,8 @@
 				<!-- js가 들어가는 자리 -->
 			</div>
 		</div>	
-		
 	</div>
+	<div class="h_border"></div>
 	
 	
 	<!-- 모든 페이지 공통 메뉴 [ 헤더는 url 절대경로!!! ] -->
