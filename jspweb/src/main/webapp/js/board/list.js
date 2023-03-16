@@ -43,20 +43,20 @@ function getBoardList( page ){
 			//----페이징버튼출력-----------------------------------------
 			
 			html = ''; // 기존에 들어있던 내용 제거
-			//이전
-			html += `
-					<button onclick="getBoardList(${page-1})" type="button">이전</button>
-					`
+			//이전 [ 현재페이지가 1이하이면 이전버튼은 현재페이지버튼이됨]
+			html += page <= 1 ?
+					`<button onclick="getBoardList(${page})" type="button">이전</button>`
+					: `<button onclick="getBoardList(${page-1})" type="button">이전</button>`
 			// 페이지 번호 버튼 들
-			for ( let i = 1 ; i <= r.totalpage ; i++ ){ // 1부터 마지막페이지수까지 버튼 생성
+			for ( let i = r.startbtn ; i <= r.endbtn ; i++ ){ // 1부터 마지막페이지수까지 버튼 생성
 				html += `
 					<button onclick="getBoardList(${i})" type="button">${i}</button>
 					`
 			}
-			// 다음
-			html += `
-					<button onclick="getBoardList(${page+1})" type="button">다음</button>
-					`
+			// 다음 [ 현재페이지가 마지막페이지면 다음버튼은 현재페이지 버튼이됨]
+			html += page >= r.totalpage ?
+					` <button onclick="getBoardList(${page})" type="button">다음</button> `
+					: ` <button onclick="getBoardList(${page+1})" type="button">다음</button> `
 					
 			document.querySelector('.pagebox').innerHTML = html;
 			

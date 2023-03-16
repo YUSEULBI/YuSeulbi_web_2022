@@ -41,22 +41,48 @@ public class Boardinfo extends HttpServlet {
 			// 1. 현재페이지[요청] , 2.페이지당 게시물수 , 3. 현재페이지[게시물시작 , 게시물끝]
 			int page = Integer.parseInt(request.getParameter("page"));
 			System.out.println("page : "+page);
+			// 페이지당 게시물수
 			int listsize = 3;
-			int startrow = (page-1)*listsize; // 해당 페이지에서의 게시물 시작번호
+			// 선택페이지 첫 게시물번호
+			int startrow = (page-1)*listsize; 
 			
 			// --------------------page 버튼만들기 //
 			// 1. 전체페이지수[총레코드수/페이지당표시된수] 2. 페이지 표시할 최대버튼수 3. 시작버튼 번호
-				// 전체 레코드수 게시물수
-			int totalsize = BoardDao.getInstance().getTotalSize();
-				// 전체 페이지수
-			int totalpage = totalsize % listsize == 0 ? // 나머지가 0이면
+				// 전체 게시물수 레코드수 
+				int totalsize = BoardDao.getInstance().getTotalSize();
+				// 페이지수
+				int totalpage = totalsize % listsize == 0 ? // 나머지가 0이면
 					totalsize/listsize : // 몫 
 						totalsize/listsize+1; // 나머지가 있으면 +1
 			
-									
+			// 2. 페이지당 최대버튼수
+			int btnsize = 5;
+			
+			int startbtn = ( (page-1)/btnsize ) *btnsize+1;
+				/*	btn size = 5
+				 * 	시작번호 패턴 : 1	6	11	16	21
+				 	1페이지 : 1-1 / 5  	몫0 *5 + 1 			1
+				 	2페이지 : 2-1 / 5 		몫0 *5 + 1			1
+				 	3페이지 : 3-1 / 5 		몫0 *5 + 1			1
+				 	4페이지 : 4-1 / 5 		몫0 *5 + 1			1
+				 	5페이지 : 5-1 / 5 		몫0 *5 + 1			1
+				 	6페이지 : 6-1 / 5 		몫1 *5 + 1			6
+				 	7페이지 : 7-1 / 5 		몫1 *5 + 1			6
+				 	8페이지 : 8-1 / 5 		몫1 *5 + 1			6
+				 	9페이지 : 9-1 / 5 		몫1 *5 + 1			6
+				 	10페이지 : 10-1 / 5	몫1 *5 + 1			6
+				 	11페이지 : 11-1 / 5 	몫2 *5 + 1			11
+				 
+				 */
+				
+			int endbtn = startbtn + (btnsize-1);
+			// * 단 마지막페이지버튼수가 총 페이지수보다 커지면 안됨 -> 마지막버튼수가 커지면 마지막버튼수를 총페이지수로 대입
+			if ( endbtn > totalpage ) { endbtn = totalpage; }
+			
+			
 			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startrow ,listsize);
 			
-			PageDto pagedto = new PageDto(page, listsize, startrow, totalsize, totalpage, result);
+			PageDto pagedto = new PageDto(page, listsize, startrow, totalsize, totalpage, btnsize, startbtn, endbtn, result);
 			
 					/*
 					 	총 게시물 수 = 10 , 페이지당 표시할 게시물수 = 3
@@ -70,6 +96,15 @@ public class Boardinfo extends HttpServlet {
 								1. 페이지 요청 -> (1-1)*3 => 0
 								2. 페이지 요청 -> (2-1)*3 => 3
 								3. 페이지 요청 -> (3-1)*3 => 6
+						3. 시작버튼 , 마지막버튼 수
+							 
+							1페이지 -> 12345
+							2페이지 -> 12345
+							3페이지 -> 12345
+							4페이지 -> 12345
+							5페이지 -> 12345
+							6페이지 -> 678910
+							7페이지 -> 111213
  
 					 */
 			 
