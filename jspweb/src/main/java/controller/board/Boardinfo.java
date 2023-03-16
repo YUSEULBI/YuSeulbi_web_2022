@@ -37,6 +37,12 @@ public class Boardinfo extends HttpServlet {
 		int type = Integer.parseInt(request.getParameter("type"));
 		if ( type == 1 ) { // 전체출력
 			
+			// -------------검색처리
+			// 1. 검색에 필요한 매개변수 요청 [ key , keyword ]
+			// 2. getTotalSize , getBoardList 조건전달
+			String key = request.getParameter("key");			System.out.println("key : "+key);
+			String keyword = request.getParameter("keyword");	System.out.println("keyword : "+keyword);
+			
 			// ------------ page 처리 계산
 			// 1. 현재페이지[요청] , 2.페이지당 게시물수 , 3. 현재페이지[게시물시작 , 게시물끝]
 			int page = Integer.parseInt(request.getParameter("page"));
@@ -48,8 +54,11 @@ public class Boardinfo extends HttpServlet {
 			
 			// --------------------page 버튼만들기 //
 			// 1. 전체페이지수[총레코드수/페이지당표시된수] 2. 페이지 표시할 최대버튼수 3. 시작버튼 번호
-				// 전체 게시물수 레코드수 
-				int totalsize = BoardDao.getInstance().getTotalSize();
+				// 전체 게시물수 레코드수
+					//검색없을때
+				// int totalsize = BoardDao.getInstance().getTotalSize();
+					// 검색있을때
+			int totalsize = BoardDao.getInstance().getTotalSize( key , keyword );
 				// 페이지수
 				int totalpage = totalsize % listsize == 0 ? // 나머지가 0이면
 					totalsize/listsize : // 몫 
@@ -79,8 +88,9 @@ public class Boardinfo extends HttpServlet {
 			// * 단 마지막페이지버튼수가 총 페이지수보다 커지면 안됨 -> 마지막버튼수가 커지면 마지막버튼수를 총페이지수로 대입
 			if ( endbtn > totalpage ) { endbtn = totalpage; }
 			
-			
-			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startrow ,listsize);
+			// 검색없을때
+			// ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startrow ,listsize);
+			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startrow ,listsize, key , keyword);
 			
 			PageDto pagedto = new PageDto(page, listsize, startrow, totalsize, totalpage, btnsize, startbtn, endbtn, result);
 			

@@ -1,15 +1,34 @@
 console.log('list js 실행')
 
+/*
+	*pageObject : 현재 페이지 , 현재검색 , 전송타입 보관된 객체
+	let pageObject = {
+	page : 1 , // page : 페이지번호
+	key : "" , 
+	keyword : "" ,
+	type : 1 // 1: 전체출력 2:개별출력
+}
+*/
+let pageObject = {
+	page : 1 , // page : 페이지번호
+	key : "" , 
+	keyword : "" ,
+	type : 1 // 1: 전체출력 2:개별출력
+}
+
 getBoardList(1); // js 열릴때 페이지1 기본값설정
 
 function getBoardList( page ){
 	// 해당 함수로부터 페이징번호 받기 = page
 	console.log('페이지 : '+page)
 	console.log('getBoardList() 실행')
+	pageObject.page = page; // 인수로 받은 현재페이지를 객체에 대입
+	console.log("pageObject")
+	console.log(pageObject)
 	$.ajax({
 		url : "/jspweb/board/info" ,
 		method : "get" ,
-		data : {"type" : 1 , "page":page } , // 1: 전체출력 2:개별출력 / page : 페이지번호
+		data : pageObject ,  
 		success : (r)=>{
 			console.log('통신')
 			console.log(r)
@@ -62,6 +81,16 @@ function getBoardList( page ){
 			
 		}// success end
 	}) // ajax end
+}
+
+function getsearch(){
+	console.log('getsearch()함수열림')
+	// * 입력받은 데이터를 전역객체 내 필드에 대입
+	pageObject.key = document.querySelector('.key').value
+	pageObject.keyword = document.querySelector('.keyword').value
+	
+	// 검색된 boardList 게시물호출
+	getBoardList(1);
 }
 
 /*

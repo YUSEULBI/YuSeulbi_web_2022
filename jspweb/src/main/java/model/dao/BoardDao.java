@@ -27,8 +27,13 @@ public class BoardDao extends Dao {
 	}
 	
 	// 2. 게시물수 구하기 ( 레코드수 구하기)
-	public int getTotalSize() {
-		String sql = "select count(*)  from member m natural join board b;";
+	public int getTotalSize(String key , String keyword) {
+		String sql = "";
+		if ( key.equals("") && keyword.equals("")) {// 검색이 없다..
+			sql = "select count(*)  from member m natural join board b;";
+		}else { // 검색이 있따.
+			sql = "select count(*)  from member m natural join board b where "+key+" like '%"+keyword+"%'";
+		}
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -37,12 +42,19 @@ public class BoardDao extends Dao {
 			System.out.println(e);
 		}return 0;
 		
+		
 	}
 	
 	// 2. 게시글출력
-	public ArrayList<BoardDto> getBoardList( int startrow ,int listsize ){
+	public ArrayList<BoardDto> getBoardList( int startrow ,int listsize , String key , String keyword ){
 		ArrayList<BoardDto> list = new ArrayList<>();
-		String sql = "select b.* , m.mid from member m natural join board b limit ? , ?;";
+		String sql = "";
+		if ( key.equals("")&& keyword.equals("")) {
+			sql = "select b.* , m.mid from member m natural join board b order by b.bdate desc limit ? , ?;";
+		}else {
+			sql = "select b.* , m.mid from member m natural join board b where "+key+" like '%"+keyword+"%' order by b.bdate desc limit ? , ?";
+		}
+		
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, startrow);

@@ -69,10 +69,57 @@ create table board(
     foreign key ( cno ) references category( cno ) on delete cascade
 );
 -- 생략시 fk에 존재하는 식별키pk는 삭제 불가능
-select * from board;
 
+-- 조인 합집합
+select bno , btilte , bcontent , bfile , bdate , bview , bup , bdown , m.mid , b.cno   from member m , board b;
 
+-- 1. where 이용 조인 [ * 다른 조건과 가독성 떨어짐 ]
+select * from member , board where member.mno = board.mno;
+-- 2. 테이블명 별칭
+select * from member m , board b where m.mno = b.mno;
+-- 3. A테이블 natural join B테이블 / 자연조인 [ 암묵적으로 fk , pk 연결 / pf fk 1개인경우 ]
+select * from member m natural join board;
+-- 4. A테이블명 join B테이블명 on 교집합필드조건(조인조건) ( where대신 on으로 조인 )
+select * from member m join board b on m.mno = b.mno; -- on 키워드 이용해서 교집합 조건 사용하면 다른 where 구분
+-- 결론
+select board.* , member.mid from member natural join board;
+-- 2. 특정 개수만 출력 [페이지 조건] limit 시작인덱스[0] , 개수
+select b.* , m.mid from member m natural join board b limit 0 , 3; -- 0부터 3개 / 1페이지
+select b.* , m.mid from member m natural join board b limit 3 , 3; -- 0부터 3개 / 2페이지
+select b.* , m.mid from member m natural join board b limit 6 , 3; -- 0부터 3개 / 3페이지
 
+-- 검색이 있을때
+select b.* , m.mid from member m natural join board b where b.btitle like '%f%' order by b.bdate desc limit 6 , 3;
+	-- 자바
+	-- "select b.* , m.mid from member m natural join board b where "+key+" like '%"+keyword+"%' order by b.bdate desc limit ? , ?"
+
+select board.* , member.mid , member.mimg  from member natural join board where board.bno = 1;
+
+-- 3. 레코드 수 구하기 count(*)
+select count(*)  from member m natural join board b;
+
+-- 검색이 있을 때 레코드수 구하기
+select count(*)  from member m natural join board b where b.btitle like '%v%';
+	-- 자바에서 사용할경우
+-- "select count(*)  from member m natural join board b where "+b.btitle+" like '%"+v+"%'";
+
+-- 검색하기
+
+	-- 카테고리
+select * from board where cno = 3;
+	-- 제목
+select * from board where btitle = '글추가' ;
+select * from board where btitle like '%v%' ;
+select * from board where btitle like '_asd_' ; -- asd가 2번째 글자에 있는 5글자 제목의 레코드 찾기
+	-- % 모든문자대응 [ 문자개수 무시 ] / _  개수만큼 대응 [ 문자개수 중요 ]
+/*
+	1asd2		like '_asd_' true		like '%asd%' true
+    1asd23 		like '_asd_' false		like '%asd%' true
+*/
+	-- 내용
+select * from board where bcontent like '%v%' ;
+	-- 작성자
+select b.* , m.mid from board b , member m  where b.mno = m.mno and m.mid like '%q%' ;
 
 
 
