@@ -13,8 +13,32 @@ let pageObject = {
 	page : 1 , // page : 페이지번호
 	key : "" , 
 	keyword : "" ,
-	type : 1 // 1: 전체출력 2:개별출력
+	type : 1 ,// 1: 전체출력 2:개별출력
+	cno : document.querySelector('.cno').value , // 카테고리번호
+	listsize : 3
 }
+
+// 전체보기 검색제거
+function clearSearch(){
+	pageObject.key = '';
+	pageObject.keyword = '';
+	getBoardList(1);
+}
+
+// 페이지당 출력 게시물수 변경
+function chlistsize(){
+	console.log('chlistsize()실행')
+	pageObject.listsize = document.querySelector('.listsize').value;
+	getBoardList(1);
+}
+
+// -- 카테고리 제목 넣어주기
+let cnameHTML = '';
+if ( pageObject.cno == 1 ){ cnameHTML = '공지사항';	}
+if ( pageObject.cno == 2 ){ cnameHTML = '커뮤니티';	}
+if ( pageObject.cno == 3 ){ cnameHTML = 'QnA';	}
+if ( pageObject.cno == 4 ){ cnameHTML = '노하우';	}
+document.querySelector('.cname').innerHTML = cnameHTML;
 
 getBoardList(1); // js 열릴때 페이지1 기본값설정
 
@@ -69,8 +93,8 @@ function getBoardList( page ){
 			// 페이지 번호 버튼 들
 			for ( let i = r.startbtn ; i <= r.endbtn ; i++ ){ // 1부터 마지막페이지수까지 버튼 생성
 				html += `
-					<button onclick="getBoardList(${i})" type="button">${i}</button>
-					`
+						<button onclick="getBoardList(${i})" type="button">${i}</button>
+						`
 			}
 			// 다음 [ 현재페이지가 마지막페이지면 다음버튼은 현재페이지 버튼이됨]
 			html += page >= r.totalpage ?
@@ -78,6 +102,8 @@ function getBoardList( page ){
 					: ` <button onclick="getBoardList(${page+1})" type="button">다음</button> `
 					
 			document.querySelector('.pagebox').innerHTML = html;
+			//----게시물수-----------------------------------------
+			document.querySelector('.searchcount').innerHTML = `게시물수 : ${r.totalsize}`;
 			
 		}// success end
 	}) // ajax end

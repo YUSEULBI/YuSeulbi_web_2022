@@ -9,10 +9,30 @@
 <body>
 
 	<%@include file="/header.jsp" %>
+	<!--
+		// HTTP GET <a href="URL경로?변수명=값"> 전달된 매개변수 가져오기
+		 
+	 -->
+	 <%
+	 	String cno = request.getParameter("cno");
+	 // 표현식 이용 input div 대입
+	 %>
+	 
+	 <!-- cno 숨겨서 js에게 전달 -->
+	<input type="hidden" class="cno" value="<%=cno%>">
 	
 	<div class="container">
-		<h3> 게시물 목록 </h3>
+		<h3 class="cname"></h3>
+		
 		<a href="write.jsp">글쓰기</a>
+		<button onclick="clearSearch()" type="button">전체보기[검색제거]</button>
+		<div class="searchcount"> 총 게시물수 : </div>
+		<select onchange="chlistsize()" class="listsize">
+			<option value="3">3</option>
+			<option value="5">5</option>
+			<option value="10">10</option>
+		</select>
+		
 		
 		<table class="boardTable table table-hover">
 		</table>

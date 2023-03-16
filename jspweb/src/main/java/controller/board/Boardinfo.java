@@ -36,6 +36,10 @@ public class Boardinfo extends HttpServlet {
 		
 		int type = Integer.parseInt(request.getParameter("type"));
 		if ( type == 1 ) { // 전체출력
+			// --------카테고리별 출력 ------------------
+			// 1. 카테고리 매개변수 요청 [ cno ] 2. getTotalSize / getBoardList
+			int cno = Integer.parseInt(request.getParameter("cno"));
+			
 			
 			// -------------검색처리
 			// 1. 검색에 필요한 매개변수 요청 [ key , keyword ]
@@ -48,7 +52,7 @@ public class Boardinfo extends HttpServlet {
 			int page = Integer.parseInt(request.getParameter("page"));
 			System.out.println("page : "+page);
 			// 페이지당 게시물수
-			int listsize = 3;
+			int listsize = Integer.parseInt(request.getParameter("listsize"));
 			// 선택페이지 첫 게시물번호
 			int startrow = (page-1)*listsize; 
 			
@@ -58,7 +62,7 @@ public class Boardinfo extends HttpServlet {
 					//검색없을때
 				// int totalsize = BoardDao.getInstance().getTotalSize();
 					// 검색있을때
-			int totalsize = BoardDao.getInstance().getTotalSize( key , keyword );
+			int totalsize = BoardDao.getInstance().getTotalSize( key , keyword , cno );
 				// 페이지수
 				int totalpage = totalsize % listsize == 0 ? // 나머지가 0이면
 					totalsize/listsize : // 몫 
@@ -90,7 +94,7 @@ public class Boardinfo extends HttpServlet {
 			
 			// 검색없을때
 			// ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startrow ,listsize);
-			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startrow ,listsize, key , keyword);
+			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startrow ,listsize, key , keyword , cno);
 			
 			PageDto pagedto = new PageDto(page, listsize, startrow, totalsize, totalpage, btnsize, startbtn, endbtn, result);
 			
