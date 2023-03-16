@@ -1,16 +1,19 @@
 console.log('list js 실행')
 
-getBoardList();
+getBoardList(1); // js 열릴때 페이지1 기본값설정
 
-function getBoardList(){
+function getBoardList( page ){
+	// 해당 함수로부터 페이징번호 받기 = page
+	console.log('페이지 : '+page)
 	console.log('getBoardList() 실행')
 	$.ajax({
 		url : "/jspweb/board/info" ,
 		method : "get" ,
-		data : {"type" : 1 } , // 1: 전체출력 2:개별출력
+		data : {"type" : 1 , "page":page } , // 1: 전체출력 2:개별출력 / page : 페이지번호
 		success : (r)=>{
 			console.log('통신')
 			console.log(r)
+			//-----테이블출력-------------------------------------------
 			let html = `
 						<tr>
 							<th>번호</th> 
@@ -22,7 +25,7 @@ function getBoardList(){
 							<th>작성자</th> 
 						</tr>
 						`
-			r.forEach((o,i)=>{
+			r.boardList.forEach((o,i)=>{
 				html += `
 						<tr>
 							<th>${o.bno}</th> 
@@ -36,8 +39,29 @@ function getBoardList(){
 						`
 			})
 			document.querySelector('.boardTable').innerHTML = html;
-		}
-	})
+			
+			//----페이징버튼출력-----------------------------------------
+			
+			html = ''; // 기존에 들어있던 내용 제거
+			//이전
+			html += `
+					<button onclick="getBoardList(${page-1})" type="button">이전</button>
+					`
+			// 페이지 번호 버튼 들
+			for ( let i = 1 ; i <= r.totalpage ; i++ ){ // 1부터 마지막페이지수까지 버튼 생성
+				html += `
+					<button onclick="getBoardList(${i})" type="button">${i}</button>
+					`
+			}
+			// 다음
+			html += `
+					<button onclick="getBoardList(${page+1})" type="button">다음</button>
+					`
+					
+			document.querySelector('.pagebox').innerHTML = html;
+			
+		}// success end
+	}) // ajax end
 }
 
 /*

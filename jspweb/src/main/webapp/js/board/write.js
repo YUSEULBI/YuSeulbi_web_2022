@@ -14,6 +14,7 @@ function bwrite(){
 	
 	// input값을 받고싶을 때 all 이 아니라 querySelector를 쓰면 html이 들어옴
 	// let writeForm = document.querySelector('.writeForm');
+	
 	// querySelectorAll 을 쓰면 input 값을 객체로 가져옴 - 객체배열
 	let writeForm = document.querySelectorAll('.writeForm');
 	

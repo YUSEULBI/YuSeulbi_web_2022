@@ -65,13 +65,14 @@ function bdownload( bfile ){
 	`<button onclick="bdownload('${r.bfile}')" type="button">다운로드</button>`
 		`<button onclick="bdownload('짱구4.jpg')" type="button">다운로드</button>`
 
-2. 전송방법
-	HTML : 1. <form>		2. <a hred = "" >
-	JS	: 1. location.href=""
-	JQUERY 	: 1.$.ajax({})
-	servlet :
-	 		response.getwriter.print();
-			response.sendRedirect("경로");
+2. 
+		전송 방법
+			HTML	:	1.<form>				2.<a href="">
+			JS 		:	1.location.href="" 	
+			JQUERY	:	1.$.ajax({ })
+			servlet : 	
+					1.response.getwriter.print(문자데이터);
+					2.response.sendRedirect('경로');
 
 bcontent
 bdate

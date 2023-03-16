@@ -16,6 +16,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import model.dao.BoardDao;
 import model.dao.MemberDao;
 import model.dto.BoardDto;
+import model.dto.PageDto;
 
 /**
  * Servlet implementation class Boardinfo
@@ -35,9 +36,47 @@ public class Boardinfo extends HttpServlet {
 		
 		int type = Integer.parseInt(request.getParameter("type"));
 		if ( type == 1 ) { // 전체출력
-			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList();
+			
+			// ------------ page 처리 계산
+			// 1. 현재페이지[요청] , 2.페이지당 게시물수 , 3. 현재페이지[게시물시작 , 게시물끝]
+			int page = Integer.parseInt(request.getParameter("page"));
+			System.out.println("page : "+page);
+			int listsize = 3;
+			int startrow = (page-1)*listsize; // 해당 페이지에서의 게시물 시작번호
+			
+			// --------------------page 버튼만들기 //
+			// 1. 전체페이지수[총레코드수/페이지당표시된수] 2. 페이지 표시할 최대버튼수 3. 시작버튼 번호
+				// 전체 레코드수 게시물수
+			int totalsize = BoardDao.getInstance().getTotalSize();
+				// 전체 페이지수
+			int totalpage = totalsize % listsize == 0 ? // 나머지가 0이면
+					totalsize/listsize : // 몫 
+						totalsize/listsize+1; // 나머지가 있으면 +1
+			
+									
+			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startrow ,listsize);
+			
+			PageDto pagedto = new PageDto(page, listsize, startrow, totalsize, totalpage, result);
+			
+					/*
+					 	총 게시물 수 = 10 , 페이지당 표시할 게시물수 = 3
+					 	1. 총 페이지수 = 10/3%+1 / 123 , 456 , 789 , 10
+					 			총레코드수/페이지당표시게시물수
+					 				1. 나머지가 없으면 몫만사용		9/3 -> 3페이지
+					 				2. 나머지가 있으면 몫 + 1		10/3 -> 4페이지
+					 	총레코드수 = 10 총레코드의 인덱수 0~9
+					 	
+						2. 페이지별 게시물시작 번호 찾기
+								1. 페이지 요청 -> (1-1)*3 => 0
+								2. 페이지 요청 -> (2-1)*3 => 3
+								3. 페이지 요청 -> (3-1)*3 => 6
+ 
+					 */
+			 
+			
+			
 			ObjectMapper mapper = new ObjectMapper();
-			String jsonlist = mapper.writeValueAsString(result);
+			String jsonlist = mapper.writeValueAsString(pagedto);
 			
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("application/json");

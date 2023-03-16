@@ -80,10 +80,9 @@ public class FileDownLoad extends HttpServlet {
 					fout.write(bytes); // --> response.getOutputStream() -- byte배열을 내보냄
 			// 3. 스트림 닫기 [ JVM CG 대신 직접 스트림 닫기 ]
 			fin.close();	// 파일입력스트림객체 닫기 초기화
-			fout.flush(); 	// 파일출력스트림객체 내 스트림 메모리 초기화
-			fout.close();	// 파일출력스트림객체 스트림 닫기
+			fout.flush(); 	// 파일출력스트림객체 내 스트림 메모리 초기화 // 
+			fout.close();	// 파일출력스트림객체 스트림 닫기 / CG에 카운트 안쌓이게 사용막음
 				
-			
 	}
 
 	

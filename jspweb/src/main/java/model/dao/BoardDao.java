@@ -26,11 +26,27 @@ public class BoardDao extends Dao {
 		return false;
 	}
 	
-	public ArrayList<BoardDto> getBoardList(){
-		ArrayList<BoardDto> list = new ArrayList<>();
-		String sql = "select board.* , member.mid from member natural join board;";
+	// 2. 게시물수 구하기 ( 레코드수 구하기)
+	public int getTotalSize() {
+		String sql = "select count(*)  from member m natural join board b;";
 		try {
 			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if ( rs.next() ) { return rs.getInt(1);	}
+		} catch (Exception e) {
+			System.out.println(e);
+		}return 0;
+		
+	}
+	
+	// 2. 게시글출력
+	public ArrayList<BoardDto> getBoardList( int startrow ,int listsize ){
+		ArrayList<BoardDto> list = new ArrayList<>();
+		String sql = "select b.* , m.mid from member m natural join board b limit ? , ?;";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, startrow);
+			ps.setInt(2, listsize);
 			rs = ps.executeQuery();
 			while( rs.next()) {
 				BoardDto boardDto = new BoardDto(

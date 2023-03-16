@@ -16,6 +16,11 @@
 		
 		<table class="boardTable table table-hover">
 		</table>
+		
+		<!--  -->
+		<div class="pagebox">
+
+		</div>
 	</div>
 	
 	<script src="/jspweb/js/board/list.js" type="text/javascript"></script>
