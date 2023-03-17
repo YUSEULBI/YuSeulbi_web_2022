@@ -10,6 +10,7 @@ public class BoardDao extends Dao {
 	private BoardDao() {	}
 	public static BoardDao getInstance() { 	return boardDao; }
 	
+	// 글쓰기
 	public boolean bwrite( BoardDto dto ) {
 		String sql = "insert into board( btitle , bcontent , bfile , mno , cno ) "
 				+ "values( ?,?,?,?,?);";
@@ -92,4 +93,61 @@ public class BoardDao extends Dao {
 		} catch (Exception e) {System.out.println(e);		}
 		return boardDto;
 	}
+	
+	// 4. 조회수/좋아수/싫어요 증가[update]
+		public boolean bIncrease( int type , int bno ) {
+			String sql ="";
+			// 만약에 타입이 1이면 bview 2이면 bup 3이면 bdown 를 1씩 증가 업데이트
+			if( type == 1 ) { sql="update board set bview 	= bview+1 	where bno = "+bno; }
+			if( type == 2 ) { sql="update board set bup 	= bup+1 	where bno = "+bno; }
+			if( type == 3 ) { sql="update board set bdown 	= bdown+1	where bno = "+bno; }
+			try {
+				ps = con.prepareStatement(sql); ps.executeUpdate(); return true;
+			}catch (Exception e) {System.out.println(e);}  return false;
+		}
+		
+	//
+	public boolean bdelete( int bno ) {
+		String sql = "delete from board where bno = "+bno;
+		try {
+			ps = con.prepareStatement(sql);
+			int count = ps.executeUpdate();
+			if ( count == 1 )return true;
+		}catch (Exception e) {System.out.println(e);}  return false;
+	}
+	
+	// 6. 게시물수정
+	public boolean bupdate( BoardDto dto ) {
+		String sql = "update board "
+				+ " set btitle = ? , bcontent = ? , "
+				+ " bfile = ? , cno = ? where bno = ? ";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getBtitle());
+			ps.setString(2, dto.getBcontent());
+			ps.setString(3, dto.getBfile());
+			ps.setInt(4, dto.getCno());
+			ps.setInt(5, dto.getBno());
+			
+			int count = ps.executeUpdate();
+			if ( count == 1 ) {return true;}
+		} catch (Exception e) { System.out.println(e); 	}
+		return false;
+	}
+		
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -42,6 +42,9 @@
 			<div class="bfile"></div> 		
 		</div>
 		
+		<div class="btnbox">
+		</div>
+		
 		
 	</div>
 
