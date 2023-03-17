@@ -46,11 +46,20 @@ public class MemberDao extends Dao {
 	}
 	
 	// 2. 모든회원호출
-	public ArrayList<MemberDto> getMemberList( ) {
+	public ArrayList<MemberDto> getMemberList( int startrow , int listsize , String mkey , String mkeyword ) {
 		ArrayList<MemberDto> list = new ArrayList<>();
-		String sql = "select * from member;";
+		String sql = "";
+		if ( mkey.equals("")&& mkeyword.equals("")) {
+			sql = "select * from member limit  ? , ?;";
+		
+		}else {
+			sql = "select * from member where "+mkey+" like '%"+mkeyword+"%' limit  ? , ?;";
+		}
+		System.out.println("검색한 또는 모든회원출력 sql : "+sql);
 		try {
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, startrow);
+			ps.setInt(2, listsize);
 			rs = ps.executeQuery();
 			while( rs.next() ) {
 				MemberDto dto = new MemberDto(
@@ -213,6 +222,22 @@ public class MemberDao extends Dao {
 		return 0;
 	}
 	
+	// 12. 회원수 구하기
+	public int getTotalMember( String mkey , String mkeyword ) {
+		String sql = "";
+		if ( mkey.equals("") && mkeyword.equals("")  ) {
+			sql = "select count(*) from member;";
+		}else {
+			sql = "select count(*) from member where "+mkey+" like '%"+mkeyword+"%'";
+		}
+		System.out.println("회원수구하기 sql : "+sql);
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if ( rs.next()) {return rs.getInt(1);	}
+		} catch (Exception e) { System.out.println(e);		}
+		return 0;
+	}
 	
 }
 

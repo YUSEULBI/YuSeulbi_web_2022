@@ -9,11 +9,42 @@
 <body>
 	
 	<%@ include file="/header.jsp" %> <!-- (프로젝트명 생략,webapp이하생략)절대경로 -->
-	<h3> 모든 회원 명단 </h3>
-	<table class="mListTable" border="1">
+	
+	<div class="container">
+		<h3> 모든 회원 명단 </h3>
+		<div>
+			<span class="totalsize"></span>
+		</div>
+		<div>
+			<select onchange="mlistsize()" class="listsize">
+				<option >3</option>
+				<option >5</option>
+				<option >10</option>
+			</select> 
+		</div>
+		<table class="mListTable table" border="1">
+		</table>
+		
+		<div class="infopagebtn">
+			<!-- 페이지버튼자리 -->
+				
+		</div>
+		<div>
+			<select class="mkey">
+				<option value="mno">회원번호</option>
+				<option value="mid">아이디</option>
+				<option value="memail">이메일</option>
+			</select>
+			<input class="mkeyword" type="text">
+			<button onclick="msearchbtn()" class="msearchbtn" type="button">검색</button>
+			<button onclick="resetPrint()" type="button">회원전체보기</button>
+		</div>
+		
+	</div>
+	
 		
 	
-	</table>
+	
 	
 	
 	

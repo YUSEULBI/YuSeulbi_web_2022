@@ -90,7 +90,7 @@ function bdelete(bno ,cno){
 	$.ajax({
 		url : "/jspweb/board/info" ,
 		method : "delete" ,
-		data : {"bno":bno} ,
+		data : {"bno":bno , "type":1} ,// 1:게시물삭제 / 2:첨부파일만삭제
 		success : (r)=>{
 			console.log('통신')
 			console.log(r)

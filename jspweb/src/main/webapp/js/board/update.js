@@ -19,7 +19,7 @@ function getBoard(){
 			
 			document.querySelector('.btitle').value = r.btitle;
 			document.querySelector('.bcontent').value = r.bcontent;
-			document.querySelector('.oldbfile').innerHTML = r.bfile;
+			
 			
 			// 기존 select option 가져와서 select
 			let cnoSelect = document.querySelector('.cno');
@@ -32,6 +32,27 @@ function getBoard(){
 					// i번째 옵션<option> 태그의 값과 현재 게시물의 카테고리번호와 일치하면
 					cnoSelect.options[i].selected = true;
 				}
+			}
+			
+			// 2. 첨부파일 있을 때 / 없을때
+			let html = '';
+			if ( r.bfile == null ){
+				html += `기존 첨부파일없음 / `;
+			}else{
+				html += `
+						<div>
+							기존 첨부파일 :<span class="oldbfile"></span> 
+							<button onclick="bfiledelete()" type="button">삭제</button>
+						</div>
+						`
+				
+			}
+			html += `변경할 첨부파일 
+						<input name="bfile" type="file"> <br/>`
+			
+			document.querySelector('.bfilebox').innerHTML = html;
+			if ( r.bfile != null ){
+				document.querySelector('.oldbfile').innerHTML = r.bfile;
 			}
 		}
 	})
@@ -64,9 +85,31 @@ function bupdate(){
 		}
 	})
 	
+}
+
+//3
+function bfiledelete(){
+	alert('첨부파일 삭제합니다.')
 	
-	
-	
+	$.ajax({
+		url : "/jspweb/board/info" ,
+		method : "delete" ,
+		data : { "bno":bno , "type" : 2} , // 1:게시물삭제 / 2:첨부파일만삭제
+		success : (r)=>{
+			console.log('통신')
+			console.log(r)
+			if ( r == 'true'){
+				// 특정 div만 reload[렌더링] 방법!
+				// 주의점!! : location.href+' .bfilebox'); 띄어쓰기 해야 부분렌더링됨
+				$(".bfilebox").load( location.href+' .bfilebox');
+				// 해당 클래스명을 가진 태그 객체화
+				// $(".클래스명")
+				// document.querySelector('.클래스명)과 동일
+			}else{
+				
+			}
+		}
+	})
 }
 
 

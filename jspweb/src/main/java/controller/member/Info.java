@@ -15,6 +15,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import model.dao.MemberDao;
 import model.dto.MemberDto;
+import model.dto.MemberPageDto;
 
 /**
  * Servlet implementation class Info
@@ -106,11 +107,43 @@ public class Info extends HttpServlet {
 	// 회원정보 호출
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//page처리
+		// 현재페이지 / 페이지당 게시물수 / 시작페이지,끝페이지 /
+		int page = Integer.parseInt(request.getParameter("page"));
+		System.out.println("page : "+page);
+		String mkey = request.getParameter("mkey");
+		String mkeyword = request.getParameter("mkeyword");
+		
+		// 페이지당 회원수
+		int listsize = Integer.parseInt(request.getParameter("listsize"));
+		System.out.println("listsize : "+listsize);
+		// 선택페이지 첫회원인덱스
+		int startrow = (page-1)*listsize;
+		System.out.println("startrow : "+startrow);
+		
+		//-------------page 버튼만들기
+		//회원수 레코드수
+		int totalsize = MemberDao.getInstance().getTotalMember( mkey , mkeyword );
+		//총페이지수(마지막페이지)
+		int totalpage = totalsize % listsize == 0 ?
+				totalsize/listsize : // 몫
+					totalsize/listsize+1;
+		//페이지당 마지막회원인덱스
+		int endrow = startrow+listsize-1;
+		
+		
+		
+		
 		// 모든 회원 명단 호출
-		ArrayList<MemberDto> list = MemberDao.getInstance().getMemberList();
-		System.out.println(list);
+		ArrayList<MemberDto> memberlist = MemberDao.getInstance().getMemberList( startrow , listsize , mkey , mkeyword );
+		System.out.println(memberlist);
+		
+		// 모든 것 담을 dto 새로만들기
+		MemberPageDto pagedto = new MemberPageDto(page, listsize, startrow, totalsize, totalpage, endrow, memberlist);
+		
+		
 		ObjectMapper mapper = new ObjectMapper();
-		String jsonList =  mapper.writeValueAsString(list);
+		String jsonList =  mapper.writeValueAsString(pagedto);
 		System.out.println(jsonList);
 		
 		response.setCharacterEncoding("UTF-8");
