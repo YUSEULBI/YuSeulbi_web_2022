@@ -1,5 +1,13 @@
 console.log('view js 열림')
 let bno = document.querySelector('.bno').innerHTML;
+console.log(memberInfo);
+
+// 로그인 안되어 있으면
+if ( memberInfo.mid == null ){
+	document.querySelector('.rcontent').disabled = true;
+	document.querySelector('.rcontent').value = '로그인 후에 작성 가능합니다.';
+	document.querySelector('.rwritebtn').disabled = true;
+}
 
 getBoard()
 function getBoard(){
@@ -140,7 +148,7 @@ function getReplyList(){
 	$.ajax({
 		url : "/jspweb/board/reply" ,
 		method : "get" ,
-		data : {"bno":bno} ,
+		data : { "type":1 , "bno":bno} ,
 		success : (r)=>{
 			console.log('댓글출력 get ajax통신');
 			console.log(r);
@@ -152,7 +160,7 @@ function getReplyList(){
 							<span>${o.mid}</span>
 							<span>${o.rdate}</span>
 							<span>${o.rcontent}</span>
-							<button onclick="rereplyview(${o.rno})" type="button">댓글달기</button>
+							<button onclick="rereplyview(${o.rno})" type="button">답변보기</button>
 							<div class="rereplybox${o.rno}"></div>
 						</div>
 						`
@@ -165,15 +173,43 @@ function getReplyList(){
 
 // 하위댓글 구역
 function rereplyview( rno ){
-	let html = `
+	console.log("bno : "+bno)
+	console.log("rno : "+rno)
+	$.ajax({
+		url : "/jspweb/board/reply" ,
+		async : 'false' , //동기화 통신
+		method : "get" ,
+		data : { "type":2 , "bno":bno , "rindex":rno } ,
+		success : (r)=>{
+			console.log(r)
+			html = `<div>
+						--------------------------------
+					</div>`
+			r.forEach( (o)=>{
+				html += `
+						<div>
+							<span>${o.mimg}</span>
+							<span>${o.mid}</span>
+							<span>${o.rdate}</span>
+							<span>${o.rcontent}</span>
+							<button onclick="rereplyview(${o.rno})" type="button">답변보기</button>
+							<div class="rereplybox${o.rno}"></div>
+						</div>
+						`
+			})
+			html += `
 				<textarea class="rrcontent${rno}"></textarea>
 				<button onclick="rrwrite(${rno})" type="button">대댓글작성</button>
 				`
-	console.log('대댓글 클릭')
-	let rereplybox = `rereplybox${rno}`
-	document.querySelector('.'+rereplybox).innerHTML = html;
-	
-}
+			console.log('대댓글 클릭')
+			// 하위댓글만 출력하려면
+			
+			let rereplybox = `rereplybox${rno}`
+			document.querySelector('.'+rereplybox).innerHTML = html;
+			
+		} // success end
+	}) // ajax end
+} // function end
 
 // 하위댓글 작성 [ ]
 function rrwrite( rno ){
@@ -185,10 +221,16 @@ function rrwrite( rno ){
 		"rcontent":document.querySelector('.rrcontent'+rno).value } ,
 		success : (r)=>{
 			console.log(r)
+			if ( r == 'true'){
+				alert('대댓글 출력')
+				location.reload();
+			}
 		} 
 		
 	})
 }
+
+
 
 /*
 

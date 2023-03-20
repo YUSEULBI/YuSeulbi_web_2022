@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+.boardbox{
+	width : 80%;
+	margin : 70px auto;
+}
+
+.boardtop{
+	text-align: center;
+}
+
+.boardtop .cname{
+	font-family: 'LINESeedKR-Bd';
+}
+
+.boardtopetc{
+	display: flex;
+	justify-content: space-between;
+}
+
+.bbtn{
+    border: #939393;
+/*     background-color: #939393; */
+    padding: 2px 10px;
+    color: gray;
+/*     border-radius: 10px; */
+}
+
+.boardcontent{
+	margin: 28px 0px;
+    border-top: 2px solid #eeeeee;
+    padding: 22px 10px;
+}
+
+.bdate{
+	font-size: 8px;
+}
+
+.btitle{
+	margin-top: 20px;
+	font-family: 'LINESeedKR-Bd';
+	font-size: 20px;
+}
+
+.contentBottom{
+	text-align: right;
+}
+
+.contentBottom span{
+	padding-left: 5px; 
+}
+
+

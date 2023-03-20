@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<link href="/jspweb/css/list.css" rel="stylesheet">
+	
+	<!--  폰트어썸  -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 </head>
 <body>
 
@@ -22,7 +26,38 @@
 	 <!-- cno 숨겨서 js에게 전달 -->
 	<input type="hidden" class="cno" value="<%=cno%>">
 	
+	<!-- html / css -->
+	<div class="container">
+		<div class="boardbox">
+		
+			<div class="boardtop">
+				<h3 class="cname">공지사항</h3>
+				<p> 다양한 사람들과 정보를 공유 해보세요 </p>
+			</div>
+			
+			<div class="boardtopetc">
+				<a href="write.jsp">
+					<button class="bbtn"> <i class="fas fa-pencil-alt"></i> 글쓰기</button>
+				</a>
+				<div>
+					<span class="searchcount"></span>
+					<button onclick="clearSearch()" class="bbtn" type="button">전체보기</button>
+					<select class="bbtn listsize" onchange="chlistsize()">
+						<option value="3">3</option>
+						<option value="5">5</option>
+						<option value="10">10</option>
+					</select>
+				</div>
+			</div> <!-- boardtopetc end -->
+			
+			<div class="boardTable">
+			</div>
+				
+		</div> <!-- boardbox end -->
+	</div>
 	
+	
+	<!--  -->
 	<div class="container">
 		<h3 class="cname"></h3>
 		

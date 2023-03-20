@@ -35,8 +35,18 @@ public class Reply extends HttpServlet {
 		// 1.
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
+		int type = Integer.parseInt(request.getParameter("type"));
+		
+		int rindex = 0;
+		if ( type == 1 ) { // 상위댓글 출력
+			
+		}else if (type == 2) { // 하위댓글 출력
+			rindex = Integer.parseInt(request.getParameter("rindex"));
+			
+		}
+		
 		// 2.
-		ArrayList<ReplyDto> result = BoardDao.getInstance().getReplyList(bno);
+		ArrayList<ReplyDto> result = BoardDao.getInstance().getReplyList( bno , rindex );
 		
 		// 3.
 		ObjectMapper mapper = new ObjectMapper();
