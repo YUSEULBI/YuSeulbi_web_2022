@@ -9,6 +9,8 @@ console.log('list js 실행')
 	type : 1 // 1: 전체출력 2:개별출력
 }
 */
+
+
 let pageObject = {
 	page : 1 , // page : 페이지번호
 	key : "" , 

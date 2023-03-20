@@ -45,9 +45,35 @@
 		<div class="btnbox">
 		</div>
 		
+		<div>
+			<textarea class="rcontent" rows="" cols=""></textarea>
+			<button onclick="rwrite()" type="button">댓글작성</button>
+		</div>
+		
+		<div class="replyListbox">
+		</div>
+		
+		
 		
 	</div>
 
 	<script src="/jspweb/js/board/view.js" type="text/javascript"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

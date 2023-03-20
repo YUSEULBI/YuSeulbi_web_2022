@@ -1,10 +1,9 @@
 console.log('view js 열림')
+let bno = document.querySelector('.bno').innerHTML;
 
 getBoard()
 function getBoard(){
-	let bno = document.querySelector('.bno').innerHTML;
 	console.log("getBoard에서 호출bno : "+bno)
-	
 	$.ajax({
 		url : "/jspweb/board/info" ,
 		method : "get" ,
@@ -40,6 +39,8 @@ function getBoard(){
 				document.querySelector('.btnbox').innerHTML = html;
 				
 			}
+			// 댓글출력
+			getReplyList();
 		}
 	})
 } // getBoard function end
@@ -106,6 +107,87 @@ function bdelete(bno ,cno){
 
 function bupdate(bno){
 	location.href = "/jspweb/board/update.jsp?bno="+bno;
+}
+
+// 댓글쓰기
+function rwrite(){
+	console.log('rwrite 함수 실행')
+	// rcontent / mno 세션 / bno 전역변수
+	let rcontent = document.querySelector('.rcontent').value
+	console.log("rcontent : "+rcontent)
+	$.ajax({
+		url : "/jspweb/board/reply" ,
+		method : "post" ,
+		data : { "type":1 , "bno":bno , "rcontent":rcontent  } ,
+		success : (r)=>{
+			console.log('댓글쓰기 post ajax통신')
+			console.log(r)
+			if ( r == 'true'){alert('댓글작성성공')
+				document.querySelector('.rcontent').value = '';
+				
+				// [제이쿼리] 특정 div만 렌더링
+				//$('.replyListbox').load( location.href+' .replyListbox');
+				// [JS] 현재페이지 새로고침 (F5)
+				location.reload();
+			}
+			else {alert('댓글작성실패') }
+		}
+	})
+}
+
+// 7. 댓글 출력
+function getReplyList(){
+	$.ajax({
+		url : "/jspweb/board/reply" ,
+		method : "get" ,
+		data : {"bno":bno} ,
+		success : (r)=>{
+			console.log('댓글출력 get ajax통신');
+			console.log(r);
+			html = ''
+			r.forEach((o,i)=>{
+				html += `
+						<div>
+							<span>${o.mimg}</span>
+							<span>${o.mid}</span>
+							<span>${o.rdate}</span>
+							<span>${o.rcontent}</span>
+							<button onclick="rereplyview(${o.rno})" type="button">댓글달기</button>
+							<div class="rereplybox${o.rno}"></div>
+						</div>
+						`
+			})
+			
+			document.querySelector('.replyListbox').innerHTML = html
+		}
+	})
+}
+
+// 하위댓글 구역
+function rereplyview( rno ){
+	let html = `
+				<textarea class="rrcontent${rno}"></textarea>
+				<button onclick="rrwrite(${rno})" type="button">대댓글작성</button>
+				`
+	console.log('대댓글 클릭')
+	let rereplybox = `rereplybox${rno}`
+	document.querySelector('.'+rereplybox).innerHTML = html;
+	
+}
+
+// 하위댓글 작성 [ ]
+function rrwrite( rno ){
+	// bno , mno , rrcontent , rindex(상위댓글번호)
+	$.ajax({
+		url : "/jspweb/board/reply" ,
+		method : "post" ,
+		data : { "type" : 2 , "bno":bno , "rindex":rno , // 하위댓글 2
+		"rcontent":document.querySelector('.rrcontent'+rno).value } ,
+		success : (r)=>{
+			console.log(r)
+		} 
+		
+	})
 }
 
 /*

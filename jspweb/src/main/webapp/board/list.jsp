@@ -15,11 +15,13 @@
 	 -->
 	 <%
 	 	String cno = request.getParameter("cno");
+	 	
 	 // 표현식 이용 input div 대입
 	 %>
 	 
 	 <!-- cno 숨겨서 js에게 전달 -->
 	<input type="hidden" class="cno" value="<%=cno%>">
+	
 	
 	<div class="container">
 		<h3 class="cname"></h3>

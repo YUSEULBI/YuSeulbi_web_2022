@@ -3,6 +3,7 @@ package model.dao;
 import java.util.ArrayList;
 
 import model.dto.BoardDto;
+import model.dto.ReplyDto;
 
 public class BoardDao extends Dao {
 	
@@ -146,7 +147,52 @@ public class BoardDao extends Dao {
 		} catch (Exception e) { System.out.println(e); 	}
 		return false;
 	}
+	
+	// 8. 댓글쓰기 , 대댓글쓰기
+	public boolean rwrite ( ReplyDto dto ) {
+		try {
+			String sql = "";
+			if ( dto.getRindex() == 0 ) { // 상위댓글
+				sql = "insert into reply( rcontent , mno , bno ) values( ? , ? , ? )";
+			}else { // 하위댓글
+				sql = "insert into reply( rcontent , mno , bno , rindex ) values( ? , ? , ? ,? )";
+			}
 		
+		
+			ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getRcontent());
+			ps.setInt(2, dto.getMno());
+			ps.setInt(3, dto.getBno());
+			// 하위댓글만 rindex넣어줌
+			if ( dto.getRindex() != 0 ) { ps.setInt(4, dto.getRindex()); }
+			
+			int count = ps.executeUpdate();
+			if (count == 1) {return true;	}
+			
+		} catch (Exception e) { System.out.println(e); 	}
+		return false;
+	}
+	
+	// 9. 게시물의 댓글 출력
+	public ArrayList<ReplyDto> getReplyList( int bno){
+		ArrayList<ReplyDto> list = new ArrayList<>();
+		String sql = "select r.* , m.mid , m.mimg  "
+				+ "from reply r natural join member m "
+				+ "where r.bno ="+bno;
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ReplyDto dto = new ReplyDto(
+						rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), 
+						rs.getInt(5), rs.getInt(6), rs.getString(7), rs.getString(8));
+				list.add(dto);
+			}
+		} catch (Exception e) { System.out.println(e); 	}
+		return list;
+	}
+	
+
 }
 
 
