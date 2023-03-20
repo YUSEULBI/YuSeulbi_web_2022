@@ -11,6 +11,7 @@
 
 .boardtop .cname{
 	font-family: 'LINESeedKR-Bd';
+	font-size: 30px;
 }
 
 .boardtopetc{
@@ -70,12 +71,8 @@
 	border: none;
 	background-color: #eeeeee;
 	padding : 2px;
-	
-	
+
 }
-
-
-
 
 .searchdiv{
 	margin-top : 20px;

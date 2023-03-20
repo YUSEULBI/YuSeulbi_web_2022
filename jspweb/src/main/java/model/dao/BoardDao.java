@@ -110,11 +110,9 @@ public class BoardDao extends Dao {
 				
 				// 모든 게시물을 찾은 rs가 아직 안끝남. 새로운 resultset rs2 선언
 				ResultSet rs2 = ps.executeQuery();
-				if ( rs2.next() ) { boardDto.setRcount(rs2.getInt(1));
-				
-				}
+				if ( rs2.next() ) { boardDto.setRcount(rs2.getInt(1));		}
 			}
-		} catch (Exception e) {System.out.println(e);		}
+		} catch (Exception e) {	System.out.println(e);	}
 		return boardDto;
 	}
 	
@@ -215,7 +213,14 @@ public class BoardDao extends Dao {
 		return list;
 	}
 	
-
+	// 10. 해당게시물의 총 댓글수
+	public int getReplyCount( int bno ) {
+		String sql = "select count(*) from reply where bno = "+bno;
+		try {
+			
+		} catch (Exception e) { System.out.println(e); 	}
+		return 0;
+	}
 }
 
 

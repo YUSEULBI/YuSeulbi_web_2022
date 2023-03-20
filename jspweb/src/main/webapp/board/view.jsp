@@ -60,8 +60,25 @@
 				<textarea class="rcontent" rows="" cols=""></textarea>
 				<button class="rwritebtn bbtn" onclick="rwrite()" type="button">댓글작성</button>
 			</div>
-			<div>댓글출력하는자리</div>
+			<div class="comments">
+				<div class="commentsone">
+					<div class="comments_first">
+						<div>
+							<img alt="" src="/jspweb/member/pimg/default.webp" class="hpimg mimg"> 
+						</div>
+						<div class="commentmid"> qwe1234 </div>
+						<div> 댓글을 작성합니다. </div>
+					</div>
+					<div class="comments_end">
+						<div class="cdate"> 2023-03-22 </div>
+						<button class="bbtn commentsbtn">답글보기</button>
+						<div class="recomments"></div>
+					</div>
+				</div>
+			</div>
+			
 			<div class="replyListbox">
+				
 			</div>
 		</div>
 	</div>

@@ -53,3 +53,37 @@
 .btnbox{
 	text-align: right;
 }
+
+.commentsone{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #eeeeee;
+	padding: 20px 30px;
+}
+
+.comments{
+	margin-top: 10px;
+}
+
+.comments_first{
+	display: flex;
+	align-items: center;
+}
+.comments_end{
+	display: flex;
+	align-items: center;
+}
+.commentmid{
+	margin: 0 20px 0 10px;
+	font-weight: bold;
+}
+
+.cdate{
+	font-size: 13px;
+}
+
+.commentsbtn{
+	background-color: white;
+	margin-left: 10px;
+}
