@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<link href="/jspweb/css/list.css" rel="stylesheet">
+	<link href="/jspweb/css/view.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file="/header.jsp" %>
@@ -14,48 +16,65 @@
 		// 1. jsp 이용한 http url 변수 호출
 		String bno = request.getParameter("bno");
 	%>
+	
 	<!-- 표현식코드 자바코드를 출력하는 자리 -->
+	<input type="hidden" class="bno" value="<%=bno%>">
+	
 	<div class="container">
-		<h3>게시물 개별 조회/보기</h3>
-		<div>
-			<div>게시물번호</div>
-			<div class="bno"><%=bno %></div> 		
+		<div class="boardbox">
+			<div class="viewtop">
+				<div>
+					<img alt="" src="/jspweb/member/pimg/default.webp" class="hpimg mimg"> 
+				</div>
+				<div class="rviewtop">
+					<div class="mid"></div>
+					<div>
+						<span class="bdate"></span>
+						
+						<span class="binfo">
+							<i class="far fa-eye"></i> 
+							<span class="bview"></span> 
+						</span>
+						
+						<span class="binfo">
+							<i class="far fa-thumbs-up"></i> 
+							<span onclick="bIncrease(2)"  class="bup"></span> 
+						</span>
+						
+						<span class="binfo">
+							<i class="far fa-thumbs-down"></i> 
+							<span onclick="bIncrease(3)" class="bdown"></span> 
+						</span>
+						
+					</div>
+
+				</div>
+			</div>
+			<div class="btitle"></div>
+			<div class="bcontent"></div>
+			<div class="bfile"></div>
+			<div class="btnbox"></div>
+			
+			<div class="replycount"> 3개의 댓글 </div>
+			<div class="replywritebox">
+				<textarea class="rcontent" rows="" cols=""></textarea>
+				<button class="rwritebtn bbtn" onclick="rwrite()" type="button">댓글작성</button>
+			</div>
+			<div>댓글출력하는자리</div>
+			<div class="replyListbox">
+			</div>
 		</div>
-		<div>
-			<div>작성일 / 조회수 / 좋아요 / 싫어요</div>
-			<div  class="infobox"></div> 		
-		</div>
-		<div>
-			<div>작성자[프로필]</div>
-			<div class="pimgbox"></div> 		
-		</div>
-		<div>
-			<div>제목</div>
-			<div class="btitle"></div> 		
-		</div>
-		<div>
-			<div>내용</div>
-			<div class="bcontent"></div> 		
-		</div>
-		<div>
-			<div>첨부파일</div>
-			<div class="bfile"></div> 		
-		</div>
-		
-		<div class="btnbox">
-		</div>
-		
-		<div>
-			<textarea class="rcontent" rows="" cols=""></textarea>
-			<button class="rwritebtn" onclick="rwrite()" type="button">댓글작성</button>
-		</div>
-		
-		<div class="replyListbox">
-		</div>
-		
-		
-		
 	</div>
+	
+	
+	
+	
+		
+		
+		
+		
+		
+	
 
 	<script src="/jspweb/js/board/view.js" type="text/javascript"></script>
 </body>
