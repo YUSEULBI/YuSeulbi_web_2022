@@ -31,7 +31,7 @@
 		<div class="boardbox">
 		
 			<div class="boardtop">
-				<h3 class="cname">공지사항</h3>
+				<h3 class="cname"></h3>
 				<p> 다양한 사람들과 정보를 공유 해보세요 </p>
 			</div>
 			
@@ -52,43 +52,30 @@
 			
 			<div class="boardTable">
 			</div>
+			
+			<!-- 페이징+검색 -->
+			<div class="boardbottom">
 				
+				<div class="pagebox"> </div>
+				
+				<div class="searchdiv">
+					<select class="key bbtn" > <!-- select시 사용되는 필드명 -->
+						<option value="btitle">제목</option>
+						<option value="bcontent">내용</option>
+						<option value="m.mid">작성자</option>
+					</select>
+					<input  class="keyword" type="text"> <!-- select 조건의 데이터 -->
+					<button class="bbtn" onclick="getsearch()" type="button">검색</button>
+				</div>
+			</div>
+			
 		</div> <!-- boardbox end -->
+		
+		
+		
 	</div>
-	
-	
-	<!--  -->
-	<div class="container">
-		<h3 class="cname"></h3>
-		
-		<a href="write.jsp">글쓰기</a>
-		<button onclick="clearSearch()" type="button">전체보기[검색제거]</button>
-		<div class="searchcount"> 총 게시물수 : </div>
-		<select onchange="chlistsize()" class="listsize">
-			<option value="3">3</option>
-			<option value="5">5</option>
-			<option value="10">10</option>
-		</select>
-		
-		
-		<table class="boardTable table table-hover">
-		</table>
-		
-		<!--  -->
-		<div class="pagebox">
+			
 
-		</div>
-		<div >
-			<select class="key" > <!-- select시 사용되는 필드명 -->
-				<option value="btitle">제목</option>
-				<option value="bcontent">내용</option>
-				<option value="m.mid">작성자</option>
-			</select>
-			<input  class="keyword" type="text"> <!-- select 조건의 데이터 -->
-			<button onclick="getsearch()" type="button">검색</button>
-		</div>
-		
-	</div>
 	
 	<script src="/jspweb/js/board/list.js" type="text/javascript"></script>
 </body>

@@ -1,5 +1,8 @@
 package model.dto;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class BoardDto {
 	private int bno;
 	private String btitle;
@@ -13,7 +16,8 @@ public class BoardDto {
     private int cno;
     // 추가 작성자 아이디
     private String mid;
-    // private String mimg;
+    private String mimg; // 작성자 프로필 사진
+    private int rcount;	// 댓글개수
     
     public BoardDto() {	}
     
@@ -31,6 +35,7 @@ public class BoardDto {
 		this.bdown = bdown;
 		this.mno = mno;
 		this.cno = cno;
+		
 	}
 	
 	
@@ -52,7 +57,24 @@ public class BoardDto {
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bfile = bfile;
-		this.bdate = bdate;
+		
+		// 오늘 날짜와 작성일이 동일하면 시간표기 / 아니면 날짜표기
+			// 1. 오늘날짜
+		Date date = new Date();
+		System.out.println("date : "+date);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String now = sdf.format(date);
+		System.out.println("now : "+now);
+			// 2. 만약에 오늘날짜와 작성일 동일하면 [ split 문자열 자르기 함수 ]
+			// 띄어쓰기로 잘라서 날짜만 나오게 
+			// now.split(" ")[0] : 날짜 / now.split(" ")[1] : 시간 /
+		if ( now.split(" ")[0].equals(bdate.split(" ")[0])) {
+			this.bdate = bdate.split(" ")[1]; // 날짜가 같으면 시간만 
+		}else {
+			this.bdate = bdate.split(" ")[0]; // 날짜가 다르면 날짜만
+		}
+		
+		
 		this.bview = bview;
 		this.bup = bup;
 		this.bdown = bdown;
@@ -166,6 +188,22 @@ public class BoardDto {
 
 	public void setMid(String mid) {
 		this.mid = mid;
+	}
+
+	public String getMimg() {
+		return mimg;
+	}
+
+	public void setMimg(String mimg) {
+		this.mimg = mimg;
+	}
+
+	public int getRcount() {
+		return rcount;
+	}
+
+	public void setRcount(int rcount) {
+		this.rcount = rcount;
 	}
 
 	

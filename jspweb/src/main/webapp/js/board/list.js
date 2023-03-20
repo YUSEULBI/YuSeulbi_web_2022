@@ -64,16 +64,16 @@ function getBoardList( page ){
 				html += `
 						<div class="boardcontent">
 							<div>
-								<img class="hpimg" alt="" src="/jspweb/member/pimg/default.webp">
+								<img class="hpimg" alt="" src="/jspweb/member/pimg/${o.mimg == null ? 'default.webp' : o.mimg}">
 								<span class="mid"> ${o.mid} </span>
 								<span class="bdate"> ${o.bdate} </span>
 							</div>
-							<div class="btitle"> ${o.btitle} </div>
+							<div class="btitle"><a href="/jspweb/board/view.jsp?bno=${o.bno}"> ${o.btitle} </a></div>
 							<div class="contentBottom">
-								<span><i class="far fa-eye"></i> <span class="bview">${o.bview}</span> </span>
-								<span><i class="far fa-thumbs-up"></i> <span class="bup">${o.bup}</span> </span>
-								<span><i class="far fa-thumbs-down"></i> <span class="bdown">${o.bdown}</span> </span>
-								<span><i class="far fa-comment-dots"></i> <span class="rcount">10</span> </span>
+								<span class="binfo"><i class="far fa-eye"></i> <span class="bview">${o.bview}</span> </span>
+								<span class="binfo"><i class="far fa-thumbs-up"></i> <span class="bup">${o.bup}</span> </span>
+								<span class="binfo"><i class="far fa-thumbs-down"></i> <span class="bdown">${o.bdown}</span> </span>
+								<span class="binfo"><i class="far fa-comment-dots"></i> <span class="rcount">${o.rcount}</span> </span>
 							</div>
 						</div>	
 						`
@@ -86,18 +86,18 @@ function getBoardList( page ){
 			html = ''; // 기존에 들어있던 내용 제거
 			//이전 [ 현재페이지가 1이하이면 이전버튼은 현재페이지버튼이됨]
 			html += page <= 1 ?
-					`<button onclick="getBoardList(${page})" type="button">이전</button>`
-					: `<button onclick="getBoardList(${page-1})" type="button">이전</button>`
+					`<button onclick="getBoardList(${page})" type="button" class="pagebtn"> < </button>`
+					: `<button onclick="getBoardList(${page-1})" type="button" class="pagebtn"> < </button>`
 			// 페이지 번호 버튼 들
 			for ( let i = r.startbtn ; i <= r.endbtn ; i++ ){ // 1부터 마지막페이지수까지 버튼 생성
 				html += `
-						<button onclick="getBoardList(${i})" type="button">${i}</button>
+						<button onclick="getBoardList(${i})" type="button" class="pagebtn">${i}</button>
 						`
 			}
 			// 다음 [ 현재페이지가 마지막페이지면 다음버튼은 현재페이지 버튼이됨]
 			html += page >= r.totalpage ?
-					` <button onclick="getBoardList(${page})" type="button">다음</button> `
-					: ` <button onclick="getBoardList(${page+1})" type="button">다음</button> `
+					` <button onclick="getBoardList(${page})" type="button" class="pagebtn"> > </button> `
+					: ` <button onclick="getBoardList(${page+1})" type="button" class="pagebtn"> > </button> `
 					
 			document.querySelector('.pagebox').innerHTML = html;
 			//----게시물수-----------------------------------------

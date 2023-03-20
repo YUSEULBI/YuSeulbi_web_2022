@@ -14,7 +14,7 @@
 		// 1. jsp 이용한 http url 변수 호출
 		String bno = request.getParameter("bno");
 	%>
-	<%=bno %> <!-- 표현식코드 자바코드를 출력하는 자리 -->
+	<!-- 표현식코드 자바코드를 출력하는 자리 -->
 	<div class="container">
 		<h3>게시물 개별 조회/보기</h3>
 		<div>

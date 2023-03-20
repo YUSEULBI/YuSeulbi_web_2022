@@ -19,7 +19,8 @@
 }
 
 .bbtn{
-    border: #939393;
+    border: #939393 1px solid;
+    background-color : transparent;
 /*     background-color: #939393; */
     padding: 2px 10px;
     color: gray;
@@ -29,7 +30,7 @@
 .boardcontent{
 	margin: 28px 0px;
     border-top: 2px solid #eeeeee;
-    padding: 22px 10px;
+    padding: 25px 20px 0px 20px;
 }
 
 .bdate{
@@ -37,7 +38,7 @@
 }
 
 .btitle{
-	margin-top: 20px;
+	margin-top: 18px;
 	font-family: 'LINESeedKR-Bd';
 	font-size: 20px;
 }
@@ -46,8 +47,39 @@
 	text-align: right;
 }
 
-.contentBottom span{
-	padding-left: 5px; 
+.binfo{
+	padding-left: 15px; 
 }
+
+/*---------------------------------*/
+.boardbottom{
+	margin : 20px 0px;
+	text-align: center;
+	border-top: 2px solid #eeeeee;
+	padding: 40px 0px; 
+}
+
+.pagebtn{
+	border: none;
+    background-color: transparent;
+    font-weight: bold;
+    margin: 0px 10px;
+}
+
+.keyword{
+	border: none;
+	background-color: #eeeeee;
+	padding : 5px;
+	
+	
+}
+
+
+.searchdiv{
+	margin-top : 20px;
+}
+
+
+
 
 
