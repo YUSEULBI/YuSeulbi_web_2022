@@ -18,7 +18,7 @@
 	
 	
 	<!-- 카카오지도 필요한 클래스/메소드 갖고있는 js라이브러리 -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4737aaadbf0b5529b4a298b1282498ea"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4737aaadbf0b5529b4a298b1282498ea&libraries=clusterer"></script>
 	
 	<script src="/jspweb/js/api/api2.js" type="text/javascript"></script>
 </body>
