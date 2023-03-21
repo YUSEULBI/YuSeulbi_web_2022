@@ -104,13 +104,21 @@ var clusterer = new kakao.maps.MarkerClusterer({
         
         // let 리턴된값배열 = map.( ()=>{ return 리턴값 } ) 
         var markers = $(data.data).map(function(i, position) {
+            
+            // 마커생성객체
             let marker = new kakao.maps.Marker({
                 position : new kakao.maps.LatLng(position['위도(WGS84)'],position['경도(WGS84)']) ,
                 image: markerImage
             });
             // 마커에 클릭이벤트를 등록합니다
 			kakao.maps.event.addListener(marker, 'click', function() {
-			      alert( positions[i].title+'의 마커를 클릭했습니다.')
+			      
+			      // 모달 정보 담기
+			      document.querySelector('.modal_title').innerHTML = position.충전소명
+			      document.querySelector('.modal_title').style.fontSize = '20px'
+			      document.querySelector('.modal_content').innerHTML = position.소재지지번주소
+			      // 모달
+			      modal_open();
 			});
 			
 			// 리턴해서 markers에 대입하기 [ map 함수 제공 ]
