@@ -11,7 +11,7 @@
 	<%@include file="/header.jsp" %> <!-- 모달있음 -->
 	
 	<div class="container">
-		<h3>3초 기다려야 나옵니다.</h3>
+		<h3>3초 기다리면 나옵니다.</h3>
 		<div id="map" style="width:100%;height:700px;"></div>
 	</div>
 	
