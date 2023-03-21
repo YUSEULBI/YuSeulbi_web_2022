@@ -71,66 +71,44 @@ $.get(
          
 });
 */
-let markers = []
- $.ajax({
+
+// 주소로 좌표를 검색합니다
+
+
+$.ajax({
 	url : "https://api.odcloud.kr/api/3035882/v1/uddi:5fae3cf5-bc15-4eba-87d8-8289b74e659b_201912202015?page=1&perPage=292&returnType=JSON&serviceKey=Iqz2hhoDi1svJ0zCQoU1Ol%2F%2Bq6uALaVVHNlDUHV9UF%2F7XsZwh82IOjzCL77bBoSdnftYuB9kq38EGPG9xOeamg%3D%3D" ,
 	method : "get",
 	async : false,
 	success: (r)=>{
-		console.log(r.data)
-		/*var markers =*/ 
-		r.data.map((o)=>{
-			console.log(o.주소)
-			
-			// 주소로 좌표를 검색합니다 -------------------------------------------------
-			geocoder.addressSearch( o.주소 , function(result, status) {
 		
-			    // 정상적으로 검색이 완료됐으면 
-			     if (status === kakao.maps.services.Status.OK) {
-					console.log(status)
-			       var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-					console.log("coords : "+coords)
-			        
-			         let marker = new kakao.maps.Marker({
-	               	 	position : coords ,
-	               	 	image: markerImage // 마커이미지 설정 
-		        	});
-		        	
-		        	// 마커에 클릭이벤트를 등록합니다
-					kakao.maps.event.addListener(marker, 'click', function() {
-					      
-					      // 모달 정보 담기
-					      document.querySelector('.modal_title').innerHTML = o.약국명
-					      document.querySelector('.modal_title').style.fontSize = '20px'
-					      document.querySelector('.modal_content').innerHTML = o.주소
-					      // 모달
-					      modal_open();
-					});
-		        	
-		        	console.log(marker)
-		        	markers.push(marker)
-			    }
-			  //------------------------------------------------------------ 
-			});    
-		})
-		// 클러스터러에 마커들을 추가합니다
-		setTimeout(() => {
-        	clusterer.addMarkers(markers);
-			console.log(markers);
-    	}, 3000);
-		
-		
-	}
-})
+		  
+	        	var markers = $(r.data).map(function(i, position) {
+					
+					geocoder.addressSearch(position.주소, function(result, status) {
 
-
-
-// 지도를 클릭한 위치에 표출할 마커입니다
-/*var marker = new kakao.maps.Marker({ 
-    // 지도 중심좌표에 마커를 생성합니다 
-    position: map.getCenter() , 
-    image: markerImage // 마커객체에 이미지객체 대입 - 마커이미지 설정
-}); 
-// 지도에 마커를 표시합니다
-marker.setMap(map);*/
-
+					    // 정상적으로 검색이 완료됐으면 
+					     if (status === kakao.maps.services.Status.OK) {
+					
+					        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+					        
+					        let marker =  new kakao.maps.Marker({
+					                position : coords
+					            });
+					            
+					        clusterer.addMarker(marker);
+					             
+					
+					    } 
+					});    
+				
+				
+				
+	          
+	             
+	        });
+	
+	        // 클러스터러에 마커들을 추가합니다
+	       
+	    }
+});
+    
