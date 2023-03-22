@@ -57,6 +57,7 @@ if ( memberInfo.mid == null ){ // 헤더js에 선언한 객체
 	//let 클라이언트소켓 = new WebSocket("ws://ip:포트번호/jspweb/chatting");
 	// 클라이언트소켓 = new WebSocket("ws://localhost:8080/jspweb/chatting/"+방번호);
 	// 클라이언트소켓 = new WebSocket("ws://localhost:8080/jspweb/chatting/아이디/채팅방번호");
+	// localhost대신에 ip로 변경하면 채팅가능
 	클라이언트소켓 = new WebSocket("ws://localhost:8080/jspweb/chatting/"+memberInfo.mid);
 	console.log(클라이언트소켓)
 	클라이언트소켓.onopen = function(e){ 서버소켓연결(e)}// 클라이언트 소켓 객체에 내가원하는것대입
