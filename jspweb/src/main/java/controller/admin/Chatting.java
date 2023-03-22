@@ -72,6 +72,8 @@ public class Chatting {
 			System.out.println("massageDto : " +massageDto);
 		// 메시지 받는 프로그램 : JSON
 		ObjectMapper mapper = new ObjectMapper();
+		// ObjectMapper가 Session웹소켓은 json형식으로 변환 불가
+		//Session session = mapper.writeValueAsString( session ); 
 		String jsonMessageDto = mapper.writeValueAsString( massageDto );
 			System.out.println("jsonMessageDto : " +jsonMessageDto);
 		System.out.println("클라이언트 웹소켓이 메시지를 보냈다. [서버가 메시지를 받았다.]");
