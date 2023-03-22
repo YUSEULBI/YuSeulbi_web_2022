@@ -93,7 +93,10 @@ function 서버소켓연결(){
  // 4. 서버로부터 메시지가 왔을 때 메시지 받기.
  // 자바 session.getBasicRemote().sendText(msg); -->클라이언트소켓.onmessage --> e
  function 메시지받기(e){
+	 console.log('메시지받기 실행')
 	 console.log(e)
+	 console.log(e.data) // 문자열
+	 console.log( JSON.parse(e.data) ); // 문자열json -> 객체json 형변환
 	 contentbox.innerHTML += `<div>${e.data}</div>`;
  }
  
