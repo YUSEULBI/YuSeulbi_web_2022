@@ -8,13 +8,15 @@
 	클라이언트소켓							서버소켓 
 	 ㄴ[JS]각 클라이언트마다 갖고 있는 소켓	 	 ㄴ [JAVA]서버가 가지고 있는 소켓 : 1개
 	new WebSocket
-		클라이언트소켓.onopen	<--연결-->	@OnOpen
-		클라이언트소켓.send		--보내기->	@OnMessage
-							<-보내기--	세션명.getBasicRemote().sendText(보낼메시지);
-		
+		클라이언트소켓.onopen	<--연결--->	@OnOpen
+		클라이언트소켓.send		--보내기-->	@OnMessage
+		클라이언트소켓.onmessage	<-보내기---	세션객체.getBasicRemote().sendText(보낼메시지);
+		클라이언트소켓.onclose	<-연결끊기--	@OnClose
+							
 	소켓 : 두 프로그램간의 양방향 비동기 통신 종착점(엔트포인트)(송수신 마지막 접점)
 	통신기법이 다름 HTTP와 다름 request response 없음 
 	C언어 파이썬에서의 소켓 문법이 다름
+	HTTP랑 다르게 요청하고 응답을 하는게 아니고 요청이없어도 서버가 클라이언트 조작응답가능
 	
 //-----------------------------------------------------------------
 	오늘은 '웹'소켓!!!
@@ -37,23 +39,41 @@
 				@OnOpen : 클라이언트소켓이 접속했을때 매핑[연결]
 		
 */
+
+
 console.log('chatting 실행')
 let contentbox = document.querySelector('.contentbox')
 
-// 1.클라이언트소켓 생성과 서버소켓 연결
+//
+let 클라이언트소켓 = null;
+ 
+if ( memberInfo.mid == null ){ // 헤더js에 선언한 객체
+	alert('로그인 하세요')
+	location.href="/jspweb/member/login.jsp";
+}else{
+	// 1.클라이언트소켓 생성과 서버소켓 연결
 
-// 전체링크
-//let 클라이언트소켓 = new WebSocket("ws://ip:포트번호/jspweb/chatting");
-let 클라이언트소켓 = new WebSocket("ws://localhost:8080/jspweb/chatting");
-console.log(클라이언트소켓)
+	// 전체링크 / HTTP가 아닌 소켓을 쓰고있어서 링크에 ?매개변수 request 불가
+	//let 클라이언트소켓 = new WebSocket("ws://ip:포트번호/jspweb/chatting");
+	// 클라이언트소켓 = new WebSocket("ws://localhost:8080/jspweb/chatting/"+방번호);
+	// 클라이언트소켓 = new WebSocket("ws://localhost:8080/jspweb/chatting/아이디/채팅방번호");
+	클라이언트소켓 = new WebSocket("ws://localhost:8080/jspweb/chatting/"+memberInfo.mid);
+	console.log(클라이언트소켓)
+	클라이언트소켓.onopen = function(e){ 서버소켓연결(e)}// 클라이언트 소켓 객체에 내가원하는것대입
+	클라이언트소켓.onmessage = function(e){메시지받기(e)}
+	클라이언트소켓.onclose = function(e){연결해제 (e) }
+}
+
+
+
 
 
 // 2. 클라이언트소켓이 접속했을 때 이벤트/함수 정의
 function 서버소켓연결(){
 	console.log('서버소켓과 연결이 되었다.')
-	contentbox.innerHTML += '<div>--------채팅방입장--------</div>'
+	contentbox.innerHTML += `<div>--------${memberInfo.mid}님 채팅방입장--------</div>`
 	}
-클라이언트소켓.onopen = function(e){ 서버소켓연결(e)}// 클라이언트 소켓 객체에 내가원하는것대입 
+ 
 
 
 
@@ -76,14 +96,39 @@ function 서버소켓연결(){
 	 console.log(e)
 	 contentbox.innerHTML += `<div>${e.data}</div>`;
  }
- 클라이언트소켓.onmessage = function(e){메시지받기(e)}
  
  
  
  
+ // 5. 서버와 연결이 끊겼을 때. [ 클라이언트소켓 객체가 초기화될때 F5 , 페이지전환시 ]
+ function 연결해제 (e){
+	 console.log('연결해제')
+ }
  
  
  
+ /*
+ 	// 클라이언트소켓 객체 이미생성됨 onclose 이미 만들어진 함수? 그래서 대입[ = ]사용 오버라이드
+ 	클라이언트소켓 필드
+ 		onopen		=
+ 		onclose		=
+ 		onmessage	=
+ 		
+ 		// 통신결과를 e에 받음
+ 		클라이언트소켓.onclose = function(e){ console.log('연결해제')}
+ 		vs
+ 		클라이언트소켓.onclose = (e)=>{ console.log('연결해제')}
+ 		vs
+ 		function 함수명(e){console.log('연결해제')}
+ 		클라이언트소켓.onclose = (e)=>{ 함수명(e) }
+ 		
+ 	// ajax 객체생성하면서 결과값도 만들기 [ : ] 사용
+ 	ajax 필드({
+ 		// 통신결과를  r에 받음
+ 		success : function(r){}
+ 		success : (r)=>{}
+ 	})
+ */
  
  
  
