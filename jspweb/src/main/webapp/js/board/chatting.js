@@ -71,11 +71,29 @@ if ( memberInfo.mid == null ){ // 헤더js에 선언한 객체
 // 2. 클라이언트소켓이 접속했을 때 이벤트/함수 정의
 function 서버소켓연결(){
 	console.log('서버소켓과 연결이 되었다.')
-	contentbox.innerHTML += `<div>--------${memberInfo.mid}님 채팅방입장--------</div>`
+	contentbox.innerHTML += `<div class="alarm">
+								<span> 채팅방 입장 하셨습니다. </span>
+							</div>
+							`
 	}
  
 
 
+// 엔터키 누르면 전송
+//document.addEventListener("keydown",(e)=>{
+//	if( e.keyCode == 13 ){
+//		보내기();
+//	}
+//})
+
+// 엔터키 누르면 전송
+function enterkey(){
+		console.log(window.event.keyCode)
+		// 입력한 키코드가 13이면
+		if(window.event.keyCode == 13 ){
+			보내기();
+		}
+}
 
 
 // 3. 클라이언트소켓이 서버에게 메시지를 보내기 [@OnMessage]
@@ -93,11 +111,44 @@ function 서버소켓연결(){
  // 4. 서버로부터 메시지가 왔을 때 메시지 받기.
  // 자바 session.getBasicRemote().sendText(msg); -->클라이언트소켓.onmessage --> e
  function 메시지받기(e){
-	 console.log('메시지받기 실행')
-	 console.log(e)
-	 console.log(e.data) // 문자열
-	 console.log( JSON.parse(e.data) ); // 문자열json -> 객체json 형변환
-	 contentbox.innerHTML += `<div>${e.data}</div>`;
+	 //console.log('메시지받기 실행')
+	 //console.log(e)
+	 //console.log(e.data) // 문자열
+	 //console.log( JSON.parse(e.data) ); // 문자열json -> 객체json 형변환
+	 //contentbox.innerHTML += `<div>${e.data}</div>`;
+	 let data = JSON.parse(e.data); // 전달받은 메시지 dto
+	 
+	 // 보낸사람과 현재유저 동일하면 내가보낸메시지
+	 if ( data.frommid == memberInfo.mid ){
+		 contentbox.innerHTML +=`
+		 							<div class="secontent">
+										<div class="date"> ${data.time} </div>
+										<div class="content"> ${data.msg} </div>
+									</div>
+		 						`
+	 }else{
+	 	// 받은 메시지
+	 	contentbox.innerHTML +=`
+		 							<div class="tocontent">
+										<div> <img alt="" src="/jspweb/member/pimg/${ data.frommimg==null ? 'default.webp' : data.frommimg }" class="hpimg"> </div>
+										<div class="rcontent">
+											<div class="name"> ${data.frommid} </div>
+											<div class="contentdate">
+												<div class="content"> ${data.msg} </div>
+												<div class="date"> ${data.time} </div>
+											</div>
+										</div>
+										
+									</div>
+		 						`
+	 }
+	 // -------------스크롤 하단으로 자동내리기
+	 	//let top = contentbox.scrollTop; // 현재 스크롤의 상단 위치 좌표
+	 		//console.log(top)
+	 	//let height = contentbox.scrollHeight; // 현재 스크롤의 전체높이 / 기본값: contentbox의 높이
+	 		//console.log(height)
+	 // 스크롤막대의 상단위치를 스크롤막대의 가장아래의 위치로 대입
+	 contentbox.scrollTop = contentbox.scrollHeight;
  }
  
  

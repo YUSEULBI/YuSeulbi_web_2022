@@ -34,7 +34,7 @@ public class MassageDto {
 				// 보낸 사람의 프로필 얻기
 				this.frommimg = MemberDao.getInstance().getMember(this.frommid).getMimg();
 				// 추후 행동이 필요없어서 모두 힙영역에서 처리 해서 time필드값 저장
-				this.time = new SimpleDateFormat("hh:mm:ss").format( new Date() );
+				this.time = new SimpleDateFormat("aa hh:mm").format( new Date() );
 			}
 		}// end
 		

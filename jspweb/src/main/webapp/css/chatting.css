@@ -18,7 +18,12 @@
 	display: flex;
 	justify-content: flex-end;
 	align-items: flex-end;
+	margin: 10px 0px;
 }
+.secontent .content{
+	background-color: #FFEB33;
+}
+
 .date{ /*시간*/
 	font-size: 2px;
 	margin: 0px 6px;
@@ -41,6 +46,27 @@
 	border-radius: 10px;
 	
 }
+
+.tocontent{
+	display: flex;
+	justify-content: flex-start;
+	margin: 10px 0px;
+	
+}
+
+.name{
+	font-size: 12px;
+}
+.rcontent{
+	margin-left: 8px;
+}
+
+.contentdate{
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+}
+
 /*버튼----------------*/
 .msgbox{
 	width: 100%;
