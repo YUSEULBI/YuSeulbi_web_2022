@@ -63,6 +63,7 @@ if ( memberInfo.mid == null ){ // 헤더js에 선언한 객체
 	클라이언트소켓.onopen = function(e){ 서버소켓연결(e)}// 클라이언트 소켓 객체에 내가원하는것대입
 	클라이언트소켓.onmessage = function(e){메시지받기(e)}
 	클라이언트소켓.onclose = function(e){연결해제 (e) }
+	클라이언트소켓.onerror = function(e){alert('문제발생:관리자에게문의'+e)}
 }
 
 
@@ -97,16 +98,37 @@ function enterkey(){
 }
 
 
-// 3. 클라이언트소켓이 서버에게 메시지를 보내기 [@OnMessage]
+// 3. 클라이언트소켓이 서버에게 메시지를 보내기 [@OnMessage] 
+	// 1. 보내기 버튼 눌렀을 때 / 2. 입력창에서 엔터했을 때 / type = msg
  function 보내기(){
 	 console.log('메시지 전송')
 	 let msgbox = document.querySelector('.msgbox').value
 	 console.log(msgbox)
 	 // ***메시지 전송하기
 	 // JS가 /jspweb/chatting 서버소켓의 onMessage로 보냄
-	 클라이언트소켓.send( msgbox );
+	 	//JSON형식의 문자열 타입 만들어서 문자열 타입으로 전송
+	 	// JSON.parse(JSON형식 문자열타입) : JSON String문자열타입 -> JSON 타입으로 변환
+	 	// JSON.stringify( info ) : JSON타입 --> JSON 형식[모양]의 String 타입으로 변환
+	 	let info = {
+			 type : 'msg' ,
+			 msgbox : msgbox
+		 }
+	 클라이언트소켓.send( JSON.stringify( info ) );
 	 //입력창 초기화
 	 document.querySelector('.msgbox').value = '';
+ }
+ // 4-2 type에 따른 html 구별
+ function 메시지타입구분( msg ){
+	 
+	 let json = JSON.parse( msg );
+	 
+	 let html = '';
+	 if ( json.type == 'msg'){
+		 html += `<div class="content"> ${json.msgbox} </div>`
+	 }else if ( json.type == 'emo'){
+		 html += `<div class="content emocontent"> <img alt="" src="/jspweb/img/imoji/emo${json.msgbox}.gif"> </div>`
+	 }
+	 return html;
  }
  
  // 4. 서버로부터 메시지가 왔을 때 메시지 받기.
@@ -118,13 +140,13 @@ function enterkey(){
 	 //console.log( JSON.parse(e.data) ); // 문자열json -> 객체json 형변환
 	 //contentbox.innerHTML += `<div>${e.data}</div>`;
 	 let data = JSON.parse(e.data); // 전달받은 메시지 dto
-	 
+	 console.log(data.msg)
 	 // 보낸사람과 현재유저 동일하면 내가보낸메시지
 	 if ( data.frommid == memberInfo.mid ){
 		 contentbox.innerHTML +=`
 		 							<div class="secontent">
 										<div class="date"> ${data.time} </div>
-										<div class="content"> ${data.msg} </div>
+										${메시지타입구분(data.msg)}
 									</div>
 		 						`
 	 }else{
@@ -135,7 +157,7 @@ function enterkey(){
 										<div class="rcontent">
 											<div class="name"> ${data.frommid} </div>
 											<div class="contentdate">
-												<div class="content"> ${data.msg} </div>
+												${메시지타입구분(data.msg)}
 												<div class="date"> ${data.time} </div>
 											</div>
 										</div>
@@ -161,6 +183,28 @@ function enterkey(){
  }
  
  
+ //7. 이모티콘 출력
+ getemo();
+ function getemo( ){
+	 let html = '';
+	 for ( let i = 1 ; i <=43 ; i++ ){
+		 html += `
+		 			<img onclick="자료보내기(${i} , 'emo')" alt="" src="/jspweb/img/imoji/emo${i}.gif" width="60px">
+		 		`
+	 }
+	 document.querySelector('.emolist').innerHTML = html
+ }
+ 
+ //
+ function 자료보내기( msgbox , type ){
+	 let msg = {
+			 type : type ,
+			 msgbox : msgbox
+		 }
+	 클라이언트소켓.send( JSON.stringify( msg ) );
+	 //입력창 초기화
+	 //document.querySelector('.msgbox').value = '';
+ }
  
  /*
  	// 클라이언트소켓 객체 이미생성됨 onclose 이미 만들어진 함수? 그래서 대입[ = ]사용 오버라이드

@@ -76,9 +76,10 @@
 	
 }
 
+/*이모티콘 버튼 , 보내기 버튼 있는 구역*/
 .chattingbtnbox{
 	display: flex;
-	justify-content : flex-end;
+	justify-content : space-between;
 	
 }
 
@@ -88,4 +89,24 @@
 	background-color: yellow;
 	border: none;
 	border-radius: 5px; 
+}
+
+/*이모티콘 버튼*/
+.emobtn{
+	background-color: transparent;
+	border: none;
+	padding: 10px;
+	font-size: 25px;
+}
+
+/*드롭다운시 보이는 구역*/
+.emolist{
+	width: 300px;
+	height: 300px;
+	overflow-y:scroll; 
+}
+
+/*내용물안에 사진이 있으면 배경을 투명으로*/
+.emocontent{
+	background-color: transparent !important;
 }
