@@ -10,7 +10,10 @@
 <body>
 	<%@include file="/header.jsp" %>
 	
-	<div class="container">
+	<div class="container chattingwrap">
+		<div class="connetlistbox"> <!-- 접속명단 표시구역 -->
+				
+		</div>
 		
 		<div class="chattingbox"> <!-- 채팅구역 -->
 			<div class="contentbox"> <!-- 채팅창 -->
@@ -53,3 +56,9 @@
 	<script src="/jspweb/js/board/chatting.js" type="text/javascript"></script>
 </body>
 </html>
+
+
+<!-- <div class="connectbox"> 1명 -->
+<!-- 	<div> <img alt="" src="/jspweb/member/pimg/default.webp" class="hpimg"></div> -->
+<!-- 	<div class="name">강호동</div> -->
+<!-- </div> -->

@@ -1,8 +1,25 @@
 @charset "UTF-8";
 
+.chattingwrap{ /*채팅과 명단이 포함된 구역*/
+	display: flex;
+	justify-content: center;
+	
+}
+.connetlistbox{
+	width: 15%;
+/* 	border: 1px solid #BACEE0;  */
+	padding: 10px;
+}
 .chattingbox{
-	width: 40%;
-	margin: 50px auto;
+	width: 35%;
+}
+.connectbox{
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+.connectbox .name{
+	margin-left: 10px;
 }
 /*----채팅구역---------*/
 .contentbox{

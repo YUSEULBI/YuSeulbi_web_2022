@@ -41,17 +41,19 @@ public class Chatting {
 	// 클라이언트 소켓이 접속했을 때의 실행되는 메소드/함수
 	@OnOpen			// Session [ 접속한 클라이언트소켓 객체 ] 
 	// 서버 엔드포인트의 url매개변수 가져오기 [ @PathParam ] 경로상의변수 가져오기
-	public void onOpen( Session session , @PathParam("mid") String mid ) {
+	public void onOpen( Session session , @PathParam("mid") String mid ) throws Exception {
 		System.out.println("클라이언트의 웹소켓이 들어왔다.");
 		System.out.println(session);
 		// 접속한 클라이언트 소켓들을 보관해야함
 		ClientDto clientDto = new ClientDto(session, mid);
 		접속명단.add( clientDto );
 		System.out.println( 접속명단.toString());
+		
+		onMessage(session, "enter"); // 예외처리 필요 던지기
 	}
 	
 	@OnClose	// 클라이언트소켓이 접속이 끊겼을 때 ( 나갔을때 F5 )
-	public void onClose( Session session ) {
+	public void onClose( Session session ) throws Exception {
 		
 		// F5 누르면 클라이언트소켓이 사라지기때문에 접속명단에서 삭제
 		
@@ -59,7 +61,18 @@ public class Chatting {
 		for ( ClientDto dto : 접속명단 ) {
 			// 접속끊긴 세션찾기 -> 찾은session이 들어있는 dto제외
 			// == 주소비교
-			if ( dto.getSession() == session ) { 접속명단.remove(dto); }
+			if ( dto.getSession() == session ) { 
+				접속명단.remove(dto);
+				// 연결이 끊긴 클라이언트 소켓을 모든 접속명단에게 알림 메시지 보내기
+				// 1. 문자열타입의 JSON형식 직접 작성하기 vs ObjectMapper
+					// { "필드명" : "데이터" , "필드명" : "데이터" }
+					// { \"필드명\" : \"데이터\" , \"필드명\" : \"데이터\" }
+				String msg = "{\"type\":\"alarm\",\"msgbox\":\""+dto.getMid()+"님이 채팅방에 나갔습니다.\"}";
+				onMessage(session, msg);
+				// 연결이 끊긴 클라이언트 소켓을 모든 접속명단 목록 알림 메시지 보내기
+				onMessage(session, "enter");
+				break;
+			}
 		} 
 		System.out.println("클라이언트 웹소켓이 나갔습니다.");
 	}
@@ -67,17 +80,35 @@ public class Chatting {
 	//클라이언트 소켓이 메시지를 보냈을때 [ 서버가 메시지 받기 ]
 	@OnMessage			// Session [누가:클라이언트소켓객체] , String [내용물]
 	public void onMessage( Session session , String msg ) throws Exception {
-		// 메시지 구성
-		MassageDto massageDto = new MassageDto(session, msg);
-			System.out.println("massageDto : " +massageDto);
+		
 		// 메시지 받는 프로그램 : JSON
 		ObjectMapper mapper = new ObjectMapper();
-		// ObjectMapper가 Session웹소켓은 json형식으로 변환 불가
-		//Session session = mapper.writeValueAsString( session ); 
-		String jsonMessageDto = mapper.writeValueAsString( massageDto );
+		String jsonMessageDto = null;
+		
+		
+		if ( msg.equals("enter")) { // 2.접속명단 알림
+			// 회원명단[이미지,아이디] 포함된 회원리스트
+			ArrayList<MassageDto> list  = new ArrayList<>();
+			for ( ClientDto dto : 접속명단 ) {
+				list.add( new MassageDto( dto.getSession() , null ));
+			}
+			jsonMessageDto = mapper.writeValueAsString(list);
+		
+		}else { // 1. 메시지
+			// 메시지 구성
+			MassageDto massageDto = new MassageDto(session, msg);
+			System.out.println("massageDto : " +massageDto);
+			
+			// ObjectMapper가 Session웹소켓은 json형식으로 변환 불가
+			//Session session = mapper.writeValueAsString( session ); 
+			jsonMessageDto = mapper.writeValueAsString( massageDto );
 			System.out.println("jsonMessageDto : " +jsonMessageDto);
+		}
+		
+		
+				
 		System.out.println("클라이언트 웹소켓이 메시지를 보냈다. [서버가 메시지를 받았다.]");
-		System.out.println("msg : "+msg);
+		
 		// ** 서버가 클라이언트 소켓에게 메시지를 보내기
 		// 현재 서버소켓과 연결된 클라이언트소켓 모두에게 서버가 받은 내용물 전달
 		for( ClientDto dto : 접속명단 ) {
