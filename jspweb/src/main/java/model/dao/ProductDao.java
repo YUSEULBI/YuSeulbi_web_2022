@@ -62,4 +62,16 @@ public class ProductDao extends Dao {
 		} catch (Exception e) { System.out.println(e); 	}
 		return false;
 	}
+	
+	// 4. 현재 회원이 해당 제품의 찜하기 상태 확인
+	public boolean getPlike( int pno , int mno ) {
+		String sql = "select * from plike where mno = "+mno+" and pno = "+pno;
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if ( rs.next()) { return true; }
+		} catch (Exception e) {
+			System.out.println(e);
+		}return false;
+	}
 }

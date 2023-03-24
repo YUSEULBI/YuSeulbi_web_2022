@@ -85,6 +85,7 @@ let productlist = null;
 	              // 마커에 클릭이벤트를 등록합니다
 				kakao.maps.event.addListener(marker, 'click', function() {
 				      console.log(position.pno + "제품 클릭")
+				      console.log(getPlike(position.pno))
 				      let html = `
 				      			<button onclick="productlistprint()" > <== </button>
 				      			<h3>제품상세페이지</h3>
@@ -96,7 +97,7 @@ let productlist = null;
 							<span> ${position.pstate} </span>
 							<span> ${position.pview} </span>
 							<span> ${position.pdate} </span>
-							<span> <button onclick="setplike(${position.pno})" type="button" > ♡ </button> </span>
+							<span> <button class="plikebtn" onclick="setplike(${position.pno})" type="button" > ${ getPlike(position.pno)} </button> </span>
 						</div>`
 					document.querySelector('.productlistbox').innerHTML = html;
 				});
@@ -147,6 +148,27 @@ kakao.maps.event.addListener(map, 'zoom_changed', function() {
 
 });
 
+// 4.현재 회원이 해당 제품의 찜하기 상태 호출
+function getPlike( pno ){
+	
+	if ( memberInfo.mid == null ){
+		return "♡"
+	}else{
+		$.ajax({
+			url : "/jspweb/product/like?pno="+pno ,
+			method : "get" ,
+			async : false ,
+			success : (r)=>{
+				console.log ('현재라이크상태 : '+r)
+				console.log(r=='true')
+				if ( r=='true'){return "♥"}
+				else{return "♡"}	
+			}
+		})
+		
+	}
+}
+
 
 // 찜하기 버튼을 눌렀을 때 [ 첫 클릭시 찜하기 / 다음 클릭시 찜하기 취소 / 다음 클릭시 찜하기 ]
 function setplike( pno ){
@@ -162,8 +184,10 @@ function setplike( pno ){
 			console.log(r) 
 			if ( r == 'true'){
 				alert('찜하기 등록')
+				document.querySelector('.plikebtn').innerHTML = '♥'
 			}else{
 				alert('찜하기 취소')
+				document.querySelector('.plikebtn').innerHTML = '♡'
 			}
 		}
 	})

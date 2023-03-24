@@ -17,7 +17,6 @@ public class ProductDto {
 	public ProductDto() {
 		// TODO Auto-generated constructor stub
 	}
-
 	
 	
 	public ProductDto(int pno, String pname, String pcomment, long pprice, int pstate, String plat, String plng,
