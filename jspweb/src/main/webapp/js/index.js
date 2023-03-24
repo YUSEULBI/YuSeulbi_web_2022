@@ -85,7 +85,6 @@ let productlist = null;
 	              // 마커에 클릭이벤트를 등록합니다
 				kakao.maps.event.addListener(marker, 'click', function() {
 				      console.log(position.pno + "제품 클릭")
-				      console.log(getPlike(position.pno))
 				      let html = `
 				      			<button onclick="productlistprint()" > <== </button>
 				      			<h3>제품상세페이지</h3>
@@ -97,9 +96,10 @@ let productlist = null;
 							<span> ${position.pstate} </span>
 							<span> ${position.pview} </span>
 							<span> ${position.pdate} </span>
-							<span> <button class="plikebtn" onclick="setplike(${position.pno})" type="button" > ${ getPlike(position.pno)} </button> </span>
+							<span> <button class="plikebtn" onclick="setplike(${position.pno})" type="button" >  </button> </span>
 						</div>`
 					document.querySelector('.productlistbox').innerHTML = html;
+					getPlike( position.pno );
 				});
 				
 				return marker;
@@ -152,7 +152,8 @@ kakao.maps.event.addListener(map, 'zoom_changed', function() {
 function getPlike( pno ){
 	
 	if ( memberInfo.mid == null ){
-		return "♡"
+		//return "♡"
+		document.querySelector('.plikebtn').innerHTML = "♡"
 	}else{
 		$.ajax({
 			url : "/jspweb/product/like?pno="+pno ,
@@ -161,8 +162,14 @@ function getPlike( pno ){
 			success : (r)=>{
 				console.log ('현재라이크상태 : '+r)
 				console.log(r=='true')
-				if ( r=='true'){return "♥"}
-				else{return "♡"}	
+				if ( r=='true'){
+					// return "♥"
+					document.querySelector('.plikebtn').innerHTML = "♥"
+				}
+				else{
+					// return "♡"
+					document.querySelector('.plikebtn').innerHTML = "♡"
+				}	
 			}
 		})
 		
