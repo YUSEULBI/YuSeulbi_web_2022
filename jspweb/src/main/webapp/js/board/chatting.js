@@ -139,6 +139,7 @@ function enterkey(){
 	 //console.log(e.data) // 문자열
 	 //console.log( JSON.parse(e.data) ); // 문자열json -> 객체json 형변환
 	 //contentbox.innerHTML += `<div>${e.data}</div>`;
+	 console.log(e)
 	 let data = JSON.parse(e.data); // 전달받은 메시지 dto
 	 console.log(data)
 	 
@@ -146,6 +147,7 @@ function enterkey(){
 	 
 	 // 명단 [여러개 list/Array] vs 메시지정보 1개 [dto/object]
 	 	// Array 타입 확인 : Array.isArray( 객체 ) : 해당객체가 배열/리스트 이면 true
+	 // 받은메시지가 Array이면 접속명단 출력
 	 if ( Array.isArray( data ) ){
 		 console.log('접속명단 왔다.')
 		 let html = '';
@@ -160,6 +162,7 @@ function enterkey(){
 		 })
 		 document.querySelector('.connetlistbox').innerHTML = html;
 	 }
+	 // 받은 메시지의 타입이 alarm이면 접속,퇴장 문구 출력
 	 else if ( JSON.parse( data.msg ).type == 'alarm'){
 		 	contentbox.innerHTML += `<div class="alarm">
 								<span> ${JSON.parse( data.msg ).msgbox} </span>
@@ -167,7 +170,7 @@ function enterkey(){
 								`
 	 }
 	 
-	 // 보낸사람과 현재유저 동일하면 내가보낸메시지
+	 // 보낸사람 == 현재유저 --- 내가보낸메시지구역에 출력
 	 else if ( data.frommid == memberInfo.mid ){
 		 contentbox.innerHTML +=`
 		 							<div class="secontent">
@@ -176,7 +179,7 @@ function enterkey(){
 									</div>
 		 						`
 	 }else{
-	 	// 받은 메시지
+	 	// 그 외에는 받은 메시지 출력
 	 	contentbox.innerHTML +=`
 		 							<div class="tocontent">
 										<div> <img alt="" src="/jspweb/member/pimg/${ data.frommimg==null ? 'default.webp' : data.frommimg }" class="hpimg"> </div>
@@ -206,7 +209,7 @@ function enterkey(){
  // 5. 서버와 연결이 끊겼을 때. [ 클라이언트소켓 객체가 초기화될때 F5 , 페이지전환시 ]
  function 연결해제 (e){
 	 console.log('연결해제')
-	 // 나갔기 ㄸㅐ문에 아래코드 불가
+	 // 나갔기 ㄸㅐ문에 해당세션이 없어서 퇴장세션정보사용불가 아래코드 불가
 	 //자료보내기( memberInfo.mid+"님 이 채팅방에 나갔습니다." , "alarm");
  }
  

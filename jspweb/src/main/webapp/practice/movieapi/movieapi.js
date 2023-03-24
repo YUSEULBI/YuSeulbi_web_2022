@@ -8,6 +8,20 @@ console.log('movieapi 실행')
 	 method : "get" ,
 	 success : (r)=>{
 		 console.log(r)
+		 console.log(r.boxOfficeResult.dailyBoxOfficeList)
+		 html = `<tr>
+		 			<th>누적관객수</th>
+		 		</tr>`
+		 r.boxOfficeResult.dailyBoxOfficeList.forEach((o,i)=>{
+			 html += `
+			 		<tr>
+			 			<td>${o.audiAcc}</td>
+			 		</tr>
+			 		`
+			 
+		 })
+		 document.querySelector('.movietable').innerHTML = html;
+		 
 	 }
 	 
  })
