@@ -35,7 +35,13 @@ public class ProductInfo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<ProductDto> list = ProductDao.getInstance().getProduct();
+		request.setCharacterEncoding("UTF-8");
+		String 동 =  request.getParameter("동"); System.out.println("동 : "+동);
+		String 서 =  request.getParameter("서"); System.out.println("서 : "+서);
+		String 남 =  request.getParameter("남"); System.out.println("남 : "+남);
+		String 북 =  request.getParameter("북"); System.out.println("북 : "+북);
+		
+		ArrayList<ProductDto> list = ProductDao.getInstance().getProduct(동,서,남,북);
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(list);
 		

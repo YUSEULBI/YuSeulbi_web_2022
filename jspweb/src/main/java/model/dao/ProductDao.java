@@ -25,9 +25,9 @@ public class ProductDao extends Dao {
 	}
 	
 	// 2. 제품출력
-	public ArrayList<ProductDto> getProduct( ) { 	
-		ArrayList<ProductDto> list = new ArrayList<>();
-		String sql = "select * from product;";
+	public ArrayList<ProductDto> getProduct( String 동 , String 서 , String 남 , String 북 ) { 	
+		ArrayList<ProductDto> list = new ArrayList<>(); // plng 경도(가로) plat 위도(세로) 
+		String sql = "select * from product where "+남+" <= plat && "+북+" >= plat && "+서+" <= plng && "+동+" >= plng";
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
