@@ -1,14 +1,20 @@
 package controller.product;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import model.dao.ProductDao;
+import model.dto.ProductDto;
 
 /**
  * Servlet implementation class ProductInfo
@@ -29,8 +35,13 @@ public class ProductInfo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ArrayList<ProductDto> list = ProductDao.getInstance().getProduct();
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(list);
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		response.getWriter().print(json);
 	}
 
 	/**
@@ -50,6 +61,10 @@ public class ProductInfo extends HttpServlet {
 		int pprice = Integer.parseInt(multi.getParameter("pprice"))  ;		System.out.println("pprice : "+pprice);
 		String plat = multi.getParameter("plat");				System.out.println("plat : "+plat);
 		String plng = multi.getParameter("plng");				System.out.println("plng : "+plng);
+		
+		ProductDto dto = new ProductDto(pname, pcomment, pprice, plat, plng);
+		boolean result =  ProductDao.getInstance().write(dto);
+		response.getWriter().print(result);
 	}
 
 	/**

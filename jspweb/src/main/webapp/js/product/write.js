@@ -14,8 +14,11 @@ function onwrite(){
 	let writeFormdata = new FormData( writeForm );
 	// 3. 좌표[위도/경도] 추가
 		// 폼데이터 객체에 필드 추가
-		writeFormdata.set("plat",plat);
-		writeFormdata.set("plng",plng);
+	writeFormdata.set("plat",plat);
+	writeFormdata.set("plng",plng);
+	
+	// 위도 경도 안들어오면 등록 안됨
+	if ( plat==0 || plng == 0 ){return;}
 	
 	$.ajax({
 		url : "/jspweb/product/info" ,
@@ -25,6 +28,13 @@ function onwrite(){
 		processData : false ,
 		success : (r)=>{
 			console.log(r)
+			console.log(r == 'true' )
+			if ( r == 'true'){
+				alert('제품등록 성공')
+				location.href="/jspweb/index.jsp";
+			}else{
+				alert('제품등록 실패')
+			}
 			
 		}
 	})
