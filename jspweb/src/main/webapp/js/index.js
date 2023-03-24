@@ -12,6 +12,8 @@ console.log('index js실행')
 //		console.log(r)
 //	}
 //})
+
+
 let productlist = null;
  function productlistprint( ){
 	 let html = '<h3>제품목록페이지</h3>'
@@ -45,7 +47,8 @@ let productlist = null;
  // 1. 제품 목록 호출 [ 1. 현재 보이는 지도좌표내 포함된 제품만 ]
  //getProductList(  );
  function getProductList(동 , 서 , 남 , 북){
-	 
+	 // 클러스터 비우기
+	 clusterer.clear();
 	 $.ajax({
 		 url : "/jspweb/product/info" ,
 		 method : "get" ,
@@ -93,7 +96,7 @@ let productlist = null;
 							<span> ${position.pstate} </span>
 							<span> ${position.pview} </span>
 							<span> ${position.pdate} </span>
-							<span> <button type="button" > ♡ </button> </span>
+							<span> <button onclick="setplike(${position.pno})" type="button" > ♡ </button> </span>
 						</div>`
 					document.querySelector('.productlistbox').innerHTML = html;
 				});
@@ -109,13 +112,9 @@ let productlist = null;
     }); // ajax end
  } // function end
 
-
-
-// ------------- 지도 중심좌표 이동 이벤트 ---------------------
-
-// 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'dragend', function() {
-	
+//좌표얻어서 현재 좌표안의 마커만 표시하기
+get동서남북(); // js실행시
+function get동서남북(){
 	// 지도의 현재 영역을 얻어옵니다 
     var bounds = map.getBounds();
     
@@ -130,7 +129,56 @@ kakao.maps.event.addListener(map, 'dragend', function() {
     let 서 = swLatLng.getLng()
     let 북 = neLatLng.getLat()
     let 동 = neLatLng.getLng()
-    
-   getProductList( 동 , 서 , 남 , 북  );
+    getProductList( 동 , 서 , 남 , 북  );
+}
+
+// ------------- 지도 중심좌표 이동 이벤트 ---------------------
+
+// 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'dragend', function() {
+	
+	get동서남북(); // 드래그시
 
 });
+
+kakao.maps.event.addListener(map, 'zoom_changed', function() {
+	
+	get동서남북(); // 확대축소시
+
+});
+
+
+// 찜하기 버튼을 눌렀을 때 [ 첫 클릭시 찜하기 / 다음 클릭시 찜하기 취소 / 다음 클릭시 찜하기 ]
+function setplike( pno ){
+	if ( memberInfo.mid == null ){
+		alert('회원기능입니다. 로그인 후 사용해주세요.'); return;
+	}
+	
+	$.ajax({
+		url : "/jspweb/product/like" ,
+		method : "post" ,
+		data : { "pno":pno } ,
+		success : (r)=>{ 
+			console.log(r) 
+			if ( r == 'true'){
+				alert('찜하기 등록')
+			}else{
+				alert('찜하기 취소')
+			}
+		}
+	})
+	
+	// get 방식 방법
+//	$.ajax({
+//		url : "/jspweb/product/like?pno="+pno ,
+//		success : (r)=>{ console.log(r) }
+//	})
+	
+	// $.get("/jspweb/product/like?pno="+pno,()=>{})
+	
+	//---------------------------------------------------
+	// post방식 다른 방법
+	// $.post("/jspweb/product/like", { "data":data } ,()=>{})
+}
+
+

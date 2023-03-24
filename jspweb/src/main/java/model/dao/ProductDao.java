@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import model.dto.ProductDto;
@@ -40,5 +41,25 @@ public class ProductDao extends Dao {
 			}
 		} catch (Exception e) { System.out.println(e); 	}
 		return list;
+	}
+	
+	// 3.찜하기 등록과 취소
+	public boolean setPlike( int pno , int mno ) {
+		// 1. 등록할지 취소할지 검색
+		String sql = "select * from plike where mno = "+mno+" and pno = "+pno;
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if ( rs.next() ) { // 이미 찜한 제품 --> 취소
+				sql = "delete from plike where mno = "+mno+" and pno = "+pno;
+				ps = con.prepareStatement(sql);
+				ps.executeUpdate(); return false;
+			}else { // 찜한 적 없으면 --> 찜하기 
+				sql = "insert into plike ( mno , pno ) values ( "+mno+" , "+pno+" );";
+				ps = con.prepareStatement(sql);
+				ps.executeUpdate(); return true;
+			}
+		} catch (Exception e) { System.out.println(e); 	}
+		return false;
 	}
 }
