@@ -16,7 +16,21 @@
 			제품설명 :  <input type="text" name="pcomment"> <br>
 			제품가격 :  <input type="text" name="pprice"> <br>
 			거래위치 : <div id="map" style="width:100%;height:350px;"></div>
-			<button onclick="onwrite()" type="button">제품등록</button> 
+			
+			<!--  
+			<h5>첨부파일 1개</h5>
+			<input type="file" name="pfile" accept="image/*"> <br>
+			
+			<h5>첨부파일 여러개 cos가능</h5>
+			<input type="file" name="pfile1" accept="image/*">
+			<input type="file" name="pfile2" accept="audio/*">
+			<input type="file" name="pfile3" accept="video/*">  <br>
+			-->
+			
+			<h5>첨부파일 한꺼번에 여러개 [ multiple cos불가능 , commons.jar 가능 ]</h5>
+			<input name="pfiles" type="file" multiple="multiple" accept="image/*">  <br>
+			
+			<button onclick="onwrite()" type="button">제품등록</button>
 		</form>
 	</div>
 	

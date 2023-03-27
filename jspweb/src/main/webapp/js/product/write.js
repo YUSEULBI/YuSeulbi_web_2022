@@ -8,6 +8,7 @@ console.log('write js실행')
 
 // 제품등록 버튼누르면
 function onwrite(){
+	console.log('onwrite()실행')
 	// 1. 폼전송
 	let writeForm = document.querySelectorAll('.writeForm')[0];
 	//2. 폼데이터 객체 선언
