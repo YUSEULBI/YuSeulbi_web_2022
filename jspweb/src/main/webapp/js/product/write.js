@@ -1,8 +1,18 @@
 /**
  * 
  */
+// 회원제페이지
+if ( memberInfo.mid == null ){
+	alert('로그인후 제품등록 가능합니다.')
+	location.href="/jspweb/member/login.jsp"
+}
+
 let plat = 0;
 let plng = 0;
+
+//
+let fileList = []; // 드래그앤드랍용
+
 
 console.log('write js실행')
 
@@ -20,10 +30,7 @@ function onwrite(){
 	
 	// 위도 경도 안들어오면 등록 안됨
 	if ( plat==0 || plng == 0 ){return;}
-	if( fileList.length <1 ){
-		alert('하나 이상의 이미지 등록해주세요')
-		return;
-	}
+	if( fileList.length <1 ){ alert('하나 이상의 제품이미지 등록해주세요'); return; }
 	
 	// 폼에 첨부파일 등록
 	fileList.forEach( (f)=>{
@@ -98,29 +105,60 @@ fileDrop.addEventListener("dragenter" , (e)=>{
 fileDrop.addEventListener('dragover',(e)=>{
 	console.log('드래그 요소가 해당 위치에 있을 때 ')
 	e.preventDefault(); // 고유 브라우저내 이벤트 제거
+	fileDrop.style.backgroundColor = "#e8e8e8";
 })
 
 fileDrop.addEventListener('dragleave', (e)=>{
 	console.log('드래그 요소 나감')
 	e.preventDefault(); // 고유 브라우저내 이벤트 제거
+	fileDrop.style.backgroundColor = "#ffffff";
 })
 
 fileDrop.addEventListener('drop', (e)=>{
 	console.log('드래그 요소 해당구역에 드랍 되었을 때')
 	// 문제점 : 브라우저 영역에 드랍했을 때 해당 페이지 열림 [ 브라우저 이벤트가 먼저 실행 ]
 	e.preventDefault(); // 고유 브라우저내 이벤트 제거
-	// 1. 드랍된 파일을 호출
+	
+	// 1.  드랍된 파일[dataTransfer]을 호출 
 	let files = e.dataTransfer.files;
-	console.log(files);
+	console.log( files ); // forEach 사용불가
 	for ( let i = 0 ; i < files.length ; i++){
 		console.log(files[i])
-		if(files[i] != null && files[i] != undefined ){
+		if(files[i] != null && files[i] != undefined ){ // 파일이 존재하면 // 비어있지 않고 정의되어 있으면
 			// 비어있지않고 정의되어있으면(파일이 존재하면)
-			fileList.push( files[i] );
+			fileList.push( files[i] ); // 각 파일들을 하나씩 배열 저장
 		}
-	}
+	} // for end
 	console.log(fileList)
-})
+	fileDrop.style.backgroundColor = "#ffffff"; //배경색 되돌리기
+	printFiles(); // 파일목록출력
+})// event end
 
-//
-let fileList = [];
+// 3. 해당구역에 드랍된 파일 목록 출력 
+function printFiles(){
+	let html = ``;
+	fileList.forEach( (f , i)=>{
+		console.log(f)
+		let fname = f.name;
+		console.log( f.name );
+		let fsize = (f.size / 1024).toFixed(1); // 파일용량 [바이트 --> mb로 변경]
+			// .toFixed(표시할소수점자리수) 소수점 자르기
+		console.log( f.size );
+		
+		html +=`
+				<div>
+					<span>${fname}</span>
+					<span>${fsize} KB</span>
+					<span><button type="button" onclick="filedelete(${i})">삭제</button></span>
+				</div>
+				`
+		
+	})
+	fileDrop.innerHTML = html;
+}
+
+// 4. 드래그앤드랍된 파일 목록에 특정인덱스의 파일 제거
+function filedelete( i ){
+	fileList.splice(i,1);
+	printFiles(); //렌더링
+}

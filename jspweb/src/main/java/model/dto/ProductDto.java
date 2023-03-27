@@ -17,14 +17,17 @@ public class ProductDto {
 	// 추가필드
 	private int mno;	// 등록한 회원번호
 	private String mid;	// 등록한 회원아이디
+	private String mimg; // 프로필이미지
 	private List<String> pimglist;	// 등록한 사진목록들
 	
 	public ProductDto() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public ProductDto(int pno, String pname, String pcomment, long pprice, int pstate, String plat, String plng,
-			int pview, String pdate, int mno, String mid, List<String> pimglist) {
+			int pview, String pdate, int mno, String mid, String mimg, List<String> pimglist) {
 		super();
 		this.pno = pno;
 		this.pname = pname;
@@ -37,8 +40,11 @@ public class ProductDto {
 		this.pdate = pdate;
 		this.mno = mno;
 		this.mid = mid;
+		this.mimg = mimg;
 		this.pimglist = pimglist;
 	}
+
+
 
 	// 등록용 생성자 [ 제품명 , 제품설명 , 제품가격 , 위도 , 경도 , 등록회원번호 , 등록사진목록 ]
 	public ProductDto(String pname, String pcomment, long pprice, String plat, String plng, int mno,
@@ -55,14 +61,29 @@ public class ProductDto {
 	
 	
 	
+	
+	
+
 	@Override
 	public String toString() {
 		return "ProductDto [pno=" + pno + ", pname=" + pname + ", pcomment=" + pcomment + ", pprice=" + pprice
 				+ ", pstate=" + pstate + ", plat=" + plat + ", plng=" + plng + ", pview=" + pview + ", pdate=" + pdate
-				+ ", mno=" + mno + ", mid=" + mid + ", pimglist=" + pimglist + "]";
+				+ ", mno=" + mno + ", mid=" + mid + ", mimg=" + mimg + ", pimglist=" + pimglist + "]";
 	}
 
-	
+
+
+	public String getMimg() {
+		return mimg;
+	}
+
+
+
+	public void setMimg(String mimg) {
+		this.mimg = mimg;
+	}
+
+
 
 	public int getPno() {
 		return pno;
