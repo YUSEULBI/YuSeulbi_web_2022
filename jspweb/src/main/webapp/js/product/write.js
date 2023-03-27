@@ -20,6 +20,15 @@ function onwrite(){
 	
 	// 위도 경도 안들어오면 등록 안됨
 	if ( plat==0 || plng == 0 ){return;}
+	if( fileList.length <1 ){
+		alert('하나 이상의 이미지 등록해주세요')
+		return;
+	}
+	
+	// 폼에 첨부파일 등록
+	fileList.forEach( (f)=>{
+		writeFormdata.append("fileList" , f);
+	})
 	
 	$.ajax({
 		url : "/jspweb/product/info" ,
@@ -73,3 +82,45 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     console.log( "경도 : "+latlng.getLng() )
     
 });
+
+
+//---------------------------드래그 앤 드랍 표현-------------------------------
+// 1. 드래그앤드랍할 구역[DOM] 객체 호출
+let fileDrop = document.querySelector('.fileDrop');
+
+// 2. 해당구역 이벤트 등록
+fileDrop.addEventListener("dragenter" , (e)=>{
+	//alert('해당 구역 클릭')
+	console.log('드래그요소가 닿으면 실행')
+	e.preventDefault(); // 고유 브라우저내 이벤트 제거
+})
+
+fileDrop.addEventListener('dragover',(e)=>{
+	console.log('드래그 요소가 해당 위치에 있을 때 ')
+	e.preventDefault(); // 고유 브라우저내 이벤트 제거
+})
+
+fileDrop.addEventListener('dragleave', (e)=>{
+	console.log('드래그 요소 나감')
+	e.preventDefault(); // 고유 브라우저내 이벤트 제거
+})
+
+fileDrop.addEventListener('drop', (e)=>{
+	console.log('드래그 요소 해당구역에 드랍 되었을 때')
+	// 문제점 : 브라우저 영역에 드랍했을 때 해당 페이지 열림 [ 브라우저 이벤트가 먼저 실행 ]
+	e.preventDefault(); // 고유 브라우저내 이벤트 제거
+	// 1. 드랍된 파일을 호출
+	let files = e.dataTransfer.files;
+	console.log(files);
+	for ( let i = 0 ; i < files.length ; i++){
+		console.log(files[i])
+		if(files[i] != null && files[i] != undefined ){
+			// 비어있지않고 정의되어있으면(파일이 존재하면)
+			fileList.push( files[i] );
+		}
+	}
+	console.log(fileList)
+})
+
+//
+let fileList = [];

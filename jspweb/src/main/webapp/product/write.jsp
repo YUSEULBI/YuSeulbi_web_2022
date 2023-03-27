@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<style type="text/css">
+		.fileDrop{ width: 600px; height: 200px; overflow: auto; border:1px red solid;}
+	</style>
 </head>
 <body>
 	<%@include file="/header.jsp" %>
@@ -27,8 +30,13 @@
 			<input type="file" name="pfile3" accept="video/*">  <br>
 			-->
 			
-			<h5>첨부파일 한꺼번에 여러개 [ multiple cos불가능 , commons.jar 가능 ]</h5>
-			<input name="pfiles" type="file" multiple="multiple" accept="image/*">  <br>
+<!-- 			<h5>첨부파일 한꺼번에 여러개 [ multiple cos불가능 , commons.jar 가능 ]</h5> -->
+<!-- 			<input name="pfiles" type="file" multiple="multiple" accept="image/*">  <br> -->
+			
+			<!-- 드래그 앤 드랍 : multiple -->
+			<div class="fileDrop">
+				[드래그앤드랍] 여기에 첨부파일을 넣어주세요.
+			</div>
 			
 			<button onclick="onwrite()" type="button">제품등록</button>
 		</form>
