@@ -13,7 +13,7 @@ console.log('index js실행')
 //	}
 //})
 
-
+// 1. 제품목록출력
 let productlist = null;
  function productlistprint( ){
 	 let html = '<h3>제품목록페이지</h3>'
@@ -39,7 +39,7 @@ let productlist = null;
 					`
 		})
 		document.querySelector('.productlistbox').innerHTML = html;
- }
+ }// end
  
  // 제품 개별 조회
  function productprint( i ){
@@ -107,13 +107,70 @@ let productlist = null;
 					</div>
 					<div class="pviewbtnbox">
 						<button class="plikebtn" onclick="setplike(${p.pno})" type="button"> <i class="far fa-heart"></i> </button>
-						<button type="button"> 채팅 </button> 
+						<button onclick="chatprint(${i})" type="button"> 채팅 </button> 
 					</div>
 				</div>
 				`
 		document.querySelector('.productlistbox').innerHTML = html;
 		getPlike( p.pno );
  }
+ 
+ // 채팅페이지 이동 ( 진짜이동 아니고 렌더링)
+ function chatprint( i ){
+	 
+	 if (memberInfo.mid == null){
+		 alert('회원 기능입니다.'); return;
+	 }
+	 
+	 let p = productlist[i];
+	 //let html = `<h3> ${p.pno}제품 채팅방 </h3>`;
+	 let html = `
+	 			<div class="chatbox">	
+					<div class="pviewinfo">
+						<div class="mimgbox">
+							<img alt="" src="/jspweb/product/pimg/${p.pimglist[0]}" class="hpimg">
+							<span class="pname"> ${p.pname} </span>
+						</div>
+						<div>
+							<button onclick="productlistprint()"  class="pbadge" type="button"> 목록보기 </button>
+						</div>
+					</div>
+					
+					<div class="chatcontent">
+						<div class="sendbox"> 구매 가능할까요? </div>
+						<div class="receivebox"> 네 구매 가능 합니다. </div>
+					</div>
+					
+					<div class="chatbtn">
+						<textarea class="ncontentinput" rows="" cols=""></textarea>
+						<button onclick="sendchat(${p.pno})" type="button">전송</button>
+					</div>
+				</div>	
+	 			`;
+	 document.querySelector('.productlistbox').innerHTML = html;
+ }
+ 
+// 5. 
+function sendchat( pno ){
+	console.log("pno : "+pno)
+	let ncontent = document.querySelector('.ncontentinput').value
+	console.log(ncontent)
+	
+	$.ajax({
+		url : "" ,
+		method : "post" ,
+		data : { "pno":pno , "ncontent":ncontent} ,
+		success : (r)=>{
+			console.log('통신')
+			console.log(r)
+			if ( r == 'true'){
+				document.querySelector('.ncontentinput').value = '';			
+			}
+		}
+	})
+	
+	
+}
 
  var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
         center : new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표 
