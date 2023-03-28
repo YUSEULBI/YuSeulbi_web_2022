@@ -17,19 +17,51 @@ console.log('index js실행')
 let productlist = null;
  function productlistprint( ){
 	 let html = '<h3>제품목록페이지</h3>'
-		productlist.forEach( (p)=>{
-			html += `<div>
-						<span> ${p.pname} </span>
-						<span> ${p.pcomment} </span>
-						<span> ${p.pprice} </span>
-						<span> ${p.pstate} </span>
-						<span> ${p.pview} </span>
-						<span> ${p.pdate} </span>
-					</div>`
+		productlist.forEach( (p , i)=>{
+					
+			html += `
+						<!-- 제품1개 -->
+						<div onclick="productprint(${i})" class="productbox">
+							<div class="pimgbox">
+								<img src="/jspweb/product/pimg/${p.pimglist[0]}">
+							</div>
+							<div class="pcontentbox">
+								<div class="pdate"> ${p.pdate} </div>
+								<div class="pname"> ${p.pname} </div>
+								<div class="pprice"> ${p.pprice.toLocaleString()} </div>
+								<div class="petc">
+									<i class="far fa-eye"></i> ${p.pview}
+									<i class="far fa-thumbs-up"></i> 5
+									<i class="far fa-comment-dots"></i> 2  
+								</div> 
+							</div>
+						</div>
+					`
 		})
 		document.querySelector('.productlistbox').innerHTML = html;
  }
  
+ // 제품 개별 조회
+ function productprint( i ){
+	 let p = productlist[i];
+	 
+	 	console.log(p.pno + "제품 클릭")
+	      let html = `
+	      			<button onclick="productlistprint()" > <== </button>
+	      			<h3>제품상세페이지</h3>
+	      			`  
+	      html += `<div>
+				<span> ${p.pname} </span>
+				<span> ${p.pcomment} </span>
+				<span> ${p.pprice} </span>
+				<span> ${p.pstate} </span>
+				<span> ${p.pview} </span>
+				<span> ${p.pdate} </span>
+				<span> <button class="plikebtn" onclick="setplike(${p.pno})" type="button" >  </button> </span>
+			</div>`
+		document.querySelector('.productlistbox').innerHTML = html;
+		getPlike( p.pno );
+ }
 
  var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
         center : new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표 
@@ -43,7 +75,18 @@ let productlist = null;
         minLevel: 10 // 클러스터 할 최소 지도 레벨 
     });
  
- 
+// -------------------------- 마커 이미지변경---------------------------
+//
+var imageSrc = '/jspweb/img/marker.png', // 마커이미지의 주소입니다    
+    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+      
+// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+    markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
+    
+// -------------------------- 마커 이미지변경---------------------------
+
  // 1. 제품 목록 호출 [ 1. 현재 보이는 지도좌표내 포함된 제품만 ]
  //getProductList(  );
  function getProductList(동 , 서 , 남 , 북){
@@ -64,7 +107,7 @@ let productlist = null;
 	  
 			//---------------사이드바------------------------
 			productlist = data;	// 제품목록 결과를 전역변수에 담기
-			//productlistprint();
+			productlistprint();
 			
 			//---------------------마커 ---------------------------------
 			
@@ -79,27 +122,13 @@ let productlist = null;
 				
 				// 마커에 추가코드 작성하기 위해 벼
 	            let marker = new kakao.maps.Marker({
-	                position : new kakao.maps.LatLng(position.plat, position.plng)
+	                position : new kakao.maps.LatLng(position.plat, position.plng) ,
+	                image : markerImage
 	            });
 	            
 	              // 마커에 클릭이벤트를 등록합니다
 				kakao.maps.event.addListener(marker, 'click', function() {
-				      console.log(position.pno + "제품 클릭")
-				      let html = `
-				      			<button onclick="productlistprint()" > <== </button>
-				      			<h3>제품상세페이지</h3>
-				      			`  
-				      html += `<div>
-							<span> ${position.pname} </span>
-							<span> ${position.pcomment} </span>
-							<span> ${position.pprice} </span>
-							<span> ${position.pstate} </span>
-							<span> ${position.pview} </span>
-							<span> ${position.pdate} </span>
-							<span> <button class="plikebtn" onclick="setplike(${position.pno})" type="button" >  </button> </span>
-						</div>`
-					document.querySelector('.productlistbox').innerHTML = html;
-					getPlike( position.pno );
+				      productprint(i);
 				});
 				
 				return marker;
