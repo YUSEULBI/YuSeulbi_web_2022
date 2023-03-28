@@ -64,7 +64,7 @@ let productlist = null;
 	  
 			//---------------사이드바------------------------
 			productlist = data;	// 제품목록 결과를 전역변수에 담기
-			productlistprint();
+			//productlistprint();
 			
 			//---------------------마커 ---------------------------------
 			

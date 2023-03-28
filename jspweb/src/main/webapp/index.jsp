@@ -11,21 +11,56 @@
 	
 	
 	<!-- 검색창 구역 -->
-	<div style="position: fixed; left: 10px; top: 40%; z-index : 999; 
-			width: 100px; height: 100px; background-color: white;">
-		검색창
+	<div class="searchbox">
+			검색창
 	</div>
+	
 	
 	<!-- div -->
 	<div style="display: flex; width: 100%; height: 100%">
 	
 		<!-- 지도 -->
-		<div id="map" style="width:80%;height:80%;"></div>
+		<div id="map" style="width:75%;height:80%;"></div>
 		
 		<!-- 사이드바 -->
-		<div class="productlistbox" style="width: 20%">
+		<div class="productlistbox">
+		
+			<!-- 제품1개 -->
+			<div class="productbox">
+				<div class="pimgbox">
+					<img src="/jspweb/product/pimg/notebook.webp">
+				</div>
+				<div class="pcontentbox">
+					<div class="pdate">  </div>
+					<div class="pname"> LG 노트북 팝니다. LG 노트북 팝니다. LG 노트북 팝니다. LG 노트북 팝니다. LG 노트북 팝니다. LG 노트북 팝니다. </div>
+					<div class="pprice"> 3,000원 </div>
+					<div class="petc">
+						<i class="far fa-eye"></i> 30
+						<i class="far fa-thumbs-up"></i> 5
+						<i class="far fa-comment-dots"></i> 2  
+					</div> 
+				</div>
+			</div>
 			
-		</div>
+				<!-- 제품1개 -->
+			<div class="productbox">
+				<div class="pimgbox">
+					<img src="/jspweb/product/pimg/notebook.webp">
+				</div>
+				<div class="pcontentbox">
+					<div class="pdate">  </div>
+					<div class="pname"> LG 노트북 팝니다. </div>
+					<div class="pprice"> 3,000원 </div>
+					<div class="petc">
+						<i class="far fa-eye"></i> 30
+						<i class="far fa-thumbs-up"></i> 5
+						<i class="far fa-comment-dots"></i> 2  
+					</div> 
+				</div>
+			</div>
+			
+		</div> <!-- 사이드바 end -->
+		
 	</div>
 	
 	<%@include file="/footer.jsp" %>
