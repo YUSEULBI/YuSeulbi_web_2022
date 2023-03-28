@@ -124,6 +124,41 @@ let productlist = null;
 	 
 	 let p = productlist[i];
 	 //let html = `<h3> ${p.pno}제품 채팅방 </h3>`;
+	 
+	 // 해당 제품에서 로그인한 사람이 보내고 받은 메시지 모두출력
+	 let chathtml = ``
+	 $.ajax({
+		url : "/jspweb/product/chat" ,
+		method : "get" ,
+		data : { "pno":p.pno } ,
+		async : false ,
+		success : (r)=>{
+			console.log('통신')
+			console.log(r)
+			
+			
+			r.forEach((o,i)=>{
+//				console.log(o.nno)
+//				console.log(o.frommno)
+//				console.log(o.ncontent)
+//				console.log(o.ndate)
+//				console.log(o.pno)
+				
+				if( r.frommno == memberInfo.mno ){
+					chathtml += `
+									<div class="sendbox"> ${o.ncontent} </div>
+								`	
+				}else{
+					chathtml += `
+									<div class="receivebox"> ${o.ncontent} </div>
+								`	
+				}
+			})
+			
+
+		}
+	})
+	 
 	 let html = `
 	 			<div class="chatbox">	
 					<div class="pviewinfo">
@@ -136,14 +171,11 @@ let productlist = null;
 						</div>
 					</div>
 					
-					<div class="chatcontent">
-						<div class="sendbox"> 구매 가능할까요? </div>
-						<div class="receivebox"> 네 구매 가능 합니다. </div>
-					</div>
+					<div class="chatcontent"> ${chathtml}	</div>
 					
 					<div class="chatbtn">
 						<textarea class="ncontentinput" rows="" cols=""></textarea>
-						<button onclick="sendchat(${p.pno})" type="button">전송</button>
+						<button onclick="sendchat(${p.pno} , ${ p.mno })" type="button">전송</button>
 					</div>
 				</div>	
 	 			`;
@@ -151,15 +183,15 @@ let productlist = null;
  }
  
 // 5. 
-function sendchat( pno ){
+function sendchat( pno , tomno ){ // 제품번호 , 제품판매자
 	console.log("pno : "+pno)
 	let ncontent = document.querySelector('.ncontentinput').value
 	console.log(ncontent)
 	
 	$.ajax({
-		url : "" ,
+		url : "/jspweb/product/chat" ,
 		method : "post" ,
-		data : { "pno":pno , "ncontent":ncontent} ,
+		data : { "pno":pno , "ncontent":ncontent , "tomno":tomno } ,
 		success : (r)=>{
 			console.log('통신')
 			console.log(r)
@@ -169,6 +201,31 @@ function sendchat( pno ){
 		}
 	})
 	
+	
+}
+
+function noteprint( pno ){
+	console.log( "print pno : "+pno )
+	$.ajax({
+		url : "/jspweb/product/chat" ,
+		method : "get" ,
+		data : { "pno":pno } ,
+		success : (r)=>{
+			console.log('통신')
+			console.log(r)
+			
+			r.forEach((o,i)=>{
+//				console.log(o.nno)
+//				console.log(o.frommno)
+//				console.log(o.ncontent)
+//				console.log(o.ndate)
+//				console.log(o.pno)
+
+			})
+			document.querySelector('.chatcontent').innerHTML = html;
+
+		}
+	})
 	
 }
 
