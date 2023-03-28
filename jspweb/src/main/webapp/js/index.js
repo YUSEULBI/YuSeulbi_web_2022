@@ -46,19 +46,71 @@ let productlist = null;
 	 let p = productlist[i];
 	 
 	 	console.log(p.pno + "제품 클릭")
-	      let html = `
-	      			<button onclick="productlistprint()" > <== </button>
-	      			<h3>제품상세페이지</h3>
-	      			`  
-	      html += `<div>
-				<span> ${p.pname} </span>
-				<span> ${p.pcomment} </span>
-				<span> ${p.pprice} </span>
-				<span> ${p.pstate} </span>
-				<span> ${p.pview} </span>
-				<span> ${p.pdate} </span>
-				<span> <button class="plikebtn" onclick="setplike(${p.pno})" type="button" >  </button> </span>
-			</div>`
+	    let imghtml = ``;
+	    p.pimglist.forEach( (img ,i)=>{
+			if ( i == 0 ){
+				imghtml += `
+					 		<div class="carousel-item active">
+						      <img src="/jspweb/product/pimg/${img}" class="d-block w-100" alt="...">
+						    </div>
+							`
+			}else{
+				imghtml += `
+					 		<div class="carousel-item">
+						      <img src="/jspweb/product/pimg/${img}" class="d-block w-100" alt="...">
+						    </div>
+							`
+			}
+		})
+		
+	    let html = ``  
+			
+		html += `
+				<div class="pviewbox">
+					<div class="pviewinfo">
+						<div class="mimgbox">
+							<img alt="" src="/jspweb/member/pimg/${p.mimg == null ? 'default.webp' : p.mimg }" class="hpimg">
+							<span class="mid"> ${p.mid} </span>
+						</div>
+						<div>
+							<button onclick="productlistprint()"  class="pbadge" type="button"> 목록보기 </button>
+						</div>
+					</div>
+					
+					<!-- 이미지 캐러셀 : 이미지 슬라이드 -->
+					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+					  
+					  <div class="carousel-inner">
+					    ${imghtml}
+					  </div>
+					  
+					  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+					    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					    <span class="visually-hidden">Previous</span>
+					  </button>
+					  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+					    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					    <span class="visually-hidden">Next</span>
+					  </button>
+					</div>
+					
+					<!-- 제품 상세 내용물 -->
+					<div class="pdate"> ${p.pdate} </div>
+					<div class="pname"> ${p.pname} </div>
+					<div class="pcomment"> ${p.pprice} </div>
+					<div class="pstate">  <span class="pbadge" >${ p.pstate == 1 ? '판매중' : p.pstate == 2 ? '거래중' : '판매완료' }</span> </div>
+					<div class="pprice"> ${p.pprice.toLocaleString()} </div>
+					<div class="petc">
+							<i class="far fa-eye"></i> ${p.pview}
+							<i class="far fa-thumbs-up"></i> 5
+							<i class="far fa-comment-dots"></i> 2  
+					</div>
+					<div class="pviewbtnbox">
+						<button class="plikebtn" onclick="setplike(${p.pno})" type="button"> <i class="far fa-heart"></i> </button>
+						<button type="button"> 채팅 </button> 
+					</div>
+				</div>
+				`
 		document.querySelector('.productlistbox').innerHTML = html;
 		getPlike( p.pno );
  }
