@@ -60,10 +60,11 @@ if ( memberInfo.mid == null ){
 	알림용소켓 = new WebSocket('ws://localhost:8080/jspweb/alarm/'+memberInfo.mid)
 	
 	// 2. 클라이언트 소켓내 필드의 이벤트 메소드 정의
+	// 로그인시 onopen실행
 	알림용소켓.onopen = (e) => { console.log('알림용 서버솟켓에 들어옴')}
 	알림용소켓.onclose = (e) => { console.log('알림용 서버소켓 나감')}
 	알림용소켓.onerror = (e) => { console.log('알림용 서버소켓 오류')}
-	알림용소켓.onmessage = (e) => { onalarm(e)}
+	알림용소켓.onmessage = (e) => { onalarm(e)} // 서버소켓에게 onmessage 받으면 onalarm실행
 }
 
 //
@@ -84,7 +85,7 @@ function onalarm(e){
 		// Dao메소드에 synchronized
 		// 스레드1 해당 메소드 사용하고 있을 때 [ return 전 ] 다른 스레드2 해당 메소드에 대기상태
 		// 멀티스레드 : 서블릿 자체가 멀티스레드 HttpServlet
-	getcontent(); // 채팅 받았을때 렌더링
+	getcontent(); // 채팅 받았을때 렌더링 // 메시지 받을때마다 채팅창 렌더링
 	
 }
 

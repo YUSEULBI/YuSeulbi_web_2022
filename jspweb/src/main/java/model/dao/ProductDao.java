@@ -140,7 +140,7 @@ public class ProductDao extends Dao {
 //					+ " on m.mno = n.frommno where n.pno = ? and ( n.frommno = ? or n.tomno = ? )  order by n.nno asc";
 			
 			sql = "select n.* , m.mid , m.mimg from note n join member m "
-					+ " on m.mno = n.frommno where n.pno = ? and n.tomno = ?  order by n.nno asc";
+					+ " on m.mno = n.frommno where n.pno = ? and n.tomno = ?  order by n.nno desc";
 		}
 		
 		

@@ -32,11 +32,11 @@ console.log('index js실행')
 // 338번줄 지도에 표시된 영역의 제품리스트 전역변수 productlist에 저장
 let productlist = null; // productlistprint( ) ajax 결과 담는 곳
 
-// 1. 제품목록출력
+// 1. 표시된 지도의 제품목록출력
  function productlistprint( ){
 	 let html = '<h3>제품목록페이지</h3>'
-	 	// 지도영역 안의 제품목록 for문 돌려서
-	 	// 한 제품당 
+	 	
+	 	// 지도에 표시된 영역안의 제품리스트 for문을 돌려서 productprint(i:제품1개 각각 인덱스) 추가 / 제품사진 첫번째 / 제품날짜/제품명/제품금액/조회수/ 
 		productlist.forEach( (p , i)=>{
 					
 			html += `
@@ -61,20 +61,24 @@ let productlist = null; // productlistprint( ) ajax 결과 담는 곳
 		document.querySelector('.productlistbox').innerHTML = html;
  }// end
  
- // 제품 개별 조회
+ // 제품 개별 조회 // 제품을 클릭하거나 마커를 클릭하면 제품1개의 상세페이지 출력 ( 제품목록출력과 마커생성할 때 온클릭에 해당제품의 인덱스번호를 매개변수로 넣음)
  function productprint( i ){
-	 let p = productlist[i];
+	 let p = productlist[i]; // 지도 표시된 영역의 i번째 제품 정보 
+	 // productlist : pno/pname/pcomment/pprice/pstate/plat/plng/pview/pdate/mno/mid/mimg/pimglist
 	 
 	 	console.log(p.pno + "제품 클릭")
 	    let imghtml = ``;
+	    
+	    // 제품 사진을 for문 돌려서 캐러셀 안에 들어갈 imgdiv만 구성
 	    p.pimglist.forEach( (img ,i)=>{
+			// 첫번째 사진은 캐러셀 첫페이지
 			if ( i == 0 ){
 				imghtml += `
 					 		<div class="carousel-item active">
 						      <img src="/jspweb/product/pimg/${img}" class="d-block w-100" alt="...">
 						    </div>
 							`
-			}else{
+			}else{ // 나머지 사진은 기본캐러셀
 				imghtml += `
 					 		<div class="carousel-item">
 						      <img src="/jspweb/product/pimg/${img}" class="d-block w-100" alt="...">
@@ -84,7 +88,8 @@ let productlist = null; // productlistprint( ) ajax 결과 담는 곳
 		})
 		
 	    let html = ``  
-			
+		// productlist : pno/pname/pcomment/pprice/pstate/plat/plng/pview/pdate/mno/mid/mimg/pimglist
+		// 제품사진캐러셀 밑에 html출력 : 제품판매자 프로필/판매자 아이디/지도영역제품리스트로돌아가기/캐러셀코드/날짜/제품명/가격/상태/금액/조회수/찜하기/채팅버튼 출력 	
 		html += `
 				<div class="pviewbox">
 					<div class="pviewinfo">
@@ -132,15 +137,18 @@ let productlist = null; // productlistprint( ) ajax 결과 담는 곳
 				</div>
 				`
 		document.querySelector('.productlistbox').innerHTML = html;
+		// 로그인한 사람의 선택한제품 찜하기 상태에 따라서 찜하기버튼 렌더링
 		getPlike( p.pno );
  }
+ 
  let index = 0; 	// 현재 보고 있는 제품의 제품인덱스
  let chatmno = 0; 	// 현재 채팅하고 있는 상대방의 mno
  
  // 10. 로그인한 사람이 받은 메시지 모두출력
  function getcontent(){
 	 
-	  // 해당 제품에서 로그인한 사람이 보내고 받은 메시지 모두출력
+	 // 해당 제품에서 로그인한 사람이 보내고 받은 메시지 모두출력
+	 // [나->상대방] 또는 [상대방->나]인 메시지 모두 가져오기 
 	 let chathtml = ``
 	 let pno = productlist[index].pno; // 현재 보고있는제품의 index
 	 $.ajax({
@@ -154,11 +162,14 @@ let productlist = null; // productlistprint( ) ajax 결과 담는 곳
 			
 			
 			r.forEach((o,i)=>{
-				
+				// r = ArrayList<ChatDto> : nno/ncontent/pdate/pno/frommno/tomno/frommid/frommimg
+				// 쪽지식별번호/쪽지내용/보낸날짜/제품번호/보낸사람/받은사람/보낸사람아이디/보낸사람프로필이미지
+				// 메시지를 보낸 사람이 로그인한 사람이면 오른쪽출력
 				if( o.frommno == memberInfo.mno ){ 
 					chathtml += `
 									<div class="sendbox"> ${o.ncontent} </div>
 								`	
+				// 그외에는 왼쪽에 출력
 				}else {
 					chathtml += `
 									<div class="receivebox"> ${o.ncontent} </div>
@@ -175,25 +186,30 @@ let productlist = null; // productlistprint( ) ajax 결과 담는 곳
  // 9. 제품별 채팅목록 페이지
  function chatlistprint( i ){
 	 
+	 // 제품인덱스 가져와서 해당제품정보 가져오기 
 	 let p = productlist[i];
+	 // productlist : pno/pname/pcomment/pprice/pstate/plat/plng/pview/pdate/mno/mid/mimg/pimglist
+	 
 	 console.log(p)
 	 let html = ``;
-	 
+	 // ajax실행 / 데이터: 제품식별번호 , chatmno는 0
 	 $.ajax({
 		url : "/jspweb/product/chat" ,
 		method : "get" ,
 		data : { "pno":p.pno , "chatmno":0 } ,
 		async : false ,
 		success : (r)=>{
+			// ProductChat.java get함수에서 pno , chatmno , 로그인mno 가지고 / 로그인한 사람이 해당제품의 받은메시지만 출력
 		 	console.log(r)
 		 	let printfrommno = []
 			r.forEach((o)=>{
-				// 해당 구매자와의 채팅을 출력한 적이 없으면
+				// 모든 메시지를 for문을 돌려서 채팅목록 출력
+				// 출력하기 직전에 메시지를 보낸 사람을 printfrommno에 1명씩 추가. 이미 printfrommno에 있으면 채팅목록에 출력 안함.
 				if ( !printfrommno.includes( o.frommno ) ){ // includes 포함여부 알려줌 // && o.frommno != memberInfo.mno <-productdao getChatList 수정해놓아서 필요없음 
 					// 구매자 번호 저장후 구매자별 1번씩만 출력  
 					printfrommno.push( o.frommno );
 				 
-				// 구매자별 1개씩만 출력 // onclick 받은메시지를 
+				// 구매자별 1개씩만 출력 // onclick chatinfoprint(제품인덱스,메시지보낸사람) / 메시지보낸사람프로필이미지/ 날짜/메시지보낸사람아이디/메시지내용
 				html += `
 						<div onclick="chatinfoprint( ${i} , ${o.frommno} )" class="chatlist">
 							<div class="frommimg"> <img src="/jspweb/member/pimg/${o.frommimg == null ? 'default.webp' : o.frommimg }" class="hpimg"> </div>
@@ -213,15 +229,20 @@ let productlist = null; // productlistprint( ) ajax 결과 담는 곳
 	 document.querySelector('.productlistbox').innerHTML = html;
  }
  
- // .11 ------------------------------------------------------------------------------------
+ // .11 채팅페이지 생성------------------------------------------------------------------------------------
+ // 매개변수 : [제품인덱스]와 [메시지를 나한테 보낸 사람] - ( 구매자는 판매자mno / 판매자는 채팅목록에서 선택한 구매자mno)
  function chatinfoprint( i , tomno ){
 	 console.log( tomno + "에게 메시지 전송페이지");
 	 // 전역변수에 담기
+	 // 제품인덱스를 전역변수 i에 담고 / 내가메시지보낼사람mno(나에게메시지보낸사람mno)를 chatmno에 담기
 	 index = i ;
 	 chatmno = tomno ;
 	 
+	 // 전역변수에 제품인덱스가 저장되었고 , 제품인덱스를 매개변수에 넣어서 productlist의 index번째 제품정보를 p에 담음
 	 let p = productlist[index];
+	 // productlist : pno/pname/pcomment/pprice/pstate/plat/plng/pview/pdate/mno/mid/mimg/pimglist
 	 
+	 // 해당제품 첫번째사진이미지/제품명/지도영역제품목록보기버튼/채팅메시지렌더링getcontent()/textarea/전송버튼sendchat(pno)/
 	 let html = `
 	 			<div class="chatbox">	
 					<div class="pviewinfo">
@@ -249,7 +270,8 @@ let productlist = null; // productlistprint( ) ajax 결과 담는 곳
 	 getcontent();
  }
  
- // 3. 채팅페이지 이동 ( 진짜이동 아니고 렌더링) ------------------------------------------------------------------------------------ 
+ // 3. 채팅페이지 이동 ( 진짜이동 아니고 렌더링) ------------------------------------------------------------------------------------
+ // 상세페이지에서 chatprint를 누르면 해당제품의 인덱스번호를 가져오고 / 로그인검사 / 로그인한사람과 해당제품판매자와 같으면 채팅목록생성(제품인덱스) / 아니면 채팅페이지로( 제품인덱스,제품판매자)
  function chatprint( i ){
 	 
 	 // 로그인검사
@@ -258,6 +280,7 @@ let productlist = null; // productlistprint( ) ajax 결과 담는 곳
 	 }
 	 
 	 let p = productlist[i];
+	 // productlist : pno/pname/pcomment/pprice/pstate/plat/plng/pview/pdate/mno/mid/mimg/pimglist
 	 
 	 console.log( "로그인 아이디 : "+memberInfo.mno )
 	 console.log( "제품판매자 : "+p.mno )
@@ -273,21 +296,23 @@ let productlist = null; // productlistprint( ) ajax 결과 담는 곳
  }
  
 // 5. 
-function sendchat( pno ){ // 제품번호 , 제품판매자
+function sendchat( pno ){ // 제품식별번호
 	console.log("pno : "+pno)
+	// 채팅입력값 가져오기
 	let ncontent = document.querySelector('.ncontentinput').value
 	console.log(ncontent)
-	
+	// 채팅페이지를 생성할때 chatmno(메시지보낼대상mno) 전역변수 저장
 	$.ajax({
 		url : "/jspweb/product/chat" ,
 		method : "post" ,
+		// 제품번호/쪽지내용/쪽지받을사람
 		data : { "pno":pno , "ncontent":ncontent , "tomno":chatmno } ,
 		success : (r)=>{
 			console.log('통신')
 			console.log(r)
 			if ( r == 'true'){
 				document.querySelector('.ncontentinput').value = '';
-				getcontent();			
+				getcontent();	// 메시지를 보내고 렌더링		
 			}
 		}
 	})
