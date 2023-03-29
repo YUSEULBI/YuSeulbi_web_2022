@@ -8,6 +8,8 @@ public class ChatDto {
 	private int frommno; // 보낸사람
 	private int tomno;	// 받는사람
 	//추가필드
+	private String frommid; // 판매자에게 보낸 사람 아이디
+	private String frommimg; // 판매자에게 보낸 사람 프로필
 	
 	public ChatDto() {
 		// TODO Auto-generated constructor stub
@@ -86,6 +88,22 @@ public class ChatDto {
 
 	public void setTomno(int tomno) {
 		this.tomno = tomno;
+	}
+
+	public String getFrommid() {
+		return frommid;
+	}
+
+	public void setFrommid(String frommid) {
+		this.frommid = frommid;
+	}
+
+	public String getFrommimg() {
+		return frommimg;
+	}
+
+	public void setFrommimg(String frommimg) {
+		this.frommimg = frommimg;
 	}
 	
 	
