@@ -68,7 +68,24 @@ if ( memberInfo.mid == null ){
 
 //
 function onalarm(e){
-	alert('채팅 왔습니다.'+e.data )
+	console.log('채팅 왔습니다.'+e.data )
+	let msgbox = document.querySelector('.msgbox')
+	msgbox.style.bottom = "50px";
+	
+	// 4초 후에 자동 내려가기
+	// n초 후에 이벤트 실행 setTimeout( ()=>{} , 밀리초 }
+	// n초 마다 이벤트 실행 setInterval( ()=>{} , 밀리초 }
+	
+	setTimeout( ()=>{
+		msgbox.style.bottom = "-100px";
+	} , 4000)
+	
+	// 여러명이 채팅 요청 하면 Dao 메소드 충돌 발생할 수 있음.
+		// Dao메소드에 synchronized
+		// 스레드1 해당 메소드 사용하고 있을 때 [ return 전 ] 다른 스레드2 해당 메소드에 대기상태
+		// 멀티스레드 : 서블릿 자체가 멀티스레드 HttpServlet
+	getcontent(); // 채팅 받았을때 렌더링
+	
 }
 
 

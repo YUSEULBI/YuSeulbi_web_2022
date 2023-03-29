@@ -302,7 +302,23 @@ html , body {
 
 
 
+/*------- 알림모달구역 ----------*/
 
+.msgbox{
+	width: 200px;
+	height: 100px;
+	border: 1px solid red;
+	background-color: white;
+	position: fixed;
+	left: 1%;
+	bottom: -100px;
+	z-index: 300;
+	opacity: 0.8;
+	
+	/* 애니메이션 효과 */
+	/* 특정 css 변화 있을때 변화시간(초) */
+	transition : 0.5s;	
+}
 
 
 

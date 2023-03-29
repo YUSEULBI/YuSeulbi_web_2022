@@ -64,8 +64,9 @@ public class ProductChat extends HttpServlet {
 		boolean result = ProductDao.getInstance().setChat(chatDto);
 		// 4. 만약에 채팅 등록 성공했으면 tomno 에게 소켓 알림 메시지 보내기
 		if ( result ) {
+			// 서버소켓에게 채팅을 받은 유저의 번호와 내용을 전달
 			try {
-				Alarm.서버메시지(null, null);
+				Alarm.서버메시지(null, tomno+","+ncontent );
 			} catch (Exception e) { e.printStackTrace(); }
 		}
 		response.getWriter().print(result);

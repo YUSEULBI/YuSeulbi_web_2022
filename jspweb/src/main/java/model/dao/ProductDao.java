@@ -14,8 +14,10 @@ public class ProductDao extends Dao {
 	private ProductDao() {}
 	public static ProductDao getInstance () { 	return dao; 	}
 	
+	 //  synchronized : 멀티스레드 사용시 ( 서블릿 ) 해당 메소드 동시사용불가 대기만들기 await
+	
 	// 1. 제품등록
-	public boolean write( ProductDto dto ) {
+	public synchronized boolean write( ProductDto dto ) {
 		// 1. 제품 우선 등록
 		String sql = "insert product ( pname , pcomment , pprice , plat , plng , mno ) "
 				+ " values ( '"+dto.getPname()+"' , "
@@ -43,7 +45,7 @@ public class ProductDao extends Dao {
 	}
 	
 	// 2. 제품출력
-	public ArrayList<ProductDto> getProduct( String 동 , String 서 , String 남 , String 북 ) { 	
+	public synchronized ArrayList<ProductDto> getProduct( String 동 , String 서 , String 남 , String 북 ) { 	
 		ArrayList<ProductDto> list = new ArrayList<>(); // plng 경도(가로) plat 위도(세로) 
 		String sql = "select p.* , m.mid , m.mimg from product p natural join member m "
 				+ " where "+남+" <= plat && "+북+" >= plat && "+서+" <= plng && "+동+" >= plng";
@@ -73,7 +75,7 @@ public class ProductDao extends Dao {
 	}
 	
 	// 3.찜하기 등록과 취소
-	public boolean setPlike( int pno , int mno ) {
+	public synchronized boolean setPlike( int pno , int mno ) {
 		// 1. 등록할지 취소할지 검색
 		String sql = "select * from plike where mno = "+mno+" and pno = "+pno;
 		try {
@@ -93,7 +95,7 @@ public class ProductDao extends Dao {
 	}
 	
 	// 4. 현재 회원이 해당 제품의 찜하기 상태 확인
-	public boolean getPlike( int pno , int mno ) {
+	public synchronized boolean getPlike( int pno , int mno ) {
 		String sql = "select * from plike where mno = "+mno+" and pno = "+pno;
 		try {
 			ps = con.prepareStatement(sql);
@@ -105,7 +107,7 @@ public class ProductDao extends Dao {
 	}
 	
 	// 5. 쪽지보내기 (DB저장)
-	public boolean setChat(ChatDto dto) {
+	public synchronized boolean setChat(ChatDto dto) {
 		String sql = "insert into note(ncontent , pno , frommno , tomno ) values ( ? , ? , ? , ? );";
 		try {
 			ps = con.prepareStatement(sql);
@@ -121,7 +123,7 @@ public class ProductDao extends Dao {
 	}
 	
 	// 6. 쪽지출력 [ 제품번호 동일 , 로그인한 회원이 받거나 보낸 내용 ] js 9번 10번
-	public ArrayList<ChatDto> getChatList( int pno , int mno , int chatmno ) {
+	public synchronized ArrayList<ChatDto> getChatList( int pno , int mno , int chatmno ) {
 		ArrayList<ChatDto> list = new ArrayList<>();
 		
 		String sql = "";

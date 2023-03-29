@@ -17,7 +17,7 @@
 	
 	
 	<!-- div -->
-	<div style="display: flex; width: 100%; height: 70%">
+	<div style="display: flex; width: 100%; height: 80%">
 	
 		<!-- 지도 -->
 		<div id="map" style="width:75%;height:100%;"></div>
