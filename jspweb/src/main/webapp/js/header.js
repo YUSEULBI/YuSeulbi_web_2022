@@ -46,4 +46,35 @@ function getLogin(){
 		}
 	})
 	
+} // end
+
+
+//----------------------알림용 클라이언트 소켓---------------------------
+let 알림용소켓 = null;
+
+if ( memberInfo.mid == null ){
+	
+}else{
+	// JS 실행주체 = 클라이언트 // JAVA = 서버
+	// 1. js : 클라이언트 소켓 생성
+	알림용소켓 = new WebSocket('ws://localhost:8080/jspweb/alarm/'+memberInfo.mid)
+	
+	// 2. 클라이언트 소켓내 필드의 이벤트 메소드 정의
+	알림용소켓.onopen = (e) => { console.log('알림용 서버솟켓에 들어옴')}
+	알림용소켓.onclose = (e) => { console.log('알림용 서버소켓 나감')}
+	알림용소켓.onerror = (e) => { console.log('알림용 서버소켓 오류')}
+	알림용소켓.onmessage = (e) => { onalarm(e)}
 }
+
+//
+function onalarm(e){
+	alert('채팅 왔습니다.'+e.data )
+}
+
+
+
+
+
+
+
+

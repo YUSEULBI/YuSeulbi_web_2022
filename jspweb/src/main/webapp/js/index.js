@@ -29,11 +29,14 @@ console.log('index js실행')
 */
 
 // 전역변수
+// 338번줄 지도에 표시된 영역의 제품리스트 전역변수 productlist에 저장
 let productlist = null; // productlistprint( ) ajax 결과 담는 곳
 
 // 1. 제품목록출력
  function productlistprint( ){
 	 let html = '<h3>제품목록페이지</h3>'
+	 	// 지도영역 안의 제품목록 for문 돌려서
+	 	// 한 제품당 
 		productlist.forEach( (p , i)=>{
 					
 			html += `
@@ -186,7 +189,7 @@ let productlist = null; // productlistprint( ) ajax 결과 담는 곳
 		 	let printfrommno = []
 			r.forEach((o)=>{
 				// 해당 구매자와의 채팅을 출력한 적이 없으면
-				if ( !printfrommno.includes( o.frommno ) ){ // includes 포함여부 알려줌
+				if ( !printfrommno.includes( o.frommno ) && o.frommno != memberInfo.mno ){ // includes 포함여부 알려줌
 					// 구매자 번호 저장후 구매자별 1번씩만 출력  
 					printfrommno.push( o.frommno );
 				 

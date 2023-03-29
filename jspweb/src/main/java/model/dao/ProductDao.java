@@ -120,16 +120,21 @@ public class ProductDao extends Dao {
 		}return false;
 	}
 	
-	// 6. 쪽지출력 [ 제품번호 동일 , 로그인한 회원이 받거나 보낸 내용 ]
+	// 6. 쪽지출력 [ 제품번호 동일 , 로그인한 회원이 받거나 보낸 내용 ] js 9번 10번
 	public ArrayList<ChatDto> getChatList( int pno , int mno , int chatmno ) {
 		ArrayList<ChatDto> list = new ArrayList<>();
 		
-//		String sql = "select n.* , m.mid , m.mimg from note n join member m "
-//				+ " on m.mno = n.frommno where n.pno = ? and ( n.frommno = ? or n.tomno = ? )  order by n.nno asc";
+		String sql = "";
 		
-		String sql = "select n.* , m.mid , m.mimg from note n join member m "
-				+ " on m.mno = n.frommno "
-				+ " where pno = ? and ( ( frommno = ? and tomno= ? ) or ( frommno = ? and tomno= ? ) )  order by n.nno asc";
+		if ( chatmno != 0 ) { // 채팅방내 메시지 목록출력
+			sql = "select n.* , m.mid , m.mimg from note n join member m "
+					+ " on m.mno = n.frommno "
+					+ " where pno = ? and ( ( frommno = ? and tomno= ? ) or ( frommno = ? and tomno= ? ) )  order by n.nno asc";
+		}else {
+			sql = "select n.* , m.mid , m.mimg from note n join member m "
+					+ " on m.mno = n.frommno where n.pno = ? and ( n.frommno = ? or n.tomno = ? )  order by n.nno asc";
+		}
+		
 		
 		// 현재 같이 채팅하고 있는 대상자들의 내용물만 출력 / pno : 채팅방기준 /
 		
@@ -148,9 +153,14 @@ public class ProductDao extends Dao {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, pno);
 			ps.setInt(2, mno);
-			ps.setInt(3, chatmno);
-			ps.setInt(4, chatmno);
-			ps.setInt(5, mno);
+			
+			if ( chatmno != 0 ) {
+				ps.setInt(3, chatmno);
+				ps.setInt(4, chatmno);
+				ps.setInt(5, mno);
+			}else {
+				ps.setInt(3, mno);
+			}
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				ChatDto chatDto = new ChatDto(
