@@ -155,7 +155,7 @@ public class MemberDao extends Dao {
 				int result = ps.executeUpdate(); // 업데이트한 레코드 개수 반환
 					if ( result == 1 ) { 
 						// -- 이메일 테스트 되는 경우
-						// new MemberDto().sendEmail(memail, updatePwd); // 임시 비밀번호를 이메일로 보내기
+						//new MemberDto().sendEmail(memail, updatePwd); // 임시 비밀번호를 이메일로 보내기
 						// return "true";
 						
 						// 이메일 전송 안되는 경우
