@@ -123,6 +123,7 @@ public class ProductDao extends Dao {
 	}
 	
 	// 6. 쪽지출력 [ 제품번호 동일 , 로그인한 회원이 받거나 보낸 내용 ] js 9번 10번
+	// mno : 로그인한 사람
 	public synchronized ArrayList<ChatDto> getChatList( int pno , int mno , int chatmno ) {
 		ArrayList<ChatDto> list = new ArrayList<>();
 		
@@ -133,8 +134,13 @@ public class ProductDao extends Dao {
 					+ " on m.mno = n.frommno "
 					+ " where pno = ? and ( ( frommno = ? and tomno= ? ) or ( frommno = ? and tomno= ? ) )  order by n.nno asc";
 		}else {
+			System.out.println("dao에서 getChatList에서 chatmno가 0일때 sql");
+			// 내맘대로 수정 전
+//			sql = "select n.* , m.mid , m.mimg from note n join member m "
+//					+ " on m.mno = n.frommno where n.pno = ? and ( n.frommno = ? or n.tomno = ? )  order by n.nno asc";
+			
 			sql = "select n.* , m.mid , m.mimg from note n join member m "
-					+ " on m.mno = n.frommno where n.pno = ? and ( n.frommno = ? or n.tomno = ? )  order by n.nno asc";
+					+ " on m.mno = n.frommno where n.pno = ? and n.tomno = ?  order by n.nno asc";
 		}
 		
 		
@@ -160,9 +166,11 @@ public class ProductDao extends Dao {
 				ps.setInt(3, chatmno);
 				ps.setInt(4, chatmno);
 				ps.setInt(5, mno);
-			}else {
-				ps.setInt(3, mno);
 			}
+			// 내맘대로수정
+//			else {
+//				ps.setInt(3, mno);
+//			}
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				ChatDto chatDto = new ChatDto(

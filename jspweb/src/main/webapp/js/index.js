@@ -189,7 +189,7 @@ let productlist = null; // productlistprint( ) ajax 결과 담는 곳
 		 	let printfrommno = []
 			r.forEach((o)=>{
 				// 해당 구매자와의 채팅을 출력한 적이 없으면
-				if ( !printfrommno.includes( o.frommno ) && o.frommno != memberInfo.mno ){ // includes 포함여부 알려줌
+				if ( !printfrommno.includes( o.frommno ) ){ // includes 포함여부 알려줌 // && o.frommno != memberInfo.mno <-productdao getChatList 수정해놓아서 필요없음 
 					// 구매자 번호 저장후 구매자별 1번씩만 출력  
 					printfrommno.push( o.frommno );
 				 
