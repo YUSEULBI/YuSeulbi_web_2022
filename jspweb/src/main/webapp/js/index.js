@@ -13,8 +13,25 @@ console.log('index js실행')
 //	}
 //})
 
+/*
+	[ 함수 목록 ]
+	productlistprint( ) 	: 모든 제품목록 출력
+	productprint( i ) 		: productlist중에 i번째 제품 1개 출력
+	chatprint( i )			: 채팅창 html 출력함수
+	
+	sendchat( pno , tomno ) : 채팅보내서 db처리
+	
+	getProductList(동,서,남,북): 보는페이지의 제품목록 요청해서 지도에 프린트
+	get동서남북()				: 현재 보고있는 동서남북 구하기
+	
+	setplike( pno )			: 찜하기 등록
+	getPlike( pno )			: 찜하기 상태 호출
+*/
+
+// 전역변수
+let productlist = null; // productlistprint( ) ajax 결과 담는 곳
+
 // 1. 제품목록출력
-let productlist = null;
  function productlistprint( ){
 	 let html = '<h3>제품목록페이지</h3>'
 		productlist.forEach( (p , i)=>{
@@ -115,15 +132,64 @@ let productlist = null;
 		getPlike( p.pno );
  }
  
- // 채팅페이지 이동 ( 진짜이동 아니고 렌더링)
+ // 9. 제품별 채팅목록 페이지
+ function chatlistprint( i ){
+	 
+	 let p = productlist[i];
+	 console.log(p)
+	 let html = ``;
+	 
+	 $.ajax({
+		url : "/jspweb/product/chat" ,
+		method : "get" ,
+		data : { "pno":p.pno } ,
+		async : false ,
+		success : (r)=>{
+		 	console.log(r)
+		 	let printfrommno = []
+			r.forEach((o)=>{
+				// 해당 구매자와의 채팅을 출력한 적이 없으면
+				if ( !printfrommno.includes( o.frommno ) ){ // includes 포함여부 알려줌
+					// 구매자 번호 저장후 구매자별 1번씩만 출력  
+					printfrommno.push( o.frommno );
+				 
+				// 구매자별 1개씩만 출력
+				html += `
+						<div class="chatlist">
+							<div class="frommimg"> <img src="/jspweb/member/pimg/default.webp" class="hpimg"> </div>
+							<div class="frominfo">
+								<div class="fromndate"> ${o.ndate} </div>
+								<div class="frommid"> ${o.frommno} </div>
+								<div class="fromncontent"> ${o.ncontent} </div>
+							</div>
+						</div>
+						`
+				}
+			})
+			// 구매자 번호가 존재하지 않으면
+			if ( printfrommno.length == 0  ){html += `채팅 목록이 없습니다.`}
+		 } // success end
+	 }) // ajax end
+	 document.querySelector('.productlistbox').innerHTML = html;
+ }
+ 
+ // 3. 채팅페이지 이동 ( 진짜이동 아니고 렌더링) 
  function chatprint( i ){
 	 
+	 // 로그인검사
 	 if (memberInfo.mid == null){
 		 alert('회원 기능입니다.'); return;
 	 }
 	 
 	 let p = productlist[i];
-	 //let html = `<h3> ${p.pno}제품 채팅방 </h3>`;
+	 
+	 console.log( "로그인 아이디 : "+memberInfo.mno )
+	 console.log( "제품판매자 : "+p.mno )
+	 if ( memberInfo.mno == p.mno ){ // 만약에 등록한 회원이면
+		 alert('본인이 등록한 제품입니다.')
+		 chatlistprint( i );
+		 return;
+	 }
 	 
 	 // 해당 제품에서 로그인한 사람이 보내고 받은 메시지 모두출력
 	 let chathtml = ``
@@ -204,31 +270,8 @@ function sendchat( pno , tomno ){ // 제품번호 , 제품판매자
 	
 }
 
-function noteprint( pno ){
-	console.log( "print pno : "+pno )
-	$.ajax({
-		url : "/jspweb/product/chat" ,
-		method : "get" ,
-		data : { "pno":pno } ,
-		success : (r)=>{
-			console.log('통신')
-			console.log(r)
-			
-			r.forEach((o,i)=>{
-//				console.log(o.nno)
-//				console.log(o.frommno)
-//				console.log(o.ncontent)
-//				console.log(o.ndate)
-//				console.log(o.pno)
 
-			})
-			document.querySelector('.chatcontent').innerHTML = html;
-
-		}
-	})
-	
-}
-
+// -------------------------- 지도생성---------------------------
  var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
         center : new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표 
         level : 13 // 지도의 확대 레벨 

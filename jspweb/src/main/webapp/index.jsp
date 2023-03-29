@@ -25,6 +25,18 @@
 		<!-- 사이드바 -->
 		<div class="productlistbox">
 			
+			<!-- 해당 제품으로부터 채팅을 받은 목록 -->
+			<div class="chatlist">
+				<div class="frommimg"> <img src="/jspweb/member/pimg/default.webp" class="hpimg"> </div>
+				<div class="frominfo">
+					<div class="fromndate"> 2023-03-29 10:02 </div>
+					<div class="frommid"> qweqwe123123 </div>
+					<div class="fromncontent"> 구매할 수 있을까요? </div>
+				</div>
+			</div>
+			
+			
+			
 		</div> <!-- 사이드바 end -->
 		
 	</div>
