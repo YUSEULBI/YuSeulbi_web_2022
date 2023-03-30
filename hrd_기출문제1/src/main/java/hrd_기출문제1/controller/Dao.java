@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 
 public class Dao {
@@ -58,5 +59,21 @@ public class Dao {
 		return false;
 	}
 	
+	// 3. 모든회원조회
+	public ArrayList<MemberDto> getMemberList(){
+		ArrayList<MemberDto> memberlist = new ArrayList<>();
+		String sql = "select * from member_tbl_02";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while ( rs.next() ) {
+				MemberDto dto = new MemberDto(
+						rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), 
+						rs.getString(5), rs.getString(6), rs.getInt(7));
+				memberlist.add(dto);
+			}
+		} catch (Exception e) { System.out.println(e); 	}
+		return memberlist;
+	}
 }
 

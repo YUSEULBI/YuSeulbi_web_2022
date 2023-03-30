@@ -29,7 +29,7 @@
 		<h3>홈쇼핑 회원 목록</h3>
 	</center> 
 	
-	<form name="joinform" method="post"  action="/hrd_기출문제1/join">
+	<form name="joinform" method="post"  action="/hrd_exam1/join">
 		<table style="margin: 0 auto;">
 			<tr>
 				<th>회원번호(자동발생)</th>
@@ -70,11 +70,6 @@
 		</table>
 	</form>
 	
-	<%
-	
-		
-		
-	%>
 	
 	
 	<%@include file="footer.jsp" %>
