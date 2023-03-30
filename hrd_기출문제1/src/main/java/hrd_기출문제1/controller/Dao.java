@@ -119,7 +119,7 @@ public class Dao {
 		String sql = "select member.custno , member.custname ,   "
 				+ " if ( member.grade = 'A' , 'VIP' , if ( member.grade = 'B' , '일반' , '직원' )  )  as 고객등급 , "
 				+ " sum(money.price*money.amount) as 매출 "
-				+ " from member_tbl_02 member join money_tbl_02 money on member.custno = money.custno  group by member.custno;";
+				+ " from member_tbl_02 member join money_tbl_02 money on member.custno = money.custno  group by member.custno  order by 매출 desc";
 		
 		try {
 			ps = con.prepareStatement(sql);
