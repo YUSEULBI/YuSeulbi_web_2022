@@ -10,10 +10,14 @@ public class MemberDto {
 	private String joindate;
 	private String grade;
 	private int city;
+	//매출필드
+	private int price;
 	
 	public MemberDto() {
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 	public MemberDto(int custno, String custname, String phone, String address, String joindate, String grade,
 			int city) {
@@ -26,6 +30,8 @@ public class MemberDto {
 		this.grade = grade;
 		this.city = city;
 	}
+
+
 
 	@Override
 	public String toString() {
@@ -87,6 +93,18 @@ public class MemberDto {
 
 	public void setCity(int city) {
 		this.city = city;
+	}
+
+
+
+	public int getPrice() {
+		return price;
+	}
+
+
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	
 	

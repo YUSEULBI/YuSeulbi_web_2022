@@ -26,8 +26,27 @@ public class Join extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		int custno = Integer.parseInt(request.getParameter("custno"));
+		int chcustno = Integer.parseInt(request.getParameter("chcustno"));
+		String custname = request.getParameter("custname");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String joindate = request.getParameter("joindate");
+		String grade = request.getParameter("grade");
+		int city = Integer.parseInt(request.getParameter("city"));
+		
+		MemberDto dto = new MemberDto(chcustno, custname, phone, address, joindate, grade, city);
+		
+		Dao dao = new Dao();
+		boolean result = dao.updateMember(dto, custno);
+		
+		// 성공시 다시 가입 페이지 이동
+		if ( result ) {
+			
+			response.sendRedirect("/hrd_exam1/update.jsp?custno="+chcustno);
+		}
 	}
 
 	/**

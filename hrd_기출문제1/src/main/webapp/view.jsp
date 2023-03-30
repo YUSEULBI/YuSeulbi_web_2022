@@ -14,7 +14,7 @@
 	
 	<center>
 		<h3>회원목록조회/수정</h3>
-		<table>
+		<table border="1">
 			<tr>
 				<th>회원번호</th> <th>회원성명</th>
 				<th>전화번호</th> <th>주소</th>
@@ -28,10 +28,14 @@
 		for ( MemberDto m : memberlist ){
 	%>
 			<tr>
-				<th><%=m.getCustno()%></th> <th><%=m.getCustname()%></th>
-				<th><%=m.getPhone()%></th> <th><%=m.getAddress()%></th>
-				<th><%=m.getJoindate()%></th> <th><%=m.getGrade()%></th>
-				<th><%=m.getCity()%></th>
+				<!-- 변수명=데이터&변수명=데이터 -->
+				<td><a href="/hrd_exam1/update.jsp?custno=<%=m.getCustno()%>"><%=m.getCustno()%></a></td> 	
+				<td><%=m.getCustname()%></td>
+				<td><%=m.getPhone()%></td> 		
+				<td><%=m.getAddress()%></td>
+				<td><%=m.getJoindate()%></td> 	
+				<td><%=m.getGrade()%></td>
+				<td><%=m.getCity()%></td>
 			</tr>
 	<%		
 		}
