@@ -1,3 +1,48 @@
+$.get("/jspweb/point" , (r)=>{
+	console.log(r)
+	
+	// Object.keys(r) 
+	// 객체내 모든 필드명/키를 배열로 호출 { 필드명 : 키값 }에서 필드명들만 가져옴
+		console.log( Object.keys(r) )
+	// Object.values(r) 
+	/// 해당객체의 값 배열로 호출
+		console.log( Object.values(r) ) // 해당객체의 값만 배열로 호출
+	
+	new Chart(ctx, {
+    type: 'line', // bar: 막대차트 / line 선차트
+    data: {
+      labels: Object.keys(r) ,
+      datasets: [{
+        label: '포인트 충전 내역',
+        data: Object.values(r), // 해당항목데이터
+        borderWidth: 3 
+      	}
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+	 
+})
+
+/////////////차트----------------------------------------------------
+
+	// new Chart( 'dom객체(문서객체)' , {차트옵션});
+	// { type : 차트이름 . data : {차트에 표시할 데이터} , option : {차트옵션}] }
+		// lable 가로축 필드명
+const ctx = document.getElementById('myChart');
+
+
+  
+
+
+////////////////////////////////////////////////////////////////////
+
 let pageObject={
 	page : 1 ,
 	mkey : '',
